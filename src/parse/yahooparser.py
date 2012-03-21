@@ -59,45 +59,23 @@ def getHistorialData(code):
     page = parse(url).getroot()
     result = etree.tostring(page)
     print result
-    import io
-    with io.open('test.xml','wb') as f:
-       #f.writelines(result)
-       pass 
     
-    r = page.xpath('//div[@class="tab01"]');
-    #print len(r)    
+    r = page.xpath('//quote');
+    print len(r)    
     from stock import Stock
     stock = Stock(code)
     for a in r:  
         tree= etree.ElementTree(a)  
-        #print etree.tostring(tree) 
-        datas = tree.xpath('//td') 
-        #print len(datas)
-        index =0
-        for data in datas:
-            dataTree = etree.ElementTree(data);
-            #print etree.tostring(dataTree)
-            values = dataTree.xpath('//text()')
-            index +=1
-            #print index
-            if (len(values)==1 ):
-                #print values
-                #print len(values[0])
-                #print str(values[0])
-                if (index == 32):
-                    mgsy = values[0]
-                    #print mgsy+'***************'
-                    stock.mgsy = mgsy
-                elif (index == 52):
-                    mgjzc = values[0]
-                    #print mgjzc+'***************'
-                    stock.mgjzc = mgjzc
-                elif (index == 2):
-                    last_update = values[0]
-                    #print last_update
-                    stock.lastUpdate = last_update                    
+        print etree.tostring(tree) 
+        print tree.xpath('//date')[0].text 
+        print tree.xpath('//open')[0].text  
+        print tree.xpath('//high')[0].text
+        print tree.xpath('//low')[0].text
+        print tree.xpath('//close')[0].text
+        print tree.xpath('//volume')[0].text            
+                      
          
-        return stock  
+    return stock  
         
 if __name__ == '__main__':
     getHistorialData('600880')
