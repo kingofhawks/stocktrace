@@ -54,31 +54,49 @@ def parseFinanceData(code):
 def getHistorialData(code):
     from lxml import etree
     from lxml.html import parse
-    url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22600327.SS%22%20and%20startDate%20%3D%20%222012-03-11%22%20and%20endDate%20%3D%20%222012-03-21%22&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+    code2 = code +".SS"
+    url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22'+code2+'%22%20and%20startDate%20%3D%20%222012-01-01%22%20and%20endDate%20%3D%20%222012-03-31%22&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
     print url
     page = parse(url).getroot()
     result = etree.tostring(page)
     print result
     
     r = page.xpath('//quote');
-    print len(r)    
     from stock import Stock
-    stock = Stock(code)
+    historyDatas = []
     for a in r:  
         tree= etree.ElementTree(a)  
-        print etree.tostring(tree) 
-        print tree.xpath('//date')[0].text 
-        print tree.xpath('//open')[0].text  
-        print tree.xpath('//high')[0].text
-        print tree.xpath('//low')[0].text
-        print tree.xpath('//close')[0].text
-        print tree.xpath('//volume')[0].text            
-                      
-         
-    return stock  
-        
+        #print etree.tostring(tree) 
+
+        stock = Stock(code)           
+        stock.date = tree.xpath('//date')[0].text
+        stock.high = float(tree.xpath('//high')[0].text)
+        stock.low = float(tree.xpath('//low')[0].text)  
+        stock.openPrice = float(tree.xpath('//open')[0].text)
+        stock.close = float(tree.xpath('//close')[0].text)
+        stock.volume = float(tree.xpath('//volume')[0].text)
+        #print stock    
+        historyDatas.append(stock) 
+    historyDatas.sort(key=lambda item:item.date,reverse=True) 
+#    for stock in historyDatas:
+#        print stock 
+#    pass 
+    
+    for i in  range(len(historyDatas)):
+        if i == len(historyDatas)-1:
+            continue
+        else:
+            last = historyDatas[i]
+            prev = historyDatas[i+1]
+            if (last.openPrice!= prev.close and
+                (last.low >prev.high or last.high<prev.low)):
+                print "gap***"+last.__str__()            
+                    
 if __name__ == '__main__':
-    getHistorialData('600880')
+    stocks = ['600327','600739','600573','600583','600718','600827','601111','601866']
+    for stock in stocks:
+        getHistorialData(stock)
+    getHistorialData('600890')
     import logging
     LOG_FILENAME = 'example.log'
     logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)

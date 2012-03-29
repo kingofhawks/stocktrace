@@ -9,6 +9,10 @@ class Stock:
 	lastUpdate = '';
 	totalCap = 0;
 	floatingCap = 0;
+	date = '';
+	close = 0 ;
+	openPrice = 0;
+	volume = 0;
 	def __init__(self,code,current=0,percent=0,low=0,high=0):
 		self.code = code
 		self.current = current
@@ -18,7 +22,7 @@ class Stock:
 		
 	def __str__(self):
 		#self.pe = self.current/self.mgsy
-		return self.code+'**now:'+str(self.current)+'**change:'+str('%.2f'%self.percent+'%')+'**PE:'+str('%.2f'%self.pe)+'**PB:'+str('%.2f'%self.pb)+'**rank:'+str('%.2f'%self.rank)+'**EPS:'+str(self.mgsy)+'**mgjzc:'+str(self.mgjzc)+'**last:'+str(self.lastUpdate)+'**totalCap:'+str('%.2f'%(self.totalCap/10000))+'**marketCap:'+str('%.2f'%(self.floatingCap/10000))
+		return self.code+'**date:'+str(self.date)+'**now:'+str(self.current)+'**change:'+str('%.2f'%self.percent+'%')+'**high:'+str('%.2f'%self.high)+'**low:'+str('%.2f'%self.low)+'**open:'+str('%.2f'%self.openPrice)+'**close:'+str('%.2f'%self.close)+'**volume:'+str(self.volume)+'**PE:'+str('%.2f'%self.pe)+'**PB:'+str('%.2f'%self.pb)+'**rank:'+str('%.2f'%self.rank)+'**EPS:'+str(self.mgsy)+'**mgjzc:'+str(self.mgjzc)+'**last:'+str(self.lastUpdate)+'**totalCap:'+str('%.2f'%(self.totalCap/10000))+'**marketCap:'+str('%.2f'%(self.floatingCap/10000))
 	
 	def compute(self):
 		if (self.lastUpdate.find('03-31')!= -1):
