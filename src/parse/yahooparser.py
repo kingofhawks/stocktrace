@@ -90,13 +90,20 @@ def getHistorialData(code):
             prev = historyDatas[i+1]
             if (last.openPrice!= prev.close and
                 (last.low >prev.high or last.high<prev.low)):
-                print "gap***"+last.__str__()            
+                print "gap***"+last.__str__()   
+                from dao.stockdao import saveStock
+                saveStock(last);
+                         
                     
 if __name__ == '__main__':
-    stocks = ['600327','600739','600573','600583','600718','600827','601111','601866']
+    stocks = ['600327','600739','600573','600583','600718','600827','601111','601866','600880']
     for stock in stocks:
         getHistorialData(stock)
     getHistorialData('600890')
+    
+    from dao.stockdao import findAllStocks
+    findAllStocks();
+                
     import logging
     LOG_FILENAME = 'example.log'
     logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
