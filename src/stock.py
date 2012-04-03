@@ -13,6 +13,7 @@ class Stock:
 	close = 0 ;
 	openPrice = 0;
 	volume = 0;
+	hasGap = False;
 	def __init__(self,code,current=0,percent=0,low=0,high=0):
 		self.code = code
 		self.current = current

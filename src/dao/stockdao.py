@@ -41,10 +41,29 @@ def findAllStocks():
     db = connection.stock
     historyDatas = db.stock_history
     for stock in historyDatas.find():
-        print stock     
+        print stock   
+        
+def findLastUpdate(code):
+    print "To find latest update****"+code
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.stock_history
+    return historyDatas.find_one({"code": code}).sort({"date":1});
+    
+def findStockByDate(code,date):
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.stock_history
+    return historyDatas.find({"code":code,"date" : {"$gt":date}});
     
     
 if __name__ == '__main__':
     from stock import Stock
     stock = Stock('600880')
-    saveStock(stock)
+#    saveStock(stock)
+#    print findLastUpdate('600890')
+    stocks = findStockByDate('600890','2012-03-01')
+    for stock in stocks:
+        print stock

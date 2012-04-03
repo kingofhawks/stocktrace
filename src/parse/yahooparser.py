@@ -51,7 +51,7 @@ def parseFinanceData(code):
          
         return stock   
     
-def getHistorialData(code):
+def getHistorialData(code,save = False):
     from lxml import etree
     from lxml.html import parse
     code2 = code +".SS"
@@ -64,6 +64,9 @@ def getHistorialData(code):
     r = page.xpath('//quote');
     from stock import Stock
     historyDatas = []
+    from dao.stockdao import findLastUpdate
+    lastStock = findLastUpdate(code)
+    print "lastStock***"+lastStock.__str__()
     for a in r:  
         tree= etree.ElementTree(a)  
         #print etree.tostring(tree) 
@@ -75,6 +78,12 @@ def getHistorialData(code):
         stock.openPrice = float(tree.xpath('//open')[0].text)
         stock.close = float(tree.xpath('//close')[0].text)
         stock.volume = float(tree.xpath('//volume')[0].text)
+        
+        print stock.date
+        print stock.date < lastStock['date']
+        if save:  
+            from dao.stockdao import saveStock
+            saveStock(stock);
         #print stock    
         historyDatas.append(stock) 
     historyDatas.sort(key=lambda item:item.date,reverse=True) 
@@ -90,16 +99,14 @@ def getHistorialData(code):
             prev = historyDatas[i+1]
             if (last.openPrice!= prev.close and
                 (last.low >prev.high or last.high<prev.low)):
-                print "gap***"+last.__str__()   
-                from dao.stockdao import saveStock
-                saveStock(last);
+                print "gap***"+last.__str__()               
                          
                     
 if __name__ == '__main__':
     stocks = ['600327','600739','600573','600583','600718','600827','601111','601866','600880']
-    for stock in stocks:
-        getHistorialData(stock)
-    getHistorialData('600890')
+#    for stock in stocks:
+#        getHistorialData(stock)
+    getHistorialData('600890',False)
     
     from dao.stockdao import findAllStocks
     findAllStocks();
