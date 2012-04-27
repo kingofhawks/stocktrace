@@ -4,14 +4,18 @@ Created on 2011-3-14
 @author: simon
 '''
 from stock import Stock
+import sys, traceback
 
-def parse(code,parseCap = True):
+def parse(code,parseIfeng= True,parseCap = True):
     from ifengparser import parseFinanceData
     deli = '*************************************'
     print deli
-    s = parseFinanceData(code)
+    if (parseIfeng):
+        s = parseFinanceData(code)
+    else:
+        s = Stock(code)
     
-    from stockutil import getStock
+    from sinaparser import getStock
     s1 = getStock('sh'+code)
     s.current = s1.current
     s.percent = s1.percent
@@ -26,7 +30,7 @@ def parse(code,parseCap = True):
     print s
     return s
 
-def parseAll(file,parseCap = False):
+def parseAll(file,parseIfeng= False,parseCap = False):
     import io
     with io.open(file,'rb') as f:
         list = [];
@@ -48,8 +52,15 @@ def parseAll(file,parseCap = False):
                 
                #parse code
                 try:
-                    list.append(parse(code,parseCap))
+                    s = parse(code,parseIfeng,parseCap)
+                    if (s.percent == -100.00):
+                        print "not in trading now"
+                    elif (s.percent >=2 or s.percent <=-2):
+                        from util.mailutil import sendMail
+                        sendMail()                        
+                    list.append(s)                    
                 except:
+                    traceback.print_exc(file=sys.stdout)
                     continue       
                 
         #write to log        

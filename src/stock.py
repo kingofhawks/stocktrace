@@ -38,7 +38,8 @@ class Stock:
 		elif (self.lastUpdate.find('12-31')!= -1):
 			self.pe = self.current/float(self.mgsy)	
 			#print '12-31'
-		self.pb = self.current/float(self.mgjzc)
+		if (self.mgjzc!= 0):
+			self.pb = self.current/float(self.mgjzc)
 		self.rank = self.pe * self.pb
 		pass 
 

@@ -15,8 +15,10 @@ def getStock(code):
     test = cont.split(',')
     yesterday = float(test[2])
     current = float(test[3])
+    high = float(test[4])
+    low = float(test[5])
     percent = (current-yesterday)/yesterday*100
-    stock = Stock(code,current,percent)
+    stock = Stock(code,current,percent,low,high)
     print stock
     return stock
     
@@ -24,7 +26,7 @@ def getStock(code):
     #print sys.argv[0]    
     
 def getMyStock():
-    codes = ['sh600600','sh600880','sh600583','sh600573','sh600631','sh601866','sh000001']
+    codes = ['sh600327','sh600739','sh600583','sh600573','sh601866','sh000001']
     
     for code in codes: 
         getStock(code)
