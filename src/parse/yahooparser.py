@@ -3,6 +3,7 @@ Created on 2011-3-7
 
 @author: simon
 '''
+#parse real time stock price from yahoo finance
 def parseFinanceData(code):
     from lxml import etree
     from lxml.html import parse
@@ -50,12 +51,22 @@ def parseFinanceData(code):
                     stock.lastUpdate = last_update                    
          
         return stock   
-    
-def getHistorialData(code,save = False):
+
+#get history data from yahoo finance API    
+def getHistorialData(code,save = False,beginDate = '',endDate = ''):
     from lxml import etree
     from lxml.html import parse
-    code2 = code +".SS"
-    url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22'+code2+'%22%20and%20startDate%20%3D%20%222012-01-01%22%20and%20endDate%20%3D%20%222012-03-31%22&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+    #yahoo stock ticker need post-fix ".SS" for Shanghai,'.SZ' for shenzheng
+    if (code.startswith('6')):
+        code2 = code +".SS"
+    else:
+        code2 = code +".SZ"
+    if len(endDate) == 0:
+        print "Poll all history date for "+code
+        from datetime import date
+        url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22'+code2+'%22%20and%20startDate%20%3D%20%22'+beginDate+'%22%20and%20endDate%20%3D%20%22'+str(date.today())+'%22&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+    else:
+        url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22'+code2+'%22%20and%20startDate%20%3D%20%22'+beginDate+'%22%20and%20endDate%20%3D%20%22'+endDate+'%22&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
     print url
     page = parse(url).getroot()
     result = etree.tostring(page)
@@ -65,8 +76,11 @@ def getHistorialData(code,save = False):
     from stock import Stock
     historyDatas = []
     from dao.stockdao import findLastUpdate
+    from dao.stockdao import findOldestUpdate
     lastStock = findLastUpdate(code)
+    oldestStock = findOldestUpdate(code)
     print "lastStock***"+lastStock.__str__()
+    print "oldestStock***"+oldestStock.__str__()
     for a in r:  
         tree= etree.ElementTree(a)  
         #print etree.tostring(tree) 
@@ -79,9 +93,11 @@ def getHistorialData(code,save = False):
         stock.close = float(tree.xpath('//close')[0].text)
         stock.volume = float(tree.xpath('//volume')[0].text)
         
-        print stock.date
-        print stock.date < lastStock['date']
-        if save:  
+        isNewData = True;
+        if lastStock is not None:            
+            isNewData = (stock.date > lastStock['date']) or (stock.date < oldestStock['date'])
+        print stock.date+'***isNewData***'+str(isNewData)
+        if isNewData and save:  
             from dao.stockdao import saveStock
             saveStock(stock);
         #print stock    
@@ -101,12 +117,15 @@ def getHistorialData(code,save = False):
                 (last.low >prev.high or last.high<prev.low)):
                 print "gap***"+last.__str__()               
                          
+
+
+
                     
 if __name__ == '__main__':
     stocks = ['600327','600739','600573','600583','600718','600827','601111','601866','600880']
 #    for stock in stocks:
 #        getHistorialData(stock)
-    getHistorialData('600890',False)
+    getHistorialData('000776',True,'2011-01-01')
     
     from dao.stockdao import findAllStocks
     findAllStocks();

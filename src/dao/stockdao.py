@@ -3,6 +3,11 @@ Created on 2011-3-7
 
 @author: simon
 '''
+import pymongo
+from datetime import date
+from datetime import timedelta
+from datetime import datetime
+    
 def insertStock():
     import pymongo
     from pymongo import Connection
@@ -43,27 +48,136 @@ def findAllStocks():
     for stock in historyDatas.find():
         print stock   
         
+#find last update stock record        
 def findLastUpdate(code):
     print "To find latest update****"+code
     from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
-    return historyDatas.find_one({"code": code}).sort({"date":1});
-    
+#    print historyDatas.find_one({"code": code})
+    #print historyDatas.find({"code": code}).sort([("date",pymongo.DESCENDING)]).limit(1)
+    return historyDatas.find_one({"code": code},sort=[("date",pymongo.DESCENDING)]);
+
+#find the oldest stock record        
+def findOldestUpdate(code):
+    print "To find oldest update****"+code
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.stock_history
+#    print historyDatas.find_one({"code": code})
+    #print historyDatas.find({"code": code}).sort([("date",pymongo.DESCENDING)]).limit(1)
+    return historyDatas.find_one({"code": code},sort=[("date",pymongo.ASCENDING)]);
+   
+#find stock record after date     
 def findStockByDate(code,date):
     from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
-    return historyDatas.find({"code":code,"date" : {"$gt":date}});
+    return historyDatas.find({"code":code,"date" : {"$gt":date}}).sort([("date",pymongo.DESCENDING)]);
+
+
+#find stock record in the last days     
+def findLastStockByDays(code,lastDays):
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.stock_history
+    from datetime import date
+    from datetime import datetime
+    from datetime import timedelta
+    print date.today()
+    delta = timedelta(-lastDays)
+    begin = date.today()+delta
+    print begin
+    #print datetime.strptime(date,'%Y-%m-%d')
+    #print type(date.today())
+    return historyDatas.find({"code":code,"date" : {"$gt":str(begin)}}).sort([("date",pymongo.DESCENDING)]);
+
+#find peak price during the last days 
+def findPeakStockByDays(code,lastDays):
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.stock_history
+    delta = timedelta(-lastDays)
+    #>= begin day
+    begin = date.today()+delta
+    print begin
+#    print begin.weekday()
+    peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
+    print code+' peak price****'+str(peak[0])
+    return peak[0]
+
+#find bottom price during the last days 
+def findBottomStockByDays(code,lastDays):
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.stock_history
+    delta = timedelta(-lastDays)
+    begin = date.today()+delta
+    peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin)}}).sort([("low",pymongo.ASCENDING)]).limit(1);
+    print code+' low price****'+str(peak[0])
+    return peak[0]
+        
+#Check whether the stock triggers NH-NL index
+#lastDays: the last range to check the index
+#newDays: the latest days trigger the index
+#return 1 as trigger NH index,-1 as trigger NL index,0 as none
+def triggerNhNl(code,lastDays,nearDays):
+    #find peak price during the last days
+    peak = findPeakStockByDays(code,lastDays)
+    print peak
     
+    #check peak price whether happen during near days
+#    print datetime.strptime(peak.get('date'),'%Y-%m-%d')
+#    print datetime.strptime(peak.get('date'),'%Y-%m-%d').date()
+#    print datetime.strptime(peak.get('date'),'%Y-%m-%d').date()<date.today()
+    delta = timedelta(-nearDays)
+    begin = date.today()+delta
+#    print begin
+    result = datetime.strptime(peak.get('date'),'%Y-%m-%d').date()>=begin
+#    print datetime.strptime(peak.get('date'),'%Y-%m-%d').date()<=date.today()
+    if result:
+        print code+' trigger NH index at '+peak
+        return 1;
+    
+    
+    #find bottom price during the last days
+    bottom = findBottomStockByDays(code,lastDays)
+    print bottom
+    
+    #check bottom price whether happen during near days
+#    print datetime.strptime(peak.get('date'),'%Y-%m-%d')
+#    print datetime.strptime(peak.get('date'),'%Y-%m-%d').date()
+#    print datetime.strptime(peak.get('date'),'%Y-%m-%d').date()<date.today()
+#    delta = timedelta(-nearDays)
+#    begin = date.today()+delta
+#    print begin
+    result = datetime.strptime(bottom.get('date'),'%Y-%m-%d').date()>=begin
+    print datetime.strptime(bottom.get('date'),'%Y-%m-%d').date()<=date.today()
+    if result:
+        print code+' trigger NL index at '+bottom
+        return -1;
+    
+    return 0
+
     
 if __name__ == '__main__':
     from stock import Stock
     stock = Stock('600880')
 #    saveStock(stock)
 #    print findLastUpdate('600890')
-    stocks = findStockByDate('600890','2012-03-01')
-    for stock in stocks:
-        print stock
+#    stocks = findStockByDate('600890','2012-03-01')
+#    for stock in stocks:
+#        print stock
+#    peak =  findPeakStockByDays('000776',9)
+#    print peak
+#    for stock in stocks:
+#        print stock
+#    peak =  findPeakStockByDays('000776',200)
+#    print peak
+    print triggerNhNl('000776',9,7)
