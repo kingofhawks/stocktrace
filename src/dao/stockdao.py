@@ -96,30 +96,37 @@ def findLastStockByDays(code,lastDays):
     #print type(date.today())
     return historyDatas.find({"code":code,"date" : {"$gt":str(begin)}}).sort([("date",pymongo.DESCENDING)]);
 
-#find peak price during the last days 
-def findPeakStockByDays(code,lastDays):
+#find peak price during the last days before endDate
+def findPeakStockByDays(code,lastDays,endDate = str(date.today())):
     from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
     delta = timedelta(-lastDays)
-    #>= begin day
-    begin = date.today()+delta
+    end = datetime.strptime(endDate,'%Y-%m-%d').date()
+    print end
+    begin = end+delta
+#    begin = date.today()+delta
+    
     print begin
 #    print begin.weekday()
-    peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
-    print code+' peak price****'+str(peak[0])
-    return peak[0]
+    peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
+    try:
+        print code+' peak price****'+str(peak[0])
+        return peak[0]
+    except:
+        return None
 
 #find bottom price during the last days 
-def findBottomStockByDays(code,lastDays):
+def findBottomStockByDays(code,lastDays,endDate = str(date.today())):
     from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
     delta = timedelta(-lastDays)
-    begin = date.today()+delta
-    peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin)}}).sort([("low",pymongo.ASCENDING)]).limit(1);
+    end = datetime.strptime(endDate,'%Y-%m-%d').date()
+    begin = end+delta
+    peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("low",pymongo.ASCENDING)]).limit(1);
     print code+' low price****'+str(peak[0])
     return peak[0]
         
@@ -127,9 +134,9 @@ def findBottomStockByDays(code,lastDays):
 #lastDays: the last range to check the index
 #newDays: the latest days trigger the index
 #return 1 as trigger NH index,-1 as trigger NL index,0 as none
-def triggerNhNl(code,lastDays,nearDays):
+def triggerNhNl(code,lastDays,nearDays,endDate = str(date.today())):
     #find peak price during the last days
-    peak = findPeakStockByDays(code,lastDays)
+    peak = findPeakStockByDays(code,lastDays,endDate)
     print peak
     
     #check peak price whether happen during near days
@@ -137,17 +144,18 @@ def triggerNhNl(code,lastDays,nearDays):
 #    print datetime.strptime(peak.get('date'),'%Y-%m-%d').date()
 #    print datetime.strptime(peak.get('date'),'%Y-%m-%d').date()<date.today()
     delta = timedelta(-nearDays)
-    begin = date.today()+delta
+    end = datetime.strptime(endDate,'%Y-%m-%d').date()
+    begin = end+delta
 #    print begin
     result = datetime.strptime(peak.get('date'),'%Y-%m-%d').date()>=begin
 #    print datetime.strptime(peak.get('date'),'%Y-%m-%d').date()<=date.today()
     if result:
-        print code+' trigger NH index at '+peak
+        print code+' trigger NH index at '+str(peak)
         return 1;
     
     
     #find bottom price during the last days
-    bottom = findBottomStockByDays(code,lastDays)
+    bottom = findBottomStockByDays(code,lastDays,endDate)
     print bottom
     
     #check bottom price whether happen during near days
@@ -158,9 +166,9 @@ def triggerNhNl(code,lastDays,nearDays):
 #    begin = date.today()+delta
 #    print begin
     result = datetime.strptime(bottom.get('date'),'%Y-%m-%d').date()>=begin
-    print datetime.strptime(bottom.get('date'),'%Y-%m-%d').date()<=date.today()
+    print datetime.strptime(bottom.get('date'),'%Y-%m-%d').date()<=end
     if result:
-        print code+' trigger NL index at '+bottom
+        print code+' trigger NL index at '+str(bottom)
         return -1;
     
     return 0
@@ -174,10 +182,10 @@ if __name__ == '__main__':
 #    stocks = findStockByDate('600890','2012-03-01')
 #    for stock in stocks:
 #        print stock
-#    peak =  findPeakStockByDays('000776',9)
+#    peak =  findPeakStockByDays('603000',9,'2012-05-06')
 #    print peak
 #    for stock in stocks:
 #        print stock
 #    peak =  findPeakStockByDays('000776',200)
 #    print peak
-    print triggerNhNl('000776',9,7)
+    print triggerNhNl('600087',52*7,7,'2012-05-06')

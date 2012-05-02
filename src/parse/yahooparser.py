@@ -3,6 +3,9 @@ Created on 2011-3-7
 
 @author: simon
 '''
+import sys, traceback
+from datetime import date
+
 #parse real time stock price from yahoo finance
 def parseFinanceData(code):
     from lxml import etree
@@ -118,20 +121,103 @@ def getHistorialData(code,save = False,beginDate = '',endDate = ''):
                 print "gap***"+last.__str__()               
                          
 
+#parse all history data from yahoo
+def parseAllHistoryData(file):
+    import io
+    with io.open(file,'rb') as f:
+        list = [];
+        for i in range(1000):
+            line = f.readline()
+            if (len(line) == 0):
+                break;
+            else :
+                l = line.strip();
+                if (len(l)==7):
+                    code = l[1:]                    
+                    #print len(l)  
+                    #print l  
+                elif (len(l) == 6):
+                    code = l;                   
+                else :
+                    print l; 
+                    continue
+                
+               #parse code
+                try:
+                    getHistorialData(code,True,'2011-01-01')                                       
+                except:
+                    traceback.print_exc(file=sys.stdout)
+                    continue       
+                
 
+        pass
+    
+#lastDays: the last range to check the index,default will be 1 year's data(52 weeks),i.e,the sampling period
+#newDays: the latest days trigger the index
+#ex. computeNhnlIndex(file,360,3,2012-05-02) will check the 360 days trading record before 2012-05-02,
+#to check if the price during the nearest 3 days trigger NH-NL index
+def computeNhnlIndex(file,lastDays,nearDays,endDate = str(date.today())):
+    result = {}
+    import io
+    with io.open(file,'rb') as f:
+        nhList = [];
+        nlList = [];
+        nhCount = 0;
+        nlCount = 0;
+        for i in range(1000):
+            line = f.readline()
+            if (len(line) == 0):
+                break;
+            else :
+                l = line.strip();
+                if (len(l)==7):
+                    code = l[1:]                    
+                    #print len(l)  
+                    #print l  
+                elif (len(l) == 6):
+                    code = l;                   
+                else :
+                    print l; 
+                    continue
+                
+               #parse code
+                try:
+                    from dao.stockdao import triggerNhNl
+                    triggered = triggerNhNl(code,lastDays,nearDays,endDate)   
+                    if triggered == 1:
+                        nhCount += 1;
+                        nhList.append(code)
+                    elif triggered == -1:
+                        nlCount += 1;     
+                        nlList.append(code)                                                   
+                except:
+                    traceback.print_exc(file=sys.stdout)
+                    continue       
+        
+        print 'nhCount ****'+str(nhCount)+str(nhList)
+        print 'nlCount ****'+str(nlCount)+str(nlList)
 
+        pass
+
+#compute the NHNL index between beginDate and endDate
+def computeNhnlIndexWithinRange(file,lastDays,nearDays,endDate = str(date.today()),beginDate = str(date.today())):
+    
+    pass                    
                     
 if __name__ == '__main__':
     stocks = ['600327','600739','600573','600583','600718','600827','601111','601866','600880']
 #    for stock in stocks:
 #        getHistorialData(stock)
-    getHistorialData('000776',True,'2011-01-01')
+#    getHistorialData('600383',True,'2011-01-01')
     
-    from dao.stockdao import findAllStocks
-    findAllStocks();
-                
-    import logging
-    LOG_FILENAME = 'example.log'
-    logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
-
-    logging.error('This message should go to the log file')
+#    parseAllHistoryData('stock_list_all')
+    computeNhnlIndex('stock_list_all',52*7,7)
+    
+#    from dao.stockdao import findAllStocks
+#    findAllStocks();
+#                
+#    import logging
+#    LOG_FILENAME = 'example.log'
+#    logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
+#
+#    logging.error('This message should go to the log file')
