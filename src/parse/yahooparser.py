@@ -5,14 +5,74 @@ Created on 2011-3-7
 '''
 import sys, traceback
 from datetime import date
+from datetime import datetime
+from datetime import timedelta
+from stock import Stock
+from lxml import etree
+from lxml.html import parse
+from dao.stockdao import *
+from lxml import etree
+from lxml.html import parse
 
+#parse ticker code/name from yahoo finance,check whether exists
+def parseTickers():
+    nonExistentTickers = findAllNonExistentTickers()
+    print nonExistentTickers
+    #parse shanghai tickers
+    for code in range(600000,603333):
+        if (code in nonExistentTickers):
+            print 'Non-existent ticker***'+str(code)
+            continue;
+        code2 = str(code) +'.SS'
+        url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22'+code2+'%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+        print url
+        page = parse(url).getroot()
+        r = page.xpath('//errorindicationreturnedforsymbolchangedinvalid');
+       
+        errorMsg = r[0].text
+        stock = Stock(code)
+            
+        if (errorMsg is None):
+            stock.name = ''
+            stock.high = float(page.xpath('//dayshigh')[0].text)
+            stock.low = float(page.xpath('//dayslow')[0].text)
+            stock.yearHigh = float(page.xpath('//yearhigh')[0].text)
+            stock.yearLow = float(page.xpath('//yearlow')[0].text)
+            if (stock.high>=stock.yearHigh):
+                print 'stock trigger new high index*****'+code2
+            elif (stock.low <=stock.yearLow):
+                print 'stock trigger new low index*****'+code2
+            #print stock
+            saveTicker(stock)
+        else:
+            saveNonExistentTicker(stock)
+            print 'Non-existent ticker***'+str(code)
+    print 'Finish parseTickers******'
+
+    
+    
 #parse real time stock price from yahoo finance
 def parseFinanceData(code):
     from lxml import etree
     from lxml.html import parse
-    url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22600327.SS%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
+    if (code.startswith('6')):
+        code2 = code +".SS"
+    else:
+        code2 = code +".SZ"
+        
+    url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22'+code2+'%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
     print url
+
+        
     page = parse(url).getroot()
+    r = page.xpath('//errorindicationreturnedforsymbolchangedinvalid');
+    errorMsg = r[0].text
+    if (errorMsg is None):
+        print 'OK'
+        stock = Stock(code)
+        stock.name = ''
+    else:
+        print 'error'
     result = etree.tostring(page)
     print result
     import io
@@ -194,24 +254,32 @@ def computeNhnlIndex(file,lastDays,nearDays,endDate = str(date.today())):
                     traceback.print_exc(file=sys.stdout)
                     continue       
         
+        print "currentDate****"+endDate
         print 'nhCount ****'+str(nhCount)+str(nhList)
         print 'nlCount ****'+str(nlCount)+str(nlList)
+        result[endDate] = {'nhnl':nhCount-nlCount,'nhList':nhList,'nlList':nlList}
 
-        pass
+        return result
 
 #compute the NHNL index between beginDate and endDate
-def computeNhnlIndexWithinRange(file,lastDays,nearDays,endDate = str(date.today()),beginDate = str(date.today())):
-    
+def computeNhnlIndexWithinRange(file,lastDays,nearDays,beginDate = str(date.today()),endDate = str(date.today())):
+    period =  (datetime.strptime(endDate,'%Y-%m-%d')-datetime.strptime(beginDate,'%Y-%m-%d')).days
+    for i in range(period):
+        currentDay = datetime.strptime(beginDate,'%Y-%m-%d').date()+timedelta(i)
+        print computeNhnlIndex(file,lastDays,nearDays,str(currentDay))       
     pass                    
                     
 if __name__ == '__main__':
     stocks = ['600327','600739','600573','600583','600718','600827','601111','601866','600880']
+    parseTickers();
+    #parseFinanceData('603333')
 #    for stock in stocks:
 #        getHistorialData(stock)
 #    getHistorialData('600383',True,'2011-01-01')
     
 #    parseAllHistoryData('stock_list_all')
-    computeNhnlIndex('stock_list_all',52*7,7)
+    #computeNhnlIndex('stock_list_all',52*7,7)
+#    computeNhnlIndexWithinRange('stock_list',52*7,7,'2012-01-01')
     
 #    from dao.stockdao import findAllStocks
 #    findAllStocks();

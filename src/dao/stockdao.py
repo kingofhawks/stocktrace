@@ -173,11 +173,47 @@ def triggerNhNl(code,lastDays,nearDays,endDate = str(date.today())):
     
     return 0
 
+#save ticker with code and year high/low etc
+def saveTicker(stock):
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    data = {"code": stock.code,
+            "name": stock.name,
+            "high": stock.high,
+            "low": stock.low,
+            "yearhigh": stock.yearHigh,
+            "yearlow": stock.yearLow}
+    historyDatas = db.tickers
+    historyDatas.insert(data)
+    
+#save non-existent tickers,may change according to IPO
+def saveNonExistentTicker(stock):
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    data = {"code": stock.code}
+    historyDatas = db.non_existent_tickers
+    historyDatas.insert(data)
+    
+def findAllNonExistentTickers():
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.non_existent_tickers
+    cursor = historyDatas.find();
+    from sets import Set
+    result = Set([])
+    for stock in cursor:
+        result.add(stock['code'])
+    return result
+      
+
     
 if __name__ == '__main__':
     from stock import Stock
     stock = Stock('600880')
-#    saveStock(stock)
+    findAllNonExistentTickers()
 #    print findLastUpdate('600890')
 #    stocks = findStockByDate('600890','2012-03-01')
 #    for stock in stocks:
@@ -188,4 +224,4 @@ if __name__ == '__main__':
 #        print stock
 #    peak =  findPeakStockByDays('000776',200)
 #    print peak
-    print triggerNhNl('600087',52*7,7,'2012-05-06')
+    #print triggerNhNl('600087',52*7,7,'2012-05-06')
