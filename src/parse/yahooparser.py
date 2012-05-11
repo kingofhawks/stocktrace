@@ -13,13 +13,14 @@ from lxml.html import parse
 from dao.stockdao import *
 from lxml import etree
 from lxml.html import parse
+import io
 
 #parse ticker code/name from yahoo finance,check whether exists
 def parseTickers():
     nonExistentTickers = findAllNonExistentTickers()
     print nonExistentTickers
     #parse shanghai tickers
-    for code in range(600000,603333):
+    for code in range(600556,603333):
         if (code in nonExistentTickers):
             print 'Non-existent ticker***'+str(code)
             continue;
@@ -34,14 +35,23 @@ def parseTickers():
             
         if (errorMsg is None):
             stock.name = ''
-            stock.high = float(page.xpath('//dayshigh')[0].text)
+            high = page.xpath('//dayshigh')[0].text
+            if (high is None):
+                print 'Non-existent ticker***'+str(code)
+                saveNonExistentTicker(stock)
+                continue;
+            stock.high = float(high)
             stock.low = float(page.xpath('//dayslow')[0].text)
             stock.yearHigh = float(page.xpath('//yearhigh')[0].text)
             stock.yearLow = float(page.xpath('//yearlow')[0].text)
             if (stock.high>=stock.yearHigh):
-                print 'stock trigger new high index*****'+code2
+                print 'stock trigger new high index*****'+code2 
+                with io.open('nh.xml','wb') as f:
+                   f.writelines(code2)                    
             elif (stock.low <=stock.yearLow):
                 print 'stock trigger new low index*****'+code2
+                with io.open('nl.xml','wb') as f:
+                   f.writelines(code2)  
             #print stock
             saveTicker(stock)
         else:
