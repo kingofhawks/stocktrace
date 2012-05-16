@@ -31,13 +31,34 @@
 <script class="code" language="javascript" type="text/javascript">
 $(document).ready(function(){ 
   // Note, the ohlc data is specified below 
-  var a = "{{ohlc}}"
-  alert(a)
-  alert(ohlc)
-  //[ohlc]
-  var plot1 = $.jqplot('chart1',[ohlc],{
+  //alert({{ STATIC_URL }})  
+  var ajaxDataRenderer = function(url, plot, options) {
+	    var ret = null;
+	    $.ajax({
+	      // have to use synchronous here, else the function 
+	      // will return before the data is fetched
+	      async: false,
+	      url: url,
+	      dataType:"json",
+	      success: function(data) {
+	        ret = data;
+	      }
+	    });
+	    //alert(ret)
+	    return [ret];
+	  };
+	 
+	  // The url for our json data
+	  //var jsonurl = {{ STATIC_URL }}+"jsondata.txt";
+	  var jsonurl = "json";
+	  //alert(jsonurl)
+	  //alert(ohlc)
+	  //alert([ohlc])
+	  
+  var plot1 = $.jqplot('chart1',jsonurl,{
 	    // use the y2 axis on the right of the plot 
 	    //rather than the y axis on the left.
+	    dataRenderer: ajaxDataRenderer,
 	    seriesDefaults:{yaxis:'y2axis'},
 	    axes: {
 	      xaxis: {
@@ -79,10 +100,7 @@ $(document).ready(function(){
 });
 </script>
 <script class="code" language="javascript" type="text/javascript">
-ohlc = [
-  ["06/15/2009 16:00:00", 136.01, 139.5, 134.53, 139.48],
-  ["06/08/2009 16:00:00", 143.82, 144.56, 136.04, 136.97]  
-];
+
 </script>
   
 

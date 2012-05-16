@@ -7,6 +7,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
     url(r'^zytj/$', 'zytj.views.index'),
+    url(r'^zytj/json', 'zytj.views.json'),
     # url(r'^$', 'stocktrace.views.home', name='home'),
     # url(r'^stocktrace/', include('stocktrace.foo.urls')),
 
