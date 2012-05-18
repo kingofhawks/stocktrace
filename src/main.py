@@ -1,6 +1,6 @@
 if __name__ == '__main__':
 	from stockutil import getStock
-	getStock('sh600030')
+	getStock('sh600327')
 	from lxml import etree
 	from easyExcel import EasyExcel	
 	from excelutil import getStockDataBySheet

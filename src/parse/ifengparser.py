@@ -7,7 +7,7 @@ def parseFinanceData(code):
     from lxml import etree
     from lxml.html import parse
     url = 'http://app.finance.ifeng.com/data/stock/cwjk.php?symbol='+code
-    print url
+    #print url
     page = parse(url).getroot()
     result = etree.tostring(page)
     #print result
@@ -52,7 +52,7 @@ def parseFinanceData(code):
         return stock   
         
 if __name__ == '__main__':
-    #parseFinanceData('600880')
+    parseFinanceData('600880')
     import logging
     LOG_FILENAME = 'example.log'
     logging.basicConfig(level=logging.DEBUG)

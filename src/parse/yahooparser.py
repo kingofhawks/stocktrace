@@ -126,7 +126,7 @@ def parseFinanceData(code):
         return stock   
 
 #get history data from yahoo finance API    
-def getHistorialData(code,save = False,beginDate = '',endDate = ''):
+def getHistorialData(code,save = True,beginDate = '',endDate = ''):
     from lxml import etree
     from lxml.html import parse
     #yahoo stock ticker need post-fix ".SS" for Shanghai,'.SZ' for shenzheng
@@ -221,6 +221,18 @@ def parseAllHistoryData(file):
                 
 
         pass
+
+#parse all history data from yahoo via invalid code in DB
+def parseAllHistoryDataInDB():
+    stocks = findAllExistentTickers()
+    for stock in stocks:
+        #parse code
+        try:
+            getHistorialData(str(stock),True,'2011-01-01')                                       
+        except:
+            traceback.print_exc(file=sys.stdout)
+            continue
+   
     
 #lastDays: the last range to check the index,default will be 1 year's data(52 weeks),i.e,the sampling period
 #newDays: the latest days trigger the index
@@ -271,22 +283,67 @@ def computeNhnlIndex(file,lastDays,nearDays,endDate = str(date.today())):
 
         return result
 
+#lastDays: the last range to check the index,default will be 1 year's data(52 weeks),i.e,the sampling period
+#newDays: the latest days trigger the index
+#ex. computeNhnlIndex(file,360,3,2012-05-02) will check the 360 days trading record before 2012-05-02,
+#to check if the price during the nearest 3 days trigger NH-NL index
+def computeNhnlIndexWithStocks(stocks,lastDays,nearDays,endDate = str(date.today())):
+    result = {}
+    nhList = [];
+    nlList = [];
+    nhCount = 0;
+    nlCount = 0;
+    for code in stocks:
+        #parse code
+                try:
+                    triggered = triggerNhNl(code,lastDays,nearDays,endDate)   
+                    if triggered == 1:
+                        nhCount += 1;
+                        nhList.append(code)
+                    elif triggered == -1:
+                        nlCount += 1;     
+                        nlList.append(code)                                                   
+                except:
+                    traceback.print_exc(file=sys.stdout)
+                    continue           
+        
+        
+    print "currentDate****"+endDate
+    print 'nhCount ****'+str(nhCount)+str(nhList)
+    print 'nlCount ****'+str(nlCount)+str(nlList)
+    result = {'date':endDate,'nhnl':nhCount-nlCount,'nhList':nhList,'nlList':nlList}
+
+    return result
+
 #compute the NHNL index between beginDate and endDate
 def computeNhnlIndexWithinRange(file,lastDays,nearDays,beginDate = str(date.today()),endDate = str(date.today())):
     period =  (datetime.strptime(endDate,'%Y-%m-%d')-datetime.strptime(beginDate,'%Y-%m-%d')).days
     for i in range(period):
         currentDay = datetime.strptime(beginDate,'%Y-%m-%d').date()+timedelta(i)
         print computeNhnlIndex(file,lastDays,nearDays,str(currentDay))       
-    pass                    
+    pass    
+
+#compute the NHNL index between beginDate and endDate
+def computeNhnlIndexWithinRangeWithStocks(stocks,lastDays,nearDays,beginDate = str(date.today()),endDate = str(date.today())):
+    period =  (datetime.strptime(endDate,'%Y-%m-%d')-datetime.strptime(beginDate,'%Y-%m-%d')).days
+    result = []
+    for i in range(period):
+        currentDay = datetime.strptime(beginDate,'%Y-%m-%d').date()+timedelta(i)
+        temp = computeNhnlIndexWithStocks(stocks,lastDays,nearDays,str(currentDay))
+        #print temp
+        result.append(temp)        
+    return result                  
                     
 if __name__ == '__main__':
-    stocks = ['600327','600739','600573','600583','600718','600827','601111','601866','600880']
-    parseTickers();
-    #parseFinanceData('603333')
+    stocks = ['600327','600829','600573','600369','601688','600132','600332','601866','600718']
+    #parseTickers();
+    #parseFinanceData('600327')
+    #getHistorialData('600327',beginDate='2012-04-01')
 #    for stock in stocks:
-#        getHistorialData(stock)
-#    getHistorialData('600383',True,'2011-01-01')
-    
+#        getHistorialData(stock,beginDate='2012-04-01')
+    print computeNhnlIndexWithinRangeWithStocks(stocks,60,7,'2012-04-01')
+    #getHistorialData('600327',True,'2011-01-01')
+    #parseAllHistoryDataInDB()
 #    parseAllHistoryData('stock_list_all')
     #computeNhnlIndex('stock_list_all',52*7,7)
 #    computeNhnlIndexWithinRange('stock_list',52*7,7,'2012-01-01')

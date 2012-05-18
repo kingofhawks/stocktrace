@@ -32,6 +32,8 @@
 $(document).ready(function(){ 
   // Note, the ohlc data is specified below 
   //alert({{ STATIC_URL }})  
+  var minDate = "";
+  var maxDate = "";
   var ajaxDataRenderer = function(url, plot, options) {
 	    var ret = null;
 	    $.ajax({
@@ -45,12 +47,15 @@ $(document).ready(function(){
 	      }
 	    });
 	    //alert(ret)
+	    minDate = ret[ret.length-1]
+	    //alert(ret.length)
+	    
 	    return [ret];
 	  };
 	 
 	  // The url for our json data
 	  //var jsonurl = {{ STATIC_URL }}+"jsondata.txt";
-	  var jsonurl = "json";
+	  var jsonurl = "jsoncandle";
 	  //alert(jsonurl)
 	  //alert(ohlc)
 	  //alert([ohlc])
@@ -63,7 +68,7 @@ $(document).ready(function(){
 	    axes: {
 	      xaxis: {
 	        renderer:$.jqplot.DateAxisRenderer,
-	        tickOptions:{formatString:'%b %e'}, 
+	        //tickOptions:{formatString:'$%.2f'}, 
 	        // For date axes, we can specify ticks options as human 
 	        // readable dates.  You should be as specific as possible, 
 	        // however, and include a date and time since some 
@@ -71,12 +76,12 @@ $(document).ready(function(){
 	        // treat dates without time as local time.
 	        // Generally, if  a time is specified without a time zone,
 	        // the browser assumes the time zone of the client.
-	        min: "09-01-2008 16:00",
-	        max: "06-22-2009 16:00",
-	        tickInterval: "6 weeks",
+	        //min: "03-19-2012",
+	        //max: "05-17-2012 16:00",
+	        //tickInterval: "6 weeks",
 	      },
 	      y2axis: {
-	        tickOptions:{formatString:'$%d'}
+	        tickOptions:{formatString:'$%.2f'}
 	      }
 	    },
 	    series: [{renderer:$.jqplot.OHLCRenderer}],
@@ -105,8 +110,7 @@ $(document).ready(function(){
   
 
 </head>
-<body>
-   {{ ohlc }}  
+<body>    
     <div class="logo">
    <div class="nav">
    <a class="nav" href="../../../index.php"><span>&gt;</span>Home</a>

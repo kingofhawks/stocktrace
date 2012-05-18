@@ -207,13 +207,28 @@ def findAllNonExistentTickers():
     for stock in cursor:
         result.add(stock['code'])
     return result
+
+def findAllExistentTickers():
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.tickers
+    cursor = historyDatas.find();
+    from sets import Set
+    result = Set([])
+    for stock in cursor:
+        result.add(stock['code'])
+    return result
       
 
     
 if __name__ == '__main__':
     from stock import Stock
     stock = Stock('600880')
-    findAllNonExistentTickers()
+    #findAllNonExistentTickers()
+    stocks = findAllExistentTickers()
+    for stock in stocks:
+      print stock
 #    print findLastUpdate('600890')
 #    stocks = findStockByDate('600890','2012-03-01')
 #    for stock in stocks:

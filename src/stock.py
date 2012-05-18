@@ -3,8 +3,9 @@ class Stock:
 	mgsy = 0
 	mgjzc = 0
 	pe = 0;#dynamic PE
-	lastYearPe = 0#last year PE
+	lastYearPe = 0#last year static PE
 	pb = 0;
+	ps = 0;#price/sales ratio
 	rank = 0;
 	lastUpdate = '';
 	totalCap = 0;
