@@ -25,7 +25,8 @@ def insertStock():
     posts.find_one({"author": "Mike"})
     for post in posts.find():
         print post
-        
+ 
+#save stock trading history         
 def saveStock(stock):
     from pymongo import Connection
     connection = Connection()
@@ -187,6 +188,15 @@ def saveTicker(stock):
     historyDatas = db.tickers
     historyDatas.insert(data)
     
+#Update ticker with key statistics data
+def updateTickerWithKeyStats(stock,pe,pb,ps,marketCap):
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    ticker = db.tickers
+    print ticker.update({"code":stock},
+    {"$set":{"pe":float(pe), "pb":pb,"ps":ps,"marketCap":marketCap}}, upsert=True,safe=True)
+    
 #save non-existent tickers,may change according to IPO
 def saveNonExistentTicker(stock):
     from pymongo import Connection
@@ -219,16 +229,30 @@ def findAllExistentTickers():
     for stock in cursor:
         result.add(stock['code'])
     return result
-      
+
+#Define market PE as mid PE of all stocks
+def getMarketPe():
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.tickers
+    all = historyDatas.find().sort([("pe",pymongo.DESCENDING)]);
+    mid = all.count()/2
+    #print mid
+    midPe = all[mid]['pe']
+    return midPe
+    
 
     
 if __name__ == '__main__':
     from stock import Stock
     stock = Stock('600880')
     #findAllNonExistentTickers()
-    stocks = findAllExistentTickers()
-    for stock in stocks:
-      print stock
+    #updateTickerWithKeyStats('600004',14.00,2.36,0.56,2333.5)
+#    stocks = findAllExistentTickers()
+#    for stock in stocks:
+#       updateTickerWithKeyStats(stock,14.00,2.36,0.56,2333.5)
+    print getMarketPe();
 #    print findLastUpdate('600890')
 #    stocks = findStockByDate('600890','2012-03-01')
 #    for stock in stocks:

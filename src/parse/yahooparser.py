@@ -16,13 +16,18 @@ from lxml.html import parse
 import io
 
 #parse ticker code/name from yahoo finance,check whether exists
-def parseTickers():
+def parseTickers(begin=600000,end=603333):
     nonExistentTickers = findAllNonExistentTickers()
+    existingTickers = findAllExistentTickers()
     print nonExistentTickers
+    print existingTickers
     #parse shanghai tickers
-    for code in range(600556,603333):
-        if (code in nonExistentTickers):
+    for code in range(begin,end):
+        if (str(code) in nonExistentTickers):
             print 'Non-existent ticker***'+str(code)
+            continue;
+        elif (str(code) in existingTickers):
+            print 'Existing ticker***'+str(code)
             continue;
         code2 = str(code) +'.SS'
         url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22'+code2+'%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
@@ -31,7 +36,7 @@ def parseTickers():
         r = page.xpath('//errorindicationreturnedforsymbolchangedinvalid');
        
         errorMsg = r[0].text
-        stock = Stock(code)
+        stock = Stock(str(code))
             
         if (errorMsg is None):
             stock.name = ''
@@ -65,7 +70,9 @@ def parseTickers():
 def parseFinanceData(code):
     from lxml import etree
     from lxml.html import parse
-    if (code.startswith('6')):
+    if (len(code) == 9):
+        code2 = code
+    elif (code.startswith('6')):
         code2 = code +".SS"
     else:
         code2 = code +".SZ"
@@ -130,7 +137,9 @@ def getHistorialData(code,save = True,beginDate = '',endDate = ''):
     from lxml import etree
     from lxml.html import parse
     #yahoo stock ticker need post-fix ".SS" for Shanghai,'.SZ' for shenzheng
-    if (code.startswith('6')):
+    if (len(code) == 9):
+        code2 = code
+    elif (code.startswith('6')):
         code2 = code +".SS"
     else:
         code2 = code +".SZ"
@@ -335,13 +344,14 @@ def computeNhnlIndexWithinRangeWithStocks(stocks,lastDays,nearDays,beginDate = s
     return result                  
                     
 if __name__ == '__main__':
-    stocks = ['600327','600829','600573','600369','601688','600132','600332','601866','600718']
-    #parseTickers();
-    #parseFinanceData('600327')
+    stocks = ['600327','600829','600573','600369','601688','600132','600332','601866','600718','600048']
+    parseTickers();
+    #parseFinanceData('000001.SS')
+    #getHistorialData('000001.SS',beginDate='2012-04-01')
     #getHistorialData('600327',beginDate='2012-04-01')
 #    for stock in stocks:
 #        getHistorialData(stock,beginDate='2012-04-01')
-    print computeNhnlIndexWithinRangeWithStocks(stocks,60,7,'2012-04-01')
+    #print computeNhnlIndexWithinRangeWithStocks(stocks,60,7,'2012-04-01')
     #getHistorialData('600327',True,'2011-01-01')
     #parseAllHistoryDataInDB()
 #    parseAllHistoryData('stock_list_all')
