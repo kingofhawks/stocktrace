@@ -31,7 +31,10 @@ def sendMail():
     
     s = smtplib.SMTP('smtp.sendgrid.net')
     s.login('cloudbees_kingofhawks','lazio_2000')
-    s.sendmail('simon.wang@mitrastar.cn', 'kingofhawks@gmail.com', msg.as_string())
+    s.sendmail('simon.wang@mitrastar.cn', 'wereach.cn@gmail.com', msg.as_string())
     s.quit()
     print 'send out mail notification'
+
+if __name__ == '__main__':
+    sendMail()
 

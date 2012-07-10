@@ -14,17 +14,19 @@ from dao.stockdao import *
 from lxml import etree
 from lxml.html import parse
 import io    
+from urllib2 import urlopen
     
 #parse stock statistics data from BB finance
 def parseKeyStatData(code):        
-    url = 'http://www.bloomberg.com/quote/'+code+':CH'   
-        
+    #url = 'http://www.bloomberg.com/quote/'+code+':CH'   
+    url ='http://cn.reuters.com/investing/quotes/quote?symbol=600327.SS'  
+    #urlopen(url)
     page = parse(url).getroot()
-    #result = etree.tostring(page)
-    #print result
+    result = etree.tostring(page)
+    print result
     r = page.xpath('//table[@class="key_stat_data"]');
     tree= etree.ElementTree(r[0])  
-    #print etree.tostring(tree)
+    print etree.tostring(tree)
     stats = tree.xpath('//td[@class="company_stat"]')
 #    for stat in stats:
 #        print stat.text
@@ -38,10 +40,10 @@ def parseKeyStatData(code):
                     
 if __name__ == '__main__':
 #    stocks = ['600327','600739','600573','600583','600718','600827','601111','601866','600880']
-#    parseKeyStatData('600000')
-    stocks = findAllExistentTickers()
-    for stock in stocks:
-       parseKeyStatData(stock)
+    parseKeyStatData('600327')
+#    stocks = findAllExistentTickers()
+#    for stock in stocks:
+#       parseKeyStatData(stock)
 #    for stock in stocks:
 #        getHistorialData(stock)
 #    getHistorialData('600383',True,'2011-01-01')

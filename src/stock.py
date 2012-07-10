@@ -1,7 +1,7 @@
 #from datetime import date
 class Stock:
-	mgsy = 0
-	mgjzc = 0
+	mgsy = 0 #EPS TTM
+	mgjzc = 0 #booking value MRQ
 	pe = 0;#dynamic PE
 	lastYearPe = 0#last year static PE
 	pb = 0;
@@ -18,6 +18,12 @@ class Stock:
 	name = '';
 	yearHigh = 0;
 	yearLow = 0;
+	PercentChangeFromYearLow = '';
+	PercebtChangeFromYearHigh = '';
+	FiftydayMovingAverage = 0;
+	TwoHundreddayMovingAverage = 0;
+	PercentChangeFromTwoHundreddayMovingAverage = '';
+	PercentChangeFromFiftydayMovingAverage = '';
 	def __init__(self,code,current=0,percent=0,low=0,high=0):
 		self.code = code
 		self.current = current

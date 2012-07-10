@@ -259,5 +259,5 @@ class ObjectHandler(BaseRequestHandler):
         self.finish()
         
 if __name__ == '__main__':
-    start(10002,'e:/s3server');
+    start(10001,'e:/s3server');
 

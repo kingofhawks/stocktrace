@@ -50,11 +50,13 @@ def parseFinanceData(code):
                     stock.lastUpdate = last_update                    
          
         return stock   
+
         
 if __name__ == '__main__':
-    parseFinanceData('600880')
-    import logging
-    LOG_FILENAME = 'example.log'
-    logging.basicConfig(level=logging.DEBUG)
-
-    logging.error('This message should go to the log file')
+    print parseFinanceData('600327')
+    parseFinanceData('600327')
+#    import logging
+#    LOG_FILENAME = 'example.log'
+#    logging.basicConfig(level=logging.DEBUG)
+#
+#    logging.error('This message should go to the log file')

@@ -138,7 +138,10 @@ def findBottomStockByDays(code,lastDays,endDate = str(date.today())):
 def triggerNhNl(code,lastDays,nearDays,endDate = str(date.today())):
     #find peak price during the last days
     peak = findPeakStockByDays(code,lastDays,endDate)
-    print peak
+    print code+str(peak)
+    
+    if peak is None:
+        return 0;
     
     #check peak price whether happen during near days
 #    print datetime.strptime(peak.get('date'),'%Y-%m-%d')
@@ -152,13 +155,14 @@ def triggerNhNl(code,lastDays,nearDays,endDate = str(date.today())):
 #    print datetime.strptime(peak.get('date'),'%Y-%m-%d').date()<=date.today()
     if result:
         print code+' trigger NH index at '+str(peak)
-        return 1;
+        return {'date':peak.get('date'),'value':1};
     
     
     #find bottom price during the last days
     bottom = findBottomStockByDays(code,lastDays,endDate)
     print bottom
-    
+    if bottom is None:
+        return 0;
     #check bottom price whether happen during near days
 #    print datetime.strptime(peak.get('date'),'%Y-%m-%d')
 #    print datetime.strptime(peak.get('date'),'%Y-%m-%d').date()
@@ -170,8 +174,8 @@ def triggerNhNl(code,lastDays,nearDays,endDate = str(date.today())):
     print datetime.strptime(bottom.get('date'),'%Y-%m-%d').date()<=end
     if result:
         print code+' trigger NL index at '+str(bottom)
-        return -1;
-    
+        #return -1;
+        return {'date':bottom.get('date'),'value':-1};
     return 0
 
 #save ticker with code and year high/low etc
@@ -184,18 +188,20 @@ def saveTicker(stock):
             "high": stock.high,
             "low": stock.low,
             "yearhigh": stock.yearHigh,
-            "yearlow": stock.yearLow}
+            "yearlow": stock.yearLow,
+            "close": stock.close}
     historyDatas = db.tickers
     historyDatas.insert(data)
     
 #Update ticker with key statistics data
-def updateTickerWithKeyStats(stock,pe,pb,ps,marketCap):
+def updateTickerWithKeyStats(stock,eps,bookingValue,marketCap = 0):
     from pymongo import Connection
     connection = Connection()
     db = connection.stock
     ticker = db.tickers
     print ticker.update({"code":stock},
-    {"$set":{"pe":float(pe), "pb":pb,"ps":ps,"marketCap":marketCap}}, upsert=True,safe=True)
+    {"$set":{"mgsy":float(eps), "mgjzc":float(bookingValue)}}, upsert=True,safe=True)
+     #,"marketCap":marketCap}
     
 #save non-existent tickers,may change according to IPO
 def saveNonExistentTicker(stock):
@@ -241,6 +247,29 @@ def getMarketPe():
     #print mid
     midPe = all[mid]['pe']
     return midPe
+
+#Define market PB as mid PB of all stocks
+def getMarketPb():
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.tickers
+    all = historyDatas.find().sort([("pb",pymongo.DESCENDING)]);
+    mid = all.count()/2
+    #print mid
+    midPb = all[mid]['pb']
+    return midPb
+
+#clear all data in system
+def clear():
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    db.tickers.remove()
+    db.non_existent_tickers.remove()
+    db.stock_history.remove()
+    
+    pass
     
 
     
@@ -252,7 +281,8 @@ if __name__ == '__main__':
 #    stocks = findAllExistentTickers()
 #    for stock in stocks:
 #       updateTickerWithKeyStats(stock,14.00,2.36,0.56,2333.5)
-    print getMarketPe();
+    #print getMarketPe();
+    clear();
 #    print findLastUpdate('600890')
 #    stocks = findStockByDate('600890','2012-03-01')
 #    for stock in stocks:

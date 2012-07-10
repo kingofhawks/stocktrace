@@ -3,24 +3,25 @@ Created on 2011-3-7
 
 @author: simon
 '''
+#Deprecated now
 def parseMarket():
     from lxml import etree
     from lxml.html import parse
     page = parse('http://www.sse.com.cn/sseportal/ps/zhs/hqjt/hqjy.shtml').getroot()
     result = etree.tostring(page)
-    #print result
+    print result
     import io
     with io.open('test.xml','wb') as f:
        f.writelines(result) 
     
-    r = page.xpath('//table[@class="border_gray_right border_gray_bottom border_gray_left right_gk_bj"]');
-    #print len(r)
+    r = page.xpath('/html/body/table');
+    print len(r)
     j = 0 ;
     from stockmarket import stockmarket
     stockmarket = stockmarket()
     for a in r:  
         tree= etree.ElementTree(a)  
-        #print etree.tostring(tree) 
+        print etree.tostring(tree) 
         datas = tree.xpath('//td[@align="right"]') 
         #print len(datas)
         for data in datas:
