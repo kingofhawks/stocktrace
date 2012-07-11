@@ -8,7 +8,7 @@ def parseMarket():
     from lxml.html import parse
     page = parse('http://www.sse.com.cn/sseportal/ps/zhs/home.html').getroot()
     result = etree.tostring(page)
-    #print result
+    print result
     import io
     with io.open('test.xml','wb') as f:
        f.writelines(result) 
@@ -135,10 +135,79 @@ def parseIndustry():
         
     #print cap
     #print stock
+#Parse shenzhen market
+def parseSzMarket():
+    from lxml import etree
+    from lxml.html import parse
+    page = parse('http://www.szse.cn/').getroot()
+    result = etree.tostring(page)
+    print result
+    import io
+    with io.open('test.xml','wb') as f:
+       f.writelines(result) 
     
+    r = page.xpath('//div[@class="agora"]');
+    print len(r)
+    j = 0 ;
+    from stockmarket import stockmarket
+    stockmarket = stockmarket()
+    tree= etree.ElementTree(r[0])  
+    print etree.tostring(tree) 
+    datas = tree.xpath('//span/text()')
+    print datas 
+    stockmarket.totalCap = float(datas[3]);
+    
+            
+    print stockmarket   
+    
+#parse quote list from shanghai exchange    
+def parseQuoteList(save=False):
+    quotes = []
+    cursor = 0
+    while True:
+        temp = parseQuoteListFromCursor(cursor*50);
+        #print len(temp)
+        if len(temp) ==0:
+            break
+        cursor += 1
+        quotes.extend(temp)
+    if save:
+        from dao.stockdao import batchInsertTicker
+        batchInsertTicker(quotes)
+    return quotes
+
+    #print stock
+    
+def parseQuoteListFromCursor(cursor=1):
+    if (cursor == 0):
+        cursor = 1
+    url = 'http://www.sse.com.cn/sseportal/webapp/datapresent/SSEQueryStockInfoAct?reportName=BizCompStockInfoRpt&PRODUCTID=&PRODUCTJP=&PRODUCTNAME=&keyword=&tab_flg=1&CURSOR='+str(cursor)
+    print url
+    from lxml import etree
+    from lxml.html import parse
+    page = parse(url).getroot()
+    result = etree.tostring(page)
+    #print result
+    temp = page.xpath('//a/text()');
+    #print temp
+    quotes = []
+    for q in temp:
+        if isinstance(q, str) and q.startswith('6'):
+            #print "ordinary string"
+            quotes.append(q)
+        elif isinstance(q, unicode):
+            #print "unicode string"  
+            pass                     
+        else:
+            #print "not a valid string"
+            pass        
+    return quotes
+   
     
 if __name__ == '__main__':
-    parseMarket()
+    #parseMarket()
+    #parseSzMarket()
+    print parseQuoteList(True)
     #parseCap('600600')
     #parseIndustry()
     #pass

@@ -22,7 +22,7 @@ def parseTickers(begin=600000,end=603366):
     print nonExistentTickers
     print existingTickers
     #parse shanghai tickers
-    for code in range(begin,end):
+    for code in range(begin,end+1):
         if (str(code) in nonExistentTickers):
             print 'Non-existent ticker***'+str(code)
             continue;
@@ -33,6 +33,9 @@ def parseTickers(begin=600000,end=603366):
         url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22'+code2+'%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
         print url
         page = parse(url).getroot()
+        if page is None:
+            print "Fail to query for "+str(code)
+            return
         r = page.xpath('//errorindicationreturnedforsymbolchangedinvalid');
        
         errorMsg = r[0].text
@@ -49,7 +52,11 @@ def parseTickers(begin=600000,end=603366):
             stock.low = float(page.xpath('//dayslow')[0].text)
             stock.yearHigh = float(page.xpath('//yearhigh')[0].text)
             stock.yearLow = float(page.xpath('//yearlow')[0].text)
-            stock.close = float(page.xpath('//bid')[0].text)
+            close = page.xpath('//bid')[0].text;
+#            print close
+#            print type(close)
+            if close is not None:
+                stock.close = float(close)
             if (stock.high>=stock.yearHigh):
                 print 'stock trigger new high index*****'+code2 
                 with io.open('nh.xml','wb') as f:
@@ -178,6 +185,8 @@ def getHistorialData(code,save = True,beginDate = '',endDate = str(date.today())
     from dao.stockdao import findOldestUpdate
     lastStock = findLastUpdate(code)
     oldestStock = findOldestUpdate(code)
+#    print lastStock
+#    print oldestStock
 #    print date.today().weekday()
 #    print beginDate    
     #check whether beginDate is weekday 
@@ -193,9 +202,9 @@ def getHistorialData(code,save = True,beginDate = '',endDate = str(date.today())
     beginDate = str(begin)
     isUpdatedToDate = False
     if lastStock is None and oldestStock is None:
-        pass
+        print 'Begin to download history data for '+code
     else:
-        print "Current history data range "+oldestStock['date']+"~"+lastStock['date']
+        print code+" Current history data range "+oldestStock['date']+"~"+lastStock['date']
         isUpdatedToDate = (endDate <= lastStock['date']) and (beginDate >= oldestStock['date'])
     if isUpdatedToDate:
         print "History data is updated to latest:"+code
@@ -225,11 +234,16 @@ def getHistorialData(code,save = True,beginDate = '',endDate = str(date.today())
         if lastStock is not None:            
             isNewData = (stock.date > lastStock['date']) or (stock.date < oldestStock['date'])
         #print stock.date+'***isNewData***'+str(isNewData)
-        if isNewData and save and stock.volume!= 0:  
+        if isNewData and save:  
             saveStock(stock);
         #print stock    
         historyDatas.append(stock) 
     historyDatas.sort(key=lambda item:item.date,reverse=True) 
+    
+    if (len(historyDatas) == 0):
+        print "No data downloaded for "+code
+    else:
+        print str(len(historyDatas))+" history Data downloaded for "+code
         
 #    for stock in historyDatas:
 #        print stock 
@@ -281,13 +295,27 @@ def parseAllHistoryData(file):
 #Download all history data from yahoo via invalid code in DB
 def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2011-01-04'):
     print 'current quote size:'+str(len(stocks))
+#    for stock in stocks:
+#        #parse code
+#        try:
+#            getHistorialData(str(stock),True,beginDate)                                       
+#        except:
+#            traceback.print_exc(file=sys.stdout)
+#            continue
+    
+    import multiprocessing as mp
+    pool = mp.Pool(5)
     for stock in stocks:
-        #parse code
-        try:
-            getHistorialData(str(stock),True,beginDate)                                       
-        except:
-            traceback.print_exc(file=sys.stdout)
-            continue
+        pool.apply_async(downloadHistorialData, args = [str(stock),True,beginDate])
+    pool.close()
+    pool.join()
+    
+    
+def downloadHistorialData(code,save,beginDate):
+    try:
+        getHistorialData(code,save,beginDate)                                       
+    except:
+        traceback.print_exc(file=sys.stdout)        
    
     
 #lastDays: the last range to check the index,default will be 1 year's data(52 weeks),i.e,the sampling period
@@ -384,7 +412,7 @@ def computeNhnlIndexWithinRange(file,lastDays,nearDays,beginDate = str(date.toda
 
 #compute the NHNL index between beginDate and endDate
 def computeNhnlIndexWithinRangeWithStocks(stocks,lastDays,nearDays,beginDate = str(date.today()),endDate = str(date.today())):
-    period =  (datetime.strptime(endDate,'%Y-%m-%d')-datetime.strptime(beginDate,'%Y-%m-%d')).days
+    period =  (datetime.strptime(endDate,'%Y-%m-%d')-datetime.strptime(beginDate,'%Y-%m-%d')).days+1
     result = []
     print period
     for i in range(period):
@@ -400,7 +428,8 @@ if __name__ == '__main__':
     #parseTickers();
     #print parseFinanceData('600327')
     #getHistorialData('000001.SS',beginDate='2012-04-01')
-    getHistorialData('600327',beginDate='2012-04-01')
+    #getHistorialData('600327',beginDate='2012-04-01')
+    triggered = triggerNhNl('600655',200,5) 
 #    for stock in stocks:
 #        getHistorialData(stock,beginDate='2012-04-01')
     #print computeNhnlIndexWithinRangeWithStocks(stocks,60,7,'2012-04-01')

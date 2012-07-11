@@ -79,6 +79,20 @@ def findStockByDate(code,date):
     historyDatas = db.stock_history
     return historyDatas.find({"code":code,"date" : {"$gt":date}}).sort([("date",pymongo.DESCENDING)]);
 
+#find quote history data by code     
+def findStockByCode(code):
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.stock_history
+    return historyDatas.find({"code":code}).sort([("date",pymongo.DESCENDING)]);
+
+def countByCode(code):
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    return db.stock_history.find({"code":code}).count();
+    
 
 #find stock record in the last days     
 def findLastStockByDays(code,lastDays):
@@ -137,6 +151,10 @@ def findBottomStockByDays(code,lastDays,endDate = str(date.today())):
 #return 1 as trigger NH index,-1 as trigger NL index,0 as none
 def triggerNhNl(code,lastDays,nearDays,endDate = str(date.today())):
     #find peak price during the last days
+    count = countByCode(code)
+    #ignore too less data <=1 month
+#    if count <= 20:
+#        return 0;
     peak = findPeakStockByDays(code,lastDays,endDate)
     print code+str(peak)
     
@@ -192,6 +210,17 @@ def saveTicker(stock):
             "close": stock.close}
     historyDatas = db.tickers
     historyDatas.insert(data)
+
+#batch save ticker with code
+def batchInsertTicker(stocks):
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    datas = []
+    for stock in stocks:
+        datas.append({"code": stock})
+    historyDatas = db.tickers
+    historyDatas.insert(datas)
     
 #Update ticker with key statistics data
 def updateTickerWithKeyStats(stock,eps,bookingValue,marketCap = 0):
@@ -260,6 +289,70 @@ def getMarketPb():
     midPb = all[mid]['pb']
     return midPb
 
+#Define average PE as mid PE of all stocks
+def getAvgPe():
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.tickers
+    allQuotes = historyDatas.find();
+    peList = []
+    for stock in allQuotes:
+        #print stock
+        if (stock.get('close') is None or stock.get('mgsy') is None ):
+            continue
+        elif (stock['mgsy'] == 0):
+            continue
+        pe = stock['close']/stock['mgsy']
+        #print pe
+        peList.append(pe)
+        #result.add(stock['code'])
+    peList.sort()
+    mid = len(peList)/2
+    #print mid
+    midPe = peList[mid]
+    return midPe
+
+#Define average PB as mid PB of all stocks
+def getAvgPb():
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.tickers
+    allQuotes = historyDatas.find();
+    pbList = []
+    for stock in allQuotes:
+        #print stock
+        if (stock.get('close') is None or stock.get('mgjzc') is None ):
+            continue
+        pb = stock['close']/stock['mgjzc']
+        #print pb
+        pbList.append(pb)
+        #result.add(stock['code'])
+    pbList.sort()
+    mid = len(pbList)/2
+    return pbList[mid]
+
+#get those PB<=1
+def getPbLessThan1():
+    from pymongo import Connection
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.tickers
+    allQuotes = historyDatas.find();
+    pbList = []
+    for stock in allQuotes:
+        #print stock
+        if (stock.get('close') is None or stock.get('mgjzc') is None ):
+            continue
+        pb = stock['close']/stock['mgjzc']
+        #print pb
+        if (pb <1):
+            pbList.append({'code':stock['code'],'pb':pb})
+        #result.add(stock['code'])
+    pbList.sort()
+    return pbList
+
 #clear all data in system
 def clear():
     from pymongo import Connection
@@ -282,11 +375,16 @@ if __name__ == '__main__':
 #    for stock in stocks:
 #       updateTickerWithKeyStats(stock,14.00,2.36,0.56,2333.5)
     #print getMarketPe();
-    clear();
+#    print getAvgPe();
+#    print getAvgPb();
+#    print getPbLessThan1()
+#    stocks =['600000', '600004', '600005']
+#    batchInsertTicker(stocks)
 #    print findLastUpdate('600890')
-#    stocks = findStockByDate('600890','2012-03-01')
-#    for stock in stocks:
-#        print stock
+    print countByCode('600655')
+    stocks = findStockByCode('600655')
+    for stock in stocks:
+        print stock
 #    peak =  findPeakStockByDays('603000',9,'2012-05-06')
 #    print peak
 #    for stock in stocks:

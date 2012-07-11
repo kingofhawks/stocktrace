@@ -25,6 +25,7 @@ class stockmarket(object):
         '''
     def __str__(self):
         #self.pe = self.current/self.mgsy
-        self.avgPrice = self.totalMarketCap/self.totalFloatingShares
+        if self.totalFloatingShares !=0:
+            self.avgPrice = self.totalMarketCap/self.totalFloatingShares
         return 'PE:'+str(self.marketPe)+'**avgPrice:'+str('%.2f'%self.avgPrice)+'**totalCap:'+str(self.totalCap)+'**marketCap:'+str(self.totalMarketCap)+'**totalShares:'+str(self.totalShares)+'**totalFloatingShares:'+str(self.totalFloatingShares)+'**ssgs:'+str(self.ssgs)+'**sszq:'+str(self.sszq)+'**ssgp:'+str(self.ssgp)
         

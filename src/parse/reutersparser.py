@@ -28,20 +28,29 @@ def parseKeyStatData(code):
     #print etree.tostring(statisticsDiv)
     valuations = statisticsDiv.xpath('//td[@class="data"]/text()');
     #print 'td length'+str(len(valuations))
-    #print valuations
-    ttmPe = valuations[0]
-    ps = valuations[1]
-    mrqPb = valuations[2]
+#    print valuations
+#    ttmPe = valuations[0]
+#    ps = valuations[1]
+#    mrqPb = valuations[2]
     
     content1 = page.xpath('//div[@class="primaryContent1"]');
     financialDiv = etree.ElementTree(content1[2])
     financialDatas = financialDiv.xpath('//td[@class="data"]/text()');
     #print financialDatas
+    if len(financialDatas) <3:
+        print 'Could not get financialDatas for '+str(code)
+        return
     epsTtm = financialDatas[0].encode('utf-8').decode("ascii", "ignore")
     bookingValue = financialDatas[2].encode('utf-8').decode("ascii", "ignore")
     #print epsTtm+bookingValue
-   
-    updateTickerWithKeyStats(str(code),float(epsTtm),float(bookingValue))
+    if epsTtm is None or bookingValue is None:
+        print "Fail to parse EPS/PB";
+    else:
+        try:
+            updateTickerWithKeyStats(str(code),float(epsTtm),float(bookingValue))
+        except ValueError:
+            print 'could not convert string to float'
+            pass
 
                     
 if __name__ == '__main__':
