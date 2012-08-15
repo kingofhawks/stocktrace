@@ -309,7 +309,7 @@ def getAvgPe():
         #result.add(stock['code'])
     peList.sort()
     mid = len(peList)/2
-    #print mid
+    print mid
     midPe = peList[mid]
     return midPe
 

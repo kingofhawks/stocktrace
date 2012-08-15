@@ -29,7 +29,7 @@ def pb1():
 #check PE/PB/
 def mpi():
     #PE range [5,80],maybe need to adjust according to more history data
-    from dao.stockdao import getAvgPe,getAvgPb
+    from dao.stockdao import getAvgPe,getAvgPb,getPbLessThan1
     avgPe = getAvgPe();
     print 'avgPe '+str(avgPe)
     print translatePe(avgPe)
@@ -37,6 +37,8 @@ def mpi():
     avgPb = getAvgPb();
     print 'avgPb '+str(avgPb)
     print translatePb(avgPb)
+    
+    
     
     
     #PB1 ratio[0,100]
@@ -64,6 +66,6 @@ def translate(value, leftMin, leftMax, rightMin, rightMax):
      
     
 if __name__ == '__main__':
-    print nhnl(beginDate='2012-06-10')
+    #print nhnl(beginDate='2012-06-10')
     #print pb1()
-    #mpi()
+    mpi()

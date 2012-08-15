@@ -16,6 +16,15 @@ from lxml.html import parse
 import io    
 from urllib2 import urlopen
     
+
+#parse stock statistics data from reuters finance
+def downloadKeyStatDatas(quotes = findAllExistentTickers()):
+    from dao.stockdao import findAllExistentTickers
+    quotes = findAllExistentTickers();
+    for quote in quotes:
+        parseKeyStatData(quote)
+        
+        
 #parse stock statistics data from reuters finance
 def parseKeyStatData(code):        
     url ='http://cn.reuters.com/investing/quotes/quote?symbol='+str(code)+".SS"  
@@ -42,7 +51,7 @@ def parseKeyStatData(code):
         return
     epsTtm = financialDatas[0].encode('utf-8').decode("ascii", "ignore")
     bookingValue = financialDatas[2].encode('utf-8').decode("ascii", "ignore")
-    #print epsTtm+bookingValue
+    print epsTtm+bookingValue
     if epsTtm is None or bookingValue is None:
         print "Fail to parse EPS/PB";
     else:
@@ -55,7 +64,8 @@ def parseKeyStatData(code):
                     
 if __name__ == '__main__':
 #    stocks = ['600327','600739','600573','600583','600718','600827','601111','601866','600880']
-    parseKeyStatData('600327')
+    #parseKeyStatData('600327')
+    downloadKeyStatDatas()
 #    stocks = findAllExistentTickers()
 #    for stock in stocks:
 #       parseKeyStatData(stock)

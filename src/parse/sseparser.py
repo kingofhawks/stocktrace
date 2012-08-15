@@ -120,6 +120,9 @@ def parseIndustry():
             
         industry = Industry()
         name = str(rows[0])
+        
+        href = dataTree.xpath('//a/@href')
+        print href
         try:
             pe = float(rows[4])
             avgPrice = str(rows[5])
@@ -129,6 +132,11 @@ def parseIndustry():
         except:
             continue
         print industry
+        newUrl = 'http://www.sse.com.cn'+str(href[0])
+        print newUrl
+        newPage = parse(newUrl).getroot()
+        newResult = etree.tostring(newPage)
+        print newResult
         
         #temp = values[0].strip()
         #print temp
@@ -161,7 +169,7 @@ def parseSzMarket():
     print stockmarket   
     
 #parse quote list from shanghai exchange    
-def parseQuoteList(save=False):
+def downloadQuoteList(save=False):
     quotes = []
     cursor = 0
     while True:
@@ -174,6 +182,7 @@ def parseQuoteList(save=False):
     if save:
         from dao.stockdao import batchInsertTicker
         batchInsertTicker(quotes)
+
     return quotes
 
     #print stock
@@ -207,7 +216,7 @@ def parseQuoteListFromCursor(cursor=1):
 if __name__ == '__main__':
     #parseMarket()
     #parseSzMarket()
-    print parseQuoteList(True)
+    #print downloadQuoteList(True)
     #parseCap('600600')
-    #parseIndustry()
+    parseIndustry()
     #pass

@@ -112,21 +112,21 @@ def parseFinanceData(code):
     #print page.xpath('/html/body/query/results/quote/ask[1]/text()')
     #print page.xpath('//ask[1]/text()')[0]#both works
     yearLow = page.xpath('//yearlow[1]/text()')[0]
-    print yearLow
+    print 'yearLow'+yearLow
     yearHigh = page.xpath('//yearhigh[1]/text()')[0]
-    print yearHigh
+    print 'yearHigh'+yearHigh
     PercentChangeFromYearLow = page.xpath('//percentchangefromyearlow[1]/text()')[0]
-    print PercentChangeFromYearLow
+    print 'PercentChangeFromYearLow'+PercentChangeFromYearLow
     PercebtChangeFromYearHigh = page.xpath('//percebtchangefromyearhigh[1]/text()')[0]
-    print PercebtChangeFromYearHigh
+    print 'PercebtChangeFromYearHigh'+PercebtChangeFromYearHigh
     FiftydayMovingAverage = page.xpath('//fiftydaymovingaverage[1]/text()')[0]
-    print FiftydayMovingAverage
+    print 'FiftydayMovingAverage'+FiftydayMovingAverage
     TwoHundreddayMovingAverage = page.xpath('//twohundreddaymovingaverage[1]/text()')[0]
-    print TwoHundreddayMovingAverage
+    print 'TwoHundreddayMovingAverage'+TwoHundreddayMovingAverage
     PercentChangeFromTwoHundreddayMovingAverage = page.xpath('//percentchangefromtwohundreddaymovingaverage[1]/text()')[0]
-    print PercentChangeFromTwoHundreddayMovingAverage
+    print 'PercentChangeFromTwoHundreddayMovingAverage'+PercentChangeFromTwoHundreddayMovingAverage
     PercentChangeFromFiftydayMovingAverage = page.xpath('//percentchangefromfiftydaymovingaverage[1]/text()')[0]
-    print PercentChangeFromFiftydayMovingAverage
+    print 'PercentChangeFromFiftydayMovingAverage'+PercentChangeFromFiftydayMovingAverage
     from stock import Stock
     stock = Stock(code)
     for a in r:  
@@ -426,10 +426,10 @@ def computeNhnlIndexWithinRangeWithStocks(stocks,lastDays,nearDays,beginDate = s
 if __name__ == '__main__':
     stocks = ['600327','600829','600573','600369','601688','600132','600332','601866','600718','600048']
     #parseTickers();
-    #print parseFinanceData('600327')
+    print parseFinanceData('600327')
     #getHistorialData('000001.SS',beginDate='2012-04-01')
     #getHistorialData('600327',beginDate='2012-04-01')
-    triggered = triggerNhNl('600655',200,5) 
+    #triggered = triggerNhNl('600655',200,5) 
 #    for stock in stocks:
 #        getHistorialData(stock,beginDate='2012-04-01')
     #print computeNhnlIndexWithinRangeWithStocks(stocks,60,7,'2012-04-01')

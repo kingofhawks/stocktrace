@@ -30,6 +30,12 @@ class TestSequenceFunctions(unittest.TestCase):
         for element in random.sample(self.seq, 5):
             self.assertTrue(element in self.seq)
             
+    def test_wmi(self):
+        import wmi
+        c = wmi.WMI()
+        for os in c.Win32_OperatingSystem():
+          print os.Caption
+            
 
 #if __name__ == '__main__':
 #    unittest.main()

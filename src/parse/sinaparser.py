@@ -19,29 +19,50 @@ def getStock(code):
     low = float(test[5])
     percent = (current-yesterday)/yesterday*100
     stock = Stock(code,current,percent,low,high)
-    print stock
+    if (percent >=2 or percent <=-2):
+        #Alarm
+        stock.alert = True;
+    elif (stock.code == 'sh000001' and (percent >=1 or percent <=-1)):
+        stock.alert = True;
     return stock
     
     #print '%.2f'%percent+'%'   
     #print sys.argv[0]    
     
-def getMyStock():
-    codes = ['sh600327','sh600739','sh600583','sh600573','sh601866','sh000001']
+def getMyStock(codes = ['sh600327','sh600600','sh600583','sh600573','sh601111','sh600221','sh000001']):
     
+    stocksCrossThreshold = [] 
     for code in codes: 
-        getStock(code)
+        stock = getStock(code)
+        print stock
+        if (stock.alert == True):
+            stocksCrossThreshold.append(stock.shortStr())
         #thread.start_new(getStock,(code,))
+    
+    if (len(stocksCrossThreshold) !=0):
+        from util.mailutil import sendMail
+        print stocksCrossThreshold
+        sendMail(str(stocksCrossThreshold))
+
+#download latest price info from sina
+def downloadLatestData(quotes = ['sh600327','sh600739','sh600583','sh600573','sh601866','sh000001']):
+    
+    for code in quotes: 
+        quote = getStock(code)
+        print quote
+        
 if __name__ =="__main__":    
     import time, os, sys, sched
-    schedule = sched.scheduler(time.time, time.sleep)
-    schedule.enter(0, 0, getMyStock, ())   # 0==right now
-    schedule.run( )
-    #getMyStock()    
-    import urllib2
-    h=urllib2.HTTPHandler(debuglevel=1)    
-    request = urllib2.Request('http://finance.google.com/finance/info?q=600030')
-    request.add_header('User-Agent','StockTrace/1.0') 
-    opener = urllib2.build_opener(h) 
+#    schedule = sched.scheduler(time.time, time.sleep)
+#    schedule.enter(0, 0, getMyStock, ())   # 0==right now
+#    schedule.run( )
+    getMyStock()    
+    #downloadLatestData();
+#    import urllib2
+#    h=urllib2.HTTPHandler(debuglevel=1)    
+#    request = urllib2.Request('http://finance.google.com/finance/info?q=600030')
+#    request.add_header('User-Agent','StockTrace/1.0') 
+#    opener = urllib2.build_opener(h) 
     #feeddata = opener.open(request).read()  
     #print feeddata
     #print os.path.abspath(os.path.dirname(sys.argv[0]))
