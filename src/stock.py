@@ -25,6 +25,7 @@ class Stock:
 	PercentChangeFromTwoHundreddayMovingAverage = '';
 	PercentChangeFromFiftydayMovingAverage = '';
 	alert = False;
+	state = 'OK'#OK,WARNING,CRITICAL,UP
 	def __init__(self,code,current=0,percent=0,low=0,high=0):
 		self.code = code
 		self.current = current
@@ -34,10 +35,10 @@ class Stock:
 		
 	def __str__(self):
 		#self.pe = self.current/self.mgsy
-		return self.code+'**now:'+str(self.current)+'**percent:'+str('%.2f'%self.percent+'%')+'**high:'+str('%.2f'%self.high)+'**low:'+str('%.2f'%self.low)+'**alarm:'+str(self.alert)+'**open:'+str('%.2f'%self.openPrice)+'**close:'+str('%.2f'%self.close)+'**volume:'+str(self.volume)+'**PE:'+str('%.2f'%self.pe)+'**PB:'+str('%.2f'%self.pb)+'**rank:'+str('%.2f'%self.rank)+'**EPS:'+str(self.mgsy)+'**mgjzc:'+str(self.mgjzc)+'**last:'+str(self.lastUpdate)+'**totalCap:'+str('%.2f'%(self.totalCap/10000))+'**marketCap:'+str('%.2f'%(self.floatingCap/10000))+'**date:'+str(self.date)
+		return self.code+'**now:'+str(self.current)+'**state:'+self.state+'**percent:'+str('%.2f'%self.percent+'%')+'**high:'+str('%.2f'%self.high)+'**low:'+str('%.2f'%self.low)+'**alarm:'+str(self.alert)+'**open:'+str('%.2f'%self.openPrice)+'**close:'+str('%.2f'%self.close)+'**volume:'+str(self.volume)+'**PE:'+str('%.2f'%self.pe)+'**PB:'+str('%.2f'%self.pb)+'**rank:'+str('%.2f'%self.rank)+'**EPS:'+str(self.mgsy)+'**mgjzc:'+str(self.mgjzc)+'**last:'+str(self.lastUpdate)+'**totalCap:'+str('%.2f'%(self.totalCap/10000))+'**marketCap:'+str('%.2f'%(self.floatingCap/10000))+'**date:'+str(self.date)
 	
 	def shortStr(self):
-		return self.code+'**now:'+str(self.current)+'**percent:'+str('%.2f'%self.percent+'%')+'**high:'+str('%.2f'%self.high)+'**low:'+str('%.2f'%self.low)
+		return self.code+str('|%.2f'%self.percent+'%')+'**state:'+self.state+'**now:'+str(self.current)+'**high:'+str('%.2f'%self.high)+'**low:'+str('%.2f'%self.low)
 	
 	def compute(self):
 		if (self.lastUpdate.find('03-31')!= -1):

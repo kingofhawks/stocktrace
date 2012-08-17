@@ -16,6 +16,6 @@ if __name__ =="__main__":
     schedule = sched.scheduler(time.time, time.sleep)
 #    schedule.enter(0, 0, getMyStock, ())   # 0==right now
 #    schedule.run( )
-    periodic(schedule, 30, getMyStock)
+    periodic(schedule, 600, getMyStock)
     schedule.run( )
   

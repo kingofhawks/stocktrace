@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
 import thread
+
+#quote state cache
+stateCache = {}
+
 def getStock(code):
     #Sina API
     url = "http://hq.sinajs.cn/list="+code
@@ -19,17 +23,38 @@ def getStock(code):
     low = float(test[5])
     percent = (current-yesterday)/yesterday*100
     stock = Stock(code,current,percent,low,high)
-    if (percent >=2 or percent <=-2):
+    
+    #check threshold
+    if (percent >=2):
         #Alarm
-        stock.alert = True;
+        stock.alert = True;        
+        stock.state = 'UP'
+    elif (percent <=-5):
+        #Alarm
+        stock.alert = True;        
+        stock.state = 'CRITICAL'
+    elif (percent <=-2):
+        #Alarm
+        stock.alert = True;        
+        stock.state = 'WARNING'
     elif (stock.code == 'sh000001' and (percent >=1 or percent <=-1)):
-        stock.alert = True;
+        stock.state = 'WARNING'
+        
+    #check whether state changed
+    state = stateCache.get(code)
+    #print state
+    
+    if (state!= stock.state):
+        stateCache[code] = stock.state;
+    else:
+        stock.alert = False;
+        
     return stock
     
     #print '%.2f'%percent+'%'   
     #print sys.argv[0]    
     
-def getMyStock(codes = ['sh600327','sh600600','sh600583','sh600573','sh601111','sh600221','sh000001']):
+def getMyStock(codes = ['sh600327','sh600600','sh601111','sh600221','sh600583','sh600573','sh600428','sh000001']):
     
     stocksCrossThreshold = [] 
     for code in codes: 
@@ -43,6 +68,8 @@ def getMyStock(codes = ['sh600327','sh600600','sh600583','sh600573','sh601111','
         from util.mailutil import sendMail
         print stocksCrossThreshold
         sendMail(str(stocksCrossThreshold))
+    
+    print '******************finished quote polling***********************'
 
 #download latest price info from sina
 def downloadLatestData(quotes = ['sh600327','sh600739','sh600583','sh600573','sh601866','sh000001']):
