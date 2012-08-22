@@ -6,11 +6,11 @@ Created on 2011-3-7
 def parseFinanceData(code):
     from lxml import etree
     from lxml.html import parse
-    url = 'http://app.finance.ifeng.com/data/stock/cwjk.php?symbol='+code
+    url = 'http://www.windin.com/home/stock/stock-div/600309.SH.shtml'
     #print url
     page = parse(url).getroot()
     result = etree.tostring(page)
-    #print result
+    print result
     import io
     with io.open('test.xml','wb') as f:
        #f.writelines(result)
@@ -49,9 +49,7 @@ def parseFinanceData(code):
                     #print last_update
                     stock.lastUpdate = last_update                    
          
-        return stock   
-    
-      
+        return stock  
 
         
 if __name__ == '__main__':

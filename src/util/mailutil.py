@@ -18,7 +18,7 @@ def sendMail(content='test mail'):
     
     # me == the sender's email address
     # you == the recipient's email address
-    msg['Subject'] = 'The contents test mail'
+    msg['Subject'] = 'Securities price notification mail'
     msg['From'] = 'kingofhawks@gmail.com'
     msg['To'] = 'kingofhawks@gmail.com'    
 

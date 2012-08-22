@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 
 import thread
+from dao.stockdao import findAllExistentTickers
 
 #quote state cache
 stateCache = {}
 
 def getStock(code):
     #Sina API
+    if (code.startswith('60')):
+        code = 'sh'+code
     url = "http://hq.sinajs.cn/list="+code
     #Google Finance API
     #url = 'http://finance.google.com/finance/info?q=600030'    
@@ -17,15 +20,21 @@ def getStock(code):
     cont = pg.read()
     #print cont
     test = cont.split(',')
+    if (len(test) <9):
+        print 'error passe:'+code
+        return 
     yesterday = float(test[2])
     current = float(test[3])
     high = float(test[4])
     low = float(test[5])
+    volume = float(test[8])
     percent = (current-yesterday)/yesterday*100
-    stock = Stock(code,current,percent,low,high)
+    stock = Stock(code,current,percent,low,high,volume)
     
     #check threshold
-    if (percent >=2):
+    if (current == 0.0):
+        pass
+    elif (percent >=2):
         #Alarm
         stock.alert = True;        
         stock.state = 'UP'
@@ -59,7 +68,7 @@ def getMyStock(codes = ['sh600327','sh600600','sh601111','sh600221','sh600583','
     stocksCrossThreshold = [] 
     for code in codes: 
         stock = getStock(code)
-        print stock
+        print stock.shortStr()
         if (stock.alert == True):
             stocksCrossThreshold.append(stock.shortStr())
         #thread.start_new(getStock,(code,))
@@ -72,19 +81,23 @@ def getMyStock(codes = ['sh600327','sh600600','sh601111','sh600221','sh600583','
     print '******************finished quote polling***********************'
 
 #download latest price info from sina
-def downloadLatestData(quotes = ['sh600327','sh600739','sh600583','sh600573','sh601866','sh000001']):
-    
+def downloadLatestData(quotes = findAllExistentTickers()):
+    from dao.stockdao import updateTickerToLatestPrice
     for code in quotes: 
         quote = getStock(code)
         print quote
+        if (code.startswith('sh')):
+            code = code.replace('sh','')
+        updateTickerToLatestPrice(code,quote.current)
+        
         
 if __name__ =="__main__":    
     import time, os, sys, sched
 #    schedule = sched.scheduler(time.time, time.sleep)
 #    schedule.enter(0, 0, getMyStock, ())   # 0==right now
 #    schedule.run( )
-    getMyStock()    
-    #downloadLatestData();
+    #getMyStock()    
+    downloadLatestData();
 #    import urllib2
 #    h=urllib2.HTTPHandler(debuglevel=1)    
 #    request = urllib2.Request('http://finance.google.com/finance/info?q=600030')
