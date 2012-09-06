@@ -97,7 +97,7 @@ if __name__ =="__main__":
 #    schedule.enter(0, 0, getMyStock, ())   # 0==right now
 #    schedule.run( )
     #getMyStock()    
-    downloadLatestData();
+    #downloadLatestData();
 #    import urllib2
 #    h=urllib2.HTTPHandler(debuglevel=1)    
 #    request = urllib2.Request('http://finance.google.com/finance/info?q=600030')
