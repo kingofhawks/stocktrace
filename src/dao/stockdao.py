@@ -370,7 +370,7 @@ def clear():
     db.tickers.remove()
     db.non_existent_tickers.remove()
     db.stock_history.remove()
-    
+    print '********All history finance data cleared***********'
     pass
     
 

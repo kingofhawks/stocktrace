@@ -23,6 +23,7 @@ def downloadKeyStatDatas(quotes = findAllExistentTickers()):
     quotes = findAllExistentTickers();
     for quote in quotes:
         parseKeyStatData(quote)
+    print '*****Download key statistics data from reuters finished****'
         
         
 #parse stock statistics data from reuters finance

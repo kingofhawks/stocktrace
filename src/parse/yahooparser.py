@@ -11,8 +11,6 @@ from stock import Stock
 from lxml import etree
 from lxml.html import parse
 from dao.stockdao import *
-from lxml import etree
-from lxml.html import parse
 import io
 
 #parse ticker code/name from yahoo finance,check whether exists
@@ -160,7 +158,8 @@ def parseFinanceData(code):
          
         return stock   
 
-#get history data from yahoo finance API    
+#get history data from yahoo finance API 
+#http://developer.yahoo.com/yql/console/   
 def getHistorialData(code,save = True,beginDate = '',endDate = str(date.today())):
     from lxml import etree
     from lxml.html import parse
@@ -293,7 +292,7 @@ def parseAllHistoryData(file):
         pass
 
 #Download all history data from yahoo via invalid code in DB
-def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2011-01-04'):
+def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01'):
     print 'current quote size:'+str(len(stocks))
 #    for stock in stocks:
 #        #parse code

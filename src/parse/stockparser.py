@@ -38,6 +38,7 @@ def parse(code,parseIfeng= True,parseCap = True,parseSina = True):
 def parseAll(file,parseSina = False, parseIfeng= False,parseCap = False):
     import io
     list = [];
+    quotes = []
     
     import os
     fn = os.path.join(os.path.dirname(__file__),'..', '..','resources',file)
@@ -70,7 +71,8 @@ def parseAll(file,parseSina = False, parseIfeng= False,parseCap = False):
                         elif (s.percent >=2 or s.percent <=-2):
                             from util.mailutil import sendMail
                             sendMail()  
-                        list.append(s)                  
+                        list.append(s)  
+                        quotes.append(s.code)                
                 except:
                     traceback.print_exc(file=sys.stdout)
                     continue                    
@@ -90,7 +92,7 @@ def parseAll(file,parseSina = False, parseIfeng= False,parseCap = False):
             else:
                 logging.info(stock)
                 
-        return list
+        return quotes
         
 
 

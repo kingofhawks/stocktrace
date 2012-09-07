@@ -89,6 +89,8 @@ def downloadLatestData(quotes = findAllExistentTickers()):
         if (code.startswith('sh')):
             code = code.replace('sh','')
         updateTickerToLatestPrice(code,quote.current)
+    
+    print '****Download latest price from sina finished****'
         
         
 if __name__ =="__main__":    

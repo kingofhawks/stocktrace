@@ -189,6 +189,7 @@ def downloadQuoteList(save=False,parseSse=False):
         from dao.stockdao import batchInsertTicker
         batchInsertTicker(quotes)
 
+    print '*****Securities List download finished******'
     return quotes
 
     #print stock
