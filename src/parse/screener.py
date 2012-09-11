@@ -9,7 +9,7 @@ import sys, traceback
 
 
 #find quotes triggered nhnl index during the last days
-def findByNhnl(lastDays=40,nearDays=5):
+def findByNhnl(lastDays=200,nearDays=5):
     stocks = findAllExistentTickers()
     nhnlList = {'nhList':[],'nlList':[]}
     nh = 0
@@ -57,4 +57,4 @@ def findByMa(lastDays=40,nearDays=7):
     return nhnlList         
     
 if __name__ == '__main__':
-    print findByNhnl(200)
+    print findByNhnl()

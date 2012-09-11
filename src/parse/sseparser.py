@@ -169,7 +169,7 @@ def parseSzMarket():
     print stockmarket   
     
 #parse quote list from shanghai exchange    
-def downloadQuoteList(save=False,parseSse=False):
+def downloadQuoteList(save=False,parseSse=False,stockList='stock_list'):
     quotes = []
     cursor = 0
     if parseSse: 
@@ -184,7 +184,7 @@ def downloadQuoteList(save=False,parseSse=False):
     else:
         #parse from local text file from newone export
         from parse.stockparser import parseAll
-        quotes = parseAll('stock_list')
+        quotes = parseAll(stockList)
     if save:
         from dao.stockdao import batchInsertTicker
         batchInsertTicker(quotes)

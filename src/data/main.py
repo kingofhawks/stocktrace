@@ -7,7 +7,7 @@ if __name__ == '__main__':
 	from parse.sinaparser import downloadLatestData
 	clear();
 	#download securities list from sse
-	downloadQuoteList(True)
+	downloadQuoteList(True,stockList='stock_list')
 	#download statistics from reuters
 	downloadKeyStatDatas()
 	#download history data from yahoo

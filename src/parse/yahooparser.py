@@ -292,7 +292,7 @@ def parseAllHistoryData(file):
         pass
 
 #Download all history data from yahoo via invalid code in DB
-def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01'):
+def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01',engine='CSV'):
     print 'current quote size:'+str(len(stocks))
 #    for stock in stocks:
 #        #parse code
@@ -305,16 +305,85 @@ def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01'
     import multiprocessing as mp
     pool = mp.Pool(5)
     for stock in stocks:
-        pool.apply_async(downloadHistorialData, args = [str(stock),True,beginDate])
+        pool.apply_async(downloadHistorialData, args = [str(stock),True,beginDate,engine])
     pool.close()
     pool.join()
     
     
-def downloadHistorialData(code,save,beginDate):
+def downloadHistorialData(code,save,beginDate,engine='CSV'):
     try:
-        getHistorialData(code,save,beginDate)                                       
+        if engine == 'CVS':
+            getCSVHistorialData(code,save,beginDate)
+        else:
+            getHistorialData(code, save, beginDate)            
+                                            
     except:
-        traceback.print_exc(file=sys.stdout)        
+        traceback.print_exc(file=sys.stdout) 
+        
+        
+#get history data from yahoo CSV API 
+# http://ichart.finance.yahoo.com/table.csv?s=300072.sz&d=7&e=23&f=2010&a=5&b=11&c=2010   
+def getCSVHistorialData(code,save = True,beginDate = '',endDate = str(date.today())):
+    from lxml import etree
+    #yahoo stock ticker need post-fix ".SS" for Shanghai,'.SZ' for shenzheng
+    if (len(code) == 9):
+        code2 = code
+    elif (code.startswith('6')):
+        code2 = code +".SS"
+    else:
+        code2 = code +".SZ"
+
+    begin = beginDate.split('-')
+    end = endDate.split('-')
+    period = '&d='+(str)(int(end[1])-1)+'&e='+end[2]+'&f='+end[0]+'&a='+(str)(int(begin[1])-1)+'&b='+begin[2]+'&c='+begin[0]    
+    url = 'http://ichart.finance.yahoo.com/table.csv?s='+code2+period
+    print url  
+    
+    #check whether data is update to latest
+    from dao.stockdao import findLastUpdate
+    from dao.stockdao import findOldestUpdate
+    lastStock = findLastUpdate(code)
+    oldestStock = findOldestUpdate(code)
+            
+    page = parse(url).getroot()
+    result = etree.tostring(page)
+    print result
+    lines = result.split('\n')
+    
+    from stock import Stock
+    historyDatas = []
+
+    for a in lines:  
+        if a.find('html')!= -1:
+            continue        
+        #print etree.tostring(tree) 
+
+        datas = a.split(',')
+        print datas
+        stock = Stock(code)           
+        stock.date = datas[0]
+        stock.high = datas[2]
+        stock.low = datas[3]  
+        stock.openPrice = datas[1]
+        stock.close = datas[4]
+        stock.volume = datas[5]
+        
+        isNewData = True;
+        if lastStock is not None:            
+            isNewData = (stock.date > lastStock['date']) or (stock.date < oldestStock['date'])
+        #print stock.date+'***isNewData***'+str(isNewData)
+        if isNewData and save:  
+            saveStock(stock);
+        #print stock    
+        historyDatas.append(stock) 
+    historyDatas.sort(key=lambda item:item.date,reverse=True) 
+    
+    if (len(historyDatas) == 0):
+        print "No data downloaded for "+code
+    else:
+        print str(len(historyDatas))+" history Data downloaded for "+code
+        
+       
    
     
 #lastDays: the last range to check the index,default will be 1 year's data(52 weeks),i.e,the sampling period
@@ -425,7 +494,8 @@ def computeNhnlIndexWithinRangeWithStocks(stocks,lastDays,nearDays,beginDate = s
 if __name__ == '__main__':
     stocks = ['600327','600829','600573','600369','601688','600132','600332','601866','600718','600048']
     #parseTickers();
-    print parseFinanceData('600327')
+    #print parseFinanceData('600327')
+    print getCSVHistorialData('600327',beginDate='2012-01-01')
     #getHistorialData('000001.SS',beginDate='2012-04-01')
     #getHistorialData('600327',beginDate='2012-04-01')
     #triggered = triggerNhNl('600655',200,5) 
