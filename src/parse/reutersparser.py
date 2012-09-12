@@ -15,6 +15,7 @@ from lxml import etree
 from lxml.html import parse
 import io    
 from urllib2 import urlopen
+import logging
     
 
 #parse stock statistics data from reuters finance
@@ -23,7 +24,7 @@ def downloadKeyStatDatas(quotes = findAllExistentTickers()):
     quotes = findAllExistentTickers();
     for quote in quotes:
         parseKeyStatData(quote)
-    print '*****Download key statistics data from reuters finished****'
+    logging.info('*****Download key statistics data from reuters finished****')
         
         
 #parse stock statistics data from reuters finance

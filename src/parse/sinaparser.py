@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import thread
+import thread,logging
 from dao.stockdao import findAllExistentTickers
 
 #quote state cache
@@ -90,7 +90,7 @@ def downloadLatestData(quotes = findAllExistentTickers()):
             code = code.replace('sh','')
         updateTickerToLatestPrice(code,quote.current)
     
-    print '****Download latest price from sina finished****'
+    logging.info( '****Download latest price from sina finished****')
         
         
 if __name__ =="__main__":    

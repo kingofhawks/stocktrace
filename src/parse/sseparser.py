@@ -3,6 +3,8 @@ Created on 2011-3-7
 
 @author: simon
 '''
+import logging
+
 def parseMarket():
     from lxml import etree
     from lxml.html import parse
@@ -189,7 +191,7 @@ def downloadQuoteList(save=False,parseSse=False,stockList='stock_list'):
         from dao.stockdao import batchInsertTicker
         batchInsertTicker(quotes)
 
-    print '*****Securities List download finished******'
+    logging.info('*****Securities List download finished******')
     return quotes
 
     #print stock
