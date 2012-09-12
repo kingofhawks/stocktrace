@@ -312,7 +312,7 @@ def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01'
     
 def downloadHistorialData(code,save,beginDate,engine='CSV'):
     try:
-        if engine == 'CVS':
+        if engine == 'CSV':
             getCSVHistorialData(code,save,beginDate)
         else:
             getHistorialData(code, save, beginDate)            
@@ -347,7 +347,7 @@ def getCSVHistorialData(code,save = True,beginDate = '',endDate = str(date.today
             
     page = parse(url).getroot()
     result = etree.tostring(page)
-    print result
+    #print result
     lines = result.split('\n')
     
     from stock import Stock
@@ -359,7 +359,7 @@ def getCSVHistorialData(code,save = True,beginDate = '',endDate = str(date.today
         #print etree.tostring(tree) 
 
         datas = a.split(',')
-        print datas
+        #print datas
         stock = Stock(code)           
         stock.date = datas[0]
         stock.high = datas[2]

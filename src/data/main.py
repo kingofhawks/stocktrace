@@ -1,7 +1,7 @@
 #download securities list,statistics data,history price data
 if __name__ == '__main__':
 	from parse.yahooparser import downloadHistoryData,parseTickers
-	from dao.stockdao import clear
+	from dao.stockdao import clear,findAllExistentTickers
 	from parse.sseparser import downloadQuoteList
 	from parse.reutersparser import downloadKeyStatDatas
 	from parse.sinaparser import downloadLatestData
@@ -10,10 +10,11 @@ if __name__ == '__main__':
 	downloadQuoteList(True,stockList='stock_list')
 	#download statistics from reuters
 	downloadKeyStatDatas()
+	quotes = findAllExistentTickers()
 	#download history data from yahoo
-	downloadHistoryData()
+	downloadHistoryData(quotes)
 	#update latest price from sina
-	downloadLatestData()
+	downloadLatestData(quotes)
 
 			
 
