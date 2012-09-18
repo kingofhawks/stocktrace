@@ -21,23 +21,26 @@ def jsoncandle(request):
     ohlc = []
     for stock in stocks:
       #print stock
+      #open/high/low/close must be float value
       s = []
       s.append(stock['date'])
-      s.append(stock['open'])
-      s.append(stock['high'])
-      s.append(stock['low'])
-      s.append(stock['close'])
+      s.append(float(stock['open']))
+      s.append(float(stock['high']))
+      s.append(float(stock['low']))
+      s.append(float(stock['close']))
       print s
       ohlc.append(s)
     print ohlc  
+    #sample format for ohlc
 #    ohlc = [
-#      ["2009-04-09", 136.01, 139.5, 134.53, 139.48],
-#      ['2009-04-08', 143.82, 144.56, 136.04, 136.97],      
+#      ["2012-08-14", 136.01, 139.5, 134.53, 139.48],
+#      ['2012-08-13', 143.82, 144.56, 136.04, 136.97],      
 #    ];
     return HttpResponse(simplejson.dumps(ohlc), mimetype='application/json')
 
 def candlestick(request):
     return render(request,'candlestick.html')   
+
 
 def jsonnhnl(request):
     from parse.yahooparser import computeNhnlIndexWithinRangeWithStocks

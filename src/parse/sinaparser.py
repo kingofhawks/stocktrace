@@ -81,11 +81,15 @@ def getMyStock(codes = ['sh600327','sh600600','sh601111','sh600221','sh600583','
     print '******************finished quote polling***********************'
 
 #download latest price info from sina
-def downloadLatestData(quotes = findAllExistentTickers()):
+def downloadLatestData(quotes = findAllExistentTickers(),engine='sina'):
     from dao.stockdao import updateTickerToLatestPrice
     for code in quotes: 
-        quote = getStock(code)
-        print quote
+        if engine == 'sina':
+            quote = getStock(code)
+            print quote
+        elif engine == 'yahoo':
+            from parse.yahooparser import parseFinanceData
+            quote = parseFinanceData(code)            
         if (code.startswith('sh')):
             code = code.replace('sh','')
         updateTickerToLatestPrice(code,quote.current)

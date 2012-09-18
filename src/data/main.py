@@ -20,7 +20,7 @@ if __name__ == '__main__':
 	#download history data from yahoo
 	downloadHistoryData(quotes)
 	#update latest price from sina
-	downloadLatestData(quotes)
+	downloadLatestData(quotes,'yahoo')
 	
 	logging.info('***Finish download finance data****')
 
