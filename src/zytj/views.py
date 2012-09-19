@@ -14,10 +14,15 @@ def index(request):
     return render(request,'ajax.html',
                   {'ohlc':ohlc})   
     
-
-def jsoncandle(request):
+#q:quote code
+def jsoncandle(request,q):
+    print q
+#    quote = request.GET.get('q', 'test')
+#    print request.GET
+#    print quote    
+    
     from dao.stockdao import findLastStockByDays
-    stocks = findLastStockByDays('600327',60)
+    stocks = findLastStockByDays(q,60)
     ohlc = []
     for stock in stocks:
       #print stock
@@ -28,9 +33,9 @@ def jsoncandle(request):
       s.append(float(stock['high']))
       s.append(float(stock['low']))
       s.append(float(stock['close']))
-      print s
+      #print s
       ohlc.append(s)
-    print ohlc  
+    #print ohlc  
     #sample format for ohlc
 #    ohlc = [
 #      ["2012-08-14", 136.01, 139.5, 134.53, 139.48],
@@ -38,8 +43,12 @@ def jsoncandle(request):
 #    ];
     return HttpResponse(simplejson.dumps(ohlc), mimetype='application/json')
 
-def candlestick(request):
-    return render(request,'candlestick.html')   
+#q:stock code,which will be passed to jsoncandle()
+def candlestick(request,q):
+    return render(request,'candlestick.html') 
+
+#def candlestick(request):
+#    return render(request,'candlestick.html')   
 
 
 def jsonnhnl(request):
