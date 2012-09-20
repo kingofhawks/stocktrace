@@ -11,7 +11,10 @@ from stock import Stock
 from lxml import etree
 from lxml.html import parse
 from dao.stockdao import *
-import io,logging
+import io
+from util import slf4p
+
+logger = slf4p.getLogger(__name__)
 
 #parse ticker code/name from yahoo finance,check whether exists
 def parseTickers(begin=600000,end=603366):
@@ -89,77 +92,62 @@ def parseFinanceData(code):
         
     url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22'+code2+'%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&diagnostics=true'
     print url
-
         
-    page = parse(url).getroot()
-    result = etree.tostring(page)
-    print result
-    
-    r = page.xpath('//errorindicationreturnedforsymbolchangedinvalid');
-    errorMsg = r[0].text
-    from stock import Stock
-    if (errorMsg is None):
-        print 'OK'
+    try:
+        page = parse(url).getroot()
+        result = etree.tostring(page)
+        print result
+        
+        r = page.xpath('//errorindicationreturnedforsymbolchangedinvalid');
+        errorMsg = r[0].text
+        from stock import Stock
+        if (errorMsg is None):
+            print 'OK'
+            stock = Stock(code)
+            stock.name = ''
+        else:
+            print 'error'
+        result = etree.tostring(page)
+        print result
+        
+        quote = page.xpath('/html/body/query/results/quote');
+        #print len(quote)    
+        #print len(page.xpath('//ask'))
+        #print page.xpath('/html/body/query/results/quote/ask[1]/text()')
+        #print page.xpath('//ask[1]/text()')[0]#both works
+        
+        yearLow = page.xpath('//yearlow[1]/text()')[0]
+        print 'yearLow'+yearLow
+        yearHigh = page.xpath('//yearhigh[1]/text()')[0]
+        print 'yearHigh'+yearHigh
+        PercentChangeFromYearLow = page.xpath('//percentchangefromyearlow[1]/text()')[0]
+        print 'PercentChangeFromYearLow'+PercentChangeFromYearLow
+        PercebtChangeFromYearHigh = page.xpath('//percebtchangefromyearhigh[1]/text()')[0]
+        print 'PercebtChangeFromYearHigh'+PercebtChangeFromYearHigh
+        FiftydayMovingAverage = page.xpath('//fiftydaymovingaverage[1]/text()')[0]
+        print 'FiftydayMovingAverage'+FiftydayMovingAverage
+        TwoHundreddayMovingAverage = page.xpath('//twohundreddaymovingaverage[1]/text()')[0]
+        print 'TwoHundreddayMovingAverage'+TwoHundreddayMovingAverage
+        PercentChangeFromTwoHundreddayMovingAverage = page.xpath('//percentchangefromtwohundreddaymovingaverage[1]/text()')[0]
+        print 'PercentChangeFromTwoHundreddayMovingAverage'+PercentChangeFromTwoHundreddayMovingAverage
+        PercentChangeFromFiftydayMovingAverage = page.xpath('//percentchangefromfiftydaymovingaverage[1]/text()')[0]
+        print 'PercentChangeFromFiftydayMovingAverage'+PercentChangeFromFiftydayMovingAverage
+        
         stock = Stock(code)
-        stock.name = ''
-    else:
-        print 'error'
-    result = etree.tostring(page)
-    print result
-    
-    quote = page.xpath('/html/body/query/results/quote');
-    #print len(quote)    
-    #print len(page.xpath('//ask'))
-    #print page.xpath('/html/body/query/results/quote/ask[1]/text()')
-    #print page.xpath('//ask[1]/text()')[0]#both works
-    yearLow = page.xpath('//yearlow[1]/text()')[0]
-    print 'yearLow'+yearLow
-    yearHigh = page.xpath('//yearhigh[1]/text()')[0]
-    print 'yearHigh'+yearHigh
-    PercentChangeFromYearLow = page.xpath('//percentchangefromyearlow[1]/text()')[0]
-    print 'PercentChangeFromYearLow'+PercentChangeFromYearLow
-    PercebtChangeFromYearHigh = page.xpath('//percebtchangefromyearhigh[1]/text()')[0]
-    print 'PercebtChangeFromYearHigh'+PercebtChangeFromYearHigh
-    FiftydayMovingAverage = page.xpath('//fiftydaymovingaverage[1]/text()')[0]
-    print 'FiftydayMovingAverage'+FiftydayMovingAverage
-    TwoHundreddayMovingAverage = page.xpath('//twohundreddaymovingaverage[1]/text()')[0]
-    print 'TwoHundreddayMovingAverage'+TwoHundreddayMovingAverage
-    PercentChangeFromTwoHundreddayMovingAverage = page.xpath('//percentchangefromtwohundreddaymovingaverage[1]/text()')[0]
-    print 'PercentChangeFromTwoHundreddayMovingAverage'+PercentChangeFromTwoHundreddayMovingAverage
-    PercentChangeFromFiftydayMovingAverage = page.xpath('//percentchangefromfiftydaymovingaverage[1]/text()')[0]
-    print 'PercentChangeFromFiftydayMovingAverage'+PercentChangeFromFiftydayMovingAverage
-    from stock import Stock
-    stock = Stock(code)
-    for a in r:  
-        tree= etree.ElementTree(a)  
-        #print etree.tostring(tree) 
-        datas = tree.xpath('//td') 
-        #print len(datas)
-        index =0
-        for data in datas:
-            dataTree = etree.ElementTree(data);
-            #print etree.tostring(dataTree)
-            values = dataTree.xpath('//text()')
-            index +=1
-            #print index
-            if (len(values)==1 ):
-                #print values
-                #print len(values[0])
-                #print str(values[0])
-                if (index == 32):
-                    mgsy = values[0]
-                    #print mgsy+'***************'
-                    stock.mgsy = mgsy
-                elif (index == 52):
-                    mgjzc = values[0]
-                    #print mgjzc+'***************'
-                    stock.mgjzc = mgjzc
-                elif (index == 2):
-                    last_update = values[0]
-                    #print last_update
-                    stock.lastUpdate = last_update                    
-         
-        return stock   
+        stock.yearHigh = float(yearHigh)
+        stock.yearLow = float(yearLow)
+        stock.yearLow = float(yearLow)
+        stock.ma50 = float(FiftydayMovingAverage)
+        stock.ma200 = float(TwoHundreddayMovingAverage)
+        close = page.xpath('//bid')[0].text;
+        
+        if close is not None:
+            stock.close = float(close)
+             
+        return stock  
+    except:
+        logger.error('Fail to download latest update from yahoo API:'+code)
+        return None 
 
 #get history data from yahoo finance API 
 #http://developer.yahoo.com/yql/console/   

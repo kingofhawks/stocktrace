@@ -20,8 +20,8 @@ class Stock:
 	yearLow = 0;
 	PercentChangeFromYearLow = '';
 	PercebtChangeFromYearHigh = '';
-	FiftydayMovingAverage = 0;
-	TwoHundreddayMovingAverage = 0;
+	ma50 = 0;
+	ma200 = 0;
 	PercentChangeFromTwoHundreddayMovingAverage = '';
 	PercentChangeFromFiftydayMovingAverage = '';
 	alert = False;

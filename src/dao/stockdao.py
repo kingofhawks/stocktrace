@@ -234,13 +234,14 @@ def updateTickerWithKeyStats(stock,eps,bookingValue,marketCap = 0):
      #,"marketCap":marketCap}
     
 #Update ticker with latest price
-def updateTickerToLatestPrice(stock,current):
+def updateTickerToLatestPrice(stock,current,ma50=0.0,ma200=0.0,yearHigh=0.0,yearLow=0.0):
     from pymongo import Connection
     connection = Connection()
     db = connection.stock
     ticker = db.tickers
     print ticker.update({"code":stock},
-    {"$set":{"current":current}}, upsert=True,safe=True)
+    {"$set":{"current":current,"ma50":ma50,"ma200":ma200,"yearHigh":yearHigh,"yearLow":yearLow}}, 
+    upsert=True,safe=True)
     
 #save non-existent tickers,may change according to IPO
 def saveNonExistentTicker(stock):
