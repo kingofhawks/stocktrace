@@ -107,8 +107,6 @@ def parseFinanceData(code):
             stock.name = ''
         else:
             print 'error'
-        result = etree.tostring(page)
-        print result
         
         quote = page.xpath('/html/body/query/results/quote');
         #print len(quote)    
