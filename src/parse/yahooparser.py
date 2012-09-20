@@ -91,7 +91,7 @@ def parseFinanceData(code):
         code2 = code +".SZ"
         
     url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22'+code2+'%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&diagnostics=true'
-    print url
+    logger.debug(url)
         
     try:
         page = parse(url).getroot()
@@ -284,7 +284,7 @@ def parseAllHistoryData(file):
 
 #Download all history data from yahoo via invalid code in DB
 def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01',engine='CSV'):
-    logging.info('current quote size:'+str(len(stocks)))
+    logger.info('current quote size:'+str(len(stocks)))
 #    for stock in stocks:
 #        #parse code
 #        try:
@@ -370,9 +370,9 @@ def getCSVHistorialData(code,save = True,beginDate = '',endDate = str(date.today
     historyDatas.sort(key=lambda item:item.date,reverse=True) 
     
     if (len(historyDatas) == 0):
-        print "No data downloaded for "+code
+        logger.warning("No data downloaded for "+code)
     else:
-        print str(len(historyDatas))+" history Data downloaded for "+code
+        logger.info(str(len(historyDatas))+" history Data downloaded for "+code)
         
        
    
