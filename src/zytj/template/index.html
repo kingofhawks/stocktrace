@@ -31,10 +31,10 @@
 <script class="code" language="javascript" type="text/javascript">
 $(document).ready(function(){ 
   // Note, the ohlc data is specified below 
-  var a = "{{ohlc}}"
-  alert(a)
-  alert(ohlc)
-  //[ohlc]
+  //var a = "{{ohlc}}"
+  //alert(a)
+  //alert(ohlc)  
+  //ohlc is defined in python views
   var plot1 = $.jqplot('chart1',[ohlc],{
 	    // use the y2 axis on the right of the plot 
 	    //rather than the y axis on the left.

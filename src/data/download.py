@@ -34,6 +34,7 @@ def download(clear='False'):
     downloadHistoryData(quotes)
     
     #update latest price from yahoo or sina
+    #Seems YQL API is not stable,tables often to be locked
     downloadLatestData(quotes,settings.YAHOO)
     
     logger.info('***Finish download finance data****')

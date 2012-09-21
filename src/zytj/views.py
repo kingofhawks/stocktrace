@@ -11,7 +11,7 @@ def index(request):
       ["06/09/2009", 136.01, 139.5, 134.53, 139.48],
       ['06/08/2009', 143.82, 144.56, 136.04, 136.97],      
     ];
-    return render(request,'ajax.html',
+    return render(request,'index.html',
                   {'ohlc':ohlc})   
     
 #q:quote code
@@ -67,4 +67,7 @@ def jsonnhnl(request):
 
 def nhnl(request):
     return render(request,'nhnl-index.html') 
+
+def ma(request):
+    return render(request,'ma.html') 
 

@@ -13,7 +13,8 @@ urlpatterns = patterns('',
     #support quote as parameter
     url(r'^zytj/candle/(\d{6})/$', 'zytj.views.candlestick'),
     url(r'^zytj/jsonnhnl', 'zytj.views.jsonnhnl'),
-    url(r'^zytj/nhnl', 'zytj.views.nhnl'),    
+    url(r'^zytj/nhnl', 'zytj.views.nhnl'),  
+    url(r'^zytj/ma', 'zytj.views.ma'),   
     # url(r'^$', 'stocktrace.views.home', name='home'),
     # url(r'^stocktrace/', include('stocktrace.foo.urls')),
 
