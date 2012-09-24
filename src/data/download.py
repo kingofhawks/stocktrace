@@ -9,7 +9,8 @@ from util import slf4p
 
 
 #download all history data
-def download(clear='False'):
+#default will download all history data incrementally
+def download(clear='False',stockList='stock_list_all'):
     from parse.yahooparser import downloadHistoryData
     from dao.stockdao import clear,findAllExistentTickers
     from parse.sseparser import downloadQuoteList
@@ -23,7 +24,7 @@ def download(clear='False'):
     if clear:
         clear();
     #download securities list from sse
-    downloadQuoteList(True,stockList='stock_list')
+    downloadQuoteList(True,False,stockList)
     
     #download statistics from reuters        
     if settings.DOWNLOAD_KEY_STAT:
@@ -35,6 +36,7 @@ def download(clear='False'):
     
     #update latest price from yahoo or sina
     #Seems YQL API is not stable,tables often to be locked
-    downloadLatestData(quotes,settings.YAHOO)
+    if settings.DOWNLOAD_LATEST_PRICE:
+        downloadLatestData(quotes,settings.YAHOO)
     
     logger.info('***Finish download finance data****')

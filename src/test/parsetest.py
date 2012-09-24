@@ -17,4 +17,8 @@ class ParseTest(unittest.TestCase):
 
         #print 'ok'
         
+    def testTriggerNhNl(self):
+        from dao.stockdao import triggerNhNl
+        print triggerNhNl('600327')
+        
   

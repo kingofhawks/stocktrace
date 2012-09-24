@@ -41,6 +41,14 @@ def jsoncandle(request,q):
 #      ["2012-08-14", 136.01, 139.5, 134.53, 139.48],
 #      ['2012-08-13', 143.82, 144.56, 136.04, 136.97],      
 #    ];
+#    line = [['06/08/2009', 7], ['06/09/2009', 100],['06/10/2009', 50]];
+#    
+#    line3 = [
+#     ["06/08/2009", 136.01, 139.5, 134.53, 139.48],
+#     ["06/09/2009", 143.82, 144.56, 136.04, 136.97],
+#     ["06/10/2009", 143.82, 144.56, 136.04, 136.97]
+#     ]
+#    ohlc =[line3,line]
     return HttpResponse(simplejson.dumps(ohlc), mimetype='application/json')
 
 #q:stock code,which will be passed to jsoncandle()
@@ -70,4 +78,5 @@ def nhnl(request):
 
 def ma(request):
     return render(request,'ma.html') 
+
 

@@ -8,6 +8,9 @@ import logging
 from datetime import date
 from datetime import timedelta
 from datetime import datetime
+from util import slf4p
+
+logger = slf4p.getLogger(__name__)
     
 def insertStock():
     import pymongo
@@ -131,6 +134,7 @@ def findPeakStockByDays(code,lastDays,endDate = str(date.today())):
         print code+' peak price****'+str(peak[0])
         return peak[0]
     except:
+        logger.error('Fail to find peak price:'+code)
         return None
 
 #find bottom price during the last days 
@@ -150,7 +154,7 @@ def findBottomStockByDays(code,lastDays,endDate = str(date.today())):
 #lastDays: the last range to check the index
 #newDays: the latest days trigger the index
 #return 1 as trigger NH index,-1 as trigger NL index,0 as none
-def triggerNhNl(code,lastDays,nearDays,endDate = str(date.today())):
+def triggerNhNl(code,lastDays=200,nearDays=5,endDate = str(date.today())):
     #find peak price during the last days
     count = countByCode(code)
     #ignore too less data <=1 month

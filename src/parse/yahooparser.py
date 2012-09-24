@@ -307,7 +307,9 @@ def downloadHistorialData(code,save,beginDate,engine='CSV'):
             getHistorialData(code, save, beginDate)            
                                             
     except:
+        logger.warn('Fail to download history data for:'+code)
         traceback.print_exc(file=sys.stdout) 
+        
         
         
 #get history data from yahoo CSV API 
