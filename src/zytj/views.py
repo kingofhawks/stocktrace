@@ -24,6 +24,16 @@ def jsoncandle(request,q):
     from dao.stockdao import findLastStockByDays
     stocks = findLastStockByDays(q,60)
     ohlc = []
+    #MA10
+    ma1 = []
+    #MA20
+    ma2 = []
+    #MA50
+    ma3 = []
+    
+    index = 0;
+
+    
     for stock in stocks:
       #print stock
       #open/high/low/close must be float value
@@ -35,7 +45,46 @@ def jsoncandle(request,q):
       s.append(float(stock['close']))
       #print s
       ohlc.append(s)
+      
+
+    size = len(ohlc)
     #print ohlc  
+    #MA10
+    for i in range(10,size):
+        ma10 = []
+        ma10.append(ohlc[i][0])
+        
+        ma10sum = 0.0;
+        for j in range(i-10,i):
+            ma10sum = ma10sum +ohlc[j][4]
+        ma10.append(ma10sum/10)
+        #print ma10
+        ma1.append(ma10)
+        
+    #MA20
+    for i in range(20,size):
+        ma20 = []
+        ma20.append(ohlc[i][0])
+        
+        ma20sum = 0.0;
+        for j in range(i-20,i):
+            ma20sum = ma20sum +ohlc[j][4]
+        ma20.append(ma20sum/20)
+        #print ma20
+        ma2.append(ma20)
+        
+    #MA50
+    for i in range(50,size):
+        ma50 = []
+        ma50.append(ohlc[i][0])
+        
+        ma50sum = 0.0;
+        for j in range(i-50,i):
+            ma50sum = ma50sum +ohlc[j][4]
+        ma50.append(ma50sum/50)
+        #print ma50
+        ma3.append(ma50)
+                
     #sample format for ohlc
 #    ohlc = [
 #      ["2012-08-14", 136.01, 139.5, 134.53, 139.48],
@@ -49,7 +98,14 @@ def jsoncandle(request,q):
 #     ["06/10/2009", 143.82, 144.56, 136.04, 136.97]
 #     ]
 #    ohlc =[line3,line]
-    return HttpResponse(simplejson.dumps(ohlc), mimetype='application/json')
+
+
+    #only draw candlestick
+    #return HttpResponse(simplejson.dumps(ohlc), mimetype='application/json')
+    
+    #draw candlestick with multiple MA
+    
+    return HttpResponse(simplejson.dumps([ohlc,ma1,ma2,ma3]), mimetype='application/json')
 
 #q:stock code,which will be passed to jsoncandle()
 def candlestick(request,q):

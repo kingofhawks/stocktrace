@@ -113,7 +113,7 @@ def findLastStockByDays(code,lastDays):
     print begin
     #print datetime.strptime(date,'%Y-%m-%d')
     #print type(date.today())
-    return historyDatas.find({"code":code,"date" : {"$gt":str(begin)}}).sort([("date",pymongo.DESCENDING)]);
+    return historyDatas.find({"code":code,"date" : {"$gt":str(begin)}}).sort([("date",pymongo.ASCENDING)]);
 
 #find peak price during the last days before endDate
 def findPeakStockByDays(code,lastDays,endDate = str(date.today())):
