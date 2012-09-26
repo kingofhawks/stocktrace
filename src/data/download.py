@@ -10,7 +10,7 @@ from util import slf4p
 
 #download all history data
 #default will download all history data incrementally
-def download(clear='False',stockList='stock_list_all'):
+def download(clearAll='False',stockList='stock_list_all'):
     from parse.yahooparser import downloadHistoryData
     from dao.stockdao import clear,findAllExistentTickers
     from parse.sseparser import downloadQuoteList

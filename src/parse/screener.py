@@ -4,8 +4,9 @@ Created on 2012-7-5
 @author: Simon
 '''
 from yahooparser import triggerNhNl
-from dao.stockdao import findAllExistentTickers
+from dao.stockdao import findAllExistentTickers,findLastStockByDays,checkStockWithMA
 import sys, traceback
+from util import settings
 
 
 #find quotes triggered nhnl index during the last days
@@ -37,24 +38,26 @@ def findByNhnl(lastDays=200,nearDays=5):
     return nhnlList  
 
 #find quotes by MA index
-def findByMa(lastDays=40,nearDays=7):
+#ma=10/20/50/200
+#condition=1(high)/2(low)
+#return those price is higher than MA during the last days
+def findByMa(lastDays=40,ma=10,condition=settings.HIGHER):
     stocks = findAllExistentTickers()
-    nhnlList = {'nhList':[],'nlList':[]}
+    result = []
+    
     for code in stocks:       
                 try:
-                    triggered = triggerNhNl(code,lastDays,nearDays) 
-                    print triggered
-                    if triggered == 0:
-                        continue
-                    elif triggered.get('value') == 1:
-                        nhnlList['nhList'].append({'date':triggered['date'],'code':code})
-                    elif triggered.get('value') == -1:
-                        nhnlList['nlList'].append({'date':triggered['date'],'code':code})
-                                                                                            
+                    triggered = checkStockWithMA(code,lastDays,ma,condition) 
+                    print code+str(triggered)
+                    if triggered:
+                        result.append(code)                      
                 except:
                     traceback.print_exc(file=sys.stdout)
                     continue 
-    return nhnlList         
+      
+        
+    return result         
     
 if __name__ == '__main__':
-    print findByNhnl()
+    #print findByNhnl()
+    print findByMa(10,10,condition=settings.LOWER)

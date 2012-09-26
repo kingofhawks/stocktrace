@@ -8,7 +8,7 @@ import logging
 from datetime import date
 from datetime import timedelta
 from datetime import datetime
-from util import slf4p
+from util import slf4p,settings
 
 logger = slf4p.getLogger(__name__)
     
@@ -130,6 +130,7 @@ def findPeakStockByDays(code,lastDays,endDate = str(date.today())):
     print begin
 #    print begin.weekday()
     peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
+
     try:
         print code+' peak price****'+str(peak[0])
         return peak[0]
@@ -376,8 +377,50 @@ def clear():
     db.tickers.remove()
     db.non_existent_tickers.remove()
     db.stock_history.remove()
-    logging.info('********All history finance data cleared***********')
+    logger.info('********All history finance data cleared***********')
     pass
+
+#return True if always higher or lower than MA during last days
+def checkStockWithMA(code,lastDays=10,ma=10,condition=settings.HIGHER):
+    result = True;
+    
+    stocks = findLastStockByDays(code, lastDays+ma);
+    
+    ohlc = []
+    
+    for stock in stocks:
+      #print stock
+      #open/high/low/close must be float value
+      s = []
+      s.append(stock['date'])
+      s.append(float(stock['open']))
+      s.append(float(stock['high']))
+      s.append(float(stock['low']))
+      s.append(float(stock['close']))
+      #print s
+      ohlc.append(s)
+      
+    size = len(ohlc)
+    #print ohlc  
+    #print size
+    #MA10
+    for i in range(ma,size):
+        close = ohlc[i][4]
+        ma10sum = 0.0;
+               
+        for j in range(i-ma+1,i+1):
+            ma10sum = ma10sum +ohlc[j][4]
+        temp = ma10sum/ma
+        
+        if condition == settings.HIGHER and close < temp:
+            return False
+        elif condition == settings.LOWER and close > temp:
+            return False            
+       
+    
+    #print ma1
+     
+    return result   
     
 
     
