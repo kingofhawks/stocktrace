@@ -353,11 +353,11 @@ def getCSVHistorialData(code,save = True,beginDate = '',endDate = str(date.today
         #print datas
         stock = Stock(code)           
         stock.date = datas[0]
-        stock.high = datas[2]
-        stock.low = datas[3]  
-        stock.openPrice = datas[1]
-        stock.close = datas[4]
-        stock.volume = datas[5]
+        stock.high = float(datas[2])
+        stock.low = float(datas[3])  
+        stock.openPrice = float(datas[1])
+        stock.close = float(datas[4])
+        stock.volume = float(datas[5])
         
         isNewData = True;
         if lastStock is not None:            
