@@ -30,6 +30,8 @@ def jsoncandle(request,q):
     ma2 = []
     #MA50
     ma3 = []
+    #MA5
+    ma4 = []
     
     index = 0;
 
@@ -55,7 +57,7 @@ def jsoncandle(request,q):
         ma10.append(ohlc[i][0])
         
         ma10sum = 0.0;
-        for j in range(i-10,i):
+        for j in range(i-9,i+1):
             ma10sum = ma10sum +ohlc[j][4]
         ma10.append(ma10sum/10)
         #print ma10
@@ -67,7 +69,7 @@ def jsoncandle(request,q):
         ma20.append(ohlc[i][0])
         
         ma20sum = 0.0;
-        for j in range(i-20,i):
+        for j in range(i-19,i+1):
             ma20sum = ma20sum +ohlc[j][4]
         ma20.append(ma20sum/20)
         #print ma20
@@ -79,11 +81,24 @@ def jsoncandle(request,q):
         ma50.append(ohlc[i][0])
         
         ma50sum = 0.0;
-        for j in range(i-50,i):
+        for j in range(i-49,i+1):
             ma50sum = ma50sum +ohlc[j][4]
         ma50.append(ma50sum/50)
         #print ma50
         ma3.append(ma50)
+    
+    #MA5
+    for i in range(5,size):
+        ma5 = []
+        ma5.append(ohlc[i][0])
+        
+        ma5sum = 0.0;
+        for j in range(i-4,i+1):
+            print ohlc[j][4]
+            ma5sum = ma5sum +ohlc[j][4]
+        ma5.append(ma5sum/5)
+        print ma5
+        ma4.append(ma5)
                 
     #sample format for ohlc
 #    ohlc = [
@@ -105,7 +120,7 @@ def jsoncandle(request,q):
     
     #draw candlestick with multiple MA
     
-    return HttpResponse(simplejson.dumps([ohlc,ma1,ma2,ma3]), mimetype='application/json')
+    return HttpResponse(simplejson.dumps([ohlc,ma1,ma2,ma3,ma4]), mimetype='application/json')
 
 #q:stock code,which will be passed to jsoncandle()
 def candlestick(request,q):
