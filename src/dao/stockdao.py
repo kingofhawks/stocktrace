@@ -384,7 +384,7 @@ def clear():
 def checkStockWithMA(code,lastDays=10,ma=10,condition=settings.HIGHER):
     result = True;
     
-    stocks = findLastStockByDays(code, lastDays+ma);
+    stocks = findLastStockByDays(code, (lastDays+ma)*7/5);
     
     ohlc = []
     
@@ -402,7 +402,10 @@ def checkStockWithMA(code,lastDays=10,ma=10,condition=settings.HIGHER):
       
     size = len(ohlc)
     #print ohlc  
-    #print size
+    if size == 0:
+        logger.error('No data found****'+code)
+        return False
+    
     #MA10
     for i in range(ma,size):
         close = ohlc[i][4]
