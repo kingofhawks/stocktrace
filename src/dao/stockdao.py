@@ -4,7 +4,6 @@ Created on 2011-3-7
 @author: simon
 '''
 import pymongo
-import logging
 from datetime import date
 from datetime import timedelta
 from datetime import datetime

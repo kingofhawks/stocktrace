@@ -431,7 +431,8 @@ def computeNhnlIndex(file,lastDays,nearDays,endDate = str(date.today())):
 #ex. computeNhnlIndex(file,360,3,2012-05-02) will check the 360 days trading record before 2012-05-02,
 #to check if the price during the nearest 3 days trigger NH-NL index
 def computeNhnlIndexWithStocks(stocks,lastDays,nearDays,endDate = str(date.today())):
-    result = []
+    #result = []
+    result = {}
     nhList = [];
     nlList = [];
     nhCount = 0;
@@ -457,8 +458,11 @@ def computeNhnlIndexWithStocks(stocks,lastDays,nearDays,endDate = str(date.today
     print "currentDate****"+endDate
     print 'nhCount ****'+str(nhCount)+str(nhList)
     print 'nlCount ****'+str(nlCount)+str(nlList)
-    result.append({'date':endDate,'nhnl':nhCount-nlCount,'nhList':nhList,'nlList':nlList})
-
+    #result.append({'date':endDate,'nhnl':nhCount-nlCount,'nhList':nhList,'nlList':nlList})
+    result['date'] = endDate
+    result['nhnl'] = nhCount-nlCount
+    result['nhList'] = nhList
+    result['nlList'] = nlList
     return result
 
 #compute the NHNL index between beginDate and endDate

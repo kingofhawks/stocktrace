@@ -132,11 +132,12 @@ def candlestick(request,q):
 
 def jsonnhnl(request):
     from parse.yahooparser import computeNhnlIndexWithinRangeWithStocks
-    stocks = ['600327','600829','600573','600369','601688','600132','600332','601866','600718']
-    result = computeNhnlIndexWithinRangeWithStocks(stocks,60,7,'2012-04-01')
+    stocks = ['600327','600573','600583','600600','600221','601111','600718']
+    result = computeNhnlIndexWithinRangeWithStocks(stocks,60,7,'2012-09-01')
     print result
     data = []
     for record in result:
+      print record
       s = []
       s.append(record['date'])
       s.append(record['nhnl'])      
