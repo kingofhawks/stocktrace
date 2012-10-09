@@ -405,19 +405,61 @@ def checkStockWithMA(code,lastDays=10,ma=10,condition=settings.HIGHER):
         logger.error('No data found****'+code)
         return False
     
-    #MA10
+    #Compute MA
     for i in range(ma,size):
         close = ohlc[i][4]
-        ma10sum = 0.0;
+        maSum = 0.0;
                
         for j in range(i-ma+1,i+1):
-            ma10sum = ma10sum +ohlc[j][4]
-        temp = ma10sum/ma
+            maSum = maSum +ohlc[j][4]
+        temp = maSum/ma
         
         if condition == settings.HIGHER and close < temp:
             return False
         elif condition == settings.LOWER and close > temp:
             return False            
+       
+    
+    #print ma1
+     
+    return result  
+
+#return MA data during last days
+def getMa(code,lastDays=10,ma=10):
+    result = [];
+    
+    stocks = findLastStockByDays(code, (lastDays+ma)*7/5);
+    
+    ohlc = []
+    
+    for stock in stocks:
+      #print stock
+      #open/high/low/close must be float value
+      s = []
+      s.append(stock['date'])
+      s.append(float(stock['open']))
+      s.append(float(stock['high']))
+      s.append(float(stock['low']))
+      s.append(float(stock['close']))
+      #print s
+      ohlc.append(s)
+      
+    size = len(ohlc)
+    #print ohlc  
+    if size == 0:
+        logger.error('No data found****'+code)
+        return result    
+    
+    #Compute MA
+    for i in range(ma,size):
+        close = ohlc[i][4]
+        maSum = 0.0;
+               
+        for j in range(i-ma+1,i+1):
+            maSum = maSum +ohlc[j][4]
+        temp = maSum/ma
+        
+        result.append(temp)           
        
     
     #print ma1
