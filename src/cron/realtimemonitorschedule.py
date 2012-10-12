@@ -10,7 +10,7 @@ def periodic(scheduler, interval, action, actionargs=()):
   #scheduler.run( )
   
   
-if __name__ =="__main__":    
+def startMonitor():
     import time, os, sys, sched
     from parse.sinaparser import getMyStock
     schedule = sched.scheduler(time.time, time.sleep)
@@ -18,4 +18,8 @@ if __name__ =="__main__":
 #    schedule.run( )
     periodic(schedule, 300, getMyStock)
     schedule.run( )
+  
+  
+if __name__ =="__main__":    
+    startMonitor();
   

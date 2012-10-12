@@ -10,3 +10,7 @@ DOWNLOAD_KEY_STAT = False
 DOWNLOAD_LATEST_PRICE = False
 HIGHER = 1
 LOWER = 2
+
+#rabbitmq settings
+STOCK_ALARMS_TOPIC ='stock_alarms'
+RABBIT_SERVER = '172.25.21.160'

@@ -63,8 +63,7 @@ def getStock(code):
     #print '%.2f'%percent+'%'   
     #print sys.argv[0]    
     
-def getMyStock(codes = ['sh600327','sh600600','sh601111','sh600221','sh600583','sh600573','sh600428','sh000001']):
-    
+def getMyStock(codes = ['sh600327','sh600600','sh601111','sh600221','sh600583','sh600573','sh600428','sh600418','sh000001']):
     stocksCrossThreshold = [] 
     for code in codes: 
         stock = getStock(code)
@@ -76,7 +75,27 @@ def getMyStock(codes = ['sh600327','sh600600','sh601111','sh600221','sh600583','
     if (len(stocksCrossThreshold) !=0):
         from util.mailutil import sendMail
         print stocksCrossThreshold
-        sendMail(str(stocksCrossThreshold))
+        message = str(stocksCrossThreshold)
+        #sendMail(message)
+        #publish message to rabbitmq
+        import pika
+        import sys
+        from util import settings
+        
+        connection = pika.BlockingConnection(pika.ConnectionParameters(
+                host=settings.RABBIT_SERVER))
+        channel = connection.channel()        
+        
+        channel.exchange_declare(exchange= settings.STOCK_ALARMS_TOPIC,
+                                 type='topic')
+        
+        routing_key = 'stock_trigger_threshold'
+        #message = ' '.join(sys.argv[2:]) or 'Hello World!'
+        channel.basic_publish(exchange=settings.STOCK_ALARMS_TOPIC,
+                              routing_key=routing_key,
+                              body=message)
+        print " [x] Sent %r:%r" % (routing_key, message)
+        connection.close()
     
     print '******************finished quote polling***********************'
 

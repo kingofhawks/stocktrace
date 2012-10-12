@@ -47,7 +47,6 @@ import sip
 sip.setapi('QVariant', 2)
 
 from PyQt4 import QtCore, QtGui
-
 import systray_rc
 
 
@@ -78,7 +77,9 @@ class Window(QtGui.QDialog):
         self.trayIcon.show()
 
         self.setWindowTitle("Systray")
-        self.resize(400, 300)
+        self.resize(400, 300)       
+
+       
 
     def setVisible(self, visible):
         self.minimizeAction.setEnabled(visible)
@@ -110,11 +111,14 @@ class Window(QtGui.QDialog):
         elif reason == QtGui.QSystemTrayIcon.MiddleClick:
             self.showMessage()
 
-    def showMessage(self):
+    def showMessage(self,message='test'):
         icon = QtGui.QSystemTrayIcon.MessageIcon(
                 self.typeComboBox.itemData(self.typeComboBox.currentIndex()))
-        self.trayIcon.showMessage(self.titleEdit.text(),
-                self.bodyEdit.toPlainText(), icon,
+#        self.trayIcon.showMessage(self.titleEdit.text(),
+#                self.bodyEdit.toPlainText(), icon,
+#                self.durationSpinBox.value() * 1000)
+        self.trayIcon.showMessage('stock alarm',
+                message, icon,
                 self.durationSpinBox.value() * 1000)
 
     def messageClicked(self):
@@ -223,20 +227,77 @@ class Window(QtGui.QDialog):
          self.trayIcon = QtGui.QSystemTrayIcon(self)
          self.trayIcon.setContextMenu(self.trayIconMenu)
 
+#Need to define as Global variable,other good choice?         
+import sys 
+
+app = QtGui.QApplication(sys.argv)
+
+if not QtGui.QSystemTrayIcon.isSystemTrayAvailable():
+    QtGui.QMessageBox.critical(None, "Systray",
+            "I couldn't detect any system tray on this system.")
+    sys.exit(1)
+
+QtGui.QApplication.setQuitOnLastWindowClosed(False)
+
+window = Window()
+window.show()
+######End of global init    
+       
+def callback(ch, method, properties, body):
+        print " [x] %r:%r" % (method.routing_key, body,)
+        window.showMessage(body)        
+          
+def subsribeRabbit():
+    import pika
+    import sys
+    from util import settings
+    
+    connection = pika.BlockingConnection(pika.ConnectionParameters(
+            host=settings.RABBIT_SERVER))
+    channel = connection.channel()
+    
+    channel.exchange_declare(exchange=settings.STOCK_ALARMS_TOPIC,
+                             type='topic')
+    
+    result = channel.queue_declare(exclusive=True)
+    queue_name = result.method.queue
+    
+    binding_keys = '#'
+    
+    for binding_key in binding_keys:
+        channel.queue_bind(exchange=settings.STOCK_ALARMS_TOPIC,
+                           queue=queue_name,
+                           routing_key=binding_key)
+    
+    print ' [*] Waiting for logs. To exit press CTRL+C'
+            
+    
+    channel.basic_consume(callback,
+                          queue=queue_name,
+                          no_ack=True)
+    
+    channel.start_consuming()
 
 if __name__ == '__main__':
 
-    import sys
+#    import sys 
+#
+#    app = QtGui.QApplication(sys.argv)
+#
+#    if not QtGui.QSystemTrayIcon.isSystemTrayAvailable():
+#        QtGui.QMessageBox.critical(None, "Systray",
+#                "I couldn't detect any system tray on this system.")
+#        sys.exit(1)
+#
+#    QtGui.QApplication.setQuitOnLastWindowClosed(False)
+#
+#    window = Window()
+#    window.show()   
+    
+    from threading import Thread
+    thread = Thread(target = subsribeRabbit)
+    thread.start()
+    #thread.join()
 
-    app = QtGui.QApplication(sys.argv)
-
-    if not QtGui.QSystemTrayIcon.isSystemTrayAvailable():
-        QtGui.QMessageBox.critical(None, "Systray",
-                "I couldn't detect any system tray on this system.")
-        sys.exit(1)
-
-    QtGui.QApplication.setQuitOnLastWindowClosed(False)
-
-    window = Window()
-    window.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec_())    
+    
