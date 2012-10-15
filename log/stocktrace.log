@@ -1,0 +1,75 @@
+10/15/2012 04:55:38 PM download     INFO     ***Start download finance data****
+10/15/2012 04:55:38 PM stocktrace.dao.stockdao INFO     ********All history finance data cleared***********
+10/15/2012 04:55:38 PM root         INFO     600327**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:55:38 PM root         INFO     600600**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:55:38 PM root         INFO     601111**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:55:38 PM root         INFO     600221**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:55:38 PM root         INFO     600573**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:55:38 PM root         INFO     600583**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:55:38 PM root         INFO     600718**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:55:38 PM root         INFO     601866**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:55:38 PM root         INFO     600428**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:55:38 PM root         INFO     600062**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:55:38 PM root         INFO     *****Securities List download finished******
+10/15/2012 04:55:38 PM stocktrace.parse.yahooparser INFO     current quote size:10
+10/15/2012 04:55:42 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 601111
+10/15/2012 04:55:42 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600327
+10/15/2012 04:55:42 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600221
+10/15/2012 04:55:42 PM stocktrace.parse.yahooparser INFO     204 history Data downloaded for 601866
+10/15/2012 04:55:42 PM stocktrace.parse.yahooparser INFO     204 history Data downloaded for 600718
+10/15/2012 04:55:46 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600583
+10/15/2012 04:55:46 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600062
+10/15/2012 04:55:46 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600428
+10/15/2012 04:55:46 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600573
+10/15/2012 04:55:46 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600600
+10/15/2012 04:55:46 PM download     INFO     ***Finish download finance data****
+10/15/2012 04:57:08 PM download     INFO     ***Start download finance data****
+10/15/2012 04:57:08 PM stocktrace.dao.stockdao INFO     ********All history finance data cleared***********
+10/15/2012 04:57:08 PM root         INFO     600327**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:57:08 PM root         INFO     600600**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:57:08 PM root         INFO     601111**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:57:08 PM root         INFO     600221**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:57:08 PM root         INFO     600573**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:57:08 PM root         INFO     600583**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:57:08 PM root         INFO     600718**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:57:08 PM root         INFO     601866**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:57:08 PM root         INFO     600428**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:57:08 PM root         INFO     600062**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:57:08 PM root         INFO     *****Securities List download finished******
+10/15/2012 04:57:08 PM stocktrace.parse.yahooparser INFO     current quote size:10
+10/15/2012 04:57:13 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600221
+10/15/2012 04:57:13 PM stocktrace.parse.yahooparser INFO     204 history Data downloaded for 600718
+10/15/2012 04:57:13 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600327
+10/15/2012 04:57:13 PM stocktrace.parse.yahooparser INFO     204 history Data downloaded for 601866
+10/15/2012 04:57:13 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 601111
+10/15/2012 04:57:16 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600062
+10/15/2012 04:57:16 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600600
+10/15/2012 04:57:16 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600573
+10/15/2012 04:57:16 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600428
+10/15/2012 04:57:16 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600583
+10/15/2012 04:57:16 PM download     INFO     ***Finish download finance data****
+10/15/2012 04:59:12 PM download     INFO     ***Start download finance data****
+10/15/2012 04:59:12 PM stocktrace.dao.stockdao INFO     ********All history finance data cleared***********
+10/15/2012 04:59:12 PM root         INFO     600327**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:59:12 PM root         INFO     600600**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:59:12 PM root         INFO     601111**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:59:12 PM root         INFO     600221**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:59:12 PM root         INFO     600573**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:59:12 PM root         INFO     600583**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:59:12 PM root         INFO     600718**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:59:12 PM root         INFO     601866**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:59:12 PM root         INFO     600428**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:59:12 PM root         INFO     600062**now:0**state:OK**percent:0.00%**high:0.00**low:0.00**alarm:False**open:0.00**close:0.00**volume:0**PE:0.00**PB:0.00**rank:0.00**EPS:0**mgjzc:0**last:**totalCap:0.00**marketCap:0.00**date:
+10/15/2012 04:59:12 PM root         INFO     *****Securities List download finished******
+10/15/2012 04:59:12 PM stocktrace.parse.yahooparser INFO     current quote size:10
+10/15/2012 04:59:15 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600221
+10/15/2012 04:59:15 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 601111
+10/15/2012 04:59:15 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600327
+10/15/2012 04:59:15 PM stocktrace.parse.yahooparser INFO     204 history Data downloaded for 601866
+10/15/2012 04:59:16 PM stocktrace.parse.yahooparser INFO     204 history Data downloaded for 600718
+10/15/2012 04:59:18 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600600
+10/15/2012 04:59:18 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600583
+10/15/2012 04:59:18 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600573
+10/15/2012 04:59:18 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600062
+10/15/2012 04:59:18 PM stocktrace.parse.yahooparser INFO     205 history Data downloaded for 600428
+10/15/2012 04:59:18 PM download     INFO     ***Finish download finance data****

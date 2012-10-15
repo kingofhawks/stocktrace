@@ -6,7 +6,7 @@ Created on 2012-9-19
 #import logging
 from stocktrace.util import settings
 from stocktrace.util import slf4p
-
+logger = slf4p.getLogger(__name__)
 
 #download all history data
 #default will download all history data incrementally
@@ -17,8 +17,6 @@ def download(clearAll='False',stockList='stock_list_all'):
     from stocktrace.parse.reutersparser import downloadKeyStatDatas
     from stocktrace.parse.sinaparser import downloadLatestData
     
-    #logger = logging.getLogger(__name__)
-    logger = slf4p.getLogger(__name__)
     logger.info('***Start download finance data****')
     
     if clear:
