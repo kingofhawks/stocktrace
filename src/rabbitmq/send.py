@@ -4,9 +4,10 @@ Created on 2012-10-12
 @author: Simon
 '''
 import pika
+from util import settings
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(
-               '172.25.21.160'))
+               settings.RABBIT_SERVER))
 channel = connection.channel()
 channel.queue_declare(queue='hello')
 channel.basic_publish(exchange='',

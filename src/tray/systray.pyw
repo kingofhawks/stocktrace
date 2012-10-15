@@ -48,6 +48,7 @@ sip.setapi('QVariant', 2)
 
 from PyQt4 import QtCore, QtGui
 import systray_rc
+from util import settings
 
 
 class Window(QtGui.QDialog):
@@ -245,6 +246,13 @@ window.show()
        
 def callback(ch, method, properties, body):
         print " [x] %r:%r" % (method.routing_key, body,)
+        
+        if (body.find(settings.STATUS_UP)!= -1):
+            window.typeComboBox.setCurrentIndex(2)
+        elif (body.find(settings.STATUS_WARNING)!= -1):
+            window.typeComboBox.setCurrentIndex(2)
+        elif (body.find(settings.STATUS_CRITICAL)!= -1):
+            window.typeComboBox.setCurrentIndex(3)
         window.showMessage(body)        
           
 def subsribeRabbit():

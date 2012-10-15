@@ -30,7 +30,8 @@ class aservice(win32serviceutil.ServiceFramework):
       servicemanager.LogMsg(servicemanager.EVENTLOG_INFORMATION_TYPE,servicemanager.PYS_SERVICE_STARTED,(self._svc_name_, '')) 
       
       self.timeout = 3000
-
+      from cron.realtimemonitorschedule import startMonitor
+      startMonitor()
       while 1:
          # Wait for service stop signal, if I timeout, loop again
          rc = win32event.WaitForSingleObject(self.hWaitStop, self.timeout)
