@@ -30,8 +30,20 @@ class aservice(win32serviceutil.ServiceFramework):
       servicemanager.LogMsg(servicemanager.EVENTLOG_INFORMATION_TYPE,servicemanager.PYS_SERVICE_STARTED,(self._svc_name_, '')) 
       
       self.timeout = 3000
-      from cron.realtimemonitorschedule import startMonitor
-      startMonitor()
+      from lxml import etree
+      from lxml.html import parse
+      
+      url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22'+'600327'+'%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&diagnostics=true'
+        
+      try:
+        page = parse(url).getroot()
+        result = etree.tostring(page)
+        print result
+        servicemanager.LogInfoMsg(result)        
+      except:
+        servicemanager.LogInfoMsg('error parse yahoo')  
+    
+    
       while 1:
          # Wait for service stop signal, if I timeout, loop again
          rc = win32event.WaitForSingleObject(self.hWaitStop, self.timeout)
