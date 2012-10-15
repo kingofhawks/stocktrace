@@ -16,15 +16,15 @@ if __name__ == '__main__':
     AWS_ACCESS_KEY_ID = ''
     AWS_SECRET_ACCESS_KEY = ''
     
-    conn = boto.connect_s3('AKIAJH777UDIOAMSJ2QA', '/FJiF2LyJXRjcOVaEXOHswbeWqt2ZV9EnV3sh7/V',debug=2,
-            #host="172.25.21.78", 
-            #port=10001, 
-            port =443,
+    conn = boto.connect_s3('test:tester', 'testing',debug=2,
+            host="172.25.21.160", 
+            port=8081, 
+            #port =443,
             is_secure=True
             )
-    #print conn
-#    rs = conn.get_all_buckets()
-#    print rs
+    print conn
+    rs = conn.get_all_buckets()
+    print rs
     #print len(rs)
     
     #bucket = conn.create_bucket("as.myupdate.zywall.zyxel.com") #, location=s3.connection.Location.DEFAULT)
