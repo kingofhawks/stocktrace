@@ -3,6 +3,9 @@
 import thread,logging
 from stocktrace.dao.stockdao import findAllExistentTickers
 from stocktrace.stock import Stock
+from stocktrace.util import slf4p
+
+logger = slf4p.getLogger(__name__)
 
 #quote state cache
 stateCache = {}
@@ -68,7 +71,7 @@ def getMyStock(codes = ['sh600327','sh600600','sh601111','sh600221','sh600583','
     stocksCrossThreshold = [] 
     for code in codes: 
         stock = getStock(code)
-        print stock.shortStr()
+        logger.debug(stock.shortStr())
         if (stock.alert == True):
             stocksCrossThreshold.append(stock.shortStr())
         #thread.start_new(getStock,(code,))
