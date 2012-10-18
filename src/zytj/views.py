@@ -102,6 +102,8 @@ def jsoncandle(request,q):
             print ma5
             ma4.append(ma5)
     except:
+        import sys, traceback
+        traceback.print_exc(file=sys.stdout)
         raise Http404
                 
     #sample format for ohlc

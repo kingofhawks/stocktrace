@@ -8,12 +8,15 @@ from datetime import date
 from datetime import timedelta
 from datetime import datetime
 from stocktrace.util import slf4p,settings
-
+from stocktrace.memcache.cache import Cache 
+from pymongo import Connection 
+import pymongo     
+    
+      
+cache = Cache() 
 logger = slf4p.getLogger(__name__)
     
 def insertStock():
-    import pymongo
-    from pymongo import Connection
     connection = Connection()
     db = connection.test_database
     collection = db.test_collection
@@ -31,7 +34,6 @@ def insertStock():
  
 #save stock trading history         
 def saveStock(stock):
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     data = {"code": stock.code,
@@ -45,7 +47,6 @@ def saveStock(stock):
     historyDatas.insert(data)
         
 def findAllStocks():
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
@@ -55,7 +56,6 @@ def findAllStocks():
 #find last update stock record        
 def findLastUpdate(code):
     print "To find latest update****"+code
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
@@ -66,7 +66,6 @@ def findLastUpdate(code):
 #find the oldest stock record        
 def findOldestUpdate(code):
     print "To find oldest update****"+code
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
@@ -76,7 +75,6 @@ def findOldestUpdate(code):
    
 #find stock record after date     
 def findStockByDate(code,date):
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
@@ -84,14 +82,12 @@ def findStockByDate(code,date):
 
 #find quote history data by code     
 def findStockByCode(code):
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
     return historyDatas.find({"code":code}).sort([("date",pymongo.DESCENDING)]);
 
 def countByCode(code):
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     return db.stock_history.find({"code":code}).count();
@@ -99,7 +95,6 @@ def countByCode(code):
 
 #find stock record in the last days     
 def findLastStockByDays(code,lastDays):
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
@@ -111,15 +106,35 @@ def findLastStockByDays(code,lastDays):
     begin = date.today()+delta
     print begin
     #print datetime.strptime(date,'%Y-%m-%d')
-    #print type(date.today())
-    return historyDatas.find({"code":code,"date" : {"$gt":str(begin)}}).sort([("date",pymongo.ASCENDING)]);
+    #print type(date.today())    
+       
+    key = str(code)+'_'+str(lastDays)
+    print key
+    try:
+        result = cache.get(key)
+    except:
+        import sys, traceback
+        traceback.print_exc(file=sys.stdout)
+    
+    if result is not None:
+        print 'cache'
+        return result
+    else:
+        result = historyDatas.find({"code":code,"date" : {"$gt":str(begin)}}).sort([("date",pymongo.ASCENDING)]);
+#        print result
+#        #records = [(record['_id'], record) for record in result]
+        cols = []
+        for record in result:
+            cols.append(record)
+        #print cols
+        cache.set(key, cols)
+        print 'sql'
+        return cols
+    
+    #return historyDatas.find({"code":code,"date" : {"$gt":str(begin)}}).sort([("date",pymongo.ASCENDING)]);
 
 #find peak price during the last days before endDate
 def findPeakStockByDays(code,lastDays,endDate = str(date.today())):
-    from pymongo import Connection
-    connection = Connection()
-    db = connection.stock
-    historyDatas = db.stock_history
     delta = timedelta(-lastDays)
     end = datetime.strptime(endDate,'%Y-%m-%d').date()
     print end
@@ -128,27 +143,81 @@ def findPeakStockByDays(code,lastDays,endDate = str(date.today())):
     
     print begin
 #    print begin.weekday()
-    peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
+    key = str(code)+'_'+str(lastDays)+'_'+endDate+'_high'
+    peak = cache.get(key)
+    if peak is not None:
+        print 'cache'
+        return peak
+    else:
+        connection = Connection()
+        db = connection.stock
+        historyDatas = db.stock_history
+        peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
+        try:
+            print code+' peak price****'+str(peak[0])
+            cache.set(key,peak[0])
+            return peak[0]
+        except:
+            logger.error('Fail to find peak price:'+code)
+            return None
+    #peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
 
-    try:
-        print code+' peak price****'+str(peak[0])
-        return peak[0]
-    except:
-        logger.error('Fail to find peak price:'+code)
-        return None
+    
 
 #find bottom price during the last days 
 def findBottomStockByDays(code,lastDays,endDate = str(date.today())):
-    from pymongo import Connection
-    connection = Connection()
-    db = connection.stock
-    historyDatas = db.stock_history
+#    from pymongo import Connection
+#    connection = Connection()
+#    db = connection.stock
+#    historyDatas = db.stock_history
+#    delta = timedelta(-lastDays)
+#    end = datetime.strptime(endDate,'%Y-%m-%d').date()
+#    begin = end+delta
+#    key = str(code)+'_'+str(lastDays)+'_'+endDate+'_low'
+#    print key
+#    peak = cache.get(key)
+#    if peak is not None:
+#        print 'cache'
+#        return peak
+#    else:        
+#        peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("low",pymongo.ASCENDING)]).limit(1);
+#        print code+' low price****'+str(peak[0])
+#        cache.set(key,peak[0])
+#        return peak[0]
+     return findHighOrLowStockByDays(code,lastDays,2)
+    
+def findHighOrLowStockByDays(code,lastDays,mode=1,endDate = str(date.today())):    
     delta = timedelta(-lastDays)
     end = datetime.strptime(endDate,'%Y-%m-%d').date()
+    print end
     begin = end+delta
-    peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("low",pymongo.ASCENDING)]).limit(1);
-    print code+' low price****'+str(peak[0])
-    return peak[0]
+#    begin = date.today()+delta
+    
+    print begin
+#    print begin.weekday()
+    key = str(code)+'_'+str(lastDays)+'_'+endDate+'_high'
+    if mode == 2:
+        key = str(code)+'_'+str(lastDays)+'_'+endDate+'_low'
+    peak = cache.get(key)
+    if peak is not None:
+        print 'cache'
+        return peak
+    else:
+        connection = Connection()
+        db = connection.stock
+        historyDatas = db.stock_history
+        if mode == 1:
+            peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
+        else:
+            peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("low",pymongo.ASCENDING)]).limit(1);
+        try:
+            print code+' peak price****'+str(peak[0])
+            cache.set(key,peak[0])
+            return peak[0]
+        except:
+            logger.error('Fail to find peak price:'+code)
+            return None
+    #peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
         
 #Check whether the stock triggers NH-NL index
 #lastDays: the last range to check the index
@@ -203,7 +272,6 @@ def triggerNhNl(code,lastDays=200,nearDays=5,endDate = str(date.today())):
 
 #save ticker with code and year high/low etc
 def saveTicker(stock):
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     data = {"code": stock.code,
@@ -218,7 +286,6 @@ def saveTicker(stock):
 
 #batch save ticker with code
 def batchInsertTicker(stocks):
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     datas = []
@@ -229,7 +296,6 @@ def batchInsertTicker(stocks):
     
 #Update ticker with key statistics data
 def updateTickerWithKeyStats(stock,eps,bookingValue,marketCap = 0):
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     ticker = db.tickers
@@ -239,7 +305,6 @@ def updateTickerWithKeyStats(stock,eps,bookingValue,marketCap = 0):
     
 #Update ticker with latest price
 def updateTickerToLatestPrice(stock,current,ma50=0.0,ma200=0.0,yearHigh=0.0,yearLow=0.0):
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     ticker = db.tickers
@@ -249,7 +314,6 @@ def updateTickerToLatestPrice(stock,current,ma50=0.0,ma200=0.0,yearHigh=0.0,year
     
 #save non-existent tickers,may change according to IPO
 def saveNonExistentTicker(stock):
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     data = {"code": stock.code}
@@ -257,7 +321,6 @@ def saveNonExistentTicker(stock):
     historyDatas.insert(data)
     
 def findAllNonExistentTickers():
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.non_existent_tickers
@@ -269,7 +332,6 @@ def findAllNonExistentTickers():
     return result
 
 def findAllExistentTickers():
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.tickers
@@ -282,7 +344,6 @@ def findAllExistentTickers():
 
 #Define market PE as mid PE of all stocks
 def getMarketPe():
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.tickers
@@ -294,7 +355,6 @@ def getMarketPe():
 
 #Define market PB as mid PB of all stocks
 def getMarketPb():
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.tickers
@@ -306,7 +366,6 @@ def getMarketPb():
 
 #Define average PE as mid PE of all stocks
 def getAvgPe():
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.tickers
@@ -330,7 +389,6 @@ def getAvgPe():
 
 #Define average PB as mid PB of all stocks
 def getAvgPb():
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.tickers
@@ -350,7 +408,6 @@ def getAvgPb():
 
 #get those PB<=1
 def getPbLessThan1():
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     historyDatas = db.tickers
@@ -370,7 +427,6 @@ def getPbLessThan1():
 
 #clear all data in system
 def clear():
-    from pymongo import Connection
     connection = Connection()
     db = connection.stock
     db.tickers.remove()
@@ -469,7 +525,7 @@ def getMa(code,lastDays=10,ma=10):
 
     
 if __name__ == '__main__':
-    from stock import Stock
+    from stocktrace.stock import Stock
     stock = Stock('600880')
     #findAllNonExistentTickers()
     #updateTickerWithKeyStats('600004',14.00,2.36,0.56,2333.5)
@@ -483,10 +539,14 @@ if __name__ == '__main__':
 #    stocks =['600000', '600004', '600005']
 #    batchInsertTicker(stocks)
 #    print findLastUpdate('600890')
-    print countByCode('600655')
-    stocks = findStockByCode('600655')
-    for stock in stocks:
-        print stock
+#    print countByCode('600655')
+#    stocks = findStockByCode('600655')
+#    for stock in stocks:
+#        print stock
+    #print findLastStockByDays('600327',10)
+    print findPeakStockByDays('600327',10)
+    print findBottomStockByDays('600327',10)
+    
 #    peak =  findPeakStockByDays('603000',9,'2012-05-06')
 #    print peak
 #    for stock in stocks:
