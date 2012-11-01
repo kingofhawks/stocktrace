@@ -100,7 +100,6 @@ def parseFinanceData(code):
         
         r = page.xpath('//errorindicationreturnedforsymbolchangedinvalid');
         errorMsg = r[0].text
-        from stock import Stock
         if (errorMsg is None):
             print 'OK'
             stock = Stock(code)
@@ -134,7 +133,8 @@ def parseFinanceData(code):
         stock = Stock(code)
         stock.yearHigh = float(yearHigh)
         stock.yearLow = float(yearLow)
-        stock.yearLow = float(yearLow)
+        stock.PercebtChangeFromYearHigh = float(PercebtChangeFromYearHigh.rstrip('%')) 
+        stock.PercentChangeFromYearLow = float(PercentChangeFromYearLow.lstrip('+').rstrip('%'))        
         stock.ma50 = float(FiftydayMovingAverage)
         stock.ma200 = float(TwoHundreddayMovingAverage)
         close = page.xpath('//bid')[0].text;
@@ -145,6 +145,7 @@ def parseFinanceData(code):
         return stock  
     except:
         logger.error('Fail to download latest update from yahoo API:'+code)
+        traceback.print_exc(file=sys.stdout) 
         return None 
 
 #get history data from yahoo finance API 
@@ -203,7 +204,6 @@ def getHistorialData(code,save = True,beginDate = '',endDate = str(date.today())
     print result
     
     r = page.xpath('//quote');
-    from stock import Stock
     historyDatas = []
 
     for a in r:  
@@ -489,8 +489,8 @@ def computeNhnlIndexWithinRangeWithStocks(stocks,lastDays,nearDays,beginDate = s
 if __name__ == '__main__':
     stocks = ['600327','600829','600573','600369','601688','600132','600332','601866','600718','600048']
     #parseTickers();
-    #print parseFinanceData('600327')
-    print getCSVHistorialData('600327',beginDate='2012-01-01')
+    print parseFinanceData('600327')
+    #print getCSVHistorialData('600327',beginDate='2012-01-01')
     #getHistorialData('000001.SS',beginDate='2012-04-01')
     #getHistorialData('600327',beginDate='2012-04-01')
     #triggered = triggerNhNl('600655',200,5) 

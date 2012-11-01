@@ -225,7 +225,7 @@ def findHighOrLowStockByDays(code,lastDays,mode=1,endDate = str(date.today())):
 #return 1 as trigger NH index,-1 as trigger NL index,0 as none
 def triggerNhNl(code,lastDays=200,nearDays=5,endDate = str(date.today())):
     #find peak price during the last days
-    count = countByCode(code)
+    #count = countByCode(code)
     #ignore too less data <=1 month
 #    if count <= 20:
 #        return 0;
@@ -304,12 +304,12 @@ def updateTickerWithKeyStats(stock,eps,bookingValue,marketCap = 0):
      #,"marketCap":marketCap}
     
 #Update ticker with latest price
-def updateTickerToLatestPrice(stock,current,ma50=0.0,ma200=0.0,yearHigh=0.0,yearLow=0.0):
+def updateTickerToLatestPrice(stock,current,ma50=0.0,ma200=0.0,yearHigh=0.0,yearLow=0.0,percentFromYearHigh=0.0,percentFromYearLow=0.0):
     connection = Connection()
     db = connection.stock
     ticker = db.tickers
     print ticker.update({"code":stock},
-    {"$set":{"current":current,"ma50":ma50,"ma200":ma200,"yearHigh":yearHigh,"yearLow":yearLow}}, 
+    {"$set":{"current":current,"ma50":ma50,"ma200":ma200,"yearHigh":yearHigh,"yearLow":yearLow,"percentFromYearHigh":percentFromYearHigh,"percentFromYearLow":percentFromYearLow}}, 
     upsert=True,safe=True)
     
 #save non-existent tickers,may change according to IPO
@@ -522,7 +522,27 @@ def getMa(code,lastDays=10,ma=10):
      
     return result   
     
+def findStockByGroup():
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.stock_history
+    return historyDatas.group(['code'], None,
+                        {'list': []}, # initial
+                        'function(obj, prev) {prev.list.push(obj)}') 
+    
+#find top N quotes by Price Volatility from yearLow or yearHigh     
+def findByYearLow(top=10):
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.tickers
+    return historyDatas.find().sort([("percentFromYearLow",pymongo.DESCENDING)]).limit(top);
 
+#find top N quotes by Price Volatility from yearLow or yearHigh     
+def findByYearHigh(top=10):
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.tickers
+    return historyDatas.find().sort([("percentFromYearHigh",pymongo.ASCENDING)]).limit(top);
     
 if __name__ == '__main__':
     from stocktrace.stock import Stock
@@ -544,9 +564,20 @@ if __name__ == '__main__':
 #    for stock in stocks:
 #        print stock
     #print findLastStockByDays('600327',10)
-    print findPeakStockByDays('600327',10)
-    print findBottomStockByDays('600327',10)
-    
+#    print findPeakStockByDays('600327',10)
+#    print findBottomStockByDays('600327',10)
+#    result = findStockByGroup()
+#    print len(result)
+#    print result[1]['list']
+    result = findByYearLow(5)
+    for stock in result:
+        #print stock.yearHighLow()
+        print stock
+    result = findByYearHigh()
+    print '------------------------'
+    for stock in result:
+        #print stock.yearHighLow()
+        print stock
 #    peak =  findPeakStockByDays('603000',9,'2012-05-06')
 #    print peak
 #    for stock in stocks:

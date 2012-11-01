@@ -117,7 +117,7 @@ def downloadLatestData(quotes = findAllExistentTickers(),engine='sina'):
             code = code.replace('sh','')
         
         if quote is not None:
-            updateTickerToLatestPrice(code,quote.close,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow)                       
+            updateTickerToLatestPrice(code,quote.close,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow,quote.PercebtChangeFromYearHigh,quote.PercentChangeFromYearLow)                       
             
     logging.info( '****Download latest price from sina finished****')
         

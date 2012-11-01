@@ -4,9 +4,9 @@ Created on 2012-7-5
 @author: Simon
 '''
 from yahooparser import triggerNhNl
-from dao.stockdao import findAllExistentTickers,findLastStockByDays,checkStockWithMA,getMa
+from stocktrace.dao.stockdao import findAllExistentTickers,findLastStockByDays,checkStockWithMA,getMa
 import sys, traceback
-from util import settings,slf4p
+from stocktrace.util import settings,slf4p
 
 logger = slf4p.getLogger(__name__)
 
@@ -68,7 +68,7 @@ def findByMa2(lastDays=40,ma1=10,ma2=20,condition=settings.HIGHER):
     stocks = findAllExistentTickers()
     result = []
     
-    for code in stocks:       
+    for code in ['600600']:       
                 try:
                     temp = getMa(code,lastDays,ma1) 
                     print temp   
@@ -94,9 +94,38 @@ def findByMa2(lastDays=40,ma1=10,ma2=20,condition=settings.HIGHER):
                     continue 
       
         
-    return result      
+    return result 
+
+#find top N quotes by Price Volatility during last days
+#condition=1(high)/2(low)
+def findByPriceVolatility(lastDays=40,top=10,condition=settings.HIGHER):
+    stocks = findAllExistentTickers()
+    result = []
+    
+    for code in stocks:       
+                try:
+                    triggered = checkStockWithMA(code,lastDays,top,condition) 
+                    print code+str(triggered)
+                    if triggered:
+                        result.append(code)                      
+                except:
+                    traceback.print_exc(file=sys.stdout)
+                    continue 
+      
+        
+    return result   
+
+#find top N quotes by Price Volatility from yearLow or yearHigh
+#condition=1(high)/2(low)
+def findByYearLowOrHigh(top=10,condition=settings.HIGHER):
+    from stocktrace.dao.stockdao import findByYearLow,findByYearHigh
+    if condition == settings.HIGHER:
+        return findByYearLow(top)
+    else:
+        return findByYearHigh(top)        
     
 if __name__ == '__main__':
     #print findByNhnl()
-    print findByMa(10,10,condition=settings.HIGHER)
-    #print findByMa(10,10,condition=settings.LOWER)
+    #print findByMa(10,10,condition=settings.HIGHER)
+    #print findByMa2(10,10,20,condition=settings.HIGHER)
+    print findByYearLowOrHigh()
