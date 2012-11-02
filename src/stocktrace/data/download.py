@@ -29,12 +29,13 @@ def download(clearAll='False',stockList='stock_list_all'):
         downloadKeyStatDatas()
         
     quotes = findAllExistentTickers()
-    #download history data from yahoo
-    downloadHistoryData(quotes)
     
     #update latest price from yahoo or sina
     #Seems YQL API is not stable,tables often to be locked
     if settings.DOWNLOAD_LATEST_PRICE:
         downloadLatestData(quotes,settings.YAHOO)
+        
+    #download history data from yahoo
+    downloadHistoryData(quotes)
     
     logger.info('***Finish download finance data****')

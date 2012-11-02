@@ -531,18 +531,18 @@ def findStockByGroup():
                         'function(obj, prev) {prev.list.push(obj)}') 
     
 #find top N quotes by Price Volatility from yearLow or yearHigh     
-def findByYearLow(top=10):
+def findByYearLow(top=20):
     connection = Connection()
     db = connection.stock
     historyDatas = db.tickers
     return historyDatas.find().sort([("percentFromYearLow",pymongo.DESCENDING)]).limit(top);
 
 #find top N quotes by Price Volatility from yearLow or yearHigh     
-def findByYearHigh(top=10):
+def findByYearHigh(top=20):
     connection = Connection()
     db = connection.stock
     historyDatas = db.tickers
-    return historyDatas.find().sort([("percentFromYearHigh",pymongo.ASCENDING)]).limit(top);
+    return historyDatas.find().sort([("percentFromYearHigh",pymongo.DESCENDING)]).limit(top);
     
 if __name__ == '__main__':
     from stocktrace.stock import Stock

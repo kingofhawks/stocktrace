@@ -117,15 +117,28 @@ def findByPriceVolatility(lastDays=40,top=10,condition=settings.HIGHER):
 
 #find top N quotes by Price Volatility from yearLow or yearHigh
 #condition=1(high)/2(low)
-def findByYearLowOrHigh(top=10,condition=settings.HIGHER):
+def findByYearLowOrHigh(top=20,condition=settings.HIGHER):
     from stocktrace.dao.stockdao import findByYearLow,findByYearHigh
+    result = []
     if condition == settings.HIGHER:
-        return findByYearLow(top)
+        cursor = findByYearLow(top)              
     else:
-        return findByYearHigh(top)        
+        cursor = findByYearHigh(top)
+
+    for record in cursor:
+        stock = {}
+        code = record.get('code')
+        if condition == settings.HIGHER:
+            stock[code] = record.get('percentFromYearLow')
+        else:
+            stock[code] = -record.get('percentFromYearHigh')            
+        
+        result.append(stock)   
+    return result        
     
 if __name__ == '__main__':
     #print findByNhnl()
     #print findByMa(10,10,condition=settings.HIGHER)
     #print findByMa2(10,10,20,condition=settings.HIGHER)
-    print findByYearLowOrHigh()
+    print findByYearLowOrHigh(10,settings.HIGHER)
+    print findByYearLowOrHigh(10,settings.LOWER)
