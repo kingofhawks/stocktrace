@@ -157,4 +157,7 @@ def nhnl(request):
 def ma(request):
     return render(request,'ma.html') 
 
+def stocklist(request):
+    return render(request,'stock_list.html',{'loop_times':[i+1 for i in range(7)]}) 
+
 
