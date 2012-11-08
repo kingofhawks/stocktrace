@@ -18,8 +18,8 @@ class Stock:
 	name = '';
 	yearHigh = 0;
 	yearLow = 0;
-	PercentChangeFromYearLow = '';
-	PercebtChangeFromYearHigh = '';
+	PercentChangeFromYearLow = 0;
+	PercebtChangeFromYearHigh = 0;
 	ma50 = 0;
 	ma200 = 0;
 	PercentChangeFromTwoHundreddayMovingAverage = '';

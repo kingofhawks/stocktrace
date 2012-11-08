@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.utils import simplejson
 from django.http import HttpResponse
 from django.http import Http404
+from stocktrace.util import settings
 
 def index(request):
 #    t = loader.get_template('jquery.jqplot/examples/candlestick-charts.html')
@@ -157,7 +158,16 @@ def nhnl(request):
 def ma(request):
     return render(request,'ma.html') 
 
-def stocklist(request):
-    return render(request,'stock_list.html',{'loop_times':[i+1 for i in range(7)]}) 
+def ascendinglist(request):
+    from stocktrace.dao.stockdao import findTopN
+    #return render(request,'stock_list.html',{'loop_times':[i+1 for i in range(7)]}) 
+    results = findTopN(20);
+    return render(request,'stock_list.html',{'results':results})
+
+def descendinglist(request):
+    from stocktrace.dao.stockdao import findTopN
+    #return render(request,'stock_list.html',{'loop_times':[i+1 for i in range(7)]}) 
+    results = findTopN(20,settings.LOWER);
+    return render(request,'stock_list.html',{'results':results})
 
 

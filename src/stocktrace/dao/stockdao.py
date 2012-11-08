@@ -11,6 +11,8 @@ from stocktrace.util import slf4p,settings
 from stocktrace.memcache.cache import Cache 
 from pymongo import Connection 
 import pymongo     
+from memorised.decorators import memorise
+from stocktrace.stock import Stock
     
       
 cache = Cache() 
@@ -342,6 +344,7 @@ def findAllExistentTickers():
         result.add(stock['code'])
     return result
 
+
 #Define market PE as mid PE of all stocks
 def getMarketPe():
     connection = Connection()
@@ -530,19 +533,37 @@ def findStockByGroup():
                         {'list': []}, # initial
                         'function(obj, prev) {prev.list.push(obj)}') 
     
-#find top N quotes by Price Volatility from yearLow or yearHigh     
+#find top N quotes by Price Volatility from yearLow 
+#@memorise(cache.getmc())    
 def findByYearLow(top=20):
     connection = Connection()
     db = connection.stock
     historyDatas = db.tickers
     return historyDatas.find().sort([("percentFromYearLow",pymongo.DESCENDING)]).limit(top);
 
-#find top N quotes by Price Volatility from yearLow or yearHigh     
+#find top N quotes by Price Volatility from yearHigh     
 def findByYearHigh(top=20):
     connection = Connection()
     db = connection.stock
     historyDatas = db.tickers
     return historyDatas.find().sort([("percentFromYearHigh",pymongo.DESCENDING)]).limit(top);
+
+#find top N quotes by Price Volatility from yearLow or yearHigh     
+def findTopN(top=20,condition=settings.HIGHER):
+    if condition == settings.HIGHER:
+        result =  findByYearLow(top)
+    else:
+        result =  findByYearHigh(top)
+    stocks = []
+    for stock in result:
+        s = Stock(stock.get('code'))
+        s.PercentChangeFromYearLow = stock.get('percentFromYearLow')
+        stocks.append(s)
+    return stocks
+    #    for stock in result:
+#        #print stock.yearHighLow()
+#        print stock
+
     
 if __name__ == '__main__':
     from stocktrace.stock import Stock
@@ -569,15 +590,17 @@ if __name__ == '__main__':
 #    result = findStockByGroup()
 #    print len(result)
 #    print result[1]['list']
-    result = findByYearLow(5)
-    for stock in result:
-        #print stock.yearHighLow()
-        print stock
-    result = findByYearHigh()
-    print '------------------------'
-    for stock in result:
-        #print stock.yearHighLow()
-        print stock
+    print findTopN()[0].yearHighLow()
+    #findPeakStockByDays('600327',10)
+#    result = findByYearLow(5)
+#    for stock in result:
+#        #print stock.yearHighLow()
+#        print stock
+#    result = findByYearHigh()
+#    print '------------------------'
+#    for stock in result:
+#        #print stock.yearHighLow()
+#        print stock
 #    peak =  findPeakStockByDays('603000',9,'2012-05-06')
 #    print peak
 #    for stock in stocks:
