@@ -26,10 +26,11 @@
 
 
 		$container.infinitescroll({
-		    navSelector  : '#page_nav',    // selector for the paged navigation 
-		    nextSelector : '#page_nav a',  // selector for the NEXT link (to page 2)
-		    itemSelector : '.cat1',     // selector for all items you'll retrieve
+		    navSelector  : "a#next:last",    // selector for the paged navigation 
+		    nextSelector : "a#next:last",  // selector for the NEXT link (to page 2)
+		    itemSelector : "div.cat2",     // selector for all items you'll retrieve
 		    debug: true,
+		    dataType: 'html'
 		    },
 	    // call Isotope as a callback
 	    function( newElements ) {
@@ -43,9 +44,8 @@
 	
 	<body>
 		<div id="header"></div>
-		<div id="page_nav">
-			<a href="isotope_demo.html"></a>
-		</div>
+
+		<a id="next" href="alist/?q=2">next page?</a>
 		<div id="nav">
 			<ul>
 				<li><a href="/zytj/alist" data-filter=".cat1">Sort Ascending</a></li>

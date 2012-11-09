@@ -159,9 +159,11 @@ def ma(request):
     return render(request,'ma.html') 
 
 def ascendinglist(request):
+    print request.GET.get('q', '')
     from stocktrace.dao.stockdao import findTopN
     #return render(request,'stock_list.html',{'loop_times':[i+1 for i in range(7)]}) 
     results = findTopN(20);
+    print results
     return render(request,'stock_list.html',{'results':results})
 
 def descendinglist(request):
@@ -169,5 +171,6 @@ def descendinglist(request):
     #return render(request,'stock_list.html',{'loop_times':[i+1 for i in range(7)]}) 
     results = findTopN(20,settings.LOWER);
     return render(request,'stock_list.html',{'results':results})
+
 
 
