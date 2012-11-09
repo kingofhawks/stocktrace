@@ -4,6 +4,8 @@ from django.utils import simplejson
 from django.http import HttpResponse
 from django.http import Http404
 from stocktrace.util import settings
+from stocktrace.dao.stockdao import findTopN
+
 
 def index(request):
 #    t = loader.get_template('jquery.jqplot/examples/candlestick-charts.html')
@@ -159,18 +161,25 @@ def ma(request):
     return render(request,'ma.html') 
 
 def ascendinglist(request):
-    print request.GET.get('q', '')
-    from stocktrace.dao.stockdao import findTopN
-    #return render(request,'stock_list.html',{'loop_times':[i+1 for i in range(7)]}) 
-    results = findTopN(20);
-    print results
-    return render(request,'stock_list.html',{'results':results})
+    return listall(request,settings.HIGHER)
 
 def descendinglist(request):
-    from stocktrace.dao.stockdao import findTopN
-    #return render(request,'stock_list.html',{'loop_times':[i+1 for i in range(7)]}) 
-    results = findTopN(20,settings.LOWER);
-    return render(request,'stock_list.html',{'results':results})
+    return listall(request,settings.LOWER)
+
+def listall(request,condition):
+    q = request.GET.get('q')
+    if condition == settings.HIGHER:
+        topn = findTopN(settings.PAGING_TOTAL);
+        dest = 'alist.html'
+    else:
+        topn = findTopN(settings.PAGING_TOTAL,settings.LOWER);
+        dest = 'dlist.html'
+    if q is None:
+        results = topn[0:settings.PAGING_ITEM]
+    else:
+        results = topn[settings.PAGING_ITEM*(int(q)-1):settings.PAGING_ITEM*int(q)]
+        
+    return render(request,dest,{'results':results})
 
 
 

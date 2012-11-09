@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Isotope Tutorial</title>
+		
+		<link rel="stylesheet" href="../static/css/style.css">
+		
+		<script type="text/javascript" src="../static/js/jquery.min.js">
+		</script>
+		
+		<script type="text/javascript" src="../static/js/isotope.js"></script>
+		<script type="text/javascript" src="../static/js/jquery.infinitescroll.js"></script>
+		
+		<script type="text/javascript">
+		
+		$(document).ready(function(){
+		var $container = $('#content');
+		$container.isotope({
+			filter: '*',
+			animationOptions: {
+		     duration: 750,
+		     easing: 'linear',
+		     queue: false,
+		   }
+		});
+
+
+		$container.infinitescroll({
+		    navSelector  : "a#next:last",    // selector for the paged navigation 
+		    nextSelector : "a#next:last",  // selector for the NEXT link (to page 2)
+		    itemSelector : "div.cat2",     // selector for all items you'll retrieve
+		    debug: true,
+		    dataType: 'html'
+		    },
+	    // call Isotope as a callback
+	    function( newElements ) {
+	      $container.isotope( 'appended', $( newElements ) ); 
+	    }
+	  );
+
+});
+		</script>
+	</head>
+	
+	<body>
+		<div id="header"></div>
+
+		<a id="next" href="dlist/?q=2">next page?</a>
+		<div id="nav">
+			<ul>
+				<li><a href="/zytj/alist" data-filter=".cat1">Sort Ascending</a></li>
+				<li><a href="/zytj/dlist" data-filter=".cat2">Sort Descending</a></li>
+			</ul>
+		</div>
+		
+		<div id="content">			
+			{% for stock in results%}
+			    <div class="box cat2 cat3">
+					<h2 class="box-title">{{stock.code}}</h2>
+					<div class="box-text">
+						-{{stock.PercentChangeFromYearHigh}}%
+				</div>
+			</div>
+			{%endfor%}
+		
+		</div>
+	</body>
+</html>

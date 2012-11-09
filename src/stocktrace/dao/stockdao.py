@@ -557,7 +557,10 @@ def findTopN(top=20,condition=settings.HIGHER):
     stocks = []
     for stock in result:
         s = Stock(stock.get('code'))
-        s.PercentChangeFromYearLow = stock.get('percentFromYearLow')
+        if condition == settings.HIGHER:
+            s.PercentChangeFromYearLow = stock.get('percentFromYearLow')
+        else:
+            s.PercentChangeFromYearHigh = stock.get('percentFromYearHigh')
         stocks.append(s)
     return stocks
     #    for stock in result:
@@ -591,6 +594,7 @@ if __name__ == '__main__':
 #    print len(result)
 #    print result[1]['list']
     print findTopN()[0].yearHighLow()
+    print findTopN(condition=settings.LOWER)[0].yearHighLow()
     #findPeakStockByDays('600327',10)
 #    result = findByYearLow(5)
 #    for stock in result:

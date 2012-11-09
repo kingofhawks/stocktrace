@@ -19,7 +19,7 @@ class Stock:
 	yearHigh = 0;
 	yearLow = 0;
 	PercentChangeFromYearLow = 0;
-	PercebtChangeFromYearHigh = 0;
+	PercentChangeFromYearHigh = 0;
 	ma50 = 0;
 	ma200 = 0;
 	PercentChangeFromTwoHundreddayMovingAverage = '';
@@ -42,7 +42,7 @@ class Stock:
 		return self.code+str('|%.2f'%self.percent+'%')+'|state:'+self.state+'|now:'+str(self.current)+'|high:'+str('%.2f'%self.high)+'|low:'+str('%.2f'%self.low)+'|volume:'+str('%.2f'%(self.volume/100))+'|alarm:'+str(self.alert)
 	
 	def yearHighLow(self):
-		return self.code+str('|%.2f'%self.percent+'%')+'|now:'+str(self.current)+'|yearHigh:'+str('%.2f'%self.yearHigh)+'|yearLow:'+str('%.2f'%self.yearLow)+'|PercebtChangeFromYearHigh:'+str('%.2f'%(self.PercebtChangeFromYearHigh))+'|PercentChangeFromYearLow:'+str(self.PercentChangeFromYearLow)
+		return self.code+str('|%.2f'%self.percent+'%')+'|now:'+str(self.current)+'|yearHigh:'+str('%.2f'%self.yearHigh)+'|yearLow:'+str('%.2f'%self.yearLow)+'|PercentChangeFromYearHigh:'+str('%.2f'%(self.PercentChangeFromYearHigh))+'|PercentChangeFromYearLow:'+str(self.PercentChangeFromYearLow)
 	
 	def compute(self):
 		if (self.lastUpdate.find('03-31')!= -1):
