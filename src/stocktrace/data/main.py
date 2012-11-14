@@ -3,7 +3,7 @@
 if __name__ == '__main__':	
 	from download import download
 	from stocktrace.util import settings
-	download(False,stockList=settings.STOCK_LIST);
+	download(False,True,True,stockList=settings.STOCK_LIST);
 
 			
 

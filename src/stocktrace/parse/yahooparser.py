@@ -13,8 +13,10 @@ from lxml.html import parse
 from stocktrace.dao.stockdao import *
 import io
 from stocktrace.util import slf4p
+import redis
 
 logger = slf4p.getLogger(__name__)
+redclient = redis.StrictRedis(host='172.25.21.16', port=6379, db=0)
 
 #parse ticker code/name from yahoo finance,check whether exists
 def parseTickers(begin=600000,end=603366):
@@ -232,7 +234,8 @@ def getHistorialData(code,save = True,beginDate = '',endDate = str(date.today())
     if (len(historyDatas) == 0):
         print "No data downloaded for "+code
     else:
-        print str(len(historyDatas))+" history Data downloaded for "+code
+        logger.info(str(len(historyDatas))+" history Data downloaded for "+code)
+        redclient.set(code,historyDatas[0].date)
         
 #    for stock in historyDatas:
 #        print stock 
@@ -282,7 +285,7 @@ def parseAllHistoryData(file):
         pass
 
 #Download all history data from yahoo via invalid code in DB
-def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01',engine='CSV'):
+def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01',engine=settings.CSV_ENGINE):
     logger.info('current quote size:'+str(len(stocks)))
 #    for stock in stocks:
 #        #parse code
@@ -300,9 +303,14 @@ def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01'
     pool.join()
     
     
-def downloadHistorialData(code,save,beginDate,engine='CSV'):
+def downloadHistorialData(code,save = True,beginDate = '2012-01-01',engine=settings.CSV_ENGINE):
     try:
-        if engine == 'CSV':
+        latest= redclient.get(code)
+        today = date.today()
+        yesterday = date.today()+timedelta(-1)
+        if latest == str(today) or latest == str(yesterday):
+            logger.info(code+" is already update to latest")                     
+        elif engine == settings.CSV_ENGINE:
             getCSVHistorialData(code,save,beginDate)
         else:
             getHistorialData(code, save, beginDate)            

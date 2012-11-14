@@ -10,11 +10,10 @@ from datetime import datetime
 from stocktrace.util import slf4p,settings
 from stocktrace.memcache.cache import Cache 
 from pymongo import Connection 
-import pymongo     
 from memorised.decorators import memorise
 from stocktrace.stock import Stock
     
-      
+connection = Connection()      
 cache = Cache() 
 logger = slf4p.getLogger(__name__)
     
@@ -36,7 +35,7 @@ def insertStock():
  
 #save stock trading history         
 def saveStock(stock):
-    connection = Connection()
+    #connection = Connection()
     db = connection.stock
     data = {"code": stock.code,
             "high": stock.high,
@@ -47,6 +46,7 @@ def saveStock(stock):
             "date": stock.date}
     historyDatas = db.stock_history
     historyDatas.insert(data)
+    #connection.end_request()
         
 def findAllStocks():
     connection = Connection()
@@ -58,7 +58,7 @@ def findAllStocks():
 #find last update stock record        
 def findLastUpdate(code):
     print "To find latest update****"+code
-    connection = Connection()
+    #connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
 #    print historyDatas.find_one({"code": code})
@@ -129,7 +129,7 @@ def findLastStockByDays(code,lastDays):
         for record in result:
             cols.append(record)
         #print cols
-        cache.set(key, cols)
+        #cache.set(key, cols)
         print 'sql'
         return cols
     

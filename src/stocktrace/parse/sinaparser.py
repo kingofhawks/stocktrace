@@ -105,23 +105,32 @@ def getMyStock(codes = ['sh600327','sh600600','sh601111','sh600221','sh600583','
 
 #download latest price info from sina
 def downloadLatestData(quotes = findAllExistentTickers(),engine='sina'):
-    from stocktrace.dao.stockdao import updateTickerToLatestPrice
+    import multiprocessing as mp
+    pool = mp.Pool(5)
+    
     for code in quotes: 
-        if engine == 'sina':
-            quote = getStock(code)
-            print quote
-        elif engine == 'yahoo':
-            from stocktrace.parse.yahooparser import parseFinanceData
-            quote = parseFinanceData(code)            
-        if (code.startswith('sh')):
-            code = code.replace('sh','')
-        
-        if quote is not None:
-            updateTickerToLatestPrice(code,quote.close,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow,quote.PercebtChangeFromYearHigh,quote.PercentChangeFromYearLow)                       
-            
+        update(code,engine)
+        pool.apply_async(update, args = [str(code),engine])
+    
+    pool.close()
+    pool.join()        
     logging.info( '****Download latest price from sina finished****')
         
+
+def update(code,engine='sina'):
+    if engine == 'sina':
+            quote = getStock(code)
+            print quote
+    elif engine == 'yahoo':
+            from stocktrace.parse.yahooparser import parseFinanceData
+            quote = parseFinanceData(code)            
+    if (code.startswith('sh')):
+            code = code.replace('sh','')
         
+    if quote is not None:
+            from stocktrace.dao.stockdao import updateTickerToLatestPrice
+            updateTickerToLatestPrice(code,quote.close,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow,quote.PercebtChangeFromYearHigh,quote.PercentChangeFromYearLow)                       
+            
 if __name__ =="__main__":    
     import time, os, sys, sched
 #    schedule = sched.scheduler(time.time, time.sleep)
