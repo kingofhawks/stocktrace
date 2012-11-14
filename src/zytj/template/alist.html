@@ -4,16 +4,18 @@
 		<title>Isotope Tutorial</title>
 		
 		<link rel="stylesheet" href="../static/css/style.css">
-		
-		<script type="text/javascript" src="../static/js/jquery.min.js">
-		</script>
-		
+		<script type="text/javascript" src="../static/js/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="../static/bootstrap/js/bootstrap-tooltip.js"></script>		
 		<script type="text/javascript" src="../static/js/isotope.js"></script>
 		<script type="text/javascript" src="../static/js/jquery.infinitescroll.js"></script>
 		
 		<script type="text/javascript">
 		
-		$(document).ready(function(){
+		$(document).ready(function(){	
+		//$('[rel=tooltip]').tooltip()
+		var jsondata = '<html>hello<br>Simon</html>';
+		$('[rel=tooltip]').attr('title', jsondata).tooltip({html:true});
+		
 		var $container = $('#content');
 		$container.isotope({
 			filter: '*',
@@ -37,26 +39,30 @@
 	      $container.isotope( 'appended', $( newElements ) ); 
 	    }
 	  );
+		
+		
+		
 
 });
 		</script>
+		
 	</head>
 	
 	<body>
 		<div id="header"></div>
 
-		<a id="next" href="alist/?q=2">next page?</a>
+		<a id="next" href="alist/?q=2" >next page?</a>
 		<div id="nav">
 			<ul>
-				<li><a href="/zytj/alist" data-filter=".cat1">Sort Ascending</a></li>
-				<li><a href="/zytj/dlist" data-filter=".cat2">Sort Descending</a></li>
+				<li><a href="/zytj/alist" data-filter=".cat1">Ascending from Year Low</a></li>
+				<li><a href="/zytj/dlist" data-filter=".cat2">Descending from Year High</a></li>
 			</ul>
 		</div>
 		
 		<div id="content">			
 			{% for stock in results%}
 			    <div class="box cat2 cat3">
-					<h2 class="box-title">{{stock.code}}</h2>
+					<h2 class="box-title"><a href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" ">{{stock.code}}</a></h2>
 					<div class="box-text">
 						+{{stock.PercentChangeFromYearLow}}%
 				</div>
@@ -64,5 +70,7 @@
 			{%endfor%}
 		
 		</div>
+		
+		
 	</body>
 </html>

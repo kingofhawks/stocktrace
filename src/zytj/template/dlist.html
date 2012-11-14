@@ -48,15 +48,15 @@
 		<a id="next" href="dlist/?q=2">next page?</a>
 		<div id="nav">
 			<ul>
-				<li><a href="/zytj/alist" data-filter=".cat1">Sort Ascending</a></li>
-				<li><a href="/zytj/dlist" data-filter=".cat2">Sort Descending</a></li>
+				<li><a href="/zytj/alist" data-filter=".cat1">Ascending from Year Low</a></li>
+				<li><a href="/zytj/dlist" data-filter=".cat2">Descending from Year High</a></li>
 			</ul>
 		</div>
 		
 		<div id="content">			
 			{% for stock in results%}
 			    <div class="box cat2 cat3">
-					<h2 class="box-title">{{stock.code}}</h2>
+					<h2 class="box-title"><a href="/zytj/candle/{{stock.code}}" data-filter=".cat1">{{stock.code}}</a></h2>
 					<div class="box-text">
 						-{{stock.PercentChangeFromYearHigh}}%
 				</div>
