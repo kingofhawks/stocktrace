@@ -27,7 +27,7 @@ def jsoncandle(request,q):
     #    print quote    
         
         from stocktrace.dao.stockdao import findLastStockByDays
-        stocks = findLastStockByDays(q,60)
+        stocks = findLastStockByDays(q,100)
         ohlc = []
         #MA10
         ma1 = []

@@ -556,11 +556,21 @@ def findTopN(top=20,condition=settings.HIGHER):
         result =  findByYearHigh(top)
     stocks = []
     for stock in result:
-        s = Stock(stock.get('code'))
+        code = stock.get('code')
+        s = Stock(code)
         if condition == settings.HIGHER:
             s.PercentChangeFromYearLow = stock.get('percentFromYearLow')
         else:
             s.PercentChangeFromYearHigh = stock.get('percentFromYearHigh')
+        s.yearHigh = stock.get('yearHigh')
+        s.yearLow = stock.get('yearLow')
+        s.current = stock.get('current')
+        s.ma50 = stock.get('ma50')
+        s.ma200 = stock.get('ma200')
+        
+        triggered = checkStockWithMA(code,40,10,condition) 
+        print triggered
+        
         stocks.append(s)
     return stocks
     #    for stock in result:

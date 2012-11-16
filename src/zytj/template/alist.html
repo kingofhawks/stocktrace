@@ -14,7 +14,8 @@
 		$(document).ready(function(){	
 		//$('[rel=tooltip]').tooltip()
 		var jsondata = '<html>hello<br>Simon</html>';
-		$('[rel=tooltip]').attr('title', jsondata).tooltip({html:true});
+		//$('[rel=tooltip]').attr('title', jsondata).tooltip({html:true});
+		$('[rel=tooltip]').tooltip({html:true});		
 		
 		var $container = $('#content');
 		$container.isotope({
@@ -61,8 +62,8 @@
 		
 		<div id="content">			
 			{% for stock in results%}
-			    <div class="box cat2 cat3">
-					<h2 class="box-title"><a href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" ">{{stock.code}}</a></h2>
+			    <div class="box cat2 cat3" >
+					<h2 class="box-title"><a href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" title ="<html>Now:{{stock.current}}<br>High:{{stock.yearHigh}}<br>Low:{{stock.yearLow}}<br>MA50:{{stock.ma50}}<br>MA200:{{stock.ma200}}<br></html>">{{stock.code}}</a></h2>
 					<div class="box-text">
 						+{{stock.PercentChangeFromYearLow}}%
 				</div>
