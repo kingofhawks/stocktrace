@@ -1,25 +1,18 @@
 <!DOCTYPE html>
+
 <html>
 	<head>
-		<title>Isotope Tutorial</title>
+		<title>Isotope Tutorial2</title>
 		
-		<link rel="stylesheet" href="../static/css/style.css">
-		<link rel="stylesheet" href="../static/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
 		<script type="text/javascript" src="../static/js/jquery-1.8.2.min.js"></script>
-		<script type="text/javascript" src="../static/bootstrap/js/bootstrap-tooltip.js"></script>		
 		<script type="text/javascript" src="../static/js/isotope.js"></script>
 		<script type="text/javascript" src="../static/js/jquery.infinitescroll.js"></script>
 		
 		<script type="text/javascript">
 		
-		$(document).ready(function(){	
-		//$('[rel=tooltip]').tooltip()
-		var jsondata = '<html>hello<br>Simon</html>';
-		//$('[rel=tooltip]').attr('title', jsondata).tooltip({html:true});
-		$('[rel=tooltip]').tooltip({html:true});	
-		$('.icon-arrow-down').tooltip({title:"Below MA50"});
-		$('.icon-exclamation-sign').tooltip({title:"Below MA200",placement:"right"});
-		
+		$(document).ready(function(){			
 		var $container = $('#content');
 		$container.isotope({
 			filter: '*',
@@ -42,10 +35,7 @@
 	    function( newElements ) {
 	      $container.isotope( 'appended', $( newElements ) ); 
 	    }
-	  );
-		
-		
-		
+	  );		
 
 });
 		</script>
@@ -60,30 +50,16 @@
 			<ul>
 				<li><a href="/zytj/alist" data-filter=".cat1">Ascending from Year Low</a></li>
 				<li><a href="/zytj/dlist" data-filter=".cat2">Descending from Year High</a></li>
-				<li><a href="/zytj/alist/20/" data-filter=".cat2">Ascending from 20 days</a></li>
 			</ul>
 		</div>
 		
 		<div id="content">			
 			{% for stock in results%}
 			    <div class="box cat2 cat3" >
-					<h2 class="box-title"><a href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" title ="<html>Now:{{stock.current}}<br>High:{{stock.yearHigh}}<br>Low:{{stock.yearLow}}<br>MA50:{{stock.ma50}}<br>MA200:{{stock.ma200}}<br></html>">{{stock.code}}</a></h2>
-					<div class="box-text">
-						+{{stock.PercentChangeFromYearLow}}%
-					</div>
-					<div class="box-text">
-						{% if stock.current < stock.ma50 %}
-						<i class="icon-arrow-down"></i>
-						{%endif%}
-						{% if stock.current < stock.ma200 %}
-						<i class="icon-exclamation-sign"></i>
-						{%endif%}
-					</div>
+					<h2 class="box-title"><a href="/zytj/candle/{{stock}}" data-filter=".cat1">{{stock}}</a></h2>
 				</div>
 			{%endfor%}
 		
 		</div>
-		
-		
 	</body>
 </html>

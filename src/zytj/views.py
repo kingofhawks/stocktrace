@@ -181,5 +181,12 @@ def listall(request,condition):
         
     return render(request,dest,{'results':results})
 
+def alist_days(request,days):
+    from stocktrace.parse.screener import findByMa
+    result = findByMa(int(days),10,condition=settings.LOWER)
+    print result
+    print '**************************'
+    return render(request,'alist_days.html',{'results':result})
+
 
 
