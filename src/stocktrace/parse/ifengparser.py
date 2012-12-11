@@ -7,7 +7,7 @@ def parseFinanceData(code):
     from lxml import etree
     from lxml.html import parse
     url = 'http://app.finance.ifeng.com/data/stock/cwjk.php?symbol='+code
-    #print url
+    print url
     page = parse(url).getroot()
     result = etree.tostring(page)
     #print result
@@ -18,7 +18,7 @@ def parseFinanceData(code):
     
     r = page.xpath('//div[@class="tab01"]');
     #print len(r)    
-    from stock import Stock
+    from stocktrace.stock import Stock
     stock = Stock(code)
     for a in r:  
         tree= etree.ElementTree(a)  
@@ -51,12 +51,61 @@ def parseFinanceData(code):
          
         return stock   
     
+def parseIndustry(code):
+    from lxml import etree
+    from lxml.html import parse
+    url = 'http://app.finance.ifeng.com/list/all_stock_cate.php?s=1'
+    print url
+    page = parse(url).getroot()
+    #result = etree.tostring(page)
+    #print result 
+    
+    from lxml.cssselect import CSSSelector
+    for links in CSSSelector('a[href]')(page):
+        href = links.attrib['href']
+        #print href
+        index =  href.find('stock_cate.php')
+        if (index !=-1):
+            print href
+            print links.text
+            page = parse(href).getroot()
+            #result = etree.tostring(page)
+            #print result 
+#            import io
+#            with io.open('test.html','wb') as f:
+#               f.writelines(result)
+#               pass
+            r = page.xpath('//a/text()'); 
+            #print len(r)
+            #print r
+            for text in r:
+                if len(text) == 6 and isinstance(text, str):
+                    print text                    
+            break;
+        
+        
+#    r = page.xpath('//div[@class="main"]');
+#    print len(r)     
+#    for a in r:  
+#        tree= etree.ElementTree(a)  
+#        print etree.tostring(tree) 
+#        datas = tree.xpath('//tr') 
+#        #print len(datas)
+#        index =0
+#        for data in datas:
+#            dataTree = etree.ElementTree(data);
+#            values = dataTree.xpath('//text()')     
+#            #print str(unicode(values))  
+#            print  values[1]
+#            #print etree.tostring(dataTree)
+            
       
 
         
 if __name__ == '__main__':
-    print parseFinanceData('600327')
-    parseFinanceData('600327')
+    #print parseFinanceData('600327')
+    #parseFinanceData('600327')
+    parseIndustry('')
 #    import logging
 #    LOG_FILENAME = 'example.log'
 #    logging.basicConfig(level=logging.DEBUG)
