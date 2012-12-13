@@ -3,6 +3,13 @@ Created on 2011-3-7
 
 @author: simon
 '''
+import redis
+from stocktrace.util import slf4p
+from stocktrace.util import settings
+
+logger = slf4p.getLogger(__name__)
+redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
+
 def parseFinanceData(code):
     from lxml import etree
     from lxml.html import parse
@@ -67,7 +74,8 @@ def parseIndustry(code):
         index =  href.find('stock_cate.php')
         if (index !=-1):
             print href
-            print links.text
+            industry = links.text
+            print industry
             page = parse(href).getroot()
             #result = etree.tostring(page)
             #print result 
@@ -78,10 +86,17 @@ def parseIndustry(code):
             r = page.xpath('//a/text()'); 
             #print len(r)
             #print r
+            size = 0;
             for text in r:
                 if len(text) == 6 and isinstance(text, str):
-                    print text                    
-            break;
+                    print text 
+                    redclient.rpush(industry,text)  
+                    size = size+1
+            print redclient.lrange(industry,0,size-1)
+            print redclient.keys(industry)                     
+            #break;
+    
+    #print redclient.keys()
         
         
 #    r = page.xpath('//div[@class="main"]');
