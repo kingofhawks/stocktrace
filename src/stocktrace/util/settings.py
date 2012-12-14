@@ -7,6 +7,7 @@ YAHOO = "yahoo"
 CSV_ENGINE = "csv"
 STOCK_LIST_ALL='stock_list_all'
 STOCK_LIST='stock_list'
+STOCK_LIST_TOP100='stock_list_top100'
 DOWNLOAD_KEY_STAT = False
 DOWNLOAD_LATEST_PRICE = True
 HIGHER = 1
@@ -26,3 +27,6 @@ STATUS_CRITICAL = 'CRITICAL'
 #paging
 PAGING_ITEM = 20
 PAGING_TOTAL = 500
+
+#redis
+REDIS_SERVER = '172.25.21.16'

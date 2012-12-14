@@ -26,6 +26,8 @@ class Stock:
 	PercentChangeFromFiftydayMovingAverage = '';
 	alert = False;
 	state = 'OK'#OK,WARNING,CRITICAL,UP
+	isInSh = False;#Shanghai code
+	
 	def __init__(self,code,current=0,percent=0,low=0,high=0,volume=0):
 		self.code = code
 		self.current = current

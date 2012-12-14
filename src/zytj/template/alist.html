@@ -18,7 +18,11 @@
 		//$('[rel=tooltip]').attr('title', jsondata).tooltip({html:true});
 		$('[rel=tooltip]').tooltip({html:true});	
 		$('.icon-arrow-down').tooltip({title:"Below MA50"});
-		$('.icon-exclamation-sign').tooltip({title:"Below MA200",placement:"right"});
+		$('.icon-arrow-up').tooltip({title:"Above MA50",placement:"right"});
+		$('.icon-star-empty').tooltip({title:"Bad",placement:"right"});
+		$('.icon-star').tooltip({title:"Great",placement:"right"});
+		$('.icon-thumbs-down').tooltip({title:"Below MA200",placement:"right"});
+		$('.icon-thumbs-up').tooltip({title:"Above MA200",placement:"right"});
 		
 		var $container = $('#content');
 		$container.isotope({
@@ -69,15 +73,30 @@
 			    <div class="box cat2 cat3" >
 					<h2 class="box-title"><a href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" title ="<html>Now:{{stock.current}}<br>High:{{stock.yearHigh}}<br>Low:{{stock.yearLow}}<br>MA50:{{stock.ma50}}<br>MA200:{{stock.ma200}}<br></html>">{{stock.code}}</a></h2>
 					<div class="box-text">
-						+{{stock.PercentChangeFromYearLow}}%
+						+{{stock.PercentChangeFromYearLow}}% 
+						{% if stock.isInSh %}
+						<a href="http://finance.sina.com.cn/realstock/company/sh{{stock.code}}/nc.shtml">Sina</a>
+						{% else%}
+						<a href="http://finance.sina.com.cn/realstock/company/sz{{stock.code}}/nc.shtml">Sina</a>
+						{% endif %}
 					</div>
 					<div class="box-text">
-						{% if stock.current < stock.ma50 %}
+						{% if stock.current < stock.ma50 and stock.ma50 < stock.ma200 %}
+						<i class="icon-star-empty"></i>
+						{% elif stock.current < stock.ma50 %}
 						<i class="icon-arrow-down"></i>
-						{%endif%}
-						{% if stock.current < stock.ma200 %}
-						<i class="icon-exclamation-sign"></i>
-						{%endif%}
+						{% elif stock.current < stock.ma200 %}
+						<i class="icon-thumbs-down"></i>
+						{% endif%}
+						{% if stock.current > stock.ma50 and stock.ma50 > stock.ma200 %}
+						<i class="icon-star"></i>
+						{% elif stock.current > stock.ma50 %}
+						<i class="icon-arrow-up"></i>
+						{% elif stock.current > stock.ma200 %}
+						<i class="icon-thumbs-up"></i>
+						{% endif%}
+							
+										
 					</div>
 				</div>
 			{%endfor%}

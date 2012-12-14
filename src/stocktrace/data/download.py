@@ -26,8 +26,8 @@ def download(clearAll= False,downloadLatest = False,downloadHistory = False,stoc
         #clear redis cache
         redclient.flushall()
         clear();
-        #download securities list from sse
-        downloadQuoteList(True,False,stockList)
+    #download securities list from sse
+    downloadQuoteList(True,False,stockList)
     
     #download statistics from reuters        
     if settings.DOWNLOAD_KEY_STAT:

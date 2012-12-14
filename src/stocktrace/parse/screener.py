@@ -41,7 +41,7 @@ def findByNhnl(lastDays=200,nearDays=5):
 #find quotes by MA index
 #ma=10/20/50/200
 #condition=1(high)/2(low)
-#return those price is higher than MA during the last days
+#return those price is higher/lower than MA during the last days
 def findByMa(lastDays=40,ma=10,condition=settings.HIGHER):
     stocks = findAllExistentTickers()
     result = []
@@ -138,7 +138,8 @@ def findByYearLowOrHigh(top=20,condition=settings.HIGHER):
     
 if __name__ == '__main__':
     #print findByNhnl()
-    #print findByMa(10,10,condition=settings.HIGHER)
+    print findByMa(5,10,condition=settings.HIGHER)
+    print findByMa(5,10,condition=settings.LOWER)
     #print findByMa2(10,10,20,condition=settings.HIGHER)
-    print findByYearLowOrHigh(10,settings.HIGHER)
-    print findByYearLowOrHigh(10,settings.LOWER)
+    #print findByYearLowOrHigh(10,settings.HIGHER)
+    #print findByYearLowOrHigh(10,settings.LOWER)

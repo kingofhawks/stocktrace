@@ -12,11 +12,11 @@ from lxml import etree
 from lxml.html import parse
 from stocktrace.dao.stockdao import *
 import io
-from stocktrace.util import slf4p
+from stocktrace.util import slf4p,settings
 import redis
 
 logger = slf4p.getLogger(__name__)
-redclient = redis.StrictRedis(host='172.25.21.16', port=6379, db=0)
+redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
 
 #parse ticker code/name from yahoo finance,check whether exists
 def parseTickers(begin=600000,end=603366):

@@ -160,9 +160,11 @@ def nhnl(request):
 def ma(request):
     return render(request,'ma.html') 
 
+#ascend from year low
 def ascendinglist(request):
     return listall(request,settings.HIGHER)
 
+#descend from year high
 def descendinglist(request):
     return listall(request,settings.LOWER)
 
@@ -181,6 +183,15 @@ def listall(request,condition):
         
     return render(request,dest,{'results':results})
 
+#ascending list during last days by MA
+def alist_days_ma(request,days):
+    from stocktrace.parse.screener import findByMa
+    result = findByMa(int(days),10,condition=settings.LOWER)
+    print result
+    print '**************************'
+    return render(request,'alist_days_ma.html',{'results':result})
+
+#ascending list during last days by price
 def alist_days(request,days):
     from stocktrace.parse.screener import findByMa
     result = findByMa(int(days),10,condition=settings.LOWER)
