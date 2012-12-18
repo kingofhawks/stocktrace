@@ -32,6 +32,9 @@ class Cache(object):
     def delete(self,key):
         self.mc.delete(key)
         
+    def getmc(self):
+        return self.mc
+        
 if __name__ =="__main__":    
     cache = Cache()
     #cache.set('key1','hello simon')
