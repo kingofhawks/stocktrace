@@ -570,8 +570,8 @@ def findTopN(top=20,condition=settings.HIGHER):
         if code.startswith('6'):
             s.isInSh = True;
         
-        triggered = checkStockWithMA(code,40,10,condition) 
-        print triggered
+        #triggered = checkStockWithMA(code,40,10,condition) 
+        #print triggered
         
         stocks.append(s)
     return stocks
