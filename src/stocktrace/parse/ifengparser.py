@@ -10,12 +10,12 @@ from stocktrace.util import settings
 
 logger = slf4p.getLogger(__name__)
 redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
-#industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)
-#for industry in industries:
-#    print industry
-#    stocks = redclient.lrange(industry,0,-1)
-#    for stock in stocks:
-#        print stock
+industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)
+for industry in industries:
+    print industry
+    stocks = redclient.lrange(industry,0,-1)
+    for stock in stocks:
+        print stock
 
 def parseFinanceData(code):
     from lxml import etree
@@ -126,9 +126,10 @@ def parseIndustry(code):
 
         
 if __name__ == '__main__':
+    print 'ok'
     #print parseFinanceData('600327')
     #parseFinanceData('600327')
-    parseIndustry('')
+    #parseIndustry('')
 #    import logging
 #    LOG_FILENAME = 'example.log'
 #    logging.basicConfig(level=logging.DEBUG)

@@ -1,3 +1,5 @@
+#-*- coding: UTF-8 -*-
+
 # Create your views here.
 from django.shortcuts import render
 from django.utils import simplejson
@@ -170,18 +172,27 @@ def descendinglist(request):
 
 def listall(request,condition):
     q = request.GET.get('q')
+    industry = request.GET.get('industry')
+    if industry is not None:
+        print 'industry:'+industry
     if condition == settings.HIGHER:
         topn = findTopN(settings.PAGING_TOTAL);
         dest = 'alist.html'
     else:
         topn = findTopN(settings.PAGING_TOTAL,settings.LOWER);
         dest = 'dlist.html'
+        
+    from stocktrace.redis.redisservice import filterStocks    
+    topn = filterStocks(topn,industry)
+    
     if q is None:
         results = topn[0:settings.PAGING_ITEM]
     else:
         results = topn[settings.PAGING_ITEM*(int(q)-1):settings.PAGING_ITEM*int(q)]
         
-    return render(request,dest,{'results':results})
+    #print len(results)
+        
+    return render(request,dest,{'results':results,'industry':industry})
 
 #ascending list during last days by MA
 def alist_days_ma(request,days):
