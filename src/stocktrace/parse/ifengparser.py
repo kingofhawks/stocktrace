@@ -3,12 +3,19 @@ Created on 2011-3-7
 
 @author: simon
 '''
+
 import redis
 from stocktrace.util import slf4p
 from stocktrace.util import settings
 
 logger = slf4p.getLogger(__name__)
 redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
+#industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)
+#for industry in industries:
+#    print industry
+#    stocks = redclient.lrange(industry,0,-1)
+#    for stock in stocks:
+#        print stock
 
 def parseFinanceData(code):
     from lxml import etree
@@ -75,6 +82,7 @@ def parseIndustry(code):
         if (index !=-1):
             print href
             industry = links.text
+            redclient.zadd(settings.INDUSTRY_SET,1.1,industry)
             print industry
             page = parse(href).getroot()
             #result = etree.tostring(page)
@@ -92,10 +100,10 @@ def parseIndustry(code):
                     print text 
                     redclient.rpush(industry,text)  
                     size = size+1
-            print redclient.lrange(industry,0,size-1)
-            print redclient.keys(industry)                     
+            #print redclient.lrange(industry,0,size-1)
+            #print redclient.keys(industry)                     
             #break;
-    
+    #print redclient.zrange(industrySet,0,-1)
     #print redclient.keys()
         
         
