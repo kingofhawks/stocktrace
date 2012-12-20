@@ -5,14 +5,18 @@
 		
 		<link rel="stylesheet" href="../static/css/style.css">
 		<link rel="stylesheet" href="../static/css/bootstrap.css">
+		<link rel="stylesheet" href="../static/js/chosen/chosen.css" />
 		<script type="text/javascript" src="../static/js/jquery-1.8.2.min.js"></script>
 		<script type="text/javascript" src="../static/bootstrap/js/bootstrap-tooltip.js"></script>		
 		<script type="text/javascript" src="../static/js/isotope.js"></script>
 		<script type="text/javascript" src="../static/js/jquery.infinitescroll.js"></script>
+		<script type="text/javascript" src="../static/js/chosen/chosen.jquery.min.js"></script>
 		
 		<script type="text/javascript">
 		
 		$(document).ready(function(){	
+		$(".chzn-select").chosen();
+		
 		//$('[rel=tooltip]').tooltip()
 		var jsondata = '<html>hello<br>Simon</html>';
 		//$('[rel=tooltip]').attr('title', jsondata).tooltip({html:true});
@@ -65,6 +69,12 @@
 				<li><a href="/zytj/alist" data-filter=".cat1">Ascending from Year Low</a></li>
 				<li><a href="/zytj/dlist" data-filter=".cat2">Descending from Year High</a></li>
 				<li><a href="/zytj/alist/20/" data-filter=".cat2">Ascending from 20 days</a></li>
+			</ul>
+			<ul>
+				<select data-placeholder="Choose a Industry" class="chzn-select">
+			        <option value="AL">Alabama</option>
+			        <option value="WY">Wyoming</option>
+    			</select>
 			</ul>
 		</div>
 		
