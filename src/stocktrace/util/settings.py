@@ -8,6 +8,7 @@ CSV_ENGINE = "csv"
 STOCK_LIST_ALL='stock_list_all'
 STOCK_LIST='stock_list'
 STOCK_LIST_TOP100='stock_list_top100'
+STOCK_LIST_SELF_SELECTION='stock_list_self_selection'
 DOWNLOAD_KEY_STAT = False
 DOWNLOAD_LATEST_PRICE = True
 HIGHER = 1

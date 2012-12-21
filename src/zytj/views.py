@@ -7,6 +7,9 @@ from django.http import HttpResponse
 from django.http import Http404
 from stocktrace.util import settings
 from stocktrace.dao.stockdao import findTopN
+import redis
+
+redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
 
 
 def index(request):
@@ -173,8 +176,9 @@ def descendinglist(request):
 def listall(request,condition):
     q = request.GET.get('q')
     industry = request.GET.get('industry')
-    if industry is not None:
-        print 'industry:'+industry
+    if industry is None:
+        industry = 'all'
+    print 'industry:'+industry
     if condition == settings.HIGHER:
         topn = findTopN(settings.PAGING_TOTAL);
         dest = 'alist.html'
@@ -191,8 +195,9 @@ def listall(request,condition):
         results = topn[settings.PAGING_ITEM*(int(q)-1):settings.PAGING_ITEM*int(q)]
         
     #print len(results)
-        
-    return render(request,dest,{'results':results,'industry':industry})
+    industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)
+    
+    return render(request,dest,{'results':results,'industry':industry,'industry_set':industries})
 
 #ascending list during last days by MA
 def alist_days_ma(request,days):

@@ -16,6 +16,9 @@
 		
 		$(document).ready(function(){	
 		$(".chzn-select").chosen();
+		$(".chzn-select").chosen().change( function(e){ 
+			window.location = "http://127.0.0.1:8000/zytj/alist?industry="+$(this).val(); 
+			} );
 		
 		//$('[rel=tooltip]').tooltip()
 		var jsondata = '<html>hello<br>Simon</html>';
@@ -50,10 +53,7 @@
 	    function( newElements ) {
 	      $container.isotope( 'appended', $( newElements ) ); 
 	    }
-	  );
-		
-		
-		
+	  );		
 
 });
 		</script>
@@ -72,9 +72,12 @@
 			</ul>
 			<ul>
 				<select data-placeholder="Choose a Industry" class="chzn-select">
-			        <option value="AL">Alabama</option>
-			        <option value="WY">Wyoming</option>
-    			</select>
+					<option value=""></option>
+					<option value="all">all</option>
+				{% for industry in industry_set%}
+			        <option value="{{industry}}">{{industry}}</option>			        
+			    {%endfor%}
+    			</select>    			
 			</ul>
 		</div>
 		
