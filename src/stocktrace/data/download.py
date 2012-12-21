@@ -9,7 +9,7 @@ from stocktrace.util import slf4p
 import redis
 
 logger = slf4p.getLogger(__name__)
-redclient = redis.StrictRedis(host='172.25.21.16', port=6379, db=0)
+redclient = redis.StrictRedis(host= settings.REDIS_SERVER, port=6379, db=0)
 
 #download all history data
 #default will download all history data incrementally
@@ -26,8 +26,13 @@ def download(clearAll= False,downloadLatest = False,downloadHistory = False,stoc
         #clear redis cache
         redclient.flushall()
         clear();
+    
     #download securities list from sse
     downloadQuoteList(True,False,stockList)
+    
+    #load stock list to redis
+    for stockList in settings.ALL_LIST:
+        loadStockListToRedis(stockList)
     
     #download statistics from reuters        
     if settings.DOWNLOAD_KEY_STAT:
@@ -45,3 +50,27 @@ def download(clearAll= False,downloadLatest = False,downloadHistory = False,stoc
         downloadHistoryData(quotes,engine = settings.YAHOO)
     
     logger.info('***Finish download finance data****')
+
+def loadStockListToRedis(stockList):
+    import os,io
+    fn = os.path.join(os.path.dirname(__file__),'..', '..','resources',stockList)    
+    
+    with io.open(os.path.abspath(fn),'rb') as f:        
+        for i in range(settings.PAGING_TOTAL):
+            line = f.readline()
+            if (len(line) == 0):
+                break;
+            else :
+                l = line.strip();
+                if (len(l)==7):
+                    code = l[1:]                    
+                    #print len(l)  
+                    #print l  
+                elif (len(l) == 6):
+                    code = l;                   
+                else :
+                    print l; 
+                    continue
+                
+                redclient.zadd(stockList,1.1,code)               
+    pass

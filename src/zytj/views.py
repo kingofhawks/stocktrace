@@ -195,9 +195,10 @@ def listall(request,condition):
         results = topn[settings.PAGING_ITEM*(int(q)-1):settings.PAGING_ITEM*int(q)]
         
     #print len(results)
-    industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)
+    industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)    
     
-    return render(request,dest,{'results':results,'industry':industry,'industry_set':industries})
+    
+    return render(request,dest,{'results':results,'industry':industry,'industry_set':industries,'lists':settings.ALL_LIST})
 
 #ascending list during last days by MA
 def alist_days_ma(request,days):

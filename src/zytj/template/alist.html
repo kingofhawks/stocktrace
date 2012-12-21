@@ -14,11 +14,14 @@
 		
 		<script type="text/javascript">
 		
-		$(document).ready(function(){	
-		$(".chzn-select").chosen();
-		$(".chzn-select").chosen().change( function(e){ 
-			window.location = "http://127.0.0.1:8000/zytj/alist?industry="+$(this).val(); 
-			} );
+		$(document).ready(function(){
+		var industry = "{{industry}}"
+		$("#industry-select").val(industry)	
+		$("#industry-select").chosen();		
+		
+		$("#industry-select").chosen().change( function(e){ 
+			window.location = "http://127.0.0.1:8000/zytj/alist?industry="+$(this).val();
+		} );
 		
 		//$('[rel=tooltip]').tooltip()
 		var jsondata = '<html>hello<br>Simon</html>';
@@ -71,11 +74,20 @@
 				<li><a href="/zytj/alist/20/" data-filter=".cat2">Ascending from 20 days</a></li>
 			</ul>
 			<ul>
-				<select data-placeholder="Choose a Industry" class="chzn-select">
+				<select data-placeholder="Choose a Industry" id="industry-select">
 					<option value=""></option>
 					<option value="all">all</option>
 				{% for industry in industry_set%}
 			        <option value="{{industry}}">{{industry}}</option>			        
+			    {%endfor%}
+    			</select>    			
+			</ul>
+			
+			<ul>
+				<select data-placeholder="Choose a List" id="list-select">
+					<option value=""></option>					
+				{% for list in lists%}
+			        <option value="{{list}}">{{list}}</option>			        
 			    {%endfor%}
     			</select>    			
 			</ul>

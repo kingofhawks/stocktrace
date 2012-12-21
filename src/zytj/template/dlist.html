@@ -5,14 +5,21 @@
 		
 		<link rel="stylesheet" href="../static/css/style.css">
 		<link rel="stylesheet" href="../static/css/bootstrap.css">
+		<link rel="stylesheet" href="../static/js/chosen/chosen.css" />
 		<script type="text/javascript" src="../static/js/jquery-1.8.2.min.js"></script>	
 		<script type="text/javascript" src="../static/bootstrap/js/bootstrap-tooltip.js"></script>			
 		<script type="text/javascript" src="../static/js/isotope.js"></script>
 		<script type="text/javascript" src="../static/js/jquery.infinitescroll.js"></script>
+		<script type="text/javascript" src="../static/js/chosen/chosen.jquery.min.js"></script>
 		
 		<script type="text/javascript">
 		
 		$(document).ready(function(){
+		$(".chzn-select").chosen();
+		$(".chzn-select").chosen().change( function(e){ 
+			window.location = "http://127.0.0.1:8000/zytj/dlist?industry="+$(this).val(); 
+			} );
+			
 		$('[rel=tooltip]').tooltip({html:true});
 		$('.icon-arrow-down').tooltip({title:"Below MA50"});
 		$('.icon-exclamation-sign').tooltip({title:"Below MA200",placement:"right"});
@@ -53,6 +60,15 @@
 			<ul>
 				<li><a href="/zytj/alist" data-filter=".cat1">Ascending from Year Low</a></li>
 				<li><a href="/zytj/dlist" data-filter=".cat2">Descending from Year High</a></li>
+			</ul>
+			<ul>
+				<select data-placeholder="Choose a Industry" class="chzn-select">
+					<option value=""></option>
+					<option value="all">all</option>
+				{% for industry in industry_set%}
+			        <option value="{{industry}}">{{industry}}</option>			        
+			    {%endfor%}
+    			</select>    			
 			</ul>
 		</div>
 		
