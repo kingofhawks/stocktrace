@@ -16,11 +16,21 @@
 		
 		$(document).ready(function(){
 		var industry = "{{industry}}"
+		var stockList = "{{stockList}}"
+			
 		$("#industry-select").val(industry)	
 		$("#industry-select").chosen();		
 		
 		$("#industry-select").chosen().change( function(e){ 
-			window.location = "http://127.0.0.1:8000/zytj/alist?industry="+$(this).val();
+			window.location = "http://127.0.0.1:8000/zytj/alist?industry="+$(this).val()+"&list="+$("#list-select").val();
+		} );
+		
+		
+		$("#list-select").val(stockList)	
+		$("#list-select").chosen();		
+		
+		$("#list-select").chosen().change( function(e){ 
+			window.location = "http://127.0.0.1:8000/zytj/alist?list="+$(this).val()+"&industry="+$("#industry-select").val();
 		} );
 		
 		//$('[rel=tooltip]').tooltip()
@@ -66,7 +76,7 @@
 	<body>
 		<div id="header"></div>
 
-		<a id="next" href="alist/?industry={{industry}}&q=2" >next page?</a>
+		<a id="next" href="alist/?industry={{industry}}&list={{stockList}}&q=2" >next page?</a>
 		<div id="nav">
 			<ul>
 				<li><a href="/zytj/alist" data-filter=".cat1">Ascending from Year Low</a></li>

@@ -186,8 +186,16 @@ def listall(request,condition):
         topn = findTopN(settings.PAGING_TOTAL,settings.LOWER);
         dest = 'dlist.html'
         
-    from stocktrace.redis.redisservice import filterStocks    
-    topn = filterStocks(topn,industry)
+    from stocktrace.redis.redisservice import filterStocksByIndustry,filterStocksByList  
+    #filter stocks by industry  
+    topn = filterStocksByIndustry(topn,industry)
+    
+    stockList = request.GET.get('list')
+    if stockList is None:
+        stockList = settings.STOCK_LIST_ALL
+    print 'stockList:'+stockList
+    #filter stocks by stock list  
+    topn = filterStocksByList(topn,stockList)    
     
     if q is None:
         results = topn[0:settings.PAGING_ITEM]
@@ -198,7 +206,8 @@ def listall(request,condition):
     industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)    
     
     
-    return render(request,dest,{'results':results,'industry':industry,'industry_set':industries,'lists':settings.ALL_LIST})
+    return render(request,dest,{'results':results,'industry':industry,'industry_set':industries,
+                                'lists':settings.ALL_LIST,'stockList':stockList})
 
 #ascending list during last days by MA
 def alist_days_ma(request,days):
