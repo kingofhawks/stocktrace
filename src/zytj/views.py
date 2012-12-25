@@ -179,12 +179,19 @@ def listall(request,condition):
     if industry is None:
         industry = 'all'
     print 'industry:'+industry
+    
     if condition == settings.HIGHER:
         topn = findTopN(settings.PAGING_TOTAL);
         dest = 'alist.html'
+        context = 'alist'
+        orderByAlist = True
     else:
         topn = findTopN(settings.PAGING_TOTAL,settings.LOWER);
         dest = 'dlist.html'
+        context = 'dlist'
+        orderByAlist = False
+    
+    dest = 'screen_year_low_high.html'
         
     from stocktrace.redis.redisservice import filterStocksByIndustry,filterStocksByList  
     #filter stocks by industry  
@@ -207,7 +214,8 @@ def listall(request,condition):
     
     
     return render(request,dest,{'results':results,'industry':industry,'industry_set':industries,
-                                'lists':settings.ALL_LIST,'stockList':stockList})
+                                'lists':settings.ALL_LIST,'stockList':stockList,
+                                'context':context,'orderByAlist':orderByAlist})
 
 #ascending list during last days by MA
 def alist_days_ma(request,days):
