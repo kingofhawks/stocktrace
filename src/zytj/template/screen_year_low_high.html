@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="../static/js/isotope.js"></script>
 		<script type="text/javascript" src="../static/js/jquery.infinitescroll.js"></script>
 		<script type="text/javascript" src="../static/js/chosen/chosen.jquery.min.js"></script>
+		<script type="text/javascript" src="../static/js/jquery-waypoints-1.1.7/waypoints.min.js"></script>
 		
 		<script type="text/javascript">
 		
@@ -44,6 +45,19 @@
 		$('.icon-star').tooltip({title:"Great",placement:"right"});
 		$('.icon-thumbs-down').tooltip({title:"Below MA200",placement:"right"});
 		$('.icon-thumbs-up').tooltip({title:"Above MA200",placement:"right"});
+		
+		//back to top style as tumblr
+		$('.top').addClass('hidden');
+		$.waypoints.settings.scrollThrottle = 30;
+		$('#content').waypoint(function(event, direction) {
+			$('.top').toggleClass('hidden', direction === "up");
+		}, {
+			offset: '-100%'
+		}).find('#nav').waypoint(function(event, direction) {
+			$(this).parent().toggleClass('sticky', direction === "down");
+			event.stopPropagation();
+		});
+
 		
 		var $container = $('#content');
 		$container.isotope({
@@ -142,6 +156,13 @@
 		
 		</div>
 		
+		<footer>
+			<nav>
+				<ul>
+					<li><a class="top" href="#" title="Back to top">Top</a></li>
+				</ul>
+			</nav>
+		</footer>
 		
 	</body>
 </html>
