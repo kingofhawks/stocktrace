@@ -17,6 +17,8 @@ def filterStocksByIndustry(stocks,industry):
         return stocks
     result = []
     stocksInRedis = redclient.lrange(industry,0,-1)
+    if (len(stocksInRedis) == 0):
+        return stocks
     for stock in stocks:
         if any(stock.code in s for s in stocksInRedis):
             logger.debug(str(stock.code)+' in '+industry)
@@ -28,11 +30,32 @@ def filterStocksByList(stocks,stockList):
         return stocks
     result = []
     stocksInRedis = redclient.zrange(stockList,0,-1)
+    if (len(stocksInRedis) == 0):
+        return stocks
     for stock in stocks:
         if any(stock.code in s for s in stocksInRedis):
             logger.debug(str(stock.code)+' in '+stockList)
             result.append(stock)
     return result
+
+def filterStocksByList2(stocks,stockList):
+    if (stockList is None):
+        return stocks
+    result = []
+    stocksInRedis = redclient.zrange(stockList,0,-1)
+    if (len(stocksInRedis) == 0):
+        return stocks
+    for stock in stocks:
+        if any(stock in s for s in stocksInRedis):
+            logger.debug(str(stock)+'already in '+stockList)
+            continue
+        else:
+            result.append(stock)
+    return result
+
+def findStocksByList(stockList):
+    stocksInRedis = redclient.zrange(stockList,0,-1)
+    return stocksInRedis
         
 if __name__ == '__main__':
     stocks = []

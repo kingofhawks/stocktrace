@@ -108,12 +108,20 @@
 						{% endif %}
 					</div>
 					<div class="box-text">
-						{% if stock.current < stock.ma50 %}
+						{% if stock.current < stock.ma50 and stock.ma50 < stock.ma200 %}
+						<i class="icon-star-empty"></i>
+						{% elif stock.current < stock.ma50 %}
 						<i class="icon-arrow-down"></i>
-						{%endif%}
-						{% if stock.current < stock.ma200 %}
-						<i class="icon-exclamation-sign"></i>
-						{%endif%}
+						{% elif stock.current < stock.ma200 %}
+						<i class="icon-thumbs-down"></i>
+						{% endif%}
+						{% if stock.current > stock.ma50 and stock.ma50 > stock.ma200 %}
+						<i class="icon-star"></i>
+						{% elif stock.current > stock.ma50 %}
+						<i class="icon-arrow-up"></i>
+						{% elif stock.current > stock.ma200 %}
+						<i class="icon-thumbs-up"></i>
+						{% endif%}
 					</div>
 				</div>
 			{%endfor%}

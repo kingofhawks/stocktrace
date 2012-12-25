@@ -4,6 +4,9 @@ Created on 2011-3-7
 @author: simon
 '''
 import logging
+from stocktrace.util import slf4p
+
+logger = slf4p.getLogger(__name__)
 
 def parseMarket():
     from lxml import etree
@@ -187,11 +190,18 @@ def downloadQuoteList(save=False,parseSse=False,stockList='stock_list'):
         #parse from local text file from newone export
         from stocktrace.parse.stockparser import parseAll
         quotes = parseAll(stockList)
-    if save:
+    
+    #filter those already discovered
+    from stocktrace.redis.redisservice import filterStocksByList2
+    quotes = filterStocksByList2(quotes,stockList)
+    
+    if save and len(quotes)!= 0:
         from stocktrace.dao.stockdao import batchInsertTicker
         batchInsertTicker(quotes)
-
-    logging.info('*****Securities List download finished******')
+        logger.info('*****Securities List download finished:'+str(len(quotes)))
+    else:
+        logger.info('*****Securities List download finished without update')
+    
     return quotes
 
     #print stock

@@ -19,6 +19,8 @@ def download(clearAll= False,downloadLatest = False,downloadHistory = False,stoc
     from stocktrace.parse.sseparser import downloadQuoteList
     from stocktrace.parse.reutersparser import downloadKeyStatDatas
     from stocktrace.parse.sinaparser import downloadLatestData
+    from stocktrace.parse.ifengparser import parseIndustry
+    from stocktrace.redis.redisservice import findStocksByList
     
     logger.info('***Start download finance data****')
     
@@ -26,20 +28,22 @@ def download(clearAll= False,downloadLatest = False,downloadHistory = False,stoc
         #clear redis cache
         redclient.flushall()
         clear();
+    #download industry info from ifeng
+    parseIndustry()
     
-    #download securities list from sse
+    #download securities list from local
     downloadQuoteList(True,False,stockList)
     
-    #load stock list to redis
-    for stockList in settings.ALL_LIST:
-        loadStockListToRedis(stockList)
+    #load stock list to redis zset
+    loadStockListToRedis(stockList)
     
     #download statistics from reuters        
     if settings.DOWNLOAD_KEY_STAT:
         downloadKeyStatDatas()
         
-    quotes = findAllExistentTickers()
-    
+    #quotes = findAllExistentTickers()
+    #find from redis cache
+    quotes = findStocksByList(stockList)
     #update latest price from yahoo or sina
     #Seems YQL API is not stable,tables often to be locked
     if downloadLatest:

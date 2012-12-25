@@ -65,7 +65,10 @@ def parseFinanceData(code):
          
         return stock   
     
-def parseIndustry(code):
+def parseIndustry():
+    industrySet = redclient.zrange(settings.INDUSTRY_SET,0,-1)
+    if (len(industrySet)!= 0):
+        return
     from lxml import etree
     from lxml.html import parse
     url = 'http://app.finance.ifeng.com/list/all_stock_cate.php?s=1'
