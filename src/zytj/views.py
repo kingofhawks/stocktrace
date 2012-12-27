@@ -174,48 +174,62 @@ def descendinglist(request):
     return listall(request,settings.LOWER)
 
 def listall(request,condition):
-    q = request.GET.get('q')
-    industry = request.GET.get('industry')
-    if industry is None:
-        industry = 'all'
-    print 'industry:'+industry
+    dest = 'screen_year_low_high.html'
+    
+    c = request.GET.get('c')
+    print c
     
     if condition == settings.HIGHER:
-        topn = findTopN(settings.PAGING_TOTAL);
-        dest = 'alist.html'
-        context = 'alist'
         orderByAlist = True
     else:
-        topn = findTopN(settings.PAGING_TOTAL,settings.LOWER);
-        dest = 'dlist.html'
-        context = 'dlist'
         orderByAlist = False
-    
-    dest = 'screen_year_low_high.html'
-        
-    from stocktrace.redis.redisservice import filterStocksByIndustry,filterStocksByList  
-    #filter stocks by industry  
-    topn = filterStocksByIndustry(topn,industry)
-    
-    stockList = request.GET.get('list')
-    if stockList is None:
-        stockList = settings.STOCK_LIST_ALL
-    print 'stockList:'+stockList
-    #filter stocks by stock list  
-    topn = filterStocksByList(topn,stockList)    
-    
-    if q is None:
-        results = topn[0:settings.PAGING_ITEM]
+            
+    if c is not None:
+        results = []
+        from stocktrace.dao.stockdao import findQuoteByCode
+        stock = findQuoteByCode(c,condition)
+        print stock.yearHighLow()
+        results.append(stock)
+        return render(request,dest,{'results':results,'orderByAlist':orderByAlist})
     else:
-        results = topn[settings.PAGING_ITEM*(int(q)-1):settings.PAGING_ITEM*int(q)]
+        q = request.GET.get('q')
+        industry = request.GET.get('industry')
+        if industry is None:
+            industry = 'all'
+        print 'industry:'+industry
         
-    #print len(results)
-    industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)    
-    
-    
-    return render(request,dest,{'results':results,'industry':industry,'industry_set':industries,
-                                'lists':settings.ALL_LIST,'stockList':stockList,
-                                'context':context,'orderByAlist':orderByAlist})
+        if condition == settings.HIGHER:
+            topn = findTopN(settings.PAGING_TOTAL);
+            context = 'alist'            
+        else:
+            topn = findTopN(settings.PAGING_TOTAL,settings.LOWER);
+            context = 'dlist'         
+        
+        
+            
+        from stocktrace.redis.redisservice import filterStocksByIndustry,filterStocksByList  
+        #filter stocks by industry  
+        topn = filterStocksByIndustry(topn,industry)
+        
+        stockList = request.GET.get('list')
+        if stockList is None:
+            stockList = settings.STOCK_LIST_ALL
+        print 'stockList:'+stockList
+        #filter stocks by stock list  
+        topn = filterStocksByList(topn,stockList)    
+        
+        if q is None:
+            results = topn[0:settings.PAGING_ITEM]
+        else:
+            results = topn[settings.PAGING_ITEM*(int(q)-1):settings.PAGING_ITEM*int(q)]
+            
+        #print len(results)
+        industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)    
+        
+        
+        return render(request,dest,{'results':results,'industry':industry,'industry_set':industries,
+                                    'lists':settings.ALL_LIST,'stockList':stockList,
+                                    'context':context,'orderByAlist':orderByAlist})
 
 #ascending list during last days by MA
 def alist_days_ma(request,days):

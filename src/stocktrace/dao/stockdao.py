@@ -579,10 +579,36 @@ def findTopN(top=20,condition=settings.HIGHER):
 #        #print stock.yearHighLow()
 #        print stock
 
+
+#find quote by code     
+def findQuoteByCode(code,condition=settings.HIGHER):
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.tickers
+    stock = historyDatas.find_one({"code":code});
+    code = stock.get('code')
+    s = Stock(code)
+
+    if condition == settings.HIGHER:
+        s.PercentChangeFromYearLow = stock.get('percentFromYearLow')
+    else:
+        s.PercentChangeFromYearHigh = stock.get('percentFromYearHigh')
+    s.yearHigh = stock.get('yearHigh')
+    s.yearLow = stock.get('yearLow')
+    s.current = stock.get('current')
+    s.ma50 = stock.get('ma50')
+    s.ma200 = stock.get('ma200')
+    if code.startswith('6'):
+        s.isInSh = True;            
+    
+    return s
+
     
 if __name__ == '__main__':
     from stocktrace.stock import Stock
     stock = Stock('600880')
+    print findQuoteByCode('600327').yearHighLow()
+    print findQuoteByCode('600327',settings.LOWER).yearHighLow()
     #findAllNonExistentTickers()
     #updateTickerWithKeyStats('600004',14.00,2.36,0.56,2333.5)
 #    stocks = findAllExistentTickers()
