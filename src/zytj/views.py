@@ -248,8 +248,9 @@ def alist_days(request,days):
     return render(request,'alist_days.html',{'results':result})
 
 def quotes(request):
-    data = ["ActionScript", "AppleScript", "Asp","JAVA"];
-    jsonData = simplejson.dumps(data)
+    from stocktrace.dao.stockdao import findAllQuotes
+    quotes = findAllQuotes()
+    jsonData = simplejson.dumps(quotes)
     
     return HttpResponse(jsonData, mimetype='application/json')
 

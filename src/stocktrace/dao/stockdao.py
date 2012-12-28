@@ -344,6 +344,17 @@ def findAllExistentTickers():
         result.add(stock['code'])
     return result
 
+#find all quotes list
+def findAllQuotes():
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.tickers
+    cursor = historyDatas.find();
+    result = []
+    for stock in cursor:
+        result.append(stock['code'])
+    return result
+
 
 #Define market PE as mid PE of all stocks
 def getMarketPe():
