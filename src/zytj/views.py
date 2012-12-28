@@ -20,6 +20,7 @@ def index(request):
       ["06/09/2009", 136.01, 139.5, 134.53, 139.48],
       ['06/08/2009', 143.82, 144.56, 136.04, 136.97],      
     ];
+    
     return render(request,'index.html',
                   {'ohlc':ohlc})   
     
@@ -226,7 +227,6 @@ def listall(request,condition):
         #print len(results)
         industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)    
         
-        
         return render(request,dest,{'results':results,'industry':industry,'industry_set':industries,
                                     'lists':settings.ALL_LIST,'stockList':stockList,
                                     'context':context,'orderByAlist':orderByAlist})
@@ -246,6 +246,12 @@ def alist_days(request,days):
     print result
     print '**************************'
     return render(request,'alist_days.html',{'results':result})
+
+def quotes(request):
+    data = ["ActionScript", "AppleScript", "Asp","JAVA"];
+    jsonData = simplejson.dumps(data)
+    
+    return HttpResponse(jsonData, mimetype='application/json')
 
 
 

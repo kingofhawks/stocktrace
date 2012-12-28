@@ -15,10 +15,11 @@ urlpatterns = patterns('',
     url(r'^zytj/jsonnhnl', 'zytj.views.jsonnhnl'),
     url(r'^zytj/nhnl', 'zytj.views.nhnl'),  
     url(r'^zytj/ma', 'zytj.views.ma'),
-    url(r'^zytj/alist/(\d{2})/$', 'zytj.views.alist_days'),#asc by days
+    url(r'^zytj/alist/ma/(\d{2})/$', 'zytj.views.alist_days_ma'),#asc by days on MA
+    url(r'^zytj/alist/(\d{2})/$', 'zytj.views.alist_days'),#asc by days on MA
     url(r'^zytj/alist', 'zytj.views.ascendinglist'),  #asc from year low
     url(r'^zytj/dlist', 'zytj.views.descendinglist'), #des from year high
-    
+    url(r'^zytj/quotes', 'zytj.views.quotes'),#show all quotes
     
     # url(r'^$', 'stocktrace.views.home', name='home'),
     # url(r'^stocktrace/', include('stocktrace.foo.urls')),
