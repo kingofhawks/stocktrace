@@ -91,9 +91,23 @@
 	    function( newElements ) {
 	      $container.isotope( 'appended', $( newElements ) ); 
 	    }
-	  );		
+	  );
+		
+		$("#code").keyup(function(event){
+			//Enter key up event
+		    if(event.keyCode == 13){
+		        $("#code").click();
+		    }
+		});
 
 });
+		
+		function searchCode() {
+			var code = $('#code').val();
+		    if (code !=""){
+		     	window.location = "http://127.0.0.1:8000/zytj/alist?c="+code;
+		    }
+		}
 		</script>
 		
 	</head>
@@ -126,7 +140,7 @@
     			</select>    			
 			</ul>
 			<ul>
-				<input type="text" class="typeahead">				
+				<input type="text" class="typeahead" id="code" onclick="searchCode();">				
 			</ul>
 		</div>
 		
