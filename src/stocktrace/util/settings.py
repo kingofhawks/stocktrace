@@ -33,3 +33,5 @@ PAGING_TOTAL = 10000
 #redis
 REDIS_SERVER = '172.25.21.85'
 INDUSTRY_SET = 'industry'
+
+APP_ROOT = 'G:\Dropbox\Workspace\stocktrace'

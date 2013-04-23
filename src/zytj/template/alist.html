@@ -101,9 +101,13 @@
 			    {%endfor%}
     			</select>    			
 			</ul>
+			
+			<ul>
+				<input type="text" data-provide="typeahead">				
+			</ul>
 		</div>
 		
-		<div id="content">			
+		<div id="content">		
 			{% for stock in results%}
 			    <div class="box cat2 cat3" >
 					<h2 class="box-title"><a href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" title ="<html>High:{{stock.yearHigh}}<br>Low:{{stock.yearLow}}<br>MA50:{{stock.ma50}}<br>MA200:{{stock.ma200}}<br></html>">{{stock.code}}</a></h2>

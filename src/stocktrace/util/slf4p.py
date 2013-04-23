@@ -3,8 +3,8 @@ Created on 2012-9-20
 logging wrapper class
 @author: Simon
 '''
-import logging,os
-log_dir = os.path.join('E:\Dropbox\Workspace\stocktrace', "log")
+import logging,os,settings
+log_dir = os.path.join(settings.APP_ROOT, "log")
 log_name = os.path.join(log_dir, "stocktrace.log")
 
 logging.basicConfig(filename=log_name, level=logging.DEBUG,

@@ -20,7 +20,6 @@ import logging
 
 #parse stock statistics data from reuters finance
 def downloadKeyStatDatas(quotes = findAllExistentTickers()):
-    from dao.stockdao import findAllExistentTickers
     quotes = findAllExistentTickers();
     for quote in quotes:
         parseKeyStatData(quote)
@@ -30,9 +29,10 @@ def downloadKeyStatDatas(quotes = findAllExistentTickers()):
 #parse stock statistics data from reuters finance
 def parseKeyStatData(code):        
     url ='http://cn.reuters.com/investing/quotes/quote?symbol='+str(code)+".SS"  
+    print url
     page = parse(url).getroot()
     result = etree.tostring(page)
-#    print result
+    print result
     r = page.xpath('//div[@class="primaryContent2"]');
     #print 'div length'+str(len(r))
     statisticsDiv= etree.ElementTree(r[1])  
@@ -66,8 +66,8 @@ def parseKeyStatData(code):
                     
 if __name__ == '__main__':
 #    stocks = ['600327','600739','600573','600583','600718','600827','601111','601866','600880']
-    #parseKeyStatData('600327')
-    downloadKeyStatDatas()
+    parseKeyStatData('600327')
+    #downloadKeyStatDatas()
 #    stocks = findAllExistentTickers()
 #    for stock in stocks:
 #       parseKeyStatData(stock)

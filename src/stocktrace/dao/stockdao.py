@@ -8,13 +8,13 @@ from datetime import date
 from datetime import timedelta
 from datetime import datetime
 from stocktrace.util import slf4p,settings
-from stocktrace.memcache.cache import Cache 
+#from stocktrace.memcache.cache import Cache 
 from pymongo import Connection 
-from memorised.decorators import memorise
+#from memorised.decorators import memorise
 from stocktrace.stock import Stock
     
 connection = Connection()      
-cache = Cache() 
+#cache = Cache() 
 logger = slf4p.getLogger(__name__)
     
 def insertStock():

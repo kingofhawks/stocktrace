@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Isotope Tutorial2</title>
+		
+		<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
+		<script type="text/javascript" src="../static/js/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="../static/js/isotope.js"></script>
+		<script type="text/javascript" src="../static/js/jquery.infinitescroll.js"></script>
+		
+		<script type="text/javascript">
+		
+		$(document).ready(function(){			
+		var $container = $('#content');
+		$container.isotope({
+			filter: '*',
+			animationOptions: {
+		     duration: 750,
+		     easing: 'linear',
+		     queue: false,
+		   }
+		});
+
+
+		$container.infinitescroll({
+		    navSelector  : "a#next:last",    // selector for the paged navigation 
+		    nextSelector : "a#next:last",  // selector for the NEXT link (to page 2)
+		    itemSelector : "div.cat2",     // selector for all items you'll retrieve
+		    debug: true,
+		    dataType: 'html'
+		    },
+	    // call Isotope as a callback
+	    function( newElements ) {
+	      $container.isotope( 'appended', $( newElements ) ); 
+	    }
+	  );		
+
+});
+		</script>
+		
+	</head>
+	
+	<body>
+		<div id="header"></div>
+
+		<a id="next" href="alist/?q=2" >next page?</a>
+		<div id="nav">
+			<ul>
+				<li><a href="/zytj/alist" data-filter=".cat1">Ascending from Year Low</a></li>
+				<li><a href="/zytj/dlist" data-filter=".cat2">Descending from Year High</a></li>
+			</ul>
+		</div>
+		
+		<div id="content">			
+			{% for stock in results%}
+			    <div class="box cat2 cat3" >
+					<h2 class="box-title"><a href="/zytj/candle/{{stock}}" data-filter=".cat1">{{stock}}</a></h2>
+				</div>
+			{%endfor%}
+		
+		</div>
+	</body>
+</html>

@@ -7,10 +7,10 @@ import sys, traceback
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
-from stock import Stock
+from stocktrace.stock import Stock
 from lxml import etree
 from lxml.html import parse
-from dao.stockdao import *
+from stocktrace.dao.stockdao import *
 from lxml import etree
 from lxml.html import parse
 import io    
