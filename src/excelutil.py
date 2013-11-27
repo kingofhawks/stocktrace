@@ -105,7 +105,12 @@ def getPhoneDataBySheet(excelProxy,sheet):
 	print phones
     return phones,missings
    
-   
+def convertListToText(phones):
+	result = ''
+	for entry in phones:
+		result = result+entry+','
+	return result   
+
 if __name__ == '__main__':
 	from easyExcel import EasyExcel	
 	import os,sys
@@ -122,6 +127,7 @@ if __name__ == '__main__':
 	for missing in result[1]:
 		print missing
 	#print directory
+	print convertListToText(result[0])
 	excelProxy.close()
 	
 
