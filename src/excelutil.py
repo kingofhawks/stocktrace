@@ -69,6 +69,43 @@ def getStockDataBySheet(excelProxy,sheet):
 	#close the Excel file
 	#excelProxy.close()
 	return directory
+
+def getPhoneDataBySheet(excelProxy,sheet):
+    print "***********Excel Sheet******",sheet
+    line = 2000
+               
+    content = excelProxy.getRange(sheet,4,1,line,5) 
+    #print len(content)
+#    print content        
+#    print content[2][0] 
+#    print content[2][1] 
+#    print content[2][0] 
+#    print content[2][1]
+    
+    phones = []
+    missings = []
+    for line in content:
+    	#print line
+    	print line[0]
+    	print line[1]
+    	print line[2]
+    	if line[0] is None:
+    		break
+    	missing = True
+    	if (line[1] is not None and (len(line[1]) == 11)):
+    		phones.append(line[1])
+    		missing = False
+    	if (line[2] is not None and (len(line[2]) == 11)):
+    		phones.append(line[2])
+    		missing = False
+    	#continue
+    	if missing:
+    		missings.append(line[0])
+        
+	print phones
+    return phones,missings
+   
+   
 if __name__ == '__main__':
 	from easyExcel import EasyExcel	
 	import os,sys
@@ -77,10 +114,13 @@ if __name__ == '__main__':
 	path = root +'\\test.xls'	
 	excelProxy = EasyExcel(path)
 	for sheets in excelProxy.getAllSheets():
-		#print sheets.name
-		directory = getStockDataBySheet(excelProxy,sheets.name)
-		for trade in directory.values():
-			print trade
+		print sheets.name
+		result = getPhoneDataBySheet(excelProxy,sheets.name)
+	print len(result[0])
+	print result[0]
+	print result[1]
+	for missing in result[1]:
+		print missing
 	#print directory
 	excelProxy.close()
 	
