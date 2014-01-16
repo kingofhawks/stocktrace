@@ -29,7 +29,10 @@ def filterStocksByList(stocks,stockList):
     if (stockList is None):
         return stocks
     result = []
-    stocksInRedis = redclient.zrange(stockList,0,-1)
+    try:
+        stocksInRedis = redclient.zrange(stockList,0,-1)
+    except:
+        return stocks
     if (len(stocksInRedis) == 0):
         return stocks
     for stock in stocks:

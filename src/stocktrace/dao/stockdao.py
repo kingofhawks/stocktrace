@@ -113,7 +113,8 @@ def findLastStockByDays(code,lastDays):
     key = str(code)+'_'+str(lastDays)
     print key
     try:
-        result = cache.get(key)
+        #result = cache.get(key)
+        result = None
     except:
         import sys, traceback
         traceback.print_exc(file=sys.stdout)

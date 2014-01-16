@@ -51,7 +51,7 @@ def download(clearAll= False,downloadLatest = False,downloadHistory = False,stoc
         
     if downloadHistory:
         #download history data from yahoo
-        downloadHistoryData(quotes,engine = settings.YAHOO)
+        downloadHistoryData(quotes,engine = settings.CSV_ENGINE)
     
     logger.info('***Finish download finance data****')
 
