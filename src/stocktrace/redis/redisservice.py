@@ -10,7 +10,7 @@ from stocktrace.util import slf4p
 from stocktrace.util import settings
 
 logger = slf4p.getLogger(__name__)
-redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
+# redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
 
 def filterStocksByIndustry(stocks,industry):
     if (industry is None or industry.find('all')!= -1):
@@ -29,11 +29,12 @@ def filterStocksByList(stocks,stockList):
     if (stockList is None):
         return stocks
     result = []
-    try:
-        stocksInRedis = redclient.zrange(stockList,0,-1)
-    except:
-        return stocks
-    if (len(stocksInRedis) == 0):
+    stocksInRedis = None
+    # try:
+    #     stocksInRedis = redclient.zrange(stockList,0,-1)
+    # except:
+    #     return stocks
+    if (stocksInRedis is None or len(stocksInRedis) == 0):
         return stocks
     for stock in stocks:
         if any(stock.code in s for s in stocksInRedis):

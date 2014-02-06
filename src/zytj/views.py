@@ -8,8 +8,9 @@ from django.http import Http404
 from stocktrace.util import settings
 from stocktrace.dao.stockdao import findTopN
 import redis
+from django.core.cache import cache
 
-redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
+# redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
 
 
 def index(request):
@@ -176,6 +177,9 @@ def descendinglist(request):
 
 def listall(request,condition):
     dest = 'screen_year_low_high.html'
+
+    cache.set('my_key', 'hello, world!', 30)
+    print cache.get('my_key')
     
     c = request.GET.get('c')
     print c
@@ -216,8 +220,14 @@ def listall(request,condition):
         if stockList is None:
             stockList = settings.STOCK_LIST_ALL
         print 'stockList:'+stockList
-        #filter stocks by stock list  
-        topn = filterStocksByList(topn,stockList)    
+        #filter stocks by stock list
+        import time
+        start = time.clock()
+        topn = filterStocksByList(topn,stockList)
+        finish = time.clock()
+        print finish-start
+        import timeit
+        print timeit.timeit('char in text', setup='text = "sample string"; char = "g"')
         
         if q is None:
             results = topn[0:settings.PAGING_ITEM]
@@ -225,10 +235,11 @@ def listall(request,condition):
             results = topn[settings.PAGING_ITEM*(int(q)-1):settings.PAGING_ITEM*int(q)]
             
         #print len(results)
-        try:
-            industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)
-        except:
-            industries = []
+        industries = []
+        # try:
+        #     industries = redclient.zrange(settings.INDUSTRY_SET,0,-1)
+        # except:
+        #     industries = []
         
         return render(request,dest,{'results':results,'industry':industry,'industry_set':industries,
                                     'lists':settings.ALL_LIST,'stockList':stockList,
