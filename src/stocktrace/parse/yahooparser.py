@@ -305,7 +305,8 @@ def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01'
     
 def downloadHistorialData(code,save = True,beginDate = '2012-01-01',engine=settings.CSV_ENGINE):
     try:
-        latest= redclient.get(code)
+        #latest= redclient.get(code)
+        latest = None
         today = date.today()
         yesterday = date.today()+timedelta(-1)
         if latest == str(today) or latest == str(yesterday):
@@ -316,6 +317,7 @@ def downloadHistorialData(code,save = True,beginDate = '2012-01-01',engine=setti
             getHistorialData(code, save, beginDate)            
                                             
     except:
+        traceback.print_exc(file=sys.stdout)
         logger.warn('Fail to download history data for:'+code)
         traceback.print_exc(file=sys.stdout) 
         
