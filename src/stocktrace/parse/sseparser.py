@@ -193,7 +193,7 @@ def downloadQuoteList(save=False,parseSse=False,stockList='stock_list'):
     
     #filter those already discovered
     from stocktrace.redis.redisservice import filterStocksByList2
-    quotes = filterStocksByList2(quotes,stockList)
+    # quotes = filterStocksByList2(quotes,stockList)
     
     if save and len(quotes)!= 0:
         from stocktrace.dao.stockdao import batchInsertTicker

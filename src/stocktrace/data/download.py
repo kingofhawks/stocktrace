@@ -9,11 +9,11 @@ from stocktrace.util import slf4p
 import redis
 
 logger = slf4p.getLogger(__name__)
-redclient = redis.StrictRedis(host= settings.REDIS_SERVER, port=6379, db=0)
+# redclient = redis.StrictRedis(host= settings.REDIS_SERVER, port=6379, db=0)
 
 #download all history data
 #default will download all history data incrementally
-def download(clearAll= False,downloadLatest = False,downloadHistory = False,stockList='stock_list_all'):
+def download(clearAll= False,downloadLatest = False,downloadHistory = False,parse_industry = False,stockList='stock_list_all'):
     from stocktrace.parse.yahooparser import downloadHistoryData
     from stocktrace.dao.stockdao import clear,findAllExistentTickers
     from stocktrace.parse.sseparser import downloadQuoteList
@@ -26,10 +26,11 @@ def download(clearAll= False,downloadLatest = False,downloadHistory = False,stoc
     
     if clearAll:
         #clear redis cache
-        redclient.flushall()
+        # redclient.flushall()
         clear();
     #download industry info from ifeng
-    parseIndustry()
+    if parse_industry:
+        parseIndustry()
     
     #download securities list from local
     downloadQuoteList(True,False,stockList)
@@ -43,7 +44,8 @@ def download(clearAll= False,downloadLatest = False,downloadHistory = False,stoc
         
     #quotes = findAllExistentTickers()
     #find from redis cache
-    quotes = findStocksByList(stockList)
+    # quotes = findStocksByList(stockList)
+    quotes = stockList
     #update latest price from yahoo or sina
     #Seems YQL API is not stable,tables often to be locked
     if downloadLatest:
@@ -76,5 +78,5 @@ def loadStockListToRedis(stockList):
                     print l; 
                     continue
                 
-                redclient.zadd(stockList,1.1,code)               
+                # redclient.zadd(stockList,1.1,code)
     pass
