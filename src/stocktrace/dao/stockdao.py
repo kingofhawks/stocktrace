@@ -89,6 +89,50 @@ def findStockByCode(code):
     historyDatas = db.stock_history
     return historyDatas.find({"code":code}).sort([("date",pymongo.DESCENDING)]);
 
+
+def find_week52_history(code):
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.stock_history
+    delta = timedelta(-52*7)
+    begin = date.today()+delta
+    return historyDatas.find({"code":code,"date" : {"$gte":str(begin)}}).sort([("date",pymongo.DESCENDING)]);
+
+
+def update_week52(code):
+    connection = Connection()
+    db = connection.stock
+    ticker = db.tickers
+    import pandas as pd
+    result = find_week52_history(code)
+    logger.debug(result)
+    df = pd.DataFrame(list(result))
+    logger.debug(df)
+    logger.debug(df.shape)
+    logger.debug(df['low'].min())
+    logger.debug(df['low'].argmin())
+    logger.debug(df['high'].max())
+    high_week52_index = df['high'].argmax()
+    low_week52_index = df['low'].argmin()
+    logger.debug(high_week52_index)
+    logger.debug(df[['date','high']][high_week52_index:high_week52_index+1])
+    logger.debug(df[['date','low']][low_week52_index:low_week52_index+1])
+    # print ticker.update({"code":stock},
+    # {"$set":{"yearHigh":df['high'].max(),"yearLow":df['low'].min(),"percentFromYearHigh":percentFromYearHigh,"percentFromYearLow":percentFromYearLow}},
+    # upsert=True,safe=True)
+    year_high = df['high'].max()
+    year_low = df['low'].min()
+    last_update = findLastUpdate(code)
+    current = last_update['close']
+    logger.debug(current)
+    percentFromYearHigh = (current-year_high)/year_high
+    percentFromYearLow = (current-year_low)/year_low
+    print ticker.update({"code":code},
+    {"$set":{"yearHigh":year_high,"yearLow":year_low,"percentFromYearHigh":percentFromYearHigh,"percentFromYearLow":percentFromYearLow}},
+    upsert=True,safe=True)
+
+
+
 def countByCode(code):
     connection = Connection()
     db = connection.stock
