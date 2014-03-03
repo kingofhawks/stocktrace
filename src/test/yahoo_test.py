@@ -7,26 +7,28 @@ from stocktrace.util import slf4p
 logger = slf4p.getLogger(__name__)
 
 class TestSequenceFunctions(unittest.TestCase):
-    def test_poll_ydn(self):
-        parseFinanceData('600327')
+    code = '600583'
 
-    def test_yahoo(self):
-        downloadHistorialData('600327',True)
+    def test_poll_ydn(self):
+        parseFinanceData(self.code)
+
+    def test_yahoo_csv(self):
+        downloadHistorialData(self.code,True)
 
     def test_week52(self):
-        history = find_week52_history('600327')
+        history = find_week52_history(self.code)
         logger.debug(history)
         logger.debug(history.count())
         # for h in history:
         #     logger.debug(h)
 
     def test_update_week52(self):
-        update_week52('600327')
+        update_week52(self.code)
 
     def test_pandas(self):
         import pandas as pd
         # result = findStockByCode('600327')
-        result = find_week52_history('600327')
+        result = find_week52_history(self.code)
         logger.debug(result)
         df = pd.DataFrame(list(result))
         logger.debug(df)
