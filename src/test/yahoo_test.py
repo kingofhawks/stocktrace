@@ -7,7 +7,7 @@ from stocktrace.util import slf4p
 logger = slf4p.getLogger(__name__)
 
 class TestSequenceFunctions(unittest.TestCase):
-    code = '600583'
+    code = '600327'
 
     def test_poll_ydn(self):
         parseFinanceData(self.code)

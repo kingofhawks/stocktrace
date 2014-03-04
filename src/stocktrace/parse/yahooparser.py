@@ -306,15 +306,23 @@ def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01'
 def downloadHistorialData(code,save = True,beginDate = '2012-01-01',engine=settings.CSV_ENGINE):
     try:
         #latest= redclient.get(code)
-        latest = None
+        latest = beginDate
+        last_update = findLastUpdate(code)
+        if last_update is not None:
+            latest = last_update['date']
+        # latest = None
         today = date.today()
         yesterday = date.today()+timedelta(-1)
-        if latest == str(today) or latest == str(yesterday):
-            logger.info(code+" is already update to latest")                     
-        elif engine == settings.CSV_ENGINE:
-            getCSVHistorialData(code,save,beginDate)
+        if latest is None:
+            latest = beginDate
+        elif latest == str(today) or latest == str(yesterday):
+            logger.info(code+" is already update to latest")
+            return
+
+        if engine == settings.CSV_ENGINE:
+            getCSVHistorialData(code,save,latest)
         else:
-            getHistorialData(code, save, beginDate)            
+            getHistorialData(code, save, latest)
                                             
     except:
         traceback.print_exc(file=sys.stdout)
@@ -383,6 +391,7 @@ def getCSVHistorialData(code,save = True,beginDate = '',endDate = str(date.today
     if (len(historyDatas) == 0):
         logger.warning("No data downloaded for "+code)
     else:
+        update_week52(code)
         logger.info(str(len(historyDatas))+" history Data downloaded for "+code)
         
        

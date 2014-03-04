@@ -42,10 +42,11 @@ def download(clearAll= False,downloadLatest = False,downloadHistory = False,pars
     if settings.DOWNLOAD_KEY_STAT:
         downloadKeyStatDatas()
         
-    #quotes = findAllExistentTickers()
+    quotes = findAllExistentTickers()
     #find from redis cache
     # quotes = findStocksByList(stockList)
-    quotes = stockList
+    # quotes = stockList
+    logger.debug(quotes)
     #update latest price from yahoo or sina
     #Seems YQL API is not stable,tables often to be locked
     if downloadLatest:

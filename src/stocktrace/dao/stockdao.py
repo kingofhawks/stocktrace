@@ -125,7 +125,7 @@ def update_week52(code):
     last_update = findLastUpdate(code)
     current = last_update['close']
     logger.debug(current)
-    percentFromYearHigh = (current-year_high)*100/year_high
+    percentFromYearHigh = (year_high-current)*100/year_high
     percentFromYearLow = (current-year_low)*100/year_low
     print ticker.update({"code":code},
     {"$set":{"yearHigh":year_high,"yearLow":year_low,"percentFromYearHigh":percentFromYearHigh,"percentFromYearLow":percentFromYearLow}},
