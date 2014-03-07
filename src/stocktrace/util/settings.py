@@ -4,6 +4,7 @@ Created on 2012-9-19
 @author: Simon
 '''
 YAHOO = "yahoo"
+SINA = 'sina'
 CSV_ENGINE = "csv"
 STOCK_LIST_ALL='stock_list_all'
 STOCK_LIST_HOLD='stock_list_hold'
@@ -34,4 +35,4 @@ PAGING_TOTAL = 10000
 REDIS_SERVER = '192.168.192.128'
 INDUSTRY_SET = 'industry'
 
-APP_ROOT = 'G:\Dropbox\Workspace\stocktrace'
+#APP_ROOT = 'G:\Dropbox\Workspace\stocktrace'

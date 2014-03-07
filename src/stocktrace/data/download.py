@@ -50,7 +50,7 @@ def download(clearAll= False,downloadLatest = False,downloadHistory = False,pars
     #update latest price from yahoo or sina
     #Seems YQL API is not stable,tables often to be locked
     if downloadLatest:
-        downloadLatestData(quotes,settings.YAHOO)
+        downloadLatestData(quotes,engine = settings.SINA)
         
     if downloadHistory:
         #download history data from yahoo

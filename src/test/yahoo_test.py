@@ -4,6 +4,7 @@ from stocktrace import settings
 from stocktrace.parse.yahooparser import downloadHistorialData
 from stocktrace.dao.stockdao import findAllQuotes,findStockByCode,find_week52_history,update_week52
 from stocktrace.util import slf4p
+from stocktrace.parse.sinaparser import update
 logger = slf4p.getLogger(__name__)
 
 class TestSequenceFunctions(unittest.TestCase):
@@ -24,6 +25,11 @@ class TestSequenceFunctions(unittest.TestCase):
 
     def test_update_week52(self):
         update_week52(self.code)
+
+
+    def test_yahoo(self):
+        update(self.code,engine='sina')
+
 
     def test_pandas(self):
         import pandas as pd

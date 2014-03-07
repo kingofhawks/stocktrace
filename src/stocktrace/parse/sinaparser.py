@@ -32,7 +32,9 @@ def getStock(code):
     low = float(test[5])
     volume = float(test[8])
     percent = (current-yesterday)/yesterday*100
+    name = test[0]
     stock = Stock(code,current,percent,low,high,volume)
+    stock.name = str(name)
     
     #check threshold
     if (current == 0.0):
@@ -129,7 +131,7 @@ def update(code,engine='sina'):
         
     if quote is not None:
             from stocktrace.dao.stockdao import updateTickerToLatestPrice
-            updateTickerToLatestPrice(code,quote.close,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow,quote.PercebtChangeFromYearHigh,quote.PercentChangeFromYearLow)                       
+            updateTickerToLatestPrice(code,quote.close,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow,quote.PercentChangeFromYearHigh,quote.PercentChangeFromYearLow,quote.name)
             
 if __name__ =="__main__":    
     import time, os, sys, sched

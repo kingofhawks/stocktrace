@@ -110,7 +110,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    'G:/Dropbox/Workspace/stocktrace/src/zytj/template'
+    #'G:/Dropbox/Workspace/stocktrace/src/zytj/template'
+    os.path.join(os.path.abspath(os.path.join(PROJECT_DIR, os.pardir)), "zytj","template")
 )
 
 INSTALLED_APPS = (
@@ -160,6 +161,6 @@ LOGGING = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'my_cache_table',
+        'LOCATION': 'my_cache_table', #python manage.py createcachetable my_cache_table
     }
 }

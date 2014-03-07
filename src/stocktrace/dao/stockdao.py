@@ -351,12 +351,13 @@ def updateTickerWithKeyStats(stock,eps,bookingValue,marketCap = 0):
      #,"marketCap":marketCap}
     
 #Update ticker with latest price
-def updateTickerToLatestPrice(stock,current,ma50=0.0,ma200=0.0,yearHigh=0.0,yearLow=0.0,percentFromYearHigh=0.0,percentFromYearLow=0.0):
+def updateTickerToLatestPrice(stock,current,ma50=0.0,ma200=0.0,yearHigh=0.0,yearLow=0.0,percentFromYearHigh=0.0,percentFromYearLow=0.0,name = ''):
     connection = Connection()
     db = connection.stock
     ticker = db.tickers
     print ticker.update({"code":stock},
-    {"$set":{"current":current,"ma50":ma50,"ma200":ma200,"yearHigh":yearHigh,"yearLow":yearLow,"percentFromYearHigh":percentFromYearHigh,"percentFromYearLow":percentFromYearLow}}, 
+    {"$set":{"current":current,"ma50":ma50,"ma200":ma200,"yearHigh":yearHigh,"yearLow":yearLow,
+             "percentFromYearHigh":percentFromYearHigh,"percentFromYearLow":percentFromYearLow,"name":name}},
     upsert=True,safe=True)
     
 #save non-existent tickers,may change according to IPO
