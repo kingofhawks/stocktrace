@@ -32,9 +32,15 @@ def getStock(code):
     low = float(test[5])
     volume = float(test[8])
     percent = (current-yesterday)/yesterday*100
-    name = test[0]
+    name = test[0].split('"')[1]
+    # logger.debug(name)
+    # logger.debug(str(name))
+    enc = "gbk"
+    u_content = name.decode(enc) # decodes from enc to unicode
+    utf8_name = u_content.encode("utf8")
+    logger.debug(utf8_name)
     stock = Stock(code,current,percent,low,high,volume)
-    stock.name = str(name)
+    stock.name = utf8_name
     
     #check threshold
     if (current == 0.0):
