@@ -14,6 +14,7 @@ class TestSequenceFunctions(unittest.TestCase):
     def test_sina(self):
         update(self.code,engine='sina')
 
+
     def test_download(self):
         from stocktrace.data.download import download
         from stocktrace.util import settings

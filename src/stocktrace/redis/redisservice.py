@@ -36,6 +36,7 @@ def filterStocksByList(stocks,stockList):
     #     return stocks
     if (stocksInRedis is None or len(stocksInRedis) == 0):
         return stocks
+
     for stock in stocks:
         if any(stock.code in s for s in stocksInRedis):
             logger.debug(str(stock.code)+' in '+stockList)

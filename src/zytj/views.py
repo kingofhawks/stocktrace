@@ -9,7 +9,9 @@ from stocktrace.util import settings
 from stocktrace.dao.stockdao import findTopN
 import redis
 from django.core.cache import cache
+from stocktrace.util import slf4p
 
+logger = slf4p.getLogger(__name__)
 # redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
 
 
@@ -219,7 +221,7 @@ def listall(request,condition):
         stockList = request.GET.get('list')
         if stockList is None:
             stockList = settings.STOCK_LIST_ALL
-        print 'stockList:'+stockList
+        logger.debug('stockList:'+stockList)
         #filter stocks by stock list
         import time
         start = time.clock()
@@ -233,7 +235,10 @@ def listall(request,condition):
             results = topn[0:settings.PAGING_ITEM]
         else:
             results = topn[settings.PAGING_ITEM*(int(q)-1):settings.PAGING_ITEM*int(q)]
-            
+
+        logger.debug(results)
+        for s in results:
+            logger.debug(s)
         #print len(results)
         industries = []
         # try:
