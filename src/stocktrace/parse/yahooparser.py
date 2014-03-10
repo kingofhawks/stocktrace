@@ -170,7 +170,7 @@ def getHistorialData(code,save = True,beginDate = '',endDate = str(date.today())
 #    else:
 #        url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22'+code2+'%22%20and%20startDate%20%3D%20%22'+beginDate+'%22%20and%20endDate%20%3D%20%22'+endDate+'%22&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'
     url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22'+code2+'%22%20and%20startDate%20%3D%20%22'+beginDate+'%22%20and%20endDate%20%3D%20%22'+endDate+'%22&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys'    
-    print url
+    logger.debug(url)
     
     #check whether data is update to latest
     #from stocktrace.dao.stockdao import findLastUpdate
@@ -324,8 +324,9 @@ def downloadHistorialData(code,save = True,beginDate = '2012-01-01',engine=setti
         else:
             getHistorialData(code, save, latest)
                                             
-    except:
+    except Exception, e:
         traceback.print_exc(file=sys.stdout)
+        logger.exception(e)
         logger.warn('Fail to download history data for:'+code)
         traceback.print_exc(file=sys.stdout) 
         
@@ -347,7 +348,7 @@ def getCSVHistorialData(code,save = True,beginDate = '',endDate = str(date.today
     end = endDate.split('-')
     period = '&d='+(str)(int(end[1])-1)+'&e='+end[2]+'&f='+end[0]+'&a='+(str)(int(begin[1])-1)+'&b='+begin[2]+'&c='+begin[0]    
     url = 'http://ichart.finance.yahoo.com/table.csv?s='+code2+period
-    print url  
+    logger.debug(url)
     
     #check whether data is update to latest
     #from stocktrace.dao.stockdao import findLastUpdate
@@ -356,6 +357,7 @@ def getCSVHistorialData(code,save = True,beginDate = '',endDate = str(date.today
     oldestStock = findOldestUpdate(code)
             
     page = parse(url).getroot()
+    logger.debug(page)
     result = etree.tostring(page)
     #print result
     lines = result.split('\n')

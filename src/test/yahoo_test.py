@@ -9,12 +9,21 @@ logger = slf4p.getLogger(__name__)
 
 class TestSequenceFunctions(unittest.TestCase):
     code = '600327'
+    # 601318
 
     def test_poll_ydn(self):
-        parseFinanceData(self.code)
+        downloadHistorialData(self.code,True,engine = 'ydn')
 
     def test_yahoo_csv(self):
         downloadHistorialData(self.code,True)
+
+    def test_yahoo_csv2(self):
+        url = 'http://ichart.finance.yahoo.com/table.csv?s=601318.SS&d=2&e=08&f=2014&a=0&b=01&c=2012'
+        import requests
+        r = requests.get(url)
+        r.status_code
+        logger.debug(r.text)
+        # downloadHistorialData(self.code,True)
 
     def test_week52(self):
         history = find_week52_history(self.code)
