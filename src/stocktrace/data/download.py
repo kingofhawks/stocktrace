@@ -76,7 +76,7 @@ def loadStockListToRedis(stockList):
                 elif (len(l) == 6):
                     code = l;                   
                 else :
-                    print l; 
+                    logger.debug(l);
                     continue
                 
                 # redclient.zadd(stockList,1.1,code)

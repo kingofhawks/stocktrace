@@ -235,7 +235,7 @@ def getHistorialData(code,save = True,beginDate = '',endDate = str(date.today())
         print "No data downloaded for "+code
     else:
         logger.info(str(len(historyDatas))+" history Data downloaded for "+code)
-        redclient.set(code,historyDatas[0].date)
+        # redclient.set(code,historyDatas[0].date)
         
 #    for stock in historyDatas:
 #        print stock 
@@ -310,6 +310,7 @@ def downloadHistorialData(code,save = True,beginDate = '2012-01-01',engine=setti
         last_update = findLastUpdate(code)
         if last_update is not None:
             latest = last_update['date']
+        logger.debug(latest)
         # latest = None
         today = date.today()
         yesterday = date.today()+timedelta(-1)

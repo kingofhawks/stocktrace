@@ -15,6 +15,7 @@ def getStock(code):
     if (code.startswith('60')):
         code = 'sh'+code
     url = "http://hq.sinajs.cn/list="+code
+    logger.debug(url)
     #Google Finance API
     #url = 'http://finance.google.com/finance/info?q=600030'    
     import urllib2,os,sys    
@@ -24,7 +25,7 @@ def getStock(code):
     #print cont
     test = cont.split(',')
     if (len(test) <9):
-        print 'error passe:'+code
+        logger.error('error passe:'+code)
         return 
     yesterday = float(test[2])
     current = float(test[3])
@@ -33,7 +34,7 @@ def getStock(code):
     volume = float(test[8])
     percent = (current-yesterday)/yesterday*100
     name = test[0].split('"')[1]
-    # logger.debug(name)
+    logger.debug(name)
     # logger.debug(str(name))
     enc = "gbk"
     u_content = name.decode(enc) # decodes from enc to unicode
@@ -69,7 +70,9 @@ def getStock(code):
         pass
     else:
         stock.alert = False;
-        
+
+    logger.info( '****Download latest price from SINA finished****'+stock.code)
+    logger.info(stock)
     return stock
     
     #print '%.2f'%percent+'%'   
@@ -113,8 +116,9 @@ def getMyStock(codes = ['sh600327','sh600600','sh601111','sh600221','sh600583','
 
 #download latest price info from sina
 def downloadLatestData(quotes = findAllExistentTickers(),engine='sina'):
+    logger.info( '****Begin Download latest price from SINA****'+str(len(quotes)))
     import multiprocessing as mp
-    pool = mp.Pool(5)
+    pool = mp.Pool(len(quotes))
     
     for code in quotes: 
         update(code,engine)
@@ -122,22 +126,23 @@ def downloadLatestData(quotes = findAllExistentTickers(),engine='sina'):
     
     pool.close()
     pool.join()        
-    logging.info( '****Download latest price from sina finished****')
+    logger.info( '****Download latest price from sina finished****')
         
 
 def update(code,engine='sina'):
     if engine == 'sina':
             quote = getStock(code)
-            print quote
     elif engine == 'yahoo':
             from stocktrace.parse.yahooparser import parseFinanceData
             quote = parseFinanceData(code)            
     if (code.startswith('sh')):
             code = code.replace('sh','')
-        
+
+    logger.debug(quote)
     if quote is not None:
             from stocktrace.dao.stockdao import updateTickerToLatestPrice
-            updateTickerToLatestPrice(code,quote.close,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow,quote.PercentChangeFromYearHigh,quote.PercentChangeFromYearLow,quote.name)
+            # updateTickerToLatestPrice(code,quote.close,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow,quote.PercentChangeFromYearHigh,quote.PercentChangeFromYearLow,quote.name)
+            updateTickerToLatestPrice(code,quote.current,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow,quote.PercentChangeFromYearHigh,quote.PercentChangeFromYearLow,quote.name)
             
 if __name__ =="__main__":    
     import time, os, sys, sched

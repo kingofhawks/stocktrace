@@ -355,10 +355,11 @@ def updateTickerToLatestPrice(stock,current,ma50=0.0,ma200=0.0,yearHigh=0.0,year
     connection = Connection()
     db = connection.stock
     ticker = db.tickers
-    print ticker.update({"code":stock},
+    logger.info('current:'+str(current))
+    logger.info(ticker.update({"code":stock},
     {"$set":{"current":current,"ma50":ma50,"ma200":ma200,"yearHigh":yearHigh,"yearLow":yearLow,
              "percentFromYearHigh":percentFromYearHigh,"percentFromYearLow":percentFromYearLow,"name":name}},
-    upsert=True,safe=True)
+    upsert=True,safe=True))
     
 #save non-existent tickers,may change according to IPO
 def saveNonExistentTicker(stock):

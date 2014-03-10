@@ -11,6 +11,15 @@ class TestSequenceFunctions(unittest.TestCase):
     code = '600327'
     # 601318
 
+    def test_sina(self):
+        update(self.code,engine='sina')
+
+    def test_download(self):
+        from stocktrace.data.download import download
+        from stocktrace.util import settings
+        download(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_HOLD);
+
+
     def test_poll_ydn(self):
         downloadHistorialData(self.code,True,engine = 'ydn')
 
