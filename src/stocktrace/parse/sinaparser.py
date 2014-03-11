@@ -14,6 +14,8 @@ def getStock(code):
     #Sina API
     if (code.startswith('60')):
         code = 'sh'+code
+    else:
+        code = 'sz'+code
     url = "http://hq.sinajs.cn/list="+code
     logger.debug(url)
     #Google Finance API

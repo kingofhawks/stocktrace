@@ -8,16 +8,25 @@ from stocktrace.parse.sinaparser import update
 logger = slf4p.getLogger(__name__)
 
 class TestSequenceFunctions(unittest.TestCase):
-    code = '600327'
+    code = '000563'
     # 601318
 
-    def test_sina(self):
+    def test_sina_latest(self):
         update(self.code,engine='sina')
+
+    def test_ydn_latest(self):
+        update(self.code,engine='yahoo')
 
     def test_download(self):
         from stocktrace.data.download import download
         from stocktrace.util import settings
         download(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_HOLD);
+
+
+    def test_download2(self):
+        from stocktrace.data.download import download
+        from stocktrace.util import settings
+        download(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_TOP100);
 
 
     def test_poll_ydn(self):
