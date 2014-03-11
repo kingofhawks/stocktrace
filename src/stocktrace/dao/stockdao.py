@@ -625,6 +625,8 @@ def findTopN(top=20,condition=settings.HIGHER):
         s.current = stock.get('current')
         s.ma50 = stock.get('ma50')
         s.ma200 = stock.get('ma200')
+        s.name = stock.get('name')
+
         if code.startswith('6'):
             s.isInSh = True;
         

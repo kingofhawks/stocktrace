@@ -15,9 +15,7 @@ class TestSequenceFunctions(unittest.TestCase):
         update(self.code,engine='sina')
 
     def test_ydn_latest(self):
-        update(self.code,engine='yahoo')
-
-    def test_download(self):
+        update(self.code,engine='yahoo')    def test_download(self):
         from stocktrace.data.download import download
         from stocktrace.util import settings
         download(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_HOLD);
