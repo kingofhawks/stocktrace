@@ -136,7 +136,7 @@ def parseFinanceData(code):
         stock.yearHigh = float(yearHigh)
         stock.yearLow = float(yearLow)
         #stock.PercebtChangeFromYearHigh = float(PercebtChangeFromYearHigh.rstrip('%'))
-        stock.PercebtChangeFromYearHigh = float(PercebtChangeFromYearHigh.lstrip('-').rstrip('%'))  
+        stock.PercentChangeFromYearHigh = float(PercebtChangeFromYearHigh.lstrip('-').rstrip('%'))
         stock.PercentChangeFromYearLow = float(PercentChangeFromYearLow.lstrip('+').rstrip('%'))        
         stock.ma50 = float(FiftydayMovingAverage)
         stock.ma200 = float(TwoHundreddayMovingAverage)
