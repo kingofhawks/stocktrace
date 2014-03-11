@@ -68,7 +68,8 @@
 	    }
 	  );
 		
-		$("a").click(function() {
+		$("#300104").click(function() {
+              console.log('hello')
 			  alert("Handler for .click() called.");
 		});
 
@@ -116,8 +117,7 @@
 			    <div class="box cat2 cat3" >
 					<h2 class="box-title"><a id="{{stock.code}}" href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" title ="<html>High:{{stock.yearHigh}}<br>Low:{{stock.yearLow}}<br>MA50:{{stock.ma50}}<br>MA200:{{stock.ma200}}<br></html>">{{stock.code}}</a></h2>
 					<div class="box-text">
-                        {{stock.name}}
-						{{stock.current}}
+						{{stock.name}}
 						+{{stock.PercentChangeFromYearLow}}% 
 						{% if stock.isInSh %}
 						<a href="http://finance.sina.com.cn/realstock/company/sh{{stock.code}}/nc.shtml">Sina</a>
