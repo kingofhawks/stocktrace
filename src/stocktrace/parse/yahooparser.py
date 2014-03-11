@@ -298,15 +298,15 @@ def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01'
     import multiprocessing as mp
     pool = mp.Pool(5)
     for stock in stocks:
-        pool.apply_async(downloadHistorialData, args = [str(stock),True,beginDate,engine])
+        pool.apply_async(download_history_data, args = [str(stock),True,beginDate,engine])
     pool.close()
     pool.join()
     
     
-def downloadHistorialData(code,save = True,beginDate = '2012-01-01',engine=settings.CSV_ENGINE):
+def download_history_data(code, save=True, begin_date='2012-01-01', engine=settings.CSV_ENGINE):
     try:
         #latest= redclient.get(code)
-        latest = beginDate
+        latest = begin_date
         last_update = findLastUpdate(code)
         if last_update is not None:
             latest = last_update['date']
@@ -315,7 +315,7 @@ def downloadHistorialData(code,save = True,beginDate = '2012-01-01',engine=setti
         today = date.today()
         yesterday = date.today()+timedelta(-1)
         if latest is None:
-            latest = beginDate
+            latest = begin_date
         elif latest == str(today) or latest == str(yesterday):
             logger.info(code+" is already update to latest")
             return

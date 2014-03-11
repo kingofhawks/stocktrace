@@ -5,11 +5,28 @@ Created on 2012-9-19
 '''
 #import logging
 from stocktrace.util import settings
+from stocktrace.dao.stockdao import clear,findAllExistentTickers
+from stocktrace.stock import Stock
 from stocktrace.util import slf4p
 import redis
 
 logger = slf4p.getLogger(__name__)
 # redclient = redis.StrictRedis(host= settings.REDIS_SERVER, port=6379, db=0)
+
+
+def download2(clearAll= False,downloadLatest = False,downloadHistory = False,parse_industry = False,stockList='stock_list_all'):
+    quotes = findAllExistentTickers()
+    logger.info( '****Begin Download latest price from SINA****'+str(len(quotes)))
+    import multiprocessing as mp
+    pool = mp.Pool(len(quotes))
+
+    for code in quotes:
+        s = Stock(code)
+        pool.apply_async(s.download(), args = [str(code),])
+
+    pool.close()
+    pool.join()
+    logger.info( '****Download latest price from sina finished****')
 
 #download all history data
 #default will download all history data incrementally

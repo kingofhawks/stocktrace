@@ -45,9 +45,9 @@ class ParseTest(unittest.TestCase):
 #        print r.get('foo')
         
     def testDownload(self):
-        from stocktrace.parse.yahooparser import downloadHistorialData
+        from stocktrace.parse.yahooparser import download_history_data
         from stocktrace.util import settings
-        downloadHistorialData('600327',engine =  settings.CSV_ENGINE)
+        download_history_data('600327',engine =  settings.CSV_ENGINE)
         from datetime import date
         from datetime import timedelta
         print date.today()

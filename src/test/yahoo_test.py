@@ -1,21 +1,33 @@
 import unittest
 from stocktrace.parse.yahooparser import parseFinanceData
 from stocktrace import settings
-from stocktrace.parse.yahooparser import downloadHistorialData
+from stocktrace.parse.yahooparser import download_history_data
 from stocktrace.dao.stockdao import findAllQuotes,findStockByCode,find_week52_history,update_week52
 from stocktrace.util import slf4p
 from stocktrace.parse.sinaparser import update
+from stocktrace.stock import Stock
+
 logger = slf4p.getLogger(__name__)
 
 class TestSequenceFunctions(unittest.TestCase):
-    code = '000563'
+    code = '600583'
+    sh = Stock('600327')
+    sz = Stock('000563')
     # 601318
+
+    def test_download_sh(self):
+        self.sh.download()
+
+    def test_download_sz(self):
+        self.sz.download()
 
     def test_sina_latest(self):
         update(self.code,engine='sina')
 
     def test_ydn_latest(self):
-        update(self.code,engine='yahoo')    def test_download(self):
+        update(self.code,engine='yahoo')
+
+    def test_download(self):
         from stocktrace.data.download import download
         from stocktrace.util import settings
         download(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_HOLD);
@@ -27,11 +39,17 @@ class TestSequenceFunctions(unittest.TestCase):
         download(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_TOP100);
 
 
+    def test_download3(self):
+        from stocktrace.data.download import download2
+        from stocktrace.util import settings
+        download2(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_HOLD);
+
+
     def test_poll_ydn(self):
-        downloadHistorialData(self.code,True,engine = 'ydn')
+        download_history_data(self.code,True,engine = 'ydn')
 
     def test_yahoo_csv(self):
-        downloadHistorialData(self.code,True)
+        download_history_data(self.code,True)
 
     def test_yahoo_csv2(self):
         url = 'http://ichart.finance.yahoo.com/table.csv?s=601318.SS&d=2&e=08&f=2014&a=0&b=01&c=2012'

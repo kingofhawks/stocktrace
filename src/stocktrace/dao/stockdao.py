@@ -380,6 +380,7 @@ def findAllNonExistentTickers():
         result.add(stock['code'])
     return result
 
+
 def findAllExistentTickers():
     connection = Connection()
     db = connection.stock
