@@ -2,10 +2,10 @@ import unittest
 from stocktrace.parse.yahooparser import parseFinanceData
 from stocktrace import settings
 from stocktrace.parse.yahooparser import download_history_data
-from stocktrace.dao.stockdao import findAllQuotes,findStockByCode,find_week52_history,update_week52
+from stocktrace.dao.stockdao import findAllQuotes,findStockByCode,find_week52_history,update_week52,remove_stock
 from stocktrace.util import slf4p
 from stocktrace.parse.sinaparser import update
-from stocktrace.stock import Stock
+from stocktrace.stock import Stock,download_stock
 
 logger = slf4p.getLogger(__name__)
 
@@ -18,11 +18,14 @@ class TestSequenceFunctions(unittest.TestCase):
     def test_print_stock(self):
         print self.sh
 
+    def test_remove_stock(self):
+        remove_stock(self.sh.code)
+
     def test_download_sh(self):
-        self.sh.download()
+        download_stock(self.sh)
 
     def test_download_sz(self):
-        self.sz.download()
+        download_stock(self.sh)
 
     def test_sina_latest(self):
         update(self.code,engine='sina')

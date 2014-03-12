@@ -497,6 +497,14 @@ def clear():
     logger.info('********All history finance data cleared***********')
     pass
 
+#Remove stock data
+def remove_stock(code):
+    connection = Connection()
+    db = connection.stock
+    db.stock_history.remove({"code": code})
+    db.tickers.remove({"code": code})
+    logger.info('Stock {} data is cleared.'.format(code))
+
 #return True if always higher or lower than MA during last days
 def checkStockWithMA(code,lastDays=10,ma=10,condition=settings.HIGHER):
     result = True;
