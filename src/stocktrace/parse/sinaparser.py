@@ -74,7 +74,7 @@ def getStock(code):
         stock.alert = False;
 
     logger.info( '****Download latest price from SINA finished****'+stock.code)
-    logger.info(stock)
+    #logger.info(stock)
     return stock
     
     #print '%.2f'%percent+'%'   
@@ -140,7 +140,7 @@ def update(code,engine='sina'):
     if (code.startswith('sh')):
             code = code.replace('sh','')
 
-    logger.debug(quote)
+    #logger.debug(quote)
     if quote is not None:
             from stocktrace.dao.stockdao import updateTickerToLatestPrice
             # updateTickerToLatestPrice(code,quote.close,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow,quote.PercentChangeFromYearHigh,quote.PercentChangeFromYearLow,quote.name)

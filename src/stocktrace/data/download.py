@@ -6,7 +6,7 @@ Created on 2012-9-19
 #import logging
 from stocktrace.util import settings
 from stocktrace.dao.stockdao import clear,findAllExistentTickers
-from stocktrace.stock import Stock
+from stocktrace.stock import Stock,download_stock
 from stocktrace.util import slf4p
 import redis
 
@@ -22,7 +22,7 @@ def download2(clearAll= False,downloadLatest = False,downloadHistory = False,par
 
     for code in quotes:
         s = Stock(code)
-        pool.apply_async(s.download(), args = [str(code),])
+        pool.apply_async(download_stock, args = [s,])
 
     pool.close()
     pool.join()

@@ -79,26 +79,27 @@ class Stock:
             self.pb = self.current/float(self.mgjzc)
         self.rank = self.pe * self.pb
 
-    def download(self, download_latest=True, realtime_engine=settings.SINA, download_history=True,
-                 history_engine=settings.CSV_ENGINE, download_statistics=False):
-        logger.info('Start download finance data:{}'.format(self.code))
 
-        #download statistics from reuters
-        if download_statistics:
-            from stocktrace.parse.reutersparser import downloadKeyStatDatas
-            downloadKeyStatDatas()
+def download_stock(stock, download_latest=True, realtime_engine=settings.SINA, download_history=True,
+             history_engine=settings.CSV_ENGINE, download_statistics=False):
+    logger.info('Start download finance data:{}'.format(stock.code))
 
-        #update latest price from yahoo or sina
-        #Seems YQL API is not stable,tables often to be locked
-        if download_latest:
-            from stocktrace.parse.sinaparser import update
-            update(self.code,realtime_engine)
+    #download statistics from reuters
+    if download_statistics:
+        from stocktrace.parse.reutersparser import downloadKeyStatDatas
+        downloadKeyStatDatas()
 
-        if download_history:
-        #    #download history data from yahoo CSV or YDN
-            from stocktrace.parse.yahooparser import download_history_data
-            download_history_data(self.code, save=True, begin_date='2012-01-01')
+    #update latest price from yahoo or sina
+    #Seems YQL API is not stable,tables often to be locked
+    if download_latest:
+        from stocktrace.parse.sinaparser import update
+        update(stock.code,realtime_engine)
 
-        logger.info('Finish download finance data:{}'.format(self.code))
+    if download_history:
+    #    #download history data from yahoo CSV or YDN
+        from stocktrace.parse.yahooparser import download_history_data
+        download_history_data(stock.code, save=True, begin_date='2012-01-01')
+
+    logger.info('Finish download finance data:{}'.format(stock.code))
 
 

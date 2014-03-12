@@ -15,6 +15,9 @@ class TestSequenceFunctions(unittest.TestCase):
     sz = Stock('000563')
     # 601318
 
+    def test_print_stock(self):
+        print self.sh
+
     def test_download_sh(self):
         self.sh.download()
 
