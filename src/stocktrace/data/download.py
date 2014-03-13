@@ -8,6 +8,8 @@ from stocktrace.util import settings
 from stocktrace.dao.stockdao import clear,findAllExistentTickers
 from stocktrace.stock import Stock,download_stock
 from stocktrace.util import slf4p
+from stocktrace.parse.sseparser import downloadQuoteList
+
 import redis
 
 logger = slf4p.getLogger(__name__)
@@ -15,8 +17,16 @@ logger = slf4p.getLogger(__name__)
 
 
 def download2(clearAll= False,downloadLatest = False,downloadHistory = False,parse_industry = False,stockList='stock_list_all'):
+    logger.info( 'Begin Download stock list data {}'.format(stockList))
+    if clearAll:
+        #clear redis cache
+        # redclient.flushall()
+        clear();
+
+    #download securities list from local
+    downloadQuoteList(True,False,stockList)
     quotes = findAllExistentTickers()
-    logger.info( '****Begin Download latest price from SINA****'+str(len(quotes)))
+
     import multiprocessing as mp
     pool = mp.Pool(len(quotes))
 
@@ -33,7 +43,6 @@ def download2(clearAll= False,downloadLatest = False,downloadHistory = False,par
 def download(clearAll= False,downloadLatest = False,downloadHistory = False,parse_industry = False,stockList='stock_list_all'):
     from stocktrace.parse.yahooparser import downloadHistoryData
     from stocktrace.dao.stockdao import clear,findAllExistentTickers
-    from stocktrace.parse.sseparser import downloadQuoteList
     from stocktrace.parse.reutersparser import downloadKeyStatDatas
     from stocktrace.parse.sinaparser import downloadLatestData
     from stocktrace.parse.ifengparser import parseIndustry

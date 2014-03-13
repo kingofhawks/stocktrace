@@ -238,7 +238,7 @@ def listall(request,condition):
 
         logger.debug(results)
         for s in results:
-            logger.debug(s)
+            logger.debug(s.name)
         #print len(results)
         industries = []
         # try:

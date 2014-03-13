@@ -108,6 +108,11 @@
 		     	window.location = "http://127.0.0.1:8000/zytj/alist?c="+code;
 		    }
 		}
+
+        //$("#next").click(function() {
+          //    console.log('hello')
+			//  alert("Handler for .click() called.");
+		//});
 		</script>
 		
 	</head>
@@ -150,6 +155,7 @@
 			    <div class="box cat2 cat3" >
 					<h2 class="box-title"><a href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" title ="<html>High:{{stock.yearHigh}}<br>Low:{{stock.yearLow}}<br>MA50:{{stock.ma50}}<br>MA200:{{stock.ma200}}<br></html>">{{stock.code}}</a></h2>
 					<div class="box-text">
+                        {{stock.name}}
 						{{stock.current}}
 						{% if orderByAlist %}
 						+{{stock.PercentChangeFromYearLow}}% 
