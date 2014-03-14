@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^zytj/alist', 'zytj.views.ascendinglist'),  #asc from year low
     url(r'^zytj/dlist', 'zytj.views.descendinglist'), #des from year high
     url(r'^zytj/quotes', 'zytj.views.quotes'),#show all quotes
+    url(r'^zytj/delete', 'zytj.views.delete_stock'),#delete stock
     
     # url(r'^$', 'stocktrace.views.home', name='home'),
     # url(r'^stocktrace/', include('stocktrace.foo.urls')),

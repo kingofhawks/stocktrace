@@ -6,10 +6,11 @@ from django.utils import simplejson
 from django.http import HttpResponse
 from django.http import Http404
 from stocktrace.util import settings
-from stocktrace.dao.stockdao import findTopN
+from stocktrace.dao.stockdao import findTopN,remove_stock
 import redis
 from django.core.cache import cache
 from stocktrace.util import slf4p
+import json
 
 logger = slf4p.getLogger(__name__)
 # redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
@@ -272,6 +273,13 @@ def quotes(request):
     jsonData = simplejson.dumps(quotes)
     
     return HttpResponse(jsonData, mimetype='application/json')
+
+
+def delete_stock(request):
+    code = request.GET.get('code')
+    logger.info('Remove stock:{}'.format(code))
+    remove_stock(code)
+    return HttpResponse(json.dumps('OK'), mimetype='application/json')
 
 
 

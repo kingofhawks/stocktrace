@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="../static/css/style.css">
 		<link rel="stylesheet" href="../static/css/bootstrap.css">
 		<link rel="stylesheet" href="../static/js/chosen/chosen.css" />
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 		<script type="text/javascript" src="../static/js/jquery-1.8.2.min.js"></script>
 		<script type="text/javascript" src="../static/bootstrap/js/bootstrap.min.js"></script>		
 		<script type="text/javascript" src="../static/js/isotope.js"></script>
@@ -113,6 +114,21 @@
           //    console.log('hello')
 			//  alert("Handler for .click() called.");
 		//});
+
+        //event handler for dynamically created icons
+        $(document).on("click", ".fa", function(event) {
+            //console.log($(this))
+            //console.log(event)
+            var target = $(event.target);
+            //console.log(text)
+            var code = target[0].title
+            //console.log(code)
+        $.get( "delete", {code: code},function( data ) {
+            console.log(data)
+            console.log('ok')
+            location.reload(true);
+        });
+        });
 		</script>
 		
 	</head>
@@ -153,7 +169,10 @@
 				
 			{% for stock in results%}
 			    <div class="box cat2 cat3" >
-					<h2 class="box-title"><a href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" title ="<html>High:{{stock.yearHigh}}<br>Low:{{stock.yearLow}}<br>MA50:{{stock.ma50}}<br>MA200:{{stock.ma200}}<br></html>">{{stock.code}}</a></h2>
+					<h2 class="box-title">
+                        <a href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" title ="<html>High:{{stock.yearHigh}}<br>Low:{{stock.yearLow}}<br>MA50:{{stock.ma50}}<br>MA200:{{stock.ma200}}<br></html>">{{stock.code}}</a>
+                        <div style="float:right"><i class="fa fa-minus-square" id="{{stock.code}}" title="{{stock.code}}"></i></div>
+                    </h2>
 					<div class="box-text">
                         {{stock.name}}
 						{{stock.current}}
