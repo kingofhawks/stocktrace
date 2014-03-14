@@ -16,7 +16,7 @@ logger = slf4p.getLogger(__name__)
 # redclient = redis.StrictRedis(host= settings.REDIS_SERVER, port=6379, db=0)
 
 
-def download2(clearAll= False,downloadLatest = False,downloadHistory = False,parse_industry = False,stockList='stock_list_all'):
+def download2(clearAll= False,download_latest = False,downloadHistory = False,parse_industry = False,stockList='stock_list_all'):
     logger.info( 'Begin Download stock list data {}'.format(stockList))
     if clearAll:
         #clear redis cache
@@ -32,7 +32,8 @@ def download2(clearAll= False,downloadLatest = False,downloadHistory = False,par
 
     for code in quotes:
         s = Stock(code)
-        pool.apply_async(download_stock, args = [s,])
+        pool.apply_async(download_stock, args = [s,download_latest, settings.SINA, True,
+             settings.CSV_ENGINE, False])
 
     pool.close()
     pool.join()

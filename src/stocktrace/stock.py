@@ -100,6 +100,10 @@ def download_stock(stock, download_latest=True, realtime_engine=settings.SINA, d
         from stocktrace.parse.yahooparser import download_history_data
         download_history_data(stock.code, save=True, begin_date='2012-01-01')
 
+    if realtime_engine==settings.SINA and history_engine==settings.CSV_ENGINE:
+        from stocktrace.dao.stockdao import update_week52
+        update_week52(stock.code)
+
     logger.info('Finish download finance data:{}'.format(stock.code))
 
 

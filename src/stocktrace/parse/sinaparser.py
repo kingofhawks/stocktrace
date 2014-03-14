@@ -3,7 +3,7 @@
 import thread,logging
 from stocktrace.dao.stockdao import findAllExistentTickers
 from stocktrace.stock import Stock
-from stocktrace.util import slf4p
+from stocktrace.util import slf4p,settings
 
 logger = slf4p.getLogger(__name__)
 
@@ -131,10 +131,10 @@ def downloadLatestData(quotes = findAllExistentTickers(),engine='sina'):
     logger.info( '****Download latest price from sina finished****')
         
 
-def update(code,engine='sina'):
-    if engine == 'sina':
+def update(code,engine=settings.SINA):
+    if engine == settings.SINA:
             quote = getStock(code)
-    elif engine == 'yahoo':
+    elif engine == settings.YAHOO:
             from stocktrace.parse.yahooparser import parseFinanceData
             quote = parseFinanceData(code)            
     if (code.startswith('sh')):

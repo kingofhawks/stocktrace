@@ -394,7 +394,7 @@ def getCSVHistorialData(code,save = True,beginDate = '',endDate = str(date.today
     if (len(historyDatas) == 0):
         logger.warning("No data downloaded for "+code)
     else:
-        update_week52(code)
+        # update_week52(code)
         logger.info(str(len(historyDatas))+" history Data downloaded for "+code)
         
        

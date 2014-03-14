@@ -1,9 +1,8 @@
 import unittest
 from stocktrace.parse.yahooparser import parseFinanceData
-from stocktrace import settings
 from stocktrace.parse.yahooparser import download_history_data
 from stocktrace.dao.stockdao import findAllQuotes,findStockByCode,find_week52_history,update_week52,remove_stock
-from stocktrace.util import slf4p
+from stocktrace.util import slf4p,settings
 from stocktrace.parse.sinaparser import update
 from stocktrace.stock import Stock,download_stock
 
@@ -22,16 +21,23 @@ class TestSequenceFunctions(unittest.TestCase):
         remove_stock(self.sh.code)
 
     def test_download_sh(self):
-        download_stock(self.sh)
+        download_stock(self.sh,download_latest=True, realtime_engine=settings.SINA, download_history=True,
+             history_engine=settings.CSV_ENGINE, download_statistics=False)
 
     def test_download_sz(self):
-        download_stock(self.sh)
+        download_stock(self.sz,download_latest=True, realtime_engine=settings.YAHOO, download_history=True,
+             history_engine=settings.YAHOO, download_statistics=False)
 
     def test_sina_latest(self):
         update(self.code,engine='sina')
 
     def test_ydn_latest(self):
         update(self.code,engine='yahoo')
+
+    def test_re_download(self):
+        from stocktrace.data.download import download2
+        from stocktrace.util import settings
+        download2(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_HOLD);
 
     def test_download(self):
         from stocktrace.data.download import download
@@ -45,10 +51,7 @@ class TestSequenceFunctions(unittest.TestCase):
         download(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_TOP100);
 
 
-    def test_download3(self):
-        from stocktrace.data.download import download2
-        from stocktrace.util import settings
-        download2(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_HOLD);
+
 
 
     def test_poll_ydn(self):
