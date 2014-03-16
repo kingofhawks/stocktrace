@@ -355,7 +355,7 @@ def updateTickerToLatestPrice(stock,current,ma50=0.0,ma200=0.0,yearHigh=0.0,year
     connection = Connection()
     db = connection.stock
     ticker = db.tickers
-    logger.info('current:'+str(current))
+    logger.info('{} current:{} yearLow:{} yearHigh:{} percentFromYearLow:{} percentFromYearHigh:{}'.format(stock,current,yearLow,yearHigh,percentFromYearLow,percentFromYearHigh))
     logger.info(ticker.update({"code":stock},
     {"$set":{"current":current,"ma50":ma50,"ma200":ma200,"yearHigh":yearHigh,"yearLow":yearLow,
              "percentFromYearHigh":percentFromYearHigh,"percentFromYearLow":percentFromYearLow,"name":name}},

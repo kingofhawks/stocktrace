@@ -93,14 +93,14 @@ def download_stock(stock, download_latest=True, realtime_engine=settings.SINA, d
     #Seems YQL API is not stable,tables often to be locked
     if download_latest:
         from stocktrace.parse.sinaparser import update
-        update(stock.code,realtime_engine)
+        update(stock.code, realtime_engine)
 
     if download_history:
     #    #download history data from yahoo CSV or YDN
         from stocktrace.parse.yahooparser import download_history_data
         download_history_data(stock.code, save=True, begin_date='2012-01-01')
 
-    if realtime_engine==settings.SINA and history_engine==settings.CSV_ENGINE:
+    if realtime_engine == settings.SINA and history_engine == settings.CSV_ENGINE:
         from stocktrace.dao.stockdao import update_week52
         update_week52(stock.code)
 
