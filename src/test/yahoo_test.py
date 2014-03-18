@@ -99,3 +99,10 @@ class TestSequenceFunctions(unittest.TestCase):
         logger.debug(high_week52_index)
         logger.debug(df[['date','high']][high_week52_index:high_week52_index+1])
         logger.debug(df[['date','low']][low_week52_index:low_week52_index+1])
+
+
+    def test_tasks(self):
+        from stocktrace.task.tasks import add
+        result = add.delay(4,4)
+        print result
+        print (result.get())
