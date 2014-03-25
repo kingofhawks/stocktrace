@@ -45,7 +45,7 @@ class TestSequenceFunctions(unittest.TestCase):
         download(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_HOLD);
 
 
-    def test_download2(self):
+    def test_download_top100(self):
         from stocktrace.data.download import download
         from stocktrace.util import settings
         download(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_TOP100);

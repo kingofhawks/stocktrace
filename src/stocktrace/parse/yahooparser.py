@@ -116,7 +116,7 @@ def parseFinanceData(code):
         #print page.xpath('//ask[1]/text()')[0]#both works
         
         yearLow = page.xpath('//yearlow[1]/text()')[0]
-        print 'yearLow'+yearLow
+        logger.debug('yearLow'+yearLow)
         yearHigh = page.xpath('//yearhigh[1]/text()')[0]
         print 'yearHigh'+yearHigh
         PercentChangeFromYearLow = page.xpath('//percentchangefromyearlow[1]/text()')[0]
@@ -131,7 +131,10 @@ def parseFinanceData(code):
         print 'PercentChangeFromTwoHundreddayMovingAverage'+PercentChangeFromTwoHundreddayMovingAverage
         PercentChangeFromFiftydayMovingAverage = page.xpath('//percentchangefromfiftydaymovingaverage[1]/text()')[0]
         print 'PercentChangeFromFiftydayMovingAverage'+PercentChangeFromFiftydayMovingAverage
-        
+        logger.debug(page.xpath('//DaysLow[1]/text()'))
+        LastTradePriceOnly = page.xpath('//lasttradepriceonly[1]/text()')[0]
+
+
         stock = Stock(code)
         stock.yearHigh = float(yearHigh)
         stock.yearLow = float(yearLow)
@@ -140,15 +143,19 @@ def parseFinanceData(code):
         stock.PercentChangeFromYearLow = float(PercentChangeFromYearLow.lstrip('+').rstrip('%'))        
         stock.ma50 = float(FiftydayMovingAverage)
         stock.ma200 = float(TwoHundreddayMovingAverage)
+        if LastTradePriceOnly is not None:
+            logger.debug("{} current: {}".format(code,LastTradePriceOnly))
+            stock.current = float(LastTradePriceOnly)
         close = page.xpath('//bid')[0].text;
-        
+
         if close is not None:
             stock.close = float(close)
-             
+
         return stock  
-    except:
+    except Exception as ex:
         logger.error('Fail to download latest update from yahoo API:'+code)
-        traceback.print_exc(file=sys.stdout) 
+        traceback.print_exc(file=sys.stdout)
+        logger.exception(ex)
         return None 
 
 #get history data from yahoo finance API 

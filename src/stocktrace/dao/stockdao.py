@@ -672,6 +672,13 @@ def findQuoteByCode(code,condition=settings.HIGHER):
     
     return s
 
+#find top N quotes by Price Volatility from yearHigh
+def find_topn_high(top=20):
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.tickers
+    return historyDatas.find().sort([("percentFromYearHigh",pymongo.DESCENDING)]).limit(top);
+
     
 if __name__ == '__main__':
     from stocktrace.stock import Stock
