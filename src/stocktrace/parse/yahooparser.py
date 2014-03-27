@@ -335,7 +335,7 @@ def download_history_data(code, save=True, begin_date='2012-01-01', engine=setti
     except Exception, e:
         traceback.print_exc(file=sys.stdout)
         logger.exception(e)
-        logger.warn('Fail to download history data for:'+code)
+        logger.error('Fail to download history data for:'+code)
         traceback.print_exc(file=sys.stdout) 
         
         

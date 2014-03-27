@@ -5,13 +5,14 @@ from stocktrace.dao.stockdao import findAllQuotes,findStockByCode,find_week52_hi
 from stocktrace.util import slf4p,settings
 from stocktrace.parse.sinaparser import update
 from stocktrace.stock import Stock,download_stock
+from stocktrace.data.download import download2
 
 logger = slf4p.getLogger(__name__)
 
 class TestSequenceFunctions(unittest.TestCase):
     code = '600583'
     sh = Stock('600327')
-    sz = Stock('000563')
+    sz = Stock('002236')
     # 601318
 
     def test_print_stock(self):
@@ -34,24 +35,15 @@ class TestSequenceFunctions(unittest.TestCase):
     def test_ydn_latest(self):
         update(self.code,engine='yahoo')
 
-    def test_re_download(self):
-        from stocktrace.data.download import download2
-        from stocktrace.util import settings
-        download2(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_HOLD);
-
-    def test_download(self):
-        from stocktrace.data.download import download
-        from stocktrace.util import settings
-        download(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_HOLD);
-
+    def test_download_hold(self):
+        download2(clearAll= True,download_latest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_TOP100);
 
     def test_download_top100(self):
-        from stocktrace.data.download import download
-        from stocktrace.util import settings
-        download(clearAll= True,downloadLatest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_TOP100);
+        download2(clearAll= True,download_latest = True,downloadHistory = True,parse_industry = False,stockList=settings.STOCK_LIST_TOP100);
 
-
-
+    def test_clear(self):
+        from stocktrace.dao.stockdao import clear
+        clear()
 
 
     def test_poll_ydn(self):
