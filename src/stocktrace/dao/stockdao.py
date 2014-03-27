@@ -191,7 +191,8 @@ def findPeakStockByDays(code,lastDays,endDate = str(date.today())):
     print begin
 #    print begin.weekday()
     key = str(code)+'_'+str(lastDays)+'_'+endDate+'_high'
-    peak = cache.get(key)
+    # peak = cache.get(key)
+    peak = None
     if peak is not None:
         print 'cache'
         return peak
@@ -200,11 +201,13 @@ def findPeakStockByDays(code,lastDays,endDate = str(date.today())):
         db = connection.stock
         historyDatas = db.stock_history
         peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
+        logger.debug(peak[0])
         try:
             print code+' peak price****'+str(peak[0])
-            cache.set(key,peak[0])
+            # cache.set(key,peak[0])
             return peak[0]
-        except:
+        except Exception as ex:
+            logger.exception(ex)
             logger.error('Fail to find peak price:'+code)
             return None
     #peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
