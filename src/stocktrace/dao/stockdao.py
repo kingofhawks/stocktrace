@@ -12,6 +12,7 @@ from stocktrace.util import slf4p,settings
 from pymongo import Connection 
 #from memorised.decorators import memorise
 from stocktrace.stock import Stock
+import pandas as pd
     
 connection = Connection()      
 #cache = Cache() 
@@ -76,11 +77,11 @@ def findOldestUpdate(code):
     return historyDatas.find_one({"code": code},sort=[("date",pymongo.ASCENDING)]);
    
 #find stock record after date     
-def findStockByDate(code,date):
+def find_history_by_date(code,date):
     connection = Connection()
     db = connection.stock
     historyDatas = db.stock_history
-    return historyDatas.find({"code":code,"date" : {"$gt":date}}).sort([("date",pymongo.DESCENDING)]);
+    return historyDatas.find({"code":code,"date" : {"$gt":str(date)}}).sort([("date",pymongo.DESCENDING)]);
 
 #find quote history data by code     
 def findStockByCode(code):
@@ -103,7 +104,6 @@ def update_week52(code):
     connection = Connection()
     db = connection.stock
     ticker = db.tickers
-    import pandas as pd
     result = find_week52_history(code)
     logger.debug(result)
     df = pd.DataFrame(list(result))
@@ -681,6 +681,25 @@ def find_topn_high(top=20):
     db = connection.stock
     historyDatas = db.tickers
     return historyDatas.find().sort([("percentFromYearHigh",pymongo.DESCENDING)]).limit(top);
+
+#find code price percent since from_date(string format:'2014-01-01')
+def find_percentage(code,from_date):
+    history = find_history_by_date(code,from_date)
+    size = history.count()
+    #logger.debug(size)
+    #logger.debug(history[0])
+    #logger.debug(history[size-1])
+    #for item in history:
+    #    logger.debug(item)
+    df = pd.DataFrame(list(history))
+    logger.debug(df)
+    #logger.debug(df.shape)
+    high_week52_index = 0
+    low_week52_index = size-1
+    begin_close = df[['date','close']][high_week52_index:high_week52_index+1]
+    end_close = df[['date','close']][low_week52_index:low_week52_index+1]
+    logger.debug(begin_close)
+    logger.debug(end_close['close'])
 
     
 if __name__ == '__main__':

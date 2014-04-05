@@ -7,14 +7,18 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
     url(r'^zytj/$', 'zytj.views.index'),
+    #candlestick chart
     url(r'^zytj/jsoncandle', 'zytj.views.jsoncandle'),
     url(r'^zytj/candle/(\d{6})/jsoncandle', 'zytj.views.jsoncandle'),
     #url(r'^zytj/candle', 'zytj.views.candlestick'),
     #support quote as parameter
     url(r'^zytj/candle/(\d{6})/$', 'zytj.views.candlestick'),
+    #NHNL Index
     url(r'^zytj/jsonnhnl', 'zytj.views.jsonnhnl'),
-    url(r'^zytj/nhnl', 'zytj.views.nhnl'),  
+    url(r'^zytj/nhnl', 'zytj.views.nhnl'),
+    #MA Index
     url(r'^zytj/ma', 'zytj.views.ma'),
+    #Order by 52 week high/low percentage
     url(r'^zytj/alist/ma/(\d{2})/$', 'zytj.views.alist_days_ma'),#asc by days on MA
     url(r'^zytj/alist/(\d{2})/$', 'zytj.views.alist_days'),#asc by days on MA
     url(r'^zytj/alist', 'zytj.views.ascendinglist'),  #asc from year low

@@ -1,12 +1,15 @@
 import unittest
 from stocktrace.parse.yahooparser import parseFinanceData
 from stocktrace.parse.yahooparser import download_history_data
-from stocktrace.dao.stockdao import findPeakStockByDays,findStockByCode,find_week52_history,update_week52,remove_stock
+from stocktrace.dao.stockdao import findPeakStockByDays,findStockByCode,find_week52_history,update_week52,remove_stock,find_percentage
 from stocktrace.util import slf4p,settings
 from stocktrace.parse.sinaparser import update
 from stocktrace.stock import Stock,download_stock
 from stocktrace.data.download import download2
 from stocktrace.parse.screener import findByNhnl
+from datetime import date
+from datetime import timedelta
+from datetime import datetime
 
 logger = slf4p.getLogger(__name__)
 
@@ -18,3 +21,10 @@ class TestSequenceFunctions(unittest.TestCase):
 
     def test_peak_price(self):
         logger.debug(findPeakStockByDays('000776',50))
+
+    def test_peak_price(self):
+        delta = timedelta(-20)
+        begin = date.today()+delta
+        #begin_date ='2014-1-1'
+        #rise('600327',begin)
+        find_percentage('600327','2014-01-01')
