@@ -1,7 +1,7 @@
 import unittest
 from stocktrace.parse.yahooparser import parseFinanceData
 from stocktrace.parse.yahooparser import download_history_data
-from stocktrace.dao.stockdao import findPeakStockByDays,findStockByCode,find_week52_history,update_week52,remove_stock,find_percentage
+from stocktrace.dao.stockdao import findPeakStockByDays,findStockByCode,find_week52_history,update_week52,remove_stock,find_percentage,findAllExistentTickers
 from stocktrace.util import slf4p,settings
 from stocktrace.parse.sinaparser import update
 from stocktrace.stock import Stock,download_stock
@@ -27,4 +27,8 @@ class TestSequenceFunctions(unittest.TestCase):
         begin = date.today()+delta
         #begin_date ='2014-1-1'
         #rise('600327',begin)
-        find_percentage('600327','2014-01-01')
+        # find_percentage(['600327','600583'],'2014-01-01')
+        result = find_percentage(findAllExistentTickers(),'2014-01-01')
+        for stock in result:
+            logger.debug(stock.shortStr())
+

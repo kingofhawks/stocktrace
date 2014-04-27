@@ -83,6 +83,13 @@ def find_history_by_date(code,date):
     historyDatas = db.stock_history
     return historyDatas.find({"code":code,"date" : {"$gt":str(date)}}).sort([("date",pymongo.DESCENDING)]);
 
+#find all stocks' history record after date
+def find_all_history_by_date(date):
+    connection = Connection()
+    db = connection.stock
+    historyDatas = db.stock_history
+    return historyDatas.find({"date" : {"$gt":str(date)}}).sort([("date",pymongo.DESCENDING)]);
+
 #find quote history data by code     
 def findStockByCode(code):
     connection = Connection()
@@ -651,6 +658,25 @@ def findTopN(top=20,condition=settings.HIGHER):
 #        #print stock.yearHighLow()
 #        print stock
 
+#find TOP N high or low percentage from date
+def find_topn_by_date(top=20,condition=settings.HIGHER):
+    history = find_history_by_date(code,from_date)
+    size = history.count()
+    #logger.debug(size)
+    #logger.debug(history[0])
+    #logger.debug(history[size-1])
+    #for item in history:
+    #    logger.debug(item)
+    df = pd.DataFrame(list(history))
+    logger.debug(df)
+    #logger.debug(df.shape)
+    high_week52_index = 0
+    low_week52_index = size-1
+    begin_close = df[['date','close']][high_week52_index:high_week52_index+1]
+    end_close = df[['date','close']][low_week52_index:low_week52_index+1]
+    logger.debug(begin_close)
+    logger.debug(end_close['close'])
+    pass
 
 #find quote by code     
 def findQuoteByCode(code,condition=settings.HIGHER):
@@ -683,23 +709,51 @@ def find_topn_high(top=20):
     return historyDatas.find().sort([("percentFromYearHigh",pymongo.DESCENDING)]).limit(top);
 
 #find code price percent since from_date(string format:'2014-01-01')
-def find_percentage(code,from_date):
-    history = find_history_by_date(code,from_date)
-    size = history.count()
-    #logger.debug(size)
+def find_percentage(code_list,from_date):
+    # history = find_history_by_date(code,from_date)
+    history = find_all_history_by_date(from_date)
+    # size = history.count()
+    # logger.debug(size)
     #logger.debug(history[0])
     #logger.debug(history[size-1])
     #for item in history:
     #    logger.debug(item)
     df = pd.DataFrame(list(history))
-    logger.debug(df)
-    #logger.debug(df.shape)
-    high_week52_index = 0
-    low_week52_index = size-1
-    begin_close = df[['date','close']][high_week52_index:high_week52_index+1]
-    end_close = df[['date','close']][low_week52_index:low_week52_index+1]
-    logger.debug(begin_close)
-    logger.debug(end_close['close'])
+    # logger.debug(df)
+    result = []
+    for code in code_list:
+        df_by_code = df.loc[df['code'] == code]
+        # logger.debug(df_by_code)
+        # logger.debug('df shape:{}'.format(df_by_code.shape))
+        logger.debug('code:{} df length:{}'.format(code,len(df_by_code.index)))
+        # size = len(df_by_code)
+        # logger.debug('df length:{}'.format(size))
+        # high_week52_index = 0
+        # low_week52_index = size-1
+        # end_close = df_by_code[['date','close']][high_week52_index:high_week52_index+1]
+        # begin_close = df_by_code[['date','close']][low_week52_index:low_week52_index+1]
+        # logger.debug(begin_close)
+        # logger.debug(end_close)
+        # logger.debug(begin_close['close'])
+        # logger.debug(end_close['close'])
+        # logger.debug(type(begin_close['close']))
+        if len(df_by_code.index) == 0:
+            continue
+        end_close = df_by_code.iloc[0]['close']
+        begin_close = df_by_code.iloc[-1]['close']
+        # logger.debug(begin_close)
+        # logger.debug(end_close)
+        code_percentage = (float(end_close)-float(begin_close))/float(begin_close)
+        logger.debug('code:{}:{}'.format(code,code_percentage))
+        stock = Stock(code)
+        stock.percent = code_percentage
+        result.append(stock)
+    result = sorted(result,key=lambda s: s.percent)
+    logger.debug(result)
+    return result
+    # logger.debug(str(begin_close))
+    # logger.debug('open:{}'.format(df_by_code[0,'close']))
+    # logger.debug('close:{}'.format(df_by_code[low_week52_index:low_week52_index+1]['close']))
 
     
 if __name__ == '__main__':
