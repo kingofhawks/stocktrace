@@ -111,7 +111,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     #'G:/Dropbox/Workspace/stocktrace/src/zytj/template'
-    os.path.join(os.path.abspath(os.path.join(PROJECT_DIR, os.pardir)), "zytj","template")
+    (os.path.join(os.path.abspath(os.path.join(PROJECT_DIR, os.pardir)), "zytj","template"),)
 )
 
 INSTALLED_APPS = (

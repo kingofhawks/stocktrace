@@ -2,7 +2,6 @@
 
 # Create your views here.
 from django.shortcuts import render
-from django.utils import simplejson
 from django.http import HttpResponse
 from django.http import Http404
 from stocktrace.util import settings
@@ -139,7 +138,7 @@ def jsoncandle(request,q):
     
     #draw candlestick with multiple MA
     
-    return HttpResponse(simplejson.dumps([ohlc,ma1,ma2,ma3,ma4]), mimetype='application/json')
+    return HttpResponse(json.dumps([ohlc,ma1,ma2,ma3,ma4]), mimetype='application/json')
 
 #q:stock code,which will be passed to jsoncandle()
 def candlestick(request,q):
@@ -162,7 +161,7 @@ def jsonnhnl(request):
       s.append(record['nhnl'])      
       data.append(s)
     print data  
-    return HttpResponse(simplejson.dumps(data), mimetype='application/json')
+    return HttpResponse(json.dumps(data), mimetype='application/json')
 
 def nhnl(request):
     return render(request,'nhnl-index.html') 
@@ -270,7 +269,7 @@ def alist_days(request,days):
 def quotes(request):
     from stocktrace.dao.stockdao import findAllQuotes
     quotes = findAllQuotes()
-    jsonData = simplejson.dumps(quotes)
+    jsonData = json.dumps(quotes)
     
     return HttpResponse(jsonData, mimetype='application/json')
 
