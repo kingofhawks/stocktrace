@@ -8,7 +8,7 @@ from __future__ import absolute_import
 
 from celery import Celery
 
-broker = 'redis://192.168.72.128:6379/0'
+broker = 'redis://192.168.192.128:6379/0'
 app = Celery('tasks', broker=broker,backend=broker)
 
 

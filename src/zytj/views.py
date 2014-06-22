@@ -138,7 +138,7 @@ def jsoncandle(request,q):
     
     #draw candlestick with multiple MA
     
-    return HttpResponse(json.dumps([ohlc,ma1,ma2,ma3,ma4]), mimetype='application/json')
+    return HttpResponse(json.dumps([ohlc,ma1,ma2,ma3,ma4]), content_type='application/json')
 
 #q:stock code,which will be passed to jsoncandle()
 def candlestick(request,q):
@@ -161,7 +161,7 @@ def jsonnhnl(request):
       s.append(record['nhnl'])      
       data.append(s)
     print data  
-    return HttpResponse(json.dumps(data), mimetype='application/json')
+    return HttpResponse(json.dumps(data), content_type='application/json')
 
 def nhnl(request):
     return render(request,'nhnl-index.html') 
@@ -271,14 +271,14 @@ def quotes(request):
     quotes = findAllQuotes()
     jsonData = json.dumps(quotes)
     
-    return HttpResponse(jsonData, mimetype='application/json')
+    return HttpResponse(jsonData, content_type='application/json')
 
 
 def delete_stock(request):
     code = request.GET.get('code')
     logger.info('Remove stock:{}'.format(code))
     remove_stock(code)
-    return HttpResponse(json.dumps('OK'), mimetype='application/json')
+    return HttpResponse(json.dumps('OK'), content_type='application/json')
 
 
 

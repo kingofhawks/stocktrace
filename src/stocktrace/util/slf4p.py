@@ -4,12 +4,12 @@ logging wrapper class
 @author: Simon
 '''
 import logging,os,settings
-from stocktrace.settings import PROJECT_DIR
+from stocktrace.settings import BASE_DIR
 
 #print PROJECT_DIR
-parent = os.path.abspath(os.path.join(PROJECT_DIR, os.pardir))
+parent = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
 #print parent
-#print os.path.join(parent, "zytj","template")
+#print os.path.join(parent, "zytj","templates")
 #print '**************'
 #PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))
 #log_dir = os.path.join(settings.APP_ROOT, "log")

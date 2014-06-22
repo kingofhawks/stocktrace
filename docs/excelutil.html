@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>excelutil.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id="background"></div>
+<div id='container'>
+  <div class='section'>
+    <div class='docs'><h1>excelutil.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">getStockDataBySheet</span><span class="p">(</span><span class="n">excelProxy</span><span class="p">,</span><span class="n">sheet</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      <p>from easyExcel import EasyExcel 
+import os,sys
+root = os.path.abspath(os.path.dirname(sys.argv[0]))
+print '<strong><em>*</em></strong>root path<strong>*</strong>',root
+path = root +'\test.xls' <br />
+excelProxy = EasyExcel(path)
+print excelProxy.getSheets()
+sheet = "2"</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="k">print</span> <span class="s">&quot;***********Excel Sheet******&quot;</span><span class="p">,</span><span class="n">sheet</span>
+	<span class="n">line</span> <span class="o">=</span> <span class="mi">2</span>
+	<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">excelProxy</span><span class="o">.</span><span class="n">getCell</span><span class="p">(</span><span class="n">sheet</span><span class="p">,</span><span class="n">line</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+			<span class="k">break</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">line</span> <span class="o">=</span> <span class="n">line</span> <span class="o">+</span><span class="mi">1</span>
+	<span class="k">print</span> <span class="s">&quot;***********Overall trading count******&quot;</span><span class="p">,</span><span class="n">line</span><span class="o">-</span><span class="mi">2</span>
+				 
+	<span class="n">content</span> <span class="o">=</span> <span class="n">excelProxy</span><span class="o">.</span><span class="n">getRange</span><span class="p">(</span><span class="n">sheet</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">line</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      <p>print content</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="n">revenue</span> <span class="o">=</span> <span class="mi">0</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      <p>trading history</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="n">directory</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+	
+	<span class="kn">from</span> <span class="nn">trading</span> <span class="kn">import</span> <span class="n">Trading</span>
+	<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      <p>print line</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>		<span class="n">code</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      <p>print code      </p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>		<span class="n">volume</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      <p>print type(volume)
+print volume        </p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>		<span class="n">tempRev</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">!=</span><span class="bp">None</span><span class="p">):</span>
+			<span class="n">tempRev</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+			<span class="n">revenue</span> <span class="o">+=</span> <span class="n">tempRev</span>
+		<span class="n">trade</span> <span class="o">=</span> <span class="n">Trading</span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">volume</span><span class="p">),</span><span class="n">tempRev</span><span class="p">)</span> 	
+		<span class="k">if</span> <span class="n">code</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">directory</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      <p>trade = Trading(code,1,abs(volume),0)         <br />
+directory[code] = abs(volume)</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>			<span class="n">directory</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="n">trade</span>
+		<span class="k">else</span> <span class="p">:</span>
+			<span class="n">temp</span> <span class="o">=</span> <span class="n">directory</span><span class="p">[</span><span class="n">code</span><span class="p">]</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      <p>print '<strong><em>*</em></strong><strong><em>'+str(trade.volume)
+print '</em></strong><strong><em>*</em></strong>'+str(temp.volume)</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>			<span class="n">trade</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">volume</span><span class="p">,</span><span class="n">temp</span><span class="o">.</span><span class="n">revenue</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      <p>trade.count += 1
+trade.volume += abs(volume)
+temp = directory[code]
+directory[code] = abs(volume)+temp</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>			<span class="n">directory</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="n">trade</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-10'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-10'>#</a>
+      </div>
+      <p>print volume        </p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>		<span class="nb">sum</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-11'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-11'>#</a>
+      </div>
+      <p>print sum
+print revenue
+directory["total"] = sum</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-12'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-12'>#</a>
+      </div>
+      <p>print directory
+for trade in directory.values():
+print trade </p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-13'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-13'>#</a>
+      </div>
+      <p>print len(directory)    </p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="k">print</span> <span class="s">&quot;************Sum Column*********&quot;</span><span class="p">,</span><span class="nb">sum</span>
+	<span class="k">print</span> <span class="s">&quot;************revenue************&quot;</span><span class="p">,</span><span class="n">revenue</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-14'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-14'>#</a>
+      </div>
+      <p>directory['sum'] = sum
+close the Excel file
+excelProxy.close()</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="k">return</span> <span class="n">directory</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+	<span class="kn">from</span> <span class="nn">easyExcel</span> <span class="kn">import</span> <span class="n">EasyExcel</span>	
+	<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
+	<span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+	<span class="k">print</span> <span class="s">&#39;*******root path*****&#39;</span><span class="p">,</span><span class="n">root</span>
+	<span class="n">path</span> <span class="o">=</span> <span class="n">root</span> <span class="o">+</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">test.xls&#39;</span>	
+	<span class="n">excelProxy</span> <span class="o">=</span> <span class="n">EasyExcel</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">sheets</span> <span class="ow">in</span> <span class="n">excelProxy</span><span class="o">.</span><span class="n">getAllSheets</span><span class="p">():</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-15'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-15'>#</a>
+      </div>
+      <p>print sheets.name</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>		<span class="n">directory</span> <span class="o">=</span> <span class="n">getStockDataBySheet</span><span class="p">(</span><span class="n">excelProxy</span><span class="p">,</span><span class="n">sheets</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">trade</span> <span class="ow">in</span> <span class="n">directory</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+			<span class="k">print</span> <span class="n">trade</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-16'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-16'>#</a>
+      </div>
+      <p>print directory</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>	<span class="n">excelProxy</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

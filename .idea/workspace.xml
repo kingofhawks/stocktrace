@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="90a9ed8e-6d16-4900-a749-5f679693db18" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/zytj/templates/alist.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/zytj/templates/dlist.html" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\css\bootstrap-responsive.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\css\bootstrap-responsive.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\css\bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\css\bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\img\glyphicons-halflings-white.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\img\glyphicons-halflings.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\js\bootstrap-tooltip.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\js\bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\js\bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\css\bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\css\style.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\css\font-awesome.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\css\font-awesome.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\fonts\FontAwesome.otf" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\fonts\fontawesome-webfont.eot" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\fonts\fontawesome-webfont.svg" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\fonts\fontawesome-webfont.ttf" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\fonts\fontawesome-webfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\bordered-pulled.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\core.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\fixed-width.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\font-awesome.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\icons.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\larger.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\list.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\mixins.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\path.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\rotated-flipped.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\spinning.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\stacked.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\variables.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_bordered-pulled.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_core.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_fixed-width.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_icons.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_larger.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_list.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_mixins.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_path.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_rotated-flipped.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_spinning.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_stacked.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_variables.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\font-awesome.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\img\glyphicons-halflings-white.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\img\glyphicons-halflings.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\chosen\chosen-sprite.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\chosen\chosen.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\chosen\chosen.jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\chosen\chosen.jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\examples.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\images\logo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\images\ui-colorpicker.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\isotope.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-1.8.2.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\dial-controls\index.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\dial-controls\style.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\infinite-scroll\index.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\infinite-scroll\style.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\modernizr.custom.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\scroll-analytics\index.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\scroll-analytics\style.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\sticky-elements\index.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\sticky-elements\style.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\waypoints.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\waypoints.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.infinitescroll.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.infinitescroll.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\excanvas.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\excanvas.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\jquery.jqplot.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\jquery.jqplot.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.BezierCurveRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.BezierCurveRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.barRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.barRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.blockRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.blockRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.bubbleRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.bubbleRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasAxisLabelRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasAxisLabelRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasAxisTickRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasAxisTickRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasOverlay.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasOverlay.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasTextRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasTextRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.categoryAxisRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.categoryAxisRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.ciParser.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.ciParser.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.cursor.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.cursor.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.dateAxisRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.dateAxisRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.donutRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.donutRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.dragable.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.dragable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.enhancedLegendRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.enhancedLegendRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.funnelRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.funnelRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.highlighter.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.highlighter.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.json2.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.json2.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.logAxisRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.logAxisRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.mekkoAxisRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.mekkoAxisRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.mekkoRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.mekkoRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.meterGaugeRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.meterGaugeRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.ohlcRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.ohlcRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pieRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pieRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pointLabels.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pointLabels.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidAxisRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidAxisRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidGridRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidGridRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.trendline.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.trendline.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\LGPL-LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\MIT-LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shAutoloader.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shAutoloader.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shBrushJScript.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shBrushJScript.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shBrushXml.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shBrushXml.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shCore.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shCore.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shCore.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shCore.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shCoreDefault.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shCoreDefault.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shThemeDefault.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shThemeDefault.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shThemejqPlot.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shThemejqPlot.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\jsondata.txt" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\alist.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\dlist.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stocktrace/settings.py" afterPath="$PROJECT_DIR$/src/stocktrace/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stocktrace/util/slf4p.py" afterPath="$PROJECT_DIR$/src/stocktrace/util/slf4p.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/stocktrace.log" afterPath="$PROJECT_DIR$/log/stocktrace.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stocktrace/task/tasks.py" afterPath="$PROJECT_DIR$/src/stocktrace/task/tasks.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stocktrace/urls.py" afterPath="$PROJECT_DIR$/src/stocktrace/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/zytj/views.py" afterPath="$PROJECT_DIR$/src/zytj/views.py" />
+      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\alist_days_ma.html" afterPath="$PROJECT_DIR$/src/zytj/templates/alist_days_ma.html" />
+      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\candlestick.html" afterPath="$PROJECT_DIR$/src/zytj/templates/candlestick.html" />
+      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\index.html" afterPath="$PROJECT_DIR$/src/zytj/templates/index.html" />
+      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\isotope_demo.html" afterPath="$PROJECT_DIR$/src/zytj/templates/isotope_demo.html" />
+      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\ma.html" afterPath="$PROJECT_DIR$/src/zytj/templates/ma.html" />
+      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\nhnl-index.html" afterPath="$PROJECT_DIR$/src/zytj/templates/nhnl-index.html" />
+      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\screen_year_low_high.html" afterPath="$PROJECT_DIR$/src/zytj/templates/screen_year_low_high.html" />
+      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\stocks.html" afterPath="$PROJECT_DIR$/src/zytj/templates/stocks.html" />
+      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\test.html" afterPath="$PROJECT_DIR$/src/zytj/templates/test.html" />
+    </list>
+    <ignored path="stocktrace.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/stocktrace$stockdao.coverage" NAME="stockdao Coverage Results" MODIFIED="1390190243639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/stocktrace/dao" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_peak_price.coverage" NAME="Nosetest TestSequenceFunctions.test_peak_price Coverage Results" MODIFIED="1398569988645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download2.coverage" NAME="Nosetest TestSequenceFunctions.test_download2 Coverage Results" MODIFIED="1394509719702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_yahoo.coverage" NAME="Nosetest TestSequenceFunctions.test_yahoo Coverage Results" MODIFIED="1394256265828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download_sh.coverage" NAME="Nosetest TestSequenceFunctions.test_download_sh Coverage Results" MODIFIED="1395884040658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download_hold.coverage" NAME="Nosetest TestSequenceFunctions.test_download_hold Coverage Results" MODIFIED="1395884869795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_nhnl.coverage" NAME="Nosetest TestSequenceFunctions.test_nhnl Coverage Results" MODIFIED="1395890939624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download_sz.coverage" NAME="Nosetest TestSequenceFunctions.test_download_sz Coverage Results" MODIFIED="1395885163211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_yahoo_csv.coverage" NAME="Nosetest TestSequenceFunctions.test_yahoo_csv Coverage Results" MODIFIED="1394342405027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetests_in_stock_api_test.coverage" NAME="Nosetests in stock_api_test Coverage Results" MODIFIED="1396667603584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_update_week52.coverage" NAME="Nosetest TestSequenceFunctions.test_update_week52 Coverage Results" MODIFIED="1393820591549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_week52.coverage" NAME="Nosetest TestSequenceFunctions.test_week52 Coverage Results" MODIFIED="1393718767719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_print_stock__1_.coverage" NAME="Nosetest TestSequenceFunctions.test_print_stock (1) Coverage Results" MODIFIED="1395889149938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download_top100.coverage" NAME="Nosetest TestSequenceFunctions.test_download_top100 Coverage Results" MODIFIED="1395883551882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_pandas.coverage" NAME="Nosetest TestSequenceFunctions.test_pandas Coverage Results" MODIFIED="1393718887113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_sina_api.coverage" NAME="Nosetest TestSequenceFunctions.test_sina_api Coverage Results" MODIFIED="1396667622594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$main.coverage" NAME="main Coverage Results" MODIFIED="1394340553454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/stocktrace/data" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_remove_stock.coverage" NAME="Nosetest TestSequenceFunctions.test_remove_stock Coverage Results" MODIFIED="1394770136380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_clear.coverage" NAME="Nosetest TestSequenceFunctions.test_clear Coverage Results" MODIFIED="1395883989685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download_all.coverage" NAME="Nosetest TestSequenceFunctions.test_download_all Coverage Results" MODIFIED="1394766594646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_re_download.coverage" NAME="Nosetest TestSequenceFunctions.test_re_download Coverage Results" MODIFIED="1394769853432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_ydn_latest.coverage" NAME="Nosetest TestSequenceFunctions.test_ydn_latest Coverage Results" MODIFIED="1394511375348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_sina.coverage" NAME="Nosetest TestSequenceFunctions.test_sina Coverage Results" MODIFIED="1394509708831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download.coverage" NAME="Nosetest TestSequenceFunctions.test_download Coverage Results" MODIFIED="1395883764760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_print_stock.coverage" NAME="Nosetest TestSequenceFunctions.test_print_stock Coverage Results" MODIFIED="1395887999030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_yahoo_csv2.coverage" NAME="Nosetest TestSequenceFunctions.test_yahoo_csv2 Coverage Results" MODIFIED="1394342937092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetests_in_yahoo_test.coverage" NAME="Nosetests in yahoo_test Coverage Results" MODIFIED="1393475543186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$mongohq.coverage" NAME="mongohq Coverage Results" MODIFIED="1389762510074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$yahoo_test.coverage" NAME="yahoo_test Coverage Results" MODIFIED="1395884276606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_poll_ydn.coverage" NAME="Nosetest TestSequenceFunctions.test_poll_ydn Coverage Results" MODIFIED="1394427794680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="stocktrace" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/zytj/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="11" selection-start="344" selection-end="344" vertical-scroll-proportion="0.0" vertical-offset="2622" max-vertical-offset="5510">
+              <folding>
+                <element signature="e#50#85#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dlist.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/zytj/templates/dlist.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="20" selection-start="47" selection-end="47" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="1824">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/static/bootstrap/js/bootstrap.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="41" selection-start="1094" selection-end="1094" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="38247">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="response.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://E:/Anaconda/Lib/site-packages/django/http/response.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="466" column="64" selection-start="16047" selection-end="16047" vertical-scroll-proportion="-7.28" vertical-offset="8330" max-vertical-offset="8873">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/stocktrace/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="0" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="836">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="alist.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/zytj/templates/alist.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="8" selection-start="34" selection-end="34" vertical-scroll-proportion="-0.6785714" vertical-offset="0" max-vertical-offset="2071">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/zytj/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="92" selection-start="777" selection-end="777" vertical-scroll-proportion="0.5857418" vertical-offset="0" max-vertical-offset="1292">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="alist_days_ma.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/zytj/templates/alist_days_ma.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="6" selection-start="23" selection-end="23" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="1330">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/stocktrace/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="127" column="50" selection-start="4781" selection-end="4781" vertical-scroll-proportion="0.0" vertical-offset="1796" max-vertical-offset="3287">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/stocktrace/parse/yahooparser.py" />
+        <option value="$PROJECT_DIR$/src/test/yahoo_test.py" />
+        <option value="$PROJECT_DIR$/src/test/screen_test.py" />
+        <option value="$PROJECT_DIR$/src/test/stock_api_test.py" />
+        <option value="$PROJECT_DIR$/src/log/stocktrace.log" />
+        <option value="$PROJECT_DIR$/src/test/dao_test.py" />
+        <option value="$PROJECT_DIR$/src/stocktrace/dao/stockdao.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/zytj/template/base.html" />
+        <option value="$PROJECT_DIR$/src/zytj/template/alist.html" />
+        <option value="$PROJECT_DIR$/src/zytj/views.py" />
+        <option value="$PROJECT_DIR$/src/zytj/template/dlist.html" />
+        <option value="$PROJECT_DIR$/src/stocktrace/util/slf4p.py" />
+        <option value="$PROJECT_DIR$/src/stocktrace/settings.py" />
+        <option value="$PROJECT_DIR$/src/stocktrace/urls.py" />
+        <option value="$PROJECT_DIR$/src/zytj/templates/base.html" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="10" />
+    <option name="width" value="1346" />
+    <option name="height" value="728" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="1" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stocktrace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stocktrace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stocktrace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zytj" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stocktrace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zytj" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="options.lastSelected" value="vcs.Git" />
+    <property name="recentsLimit" value="5" />
+    <property name="last_opened_file_path" value="G:/Workspace/Ghost" />
+    <property name="FullScreen" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings />
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Dropbox\Workspace\stocktrace\src\static" />
+      <recent name="G:\Dropbox\Workspace\stocktrace\src\zytj\template" />
+      <recent name="G:\Dropbox\Workspace\stocktrace\src\test" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python tests.Nosetest TestSequenceFunctions.test_peak_price">
+    <configuration default="false" name="Nosetest TestSequenceFunctions.test_print_stock (1)" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/dao_test.py" />
+      <option name="CLASS_NAME" value="TestSequenceFunctions" />
+      <option name="METHOD_NAME" value="test_print_stock" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Nosetest TestSequenceFunctions.test_nhnl" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/screen_test.py" />
+      <option name="CLASS_NAME" value="TestSequenceFunctions" />
+      <option name="METHOD_NAME" value="test_nhnl" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Nosetest TestSequenceFunctions.test_peak_price" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/dao_test.py" />
+      <option name="CLASS_NAME" value="TestSequenceFunctions" />
+      <option name="METHOD_NAME" value="test_peak_price" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Nosetest TestSequenceFunctions.test_sina_api" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/stock_api_test.py" />
+      <option name="CLASS_NAME" value="TestSequenceFunctions" />
+      <option name="METHOD_NAME" value="test_sina_api" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Nosetests in stock_api_test" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/stock_api_test.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <browser start="false" url="" with-js-debugger="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_print_stock (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_nhnl" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_peak_price" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_sina_api" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Nosetests in stock_api_test" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_peak_price" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_sina_api" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Nosetests in stock_api_test" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_nhnl" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_print_stock (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="90a9ed8e-6d16-4900-a749-5f679693db18" name="Default" comment="" />
+      <created>1389758800535</created>
+      <updated>1389758800535</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="10" y="0" width="1346" height="728" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45454547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25263157" sideWeight="0.54545456" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989899" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45286196" sideWeight="0.1112782" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43771043" sideWeight="0.8887218" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/stocktrace/stock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="16" selection-start="1922" selection-end="1930" vertical-scroll-proportion="0.0" vertical-offset="969" max-vertical-offset="2185">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/text_diff_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="27" selection-start="144" selection-end="163" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="532">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/dao_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="1237" selection-end="1237" vertical-scroll-proportion="0.0" vertical-offset="192" max-vertical-offset="760">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="9" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0" vertical-offset="247" max-vertical-offset="1045">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="59" selection-start="285" selection-end="285" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/history.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="30" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/zytj/templates/alist_days_ma.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="6" selection-start="23" selection-end="23" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="1330">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/zytj/templates/alist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="8" selection-start="34" selection-end="34" vertical-scroll-proportion="-0.6785714" vertical-offset="0" max-vertical-offset="2071">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/zytj/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="11" selection-start="344" selection-end="344" vertical-scroll-proportion="0.0" vertical-offset="2622" max-vertical-offset="5510">
+          <folding>
+            <element signature="e#50#85#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/zytj/templates/dlist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="20" selection-start="47" selection-end="47" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="1824">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/static/bootstrap/js/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="41" selection-start="1094" selection-end="1094" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="38247">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stocktrace/util/slf4p.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="46" selection-start="200" selection-end="200" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="703">
+          <folding>
+            <element signature="e#66#92#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stocktrace/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="127" column="50" selection-start="4781" selection-end="4781" vertical-scroll-proportion="0.0" vertical-offset="1796" max-vertical-offset="3287">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stocktrace/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="836">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Anaconda/Lib/site-packages/django/http/response.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="466" column="64" selection-start="16047" selection-end="16047" vertical-scroll-proportion="-7.28" vertical-offset="8330" max-vertical-offset="8873">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/zytj/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="92" selection-start="777" selection-end="777" vertical-scroll-proportion="0.5857418" vertical-offset="0" max-vertical-offset="1292">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+
