@@ -1,52 +1,41 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Isotope Tutorial</title>
-		
-		<link rel="stylesheet" href="../static/css/style.css">
-		<link rel="stylesheet" href="../static/css/bootstrap.css">
-		<link rel="stylesheet" href="../static/js/chosen/chosen.css" />
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-		<script type="text/javascript" src="../static/js/jquery-1.8.2.min.js"></script>
-		<script type="text/javascript" src="../static/bootstrap/js/bootstrap.min.js"></script>		
-		<script type="text/javascript" src="../static/js/isotope.js"></script>
-		<script type="text/javascript" src="../static/js/jquery.infinitescroll.js"></script>
-		<script type="text/javascript" src="../static/js/chosen/chosen.jquery.min.js"></script>
-		<script type="text/javascript" src="../static/js/jquery-waypoints-1.1.7/waypoints.min.js"></script>
-		
-		<script type="text/javascript">
-		
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_js %}
+        <script type="text/javascript" src="{%static 'js/jquery-waypoints-1.1.7/waypoints.min.js' %}"></script>
+        <script type="text/javascript">
+
 		$(document).ready(function(){
 		var industry = "{{industry}}"
 		var stockList = "{{stockList}}"
 		var context = "{{context}}"
-					
-		$("#industry-select").val(industry)	
-		$("#industry-select").chosen();		
-		
-		$("#industry-select").chosen().change( function(e){ 
+
+		$("#industry-select").val(industry)
+		$("#industry-select").chosen();
+
+		$("#industry-select").chosen().change( function(e){
 			window.location = "http://127.0.0.1:8000/zytj/"+context+"?industry="+$(this).val()+"&list="+$("#list-select").val();
 		} );
-		
-		
-		$("#list-select").val(stockList)	
-		$("#list-select").chosen();		
-		
-		$("#list-select").chosen().change( function(e){ 
+
+
+		$("#list-select").val(stockList)
+		$("#list-select").chosen();
+
+		$("#list-select").chosen().change( function(e){
 			window.location = "http://127.0.0.1:8000/zytj/"+context+"?list="+$(this).val()+"&industry="+$("#industry-select").val();
 		} );
-		
+
 		//$('[rel=tooltip]').tooltip()
 		var jsondata = '<html>hello<br>Simon</html>';
 		//$('[rel=tooltip]').attr('title', jsondata).tooltip({html:true});
-		$('[rel=tooltip]').tooltip({html:true});	
+		$('[rel=tooltip]').tooltip({html:true});
 		$('.icon-arrow-down').tooltip({title:"Below MA50"});
 		$('.icon-arrow-up').tooltip({title:"Above MA50",placement:"right"});
 		$('.icon-star-empty').tooltip({title:"Bad",placement:"right"});
 		$('.icon-star').tooltip({title:"Great",placement:"right"});
 		$('.icon-thumbs-down').tooltip({title:"Below MA200",placement:"right"});
 		$('.icon-thumbs-up').tooltip({title:"Above MA200",placement:"right"});
-		
+
 		//back to top style as tumblr
 		$('.top').addClass('hidden');
 		$.waypoints.settings.scrollThrottle = 30;
@@ -82,7 +71,7 @@
 
 
 		$container.infinitescroll({
-		    navSelector  : "a#next:last",    // selector for the paged navigation 
+		    navSelector  : "a#next:last",    // selector for the paged navigation
 		    nextSelector : "a#next:last",  // selector for the NEXT link (to page 2)
 		    itemSelector : "div.cat2",     // selector for all items you'll retrieve
 		    debug: true,
@@ -90,10 +79,10 @@
 		    },
 	    // call Isotope as a callback
 	    function( newElements ) {
-	      $container.isotope( 'appended', $( newElements ) ); 
+	      $container.isotope( 'appended', $( newElements ) );
 	    }
 	  );
-		
+
 		$("#code").keyup(function(event){
 			//Enter key up event
 		    if(event.keyCode == 13){
@@ -102,7 +91,7 @@
 		});
 
 });
-		
+
 		function searchCode() {
 			var code = $('#code').val();
 		    if (code !=""){
@@ -130,91 +119,83 @@
         });
         });
 		</script>
-		
-	</head>
-	
-	<body>
-		<div id="header"></div>
-		<a id="next" href="{{context}}/?industry={{industry}}&list={{stockList}}&q=2" >next page?</a>
-		<div id="nav">
-			<ul>
-				<li><a href="/zytj/alist" data-filter=".cat1">Ascending from Year Low</a></li>
-				<li><a href="/zytj/dlist" data-filter=".cat2">Descending from Year High</a></li>
-				<li><a href="/zytj/alist/20/" data-filter=".cat2">Ascending from 20 days</a></li>
-			</ul>
-			<ul>
-				<select data-placeholder="Choose a Industry" id="industry-select">
-					<option value=""></option>
-					<option value="all">all</option>
-				{% for industry in industry_set%}
-			        <option value="{{industry}}">{{industry}}</option>			        
-			    {%endfor%}
-    			</select>    			
-			</ul>
-			
-			<ul>
-				<select data-placeholder="Choose a List" id="list-select">
-					<option value=""></option>					
-				{% for list in lists%}
-			        <option value="{{list}}">{{list}}</option>			        
-			    {%endfor%}
-    			</select>    			
-			</ul>
-			<ul>
-				<input type="text" class="typeahead" id="code" onclick="searchCode();">				
-			</ul>
-		</div>
-		
-		<div id="content">	
-				
-			{% for stock in results%}
-			    <div class="box cat2 cat3" >
-					<h2 class="box-title">
-                        <a href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" title ="<html>High:{{stock.yearHigh}}<br>Low:{{stock.yearLow}}<br>MA50:{{stock.ma50}}<br>MA200:{{stock.ma200}}<br></html>">{{stock.code}}</a>
-                        <div style="float:right"><i class="fa fa-minus-square" id="{{stock.code}}" title="{{stock.code}}"></i></div>
-                    </h2>
-					<div class="box-text">
-                        {{stock.name}}
-						{{stock.current}}
-						{% if orderByAlist %}
-						+{{stock.PercentChangeFromYearLow}}% 
-						{% else%}
-						-{{stock.PercentChangeFromYearHigh}}%
-						{% endif %}
-						{% if stock.isInSh %}
-						<a href="http://finance.sina.com.cn/realstock/company/sh{{stock.code}}/nc.shtml">Sina</a>
-						{% else%}
-						<a href="http://finance.sina.com.cn/realstock/company/sz{{stock.code}}/nc.shtml">Sina</a>
-						{% endif %}
-					</div>
-					<div class="box-text">
-						{% if stock.current < stock.ma50 and stock.ma50 < stock.ma200 %}
-						<i class="icon-star-empty"></i>
-						{% elif stock.current < stock.ma50 %}
-						<i class="icon-arrow-down"></i>
-						{% elif stock.current < stock.ma200 %}
-						<i class="icon-thumbs-down"></i>
-						{% endif%}
-						{% if stock.current > stock.ma50 and stock.ma50 > stock.ma200 %}
-						<i class="icon-star"></i>
-						{% elif stock.current > stock.ma50 %}
-						<i class="icon-arrow-up"></i>
-						{% elif stock.current > stock.ma200 %}
-						<i class="icon-thumbs-up"></i>
-						{% endif%}									
-					</div>
-				</div>
-			{%endfor%}
-		
-		</div>
-		
-		<footer>
-			<nav>
-				<ul>
-					<li><a class="top" href="#" title="Back to top">Top</a></li>
-				</ul>
-			</nav>
-		</footer>
-		
-	</body>
-</html>
+{%endblock %}
+
+{% block left_panel %}
+<a id="next" href="{{context}}/?industry={{industry}}&list={{stockList}}&q=2" >next page?</a>
+<nav>
+    <div id="nav">
+        <ul>
+            <li><a href="/zytj/alist" data-filter=".cat1">Ascending from Year Low</a></li>
+            <li><a href="/zytj/dlist" data-filter=".cat2">Descending from Year High</a></li>
+            <li><a href="/zytj/alist/20/" data-filter=".cat2">Ascending from 20 days</a></li>
+        </ul>
+        <ul>
+            <select data-placeholder="Choose a Industry" id="industry-select">
+                <option value=""></option>
+                <option value="all">all</option>
+            {% for industry in industry_set%}
+                <option value="{{industry}}">{{industry}}</option>
+            {%endfor%}
+            </select>
+        </ul>
+
+        <ul>
+            <select data-placeholder="Choose a List" id="list-select">
+                <option value=""></option>
+            {% for list in lists%}
+                <option value="{{list}}">{{list}}</option>
+            {%endfor%}
+            </select>
+        </ul>
+        <ul>
+            <input type="text" class="typeahead" id="code" onclick="searchCode();">
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div id="content">
+    {% for stock in results%}
+        <div class="box cat2 cat3" >
+            <h2 class="box-title">
+                <a href="/zytj/candle/{{stock.code}}" data-filter=".cat1" rel="tooltip" data-placement="right" title ="<html>High:{{stock.yearHigh}}<br>Low:{{stock.yearLow}}<br>MA50:{{stock.ma50}}<br>MA200:{{stock.ma200}}<br></html>">{{stock.code}}</a>
+                <div style="float:right"><i class="fa fa-minus-square" id="{{stock.code}}" title="{{stock.code}}"></i></div>
+            </h2>
+            <div class="box-text">
+                {{stock.name}}
+                {{stock.current}}
+                {% if orderByAlist %}
+                +{{stock.PercentChangeFromYearLow}}%
+                {% else%}
+                -{{stock.PercentChangeFromYearHigh}}%
+                {% endif %}
+                {% if stock.isInSh %}
+                <a href="http://finance.sina.com.cn/realstock/company/sh{{stock.code}}/nc.shtml">Sina</a>
+                {% else%}
+                <a href="http://finance.sina.com.cn/realstock/company/sz{{stock.code}}/nc.shtml">Sina</a>
+                {% endif %}
+            </div>
+            <div class="box-text">
+                {% if stock.current < stock.ma50 and stock.ma50 < stock.ma200 %}
+                <i class="icon-star-empty"></i>
+                {% elif stock.current < stock.ma50 %}
+                <i class="icon-arrow-down"></i>
+                {% elif stock.current < stock.ma200 %}
+                <i class="icon-thumbs-down"></i>
+                {% endif%}
+                {% if stock.current > stock.ma50 and stock.ma50 > stock.ma200 %}
+                <i class="icon-star"></i>
+                {% elif stock.current > stock.ma50 %}
+                <i class="icon-arrow-up"></i>
+                {% elif stock.current > stock.ma200 %}
+                <i class="icon-thumbs-up"></i>
+                {% endif%}
+            </div>
+        </div>
+    {%endfor%}
+</div>
+{% endblock %}
+
+
