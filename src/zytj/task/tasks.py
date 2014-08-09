@@ -7,9 +7,11 @@
 from __future__ import absolute_import
 
 from celery import Celery
+#from stocktrace import settings
 
-broker = 'redis://192.168.192.128:6379/0'
-app = Celery('tasks', broker=broker,backend=broker)
+#broker = 'redis://192.168.192.128:6379/0'
+BROKER_URL = 'mongodb://localhost:27017/stock'
+app = Celery('tasks', backend=BROKER_URL, broker=BROKER_URL)
 
 
 @app.task()
