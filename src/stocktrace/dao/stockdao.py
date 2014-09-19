@@ -9,18 +9,17 @@ from datetime import timedelta
 from datetime import datetime
 from stocktrace.util import slf4p,settings
 #from stocktrace.memcache.cache import Cache 
-from pymongo import Connection 
 #from memorised.decorators import memorise
 from stocktrace.stock import Stock
 import pandas as pd
-    
-connection = Connection()      
+
+DB_NAME = 'stocktrace'
+DB_HOST = 'localhost'
+db = getattr(pymongo.MongoClient(host=DB_HOST),DB_NAME)
 #cache = Cache() 
 logger = slf4p.getLogger(__name__)
     
 def insertStock():
-    connection = Connection()
-    db = connection.test_database
     collection = db.test_collection
     import datetime
     post = {"author": "Mike",
@@ -36,8 +35,6 @@ def insertStock():
  
 #save stock trading history         
 def saveStock(stock):
-    #connection = Connection()
-    db = connection.stock
     data = {"code": stock.code,
             "high": stock.high,
             "low": stock.low,
@@ -50,8 +47,6 @@ def saveStock(stock):
     #connection.end_request()
         
 def findAllStocks():
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.stock_history
     for stock in historyDatas.find():
         print stock   
@@ -59,8 +54,6 @@ def findAllStocks():
 #find last update stock record        
 def findLastUpdate(code):
     print "To find latest update****"+code
-    #connection = Connection()
-    db = connection.stock
     historyDatas = db.stock_history
 #    print historyDatas.find_one({"code": code})
     #print historyDatas.find({"code": code}).sort([("date",pymongo.DESCENDING)]).limit(1)
@@ -69,8 +62,6 @@ def findLastUpdate(code):
 #find the oldest stock record        
 def findOldestUpdate(code):
     print "To find oldest update****"+code
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.stock_history
 #    print historyDatas.find_one({"code": code})
     #print historyDatas.find({"code": code}).sort([("date",pymongo.DESCENDING)]).limit(1)
@@ -78,29 +69,21 @@ def findOldestUpdate(code):
    
 #find stock record after date     
 def find_history_by_date(code,date):
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.stock_history
     return historyDatas.find({"code":code,"date" : {"$gt":str(date)}}).sort([("date",pymongo.DESCENDING)]);
 
 #find all stocks' history record after date
 def find_all_history_by_date(date):
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.stock_history
     return historyDatas.find({"date" : {"$gt":str(date)}}).sort([("date",pymongo.DESCENDING)]);
 
 #find quote history data by code     
 def findStockByCode(code):
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.stock_history
     return historyDatas.find({"code":code}).sort([("date",pymongo.DESCENDING)]);
 
 
 def find_week52_history(code):
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.stock_history
     delta = timedelta(-52*7)
     begin = date.today()+delta
@@ -108,8 +91,6 @@ def find_week52_history(code):
 
 
 def update_week52(code):
-    connection = Connection()
-    db = connection.stock
     ticker = db.tickers
     result = find_week52_history(code)
     logger.debug(result)
@@ -141,15 +122,11 @@ def update_week52(code):
 
 
 def countByCode(code):
-    connection = Connection()
-    db = connection.stock
     return db.stock_history.find({"code":code}).count();
     
 
 #find stock record in the last days     
 def findLastStockByDays(code,lastDays):
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.stock_history
     from datetime import date
     from datetime import datetime
@@ -329,8 +306,6 @@ def triggerNhNl(code,lastDays=200,nearDays=5,endDate = str(date.today())):
 
 #save ticker with code and year high/low etc
 def saveTicker(stock):
-    connection = Connection()
-    db = connection.stock
     data = {"code": stock.code,
             "name": stock.name,
             "high": stock.high,
@@ -343,8 +318,6 @@ def saveTicker(stock):
 
 #batch save ticker with code
 def batchInsertTicker(stocks):
-    connection = Connection()
-    db = connection.stock
     datas = []
     for stock in stocks:
         datas.append({"code": stock})
@@ -353,8 +326,6 @@ def batchInsertTicker(stocks):
     
 #Update ticker with key statistics data
 def updateTickerWithKeyStats(stock,eps,bookingValue,marketCap = 0):
-    connection = Connection()
-    db = connection.stock
     ticker = db.tickers
     print ticker.update({"code":stock},
     {"$set":{"mgsy":float(eps), "mgjzc":float(bookingValue)}}, upsert=True,safe=True)
@@ -362,8 +333,6 @@ def updateTickerWithKeyStats(stock,eps,bookingValue,marketCap = 0):
     
 #Update ticker with latest price
 def updateTickerToLatestPrice(stock,current,ma50=0.0,ma200=0.0,yearHigh=0.0,yearLow=0.0,percentFromYearHigh=0.0,percentFromYearLow=0.0,name = ''):
-    connection = Connection()
-    db = connection.stock
     ticker = db.tickers
     logger.info('{} current:{} yearLow:{} yearHigh:{} percentFromYearLow:{} percentFromYearHigh:{}'.format(stock,current,yearLow,yearHigh,percentFromYearLow,percentFromYearHigh))
     logger.info(ticker.update({"code":stock},
@@ -373,15 +342,11 @@ def updateTickerToLatestPrice(stock,current,ma50=0.0,ma200=0.0,yearHigh=0.0,year
     
 #save non-existent tickers,may change according to IPO
 def saveNonExistentTicker(stock):
-    connection = Connection()
-    db = connection.stock
     data = {"code": stock.code}
     historyDatas = db.non_existent_tickers
     historyDatas.insert(data)
     
 def findAllNonExistentTickers():
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.non_existent_tickers
     cursor = historyDatas.find();
     from sets import Set
@@ -392,8 +357,6 @@ def findAllNonExistentTickers():
 
 
 def findAllExistentTickers():
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.tickers
     cursor = historyDatas.find();
     from sets import Set
@@ -404,8 +367,6 @@ def findAllExistentTickers():
 
 #find all quotes list
 def findAllQuotes():
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.tickers
     cursor = historyDatas.find();
     result = []
@@ -416,8 +377,6 @@ def findAllQuotes():
 
 #Define market PE as mid PE of all stocks
 def getMarketPe():
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.tickers
     all = historyDatas.find().sort([("pe",pymongo.DESCENDING)]);
     mid = all.count()/2
@@ -427,8 +386,6 @@ def getMarketPe():
 
 #Define market PB as mid PB of all stocks
 def getMarketPb():
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.tickers
     all = historyDatas.find().sort([("pb",pymongo.DESCENDING)]);
     mid = all.count()/2
@@ -438,8 +395,6 @@ def getMarketPb():
 
 #Define average PE as mid PE of all stocks
 def getAvgPe():
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.tickers
     allQuotes = historyDatas.find();
     peList = []
@@ -461,8 +416,6 @@ def getAvgPe():
 
 #Define average PB as mid PB of all stocks
 def getAvgPb():
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.tickers
     allQuotes = historyDatas.find();
     pbList = []
@@ -480,8 +433,6 @@ def getAvgPb():
 
 #get those PB<=1
 def getPbLessThan1():
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.tickers
     allQuotes = historyDatas.find();
     pbList = []
@@ -499,8 +450,6 @@ def getPbLessThan1():
 
 #clear all data in system
 def clear():
-    connection = Connection()
-    db = connection.stock
     db.tickers.remove()
     db.non_existent_tickers.remove()
     db.stock_history.remove()
@@ -509,8 +458,6 @@ def clear():
 
 #Remove stock data
 def remove_stock(code):
-    connection = Connection()
-    db = connection.stock
     db.stock_history.remove({"code": code})
     db.tickers.remove({"code": code})
     logger.info('Stock {} data is cleared.'.format(code))
@@ -603,8 +550,6 @@ def getMa(code,lastDays=10,ma=10):
     return result   
     
 def findStockByGroup():
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.stock_history
     return historyDatas.group(['code'], None,
                         {'list': []}, # initial
@@ -613,15 +558,11 @@ def findStockByGroup():
 #find top N quotes by Price Volatility from yearLow 
 #@memorise(cache.getmc())    
 def findByYearLow(top=20):
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.tickers
     return historyDatas.find().sort([("percentFromYearLow",pymongo.DESCENDING)]).limit(top);
 
 #find top N quotes by Price Volatility from yearHigh     
 def findByYearHigh(top=20):
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.tickers
     return historyDatas.find().sort([("percentFromYearHigh",pymongo.DESCENDING)]).limit(top);
 
@@ -680,8 +621,6 @@ def find_topn_by_date(top=20,condition=settings.HIGHER):
 
 #find quote by code     
 def findQuoteByCode(code,condition=settings.HIGHER):
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.tickers
     stock = historyDatas.find_one({"code":code});
     code = stock.get('code')
@@ -703,8 +642,6 @@ def findQuoteByCode(code,condition=settings.HIGHER):
 
 #find top N quotes by Price Volatility from yearHigh
 def find_topn_high(top=20):
-    connection = Connection()
-    db = connection.stock
     historyDatas = db.tickers
     return historyDatas.find().sort([("percentFromYearHigh",pymongo.DESCENDING)]).limit(top);
 
