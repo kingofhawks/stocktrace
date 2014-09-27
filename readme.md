@@ -4,6 +4,13 @@ stock trace will parse finance data from famous finance web sites and generate s
 3.Screen stocks based on 52 week's high or low percentage  
 
 
+Trade history tracking, stock price notification, compare with worldwide companies.  
+
+Reference:  
+https://www.robinhood.com/  
+http://www.tradehero.mobi/  
+
+
 
 
 
