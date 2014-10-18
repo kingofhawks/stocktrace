@@ -1,178 +1,510 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="90a9ed8e-6d16-4900-a749-5f679693db18" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/zytj/templates/alist.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/zytj/templates/dlist.html" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\css\bootstrap-responsive.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\css\bootstrap-responsive.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\css\bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\css\bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\img\glyphicons-halflings-white.png" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\img\glyphicons-halflings.png" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\js\bootstrap-tooltip.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\js\bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\bootstrap\js\bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\css\bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\css\style.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\css\font-awesome.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\css\font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\fonts\FontAwesome.otf" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\fonts\fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\fonts\fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\fonts\fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\fonts\fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\bordered-pulled.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\core.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\fixed-width.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\font-awesome.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\icons.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\larger.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\list.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\mixins.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\path.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\rotated-flipped.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\spinning.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\stacked.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\less\variables.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_bordered-pulled.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_core.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_fixed-width.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_icons.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_larger.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_list.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_mixins.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_path.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_rotated-flipped.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_spinning.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_stacked.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\_variables.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\font-awesome-4.0.3\scss\font-awesome.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\img\glyphicons-halflings-white.png" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\img\glyphicons-halflings.png" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\chosen\chosen-sprite.png" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\chosen\chosen.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\chosen\chosen.jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\chosen\chosen.jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\examples.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\images\logo.jpg" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\images\ui-colorpicker.png" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\isotope.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-1.8.2.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\dial-controls\index.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\dial-controls\style.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\infinite-scroll\index.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\infinite-scroll\style.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\modernizr.custom.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\scroll-analytics\index.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\scroll-analytics\style.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\sticky-elements\index.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\examples\sticky-elements\style.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\waypoints.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery-waypoints-1.1.7\waypoints.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.infinitescroll.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.infinitescroll.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\excanvas.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\excanvas.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\jquery.jqplot.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\jquery.jqplot.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.BezierCurveRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.BezierCurveRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.barRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.barRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.blockRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.blockRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.bubbleRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.bubbleRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasAxisLabelRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasAxisLabelRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasAxisTickRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasAxisTickRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasOverlay.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasOverlay.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasTextRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.canvasTextRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.categoryAxisRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.categoryAxisRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.ciParser.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.ciParser.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.cursor.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.cursor.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.dateAxisRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.dateAxisRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.donutRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.donutRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.dragable.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.dragable.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.enhancedLegendRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.enhancedLegendRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.funnelRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.funnelRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.highlighter.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.highlighter.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.json2.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.json2.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.logAxisRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.logAxisRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.mekkoAxisRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.mekkoAxisRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.mekkoRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.mekkoRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.meterGaugeRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.meterGaugeRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.ohlcRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.ohlcRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pieRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pieRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pointLabels.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pointLabels.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidAxisRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidAxisRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidGridRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidGridRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.pyramidRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.trendline.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.jqplot\plugins\jqplot.trendline.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\LGPL-LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\MIT-LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shAutoloader.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shAutoloader.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shBrushJScript.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shBrushJScript.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shBrushXml.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shBrushXml.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shCore.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\scripts\shCore.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shCore.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shCore.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shCoreDefault.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shCoreDefault.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shThemeDefault.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shThemeDefault.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shThemejqPlot.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\js\syntaxhighlighter\styles\shThemejqPlot.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\static\jsondata.txt" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\alist.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\dlist.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stocktrace/settings.py" afterPath="$PROJECT_DIR$/src/stocktrace/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stocktrace/util/slf4p.py" afterPath="$PROJECT_DIR$/src/stocktrace/util/slf4p.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/stocktrace.log" afterPath="$PROJECT_DIR$/log/stocktrace.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stocktrace/task/tasks.py" afterPath="$PROJECT_DIR$/src/stocktrace/task/tasks.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stocktrace/urls.py" afterPath="$PROJECT_DIR$/src/stocktrace/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/zytj/views.py" afterPath="$PROJECT_DIR$/src/zytj/views.py" />
-      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\alist_days_ma.html" afterPath="$PROJECT_DIR$/src/zytj/templates/alist_days_ma.html" />
-      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\candlestick.html" afterPath="$PROJECT_DIR$/src/zytj/templates/candlestick.html" />
-      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\index.html" afterPath="$PROJECT_DIR$/src/zytj/templates/index.html" />
-      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\isotope_demo.html" afterPath="$PROJECT_DIR$/src/zytj/templates/isotope_demo.html" />
-      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\ma.html" afterPath="$PROJECT_DIR$/src/zytj/templates/ma.html" />
-      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\nhnl-index.html" afterPath="$PROJECT_DIR$/src/zytj/templates/nhnl-index.html" />
-      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\screen_year_low_high.html" afterPath="$PROJECT_DIR$/src/zytj/templates/screen_year_low_high.html" />
-      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\stocks.html" afterPath="$PROJECT_DIR$/src/zytj/templates/stocks.html" />
-      <change type="MOVED" beforePath="G:\Dropbox\Workspace\stocktrace\src\zytj\template\test.html" afterPath="$PROJECT_DIR$/src/zytj/templates/test.html" />
+    <list default="true" id="66b78525-0139-49bf-bf19-d1a1442b8f7a" name="Default" comment="">
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\.project" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\.pydevproject" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\.settings\org.eclipse.core.resources.prefs" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\docs\easyExcel.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\docs\excelutil.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\docs\manage.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\docs\pycco.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\docs\trading.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\log\stocktrace.log" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\.bowerrc" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\amazon\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\amazon\s3server.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\amazon\test.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\easyExcel.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\excel\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\excel\main.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\excelutil.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\lottery\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\lottery\lotteryparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\manage.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\emit_log.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\emit_log_topic.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\new_task.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\receive.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\receive_logs.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\receive_logs_topic.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\send.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\worker.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\requirements.txt" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\resources\stock_list_all" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\resources\stock_list_hold" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\resources\stock_list_self_selection" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\resources\stock_list_top100" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\Gruntfile.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\README.md" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\bower.json" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap-theme.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap-theme.css.map" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap-theme.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap.css.map" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\js\bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\js\bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\fonts\glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\fonts\glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\fonts\glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\fonts\glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\grunt\bs-glyphicons-data-generator.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\grunt\bs-lessdoc-parser.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\grunt\bs-raw-files-generator.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\grunt\sauce_browsers.yml" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\affix.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\alert.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\button.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\carousel.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\collapse.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\dropdown.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\modal.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\popover.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\scrollspy.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\tab.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\tooltip.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\transition.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\alerts.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\badges.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\bootstrap.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\breadcrumbs.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\button-groups.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\buttons.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\carousel.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\close.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\code.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\component-animations.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\dropdowns.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\forms.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\glyphicons.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\grid.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\input-groups.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\jumbotron.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\labels.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\list-group.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\media.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\alerts.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\background-variant.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\border-radius.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\buttons.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\center-block.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\clearfix.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\forms.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\gradients.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\grid-framework.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\grid.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\hide-text.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\image.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\labels.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\list-group.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\nav-divider.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\nav-vertical-align.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\opacity.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\pagination.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\panels.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\progress-bar.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\reset-filter.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\resize.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\responsive-visibility.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\size.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\tab-focus.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\table-row.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\text-emphasis.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\text-overflow.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\vendor-prefixes.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\modals.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\navbar.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\navs.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\normalize.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\pager.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\pagination.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\panels.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\popovers.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\print.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\progress-bars.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\responsive-embed.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\responsive-utilities.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\scaffolding.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\tables.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\theme.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\thumbnails.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\tooltip.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\type.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\utilities.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\variables.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\wells.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\package.json" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\css\bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\css\style.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\css\font-awesome.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\css\font-awesome.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\fonts\FontAwesome.otf" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\fonts\fontawesome-webfont.eot" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\fonts\fontawesome-webfont.svg" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\fonts\fontawesome-webfont.ttf" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\fonts\fontawesome-webfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\bordered-pulled.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\core.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\fixed-width.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\font-awesome.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\icons.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\larger.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\list.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\mixins.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\path.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\rotated-flipped.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\spinning.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\stacked.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\variables.less" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_bordered-pulled.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_core.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_fixed-width.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_icons.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_larger.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_list.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_mixins.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_path.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_rotated-flipped.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_spinning.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_stacked.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_variables.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\font-awesome.scss" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\img\glyphicons-halflings-white.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\img\glyphicons-halflings.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\MIT-LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\bower.json" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\dist\jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\dist\jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\dist\jquery.min.map" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\jsonp.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\load.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\parseJSON.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\parseXML.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\script.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\xhr.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes\attr.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes\classes.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes\prop.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes\support.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes\val.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\callbacks.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\core.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\core\access.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\core\init.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\core\parseHTML.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\core\ready.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\addGetHookIf.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\curCSS.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\defaultDisplay.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\hiddenVisibleSelectors.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\support.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\swap.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\data.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\data\Data.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\data\accepts.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\deferred.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\deprecated.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\dimensions.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\effects.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\effects\Tween.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\effects\animatedSelector.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\event.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\event\alias.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\event\support.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\exports\amd.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\exports\global.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\intro.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\manipulation.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\manipulation\_evalUrl.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\manipulation\support.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\offset.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\outro.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\queue.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\queue\delay.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\selector-native.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\selector-sizzle.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\selector.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\serialize.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\sizzle\dist\sizzle.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\sizzle\dist\sizzle.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\sizzle\dist\sizzle.min.map" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\traversing.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\traversing\findFilter.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\wrap.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\chosen\chosen-sprite.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\chosen\chosen.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\chosen\chosen.jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\chosen\chosen.jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\examples.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\images\logo.jpg" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\images\ui-colorpicker.png" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\isotope.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-1.8.2.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\dial-controls\index.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\dial-controls\style.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\infinite-scroll\index.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\infinite-scroll\style.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\modernizr.custom.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\scroll-analytics\index.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\scroll-analytics\style.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\sticky-elements\index.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\sticky-elements\style.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\waypoints.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\waypoints.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.infinitescroll.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.infinitescroll.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\excanvas.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\excanvas.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\jquery.jqplot.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\jquery.jqplot.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.BezierCurveRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.BezierCurveRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.barRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.barRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.blockRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.blockRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.bubbleRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.bubbleRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasAxisLabelRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasAxisLabelRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasAxisTickRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasAxisTickRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasOverlay.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasOverlay.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasTextRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasTextRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.categoryAxisRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.categoryAxisRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.ciParser.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.ciParser.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.cursor.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.cursor.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.dateAxisRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.dateAxisRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.donutRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.donutRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.dragable.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.dragable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.enhancedLegendRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.enhancedLegendRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.funnelRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.funnelRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.highlighter.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.highlighter.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.json2.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.json2.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.logAxisRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.logAxisRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.mekkoAxisRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.mekkoAxisRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.mekkoRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.mekkoRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.meterGaugeRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.meterGaugeRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.ohlcRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.ohlcRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pieRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pieRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pointLabels.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pointLabels.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidAxisRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidAxisRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidGridRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidGridRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidRenderer.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidRenderer.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.trendline.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.trendline.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\LGPL-LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\MIT-LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shAutoloader.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shAutoloader.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shBrushJScript.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shBrushJScript.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shBrushXml.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shBrushXml.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shCore.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shCore.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shCore.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shCore.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shCoreDefault.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shCoreDefault.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shThemeDefault.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shThemeDefault.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shThemejqPlot.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shThemejqPlot.min.css" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jsondata.txt" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\.jshintrc" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\.travis.yml" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\CONTRIBUTING.md" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\Gruntfile.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\README.md" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\bower.json" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\composer.json" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\bloodhound.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\bloodhound.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\typeahead.bundle.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\typeahead.bundle.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\typeahead.jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\typeahead.jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\doc\bloodhound.md" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\doc\jquery_typeahead.md" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\doc\migration\0.10.0.md" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\karma.conf.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\package.json" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\bloodhound.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\lru_cache.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\options_parser.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\persistent_storage.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\search_index.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\tokenizers.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\transport.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\version.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\common\utils.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\css.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\dataset.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\dropdown.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\event_bus.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\event_emitter.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\highlight.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\html.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\input.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\plugin.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\typeahead.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\bloodhound_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\ci" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\dataset_view_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\dropdown_view_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\event_emitter_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\fixtures\ajax_responses.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\fixtures\data.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\fixtures\html.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\helpers\typeahead_mocks.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\highlight_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\input_view_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\integration\test.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\integration\test.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\lru_cache_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\persistent_storage_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\playground.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\search_index_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\tokenizers_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\transport_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\typeahead_view_spec.js" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\typeahead.js.jquery.json" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace.db" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\cron\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\cron\monitor.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\cron\realtimemonitorschedule.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\dao\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\dao\stockdao.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\data.json" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\data\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\data\download.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\data\main.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\memcache\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\memcache\cache.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\bloombergparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\exchangeparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\googleparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\hsiparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\htmltest.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\ifengparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\index.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\industry.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\radar.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\reutersparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\screener.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\sinaparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\sseparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\stockmarket.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\stockparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\windinparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\yahooparser.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\redis\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\redis\redisservice.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\service\AppServerSvc.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\service\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\service\stocktraceservice.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\settings.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\stock.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\stocktrace.db" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\images\bad.svg" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\images\heart.svg" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\images\trash.svg" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\stocktray.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\systray.pyw" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\systray.qrc" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\systray_rc.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\urls.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\util\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\util\mailutil.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\util\mailutil2.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\util\settings.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\util\slf4p.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\wsgi.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test.xls" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\dao_test.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\export_github.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\main.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\mongohq.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\parsetest.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\phones.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\screen_test.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\stock_api_test.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\text_diff_test.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\unitt.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\upload.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\yahoo_test.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\trading.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\models.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\task\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\task\run_tasks.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\task\tasks.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\alist_days_ma.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\base.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\candlestick.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\index.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\index_backup.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\isotope_demo.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\ma.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\nhnl-index.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\screen_year_low_high.html" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\tests.py" afterPath="" />
+      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\views.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/stocktrace.iml" afterPath="$PROJECT_DIR$/.idea/stocktrace.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="stocktrace.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -184,36 +516,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/stocktrace$stockdao.coverage" NAME="stockdao Coverage Results" MODIFIED="1390190243639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/stocktrace/dao" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_peak_price.coverage" NAME="Nosetest TestSequenceFunctions.test_peak_price Coverage Results" MODIFIED="1398569988645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download2.coverage" NAME="Nosetest TestSequenceFunctions.test_download2 Coverage Results" MODIFIED="1394509719702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_yahoo.coverage" NAME="Nosetest TestSequenceFunctions.test_yahoo Coverage Results" MODIFIED="1394256265828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download_sh.coverage" NAME="Nosetest TestSequenceFunctions.test_download_sh Coverage Results" MODIFIED="1395884040658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download_hold.coverage" NAME="Nosetest TestSequenceFunctions.test_download_hold Coverage Results" MODIFIED="1395884869795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_nhnl.coverage" NAME="Nosetest TestSequenceFunctions.test_nhnl Coverage Results" MODIFIED="1395890939624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download_sz.coverage" NAME="Nosetest TestSequenceFunctions.test_download_sz Coverage Results" MODIFIED="1395885163211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_yahoo_csv.coverage" NAME="Nosetest TestSequenceFunctions.test_yahoo_csv Coverage Results" MODIFIED="1394342405027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetests_in_stock_api_test.coverage" NAME="Nosetests in stock_api_test Coverage Results" MODIFIED="1396667603584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_update_week52.coverage" NAME="Nosetest TestSequenceFunctions.test_update_week52 Coverage Results" MODIFIED="1393820591549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_week52.coverage" NAME="Nosetest TestSequenceFunctions.test_week52 Coverage Results" MODIFIED="1393718767719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_print_stock__1_.coverage" NAME="Nosetest TestSequenceFunctions.test_print_stock (1) Coverage Results" MODIFIED="1395889149938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download_top100.coverage" NAME="Nosetest TestSequenceFunctions.test_download_top100 Coverage Results" MODIFIED="1395883551882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_pandas.coverage" NAME="Nosetest TestSequenceFunctions.test_pandas Coverage Results" MODIFIED="1393718887113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_sina_api.coverage" NAME="Nosetest TestSequenceFunctions.test_sina_api Coverage Results" MODIFIED="1396667622594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$main.coverage" NAME="main Coverage Results" MODIFIED="1394340553454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/stocktrace/data" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_remove_stock.coverage" NAME="Nosetest TestSequenceFunctions.test_remove_stock Coverage Results" MODIFIED="1394770136380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_clear.coverage" NAME="Nosetest TestSequenceFunctions.test_clear Coverage Results" MODIFIED="1395883989685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download_all.coverage" NAME="Nosetest TestSequenceFunctions.test_download_all Coverage Results" MODIFIED="1394766594646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_re_download.coverage" NAME="Nosetest TestSequenceFunctions.test_re_download Coverage Results" MODIFIED="1394769853432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_ydn_latest.coverage" NAME="Nosetest TestSequenceFunctions.test_ydn_latest Coverage Results" MODIFIED="1394511375348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_sina.coverage" NAME="Nosetest TestSequenceFunctions.test_sina Coverage Results" MODIFIED="1394509708831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_download.coverage" NAME="Nosetest TestSequenceFunctions.test_download Coverage Results" MODIFIED="1395883764760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_print_stock.coverage" NAME="Nosetest TestSequenceFunctions.test_print_stock Coverage Results" MODIFIED="1395887999030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_yahoo_csv2.coverage" NAME="Nosetest TestSequenceFunctions.test_yahoo_csv2 Coverage Results" MODIFIED="1394342937092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetests_in_yahoo_test.coverage" NAME="Nosetests in yahoo_test Coverage Results" MODIFIED="1393475543186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$mongohq.coverage" NAME="mongohq Coverage Results" MODIFIED="1389762510074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$yahoo_test.coverage" NAME="yahoo_test Coverage Results" MODIFIED="1395884276606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
-    <SUITE FILE_PATH="coverage/stocktrace$Nosetest_TestSequenceFunctions_test_poll_ydn.coverage" NAME="Nosetest TestSequenceFunctions.test_poll_ydn Coverage Results" MODIFIED="1394427794680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/test" />
+    <SUITE FILE_PATH="coverage/stocktrace$main.coverage" NAME="main Coverage Results" MODIFIED="1413602693005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stocktrace/data" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -227,84 +530,66 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/zytj/views.py">
+      <file leaf-file-name="yahooparser.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/stocktrace/parse/yahooparser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="11" selection-start="344" selection-end="344" vertical-scroll-proportion="0.0" vertical-offset="2622" max-vertical-offset="5510">
+            <state line="364" column="40" selection-start="14658" selection-end="14658" vertical-scroll-proportion="-19.64" vertical-offset="6235" max-vertical-offset="10279">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="yahoo_test.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/yahoo_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="24" selection-start="614" selection-end="630" vertical-scroll-proportion="-6.08" vertical-offset="171" max-vertical-offset="2014">
               <folding>
-                <element signature="e#50#85#0" expanded="true" />
+                <element signature="e#0#15#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dlist.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/zytj/templates/dlist.html">
+      <file leaf-file-name="readme.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="20" selection-start="47" selection-end="47" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="1824">
+            <state line="21" column="76" selection-start="654" selection-end="654" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="779">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/static/bootstrap/js/bootstrap.js">
+      <file leaf-file-name="requirements.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="41" selection-start="1094" selection-end="1094" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="38247">
+            <state line="3" column="5" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="171">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="response.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://E:/Anaconda/Lib/site-packages/django/http/response.py">
+      <file leaf-file-name="trading.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trading.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="466" column="64" selection-start="16047" selection-end="16047" vertical-scroll-proportion="-7.28" vertical-offset="8330" max-vertical-offset="8873">
+            <state line="24" column="12" selection-start="674" selection-end="674" vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="608">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stocktrace/urls.py">
+      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="836">
+            <state line="4" column="5" selection-start="74" selection-end="74" vertical-scroll-proportion="0.20430107" vertical-offset="0" max-vertical-offset="1102">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="alist.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/zytj/templates/alist.html">
+      <file leaf-file-name="history.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/history.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="8" selection-start="34" selection-end="34" vertical-scroll-proportion="-0.6785714" vertical-offset="0" max-vertical-offset="2071">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/zytj/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="92" selection-start="777" selection-end="777" vertical-scroll-proportion="0.5857418" vertical-offset="0" max-vertical-offset="1292">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="alist_days_ma.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/zytj/templates/alist_days_ma.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="6" selection-start="23" selection-end="23" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="1330">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/stocktrace/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="50" selection-start="4781" selection-end="4781" vertical-scroll-proportion="0.0" vertical-offset="1796" max-vertical-offset="3287">
+            <state line="0" column="0" selection-start="0" selection-end="203" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
               <folding />
             </state>
           </provider>
@@ -328,22 +613,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/stocktrace/parse/yahooparser.py" />
-        <option value="$PROJECT_DIR$/src/test/yahoo_test.py" />
-        <option value="$PROJECT_DIR$/src/test/screen_test.py" />
-        <option value="$PROJECT_DIR$/src/test/stock_api_test.py" />
-        <option value="$PROJECT_DIR$/src/log/stocktrace.log" />
-        <option value="$PROJECT_DIR$/src/test/dao_test.py" />
-        <option value="$PROJECT_DIR$/src/stocktrace/dao/stockdao.py" />
+        <option value="$PROJECT_DIR$/stocktrace/parse/yahooparser.py" />
+        <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/trading.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/zytj/template/base.html" />
-        <option value="$PROJECT_DIR$/src/zytj/template/alist.html" />
-        <option value="$PROJECT_DIR$/src/zytj/views.py" />
-        <option value="$PROJECT_DIR$/src/zytj/template/dlist.html" />
-        <option value="$PROJECT_DIR$/src/stocktrace/util/slf4p.py" />
-        <option value="$PROJECT_DIR$/src/stocktrace/settings.py" />
-        <option value="$PROJECT_DIR$/src/stocktrace/urls.py" />
-        <option value="$PROJECT_DIR$/src/zytj/templates/base.html" />
       </list>
     </option>
   </component>
@@ -393,39 +667,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
               <option name="myItemId" value="stocktrace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zytj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="stocktrace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="zytj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -436,142 +678,28 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="vcs.Git" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="G:/Workspace/Ghost" />
-    <property name="FullScreen" value="false" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="last_opened_file_path" value="G:/Workspace" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
   </component>
-  <component name="PyConsoleOptionsProvider">
-    <option name="myPythonConsoleState">
-      <console-settings />
-    </option>
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="G:\Dropbox\Workspace\stocktrace\src\static" />
-      <recent name="G:\Dropbox\Workspace\stocktrace\src\zytj\template" />
-      <recent name="G:\Dropbox\Workspace\stocktrace\src\test" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Python tests.Nosetest TestSequenceFunctions.test_peak_price">
-    <configuration default="false" name="Nosetest TestSequenceFunctions.test_print_stock (1)" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.main">
+    <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/stocktrace/data" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="stocktrace" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/dao_test.py" />
-      <option name="CLASS_NAME" value="TestSequenceFunctions" />
-      <option name="METHOD_NAME" value="test_print_stock" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_METHOD" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Nosetest TestSequenceFunctions.test_nhnl" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="stocktrace" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/screen_test.py" />
-      <option name="CLASS_NAME" value="TestSequenceFunctions" />
-      <option name="METHOD_NAME" value="test_nhnl" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_METHOD" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Nosetest TestSequenceFunctions.test_peak_price" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="stocktrace" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/dao_test.py" />
-      <option name="CLASS_NAME" value="TestSequenceFunctions" />
-      <option name="METHOD_NAME" value="test_peak_price" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_METHOD" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Nosetest TestSequenceFunctions.test_sina_api" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="stocktrace" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/stock_api_test.py" />
-      <option name="CLASS_NAME" value="TestSequenceFunctions" />
-      <option name="METHOD_NAME" value="test_sina_api" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_METHOD" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Nosetests in stock_api_test" type="tests" factoryName="Nosetests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="stocktrace" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/stock_api_test.py" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/stocktrace/data/main.py" />
+      <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
@@ -660,6 +788,9 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -683,7 +814,27 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
       <method />
     </configuration>
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
@@ -730,46 +881,45 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_print_stock (1)" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_nhnl" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_peak_price" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_sina_api" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Nosetests in stock_api_test" />
+    <configuration default="false" name="stocktrace" type="Python.DjangoServer" factoryName="Django server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Django server.stocktrace" />
+      <item index="1" class="java.lang.String" itemvalue="Python.main" />
     </list>
     <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_peak_price" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_sina_api" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Nosetests in stock_api_test" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_nhnl" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Nosetest TestSequenceFunctions.test_print_stock (1)" />
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="90a9ed8e-6d16-4900-a749-5f679693db18" name="Default" comment="" />
-      <created>1389758800535</created>
-      <updated>1389758800535</updated>
+      <changelist id="66b78525-0139-49bf-bf19-d1a1442b8f7a" name="Default" comment="" />
+      <created>1413602611856</created>
+      <updated>1413602611856</updated>
     </task>
     <servers />
   </component>
@@ -777,24 +927,24 @@
     <frame x="10" y="0" width="1346" height="728" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45454547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25263157" sideWeight="0.54545456" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989899" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45286196" sideWeight="0.1112782" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43771043" sideWeight="0.8887218" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962406" sideWeight="0.6700337" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32996634" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -809,118 +959,67 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/stocktrace/stock.py">
+    <entry file="file://$PROJECT_DIR$/stocktrace/data/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="16" selection-start="1922" selection-end="1930" vertical-scroll-proportion="0.0" vertical-offset="969" max-vertical-offset="2185">
+        <state line="10" column="0" selection-start="299" selection-end="299" vertical-scroll-proportion="-6.84" vertical-offset="0" max-vertical-offset="285">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/text_diff_test.py">
+    <entry file="file://$PROJECT_DIR$/stocktrace/parse/yahooparser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="27" selection-start="144" selection-end="163" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="532">
+        <state line="364" column="40" selection-start="14658" selection-end="14658" vertical-scroll-proportion="-19.64" vertical-offset="6235" max-vertical-offset="10279">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/dao_test.py">
+    <entry file="file://$PROJECT_DIR$/test/yahoo_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1237" selection-end="1237" vertical-scroll-proportion="0.0" vertical-offset="192" max-vertical-offset="760">
+        <state line="17" column="24" selection-start="614" selection-end="630" vertical-scroll-proportion="-6.08" vertical-offset="171" max-vertical-offset="2014">
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/history.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="203" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/.bowerrc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="9" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0" vertical-offset="247" max-vertical-offset="1045">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="372">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="59" selection-start="285" selection-end="285" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+        <state line="21" column="76" selection-start="654" selection-end="654" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="779">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/history.md">
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="30" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+        <state line="3" column="5" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="171">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/zytj/templates/alist_days_ma.html">
+    <entry file="file://$PROJECT_DIR$/trading.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="6" selection-start="23" selection-end="23" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="1330">
+        <state line="24" column="12" selection-start="674" selection-end="674" vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="608">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/zytj/templates/alist.html">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="8" selection-start="34" selection-end="34" vertical-scroll-proportion="-0.6785714" vertical-offset="0" max-vertical-offset="2071">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/zytj/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="11" selection-start="344" selection-end="344" vertical-scroll-proportion="0.0" vertical-offset="2622" max-vertical-offset="5510">
-          <folding>
-            <element signature="e#50#85#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/zytj/templates/dlist.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="20" selection-start="47" selection-end="47" vertical-scroll-proportion="-1.3571428" vertical-offset="0" max-vertical-offset="1824">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/static/bootstrap/js/bootstrap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="41" selection-start="1094" selection-end="1094" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="38247">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stocktrace/util/slf4p.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="46" selection-start="200" selection-end="200" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="703">
-          <folding>
-            <element signature="e#66#92#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stocktrace/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="50" selection-start="4781" selection-end="4781" vertical-scroll-proportion="0.0" vertical-offset="1796" max-vertical-offset="3287">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stocktrace/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="836">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Anaconda/Lib/site-packages/django/http/response.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="466" column="64" selection-start="16047" selection-end="16047" vertical-scroll-proportion="-7.28" vertical-offset="8330" max-vertical-offset="8873">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/zytj/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="92" selection-start="777" selection-end="777" vertical-scroll-proportion="0.5857418" vertical-offset="0" max-vertical-offset="1292">
+        <state line="4" column="5" selection-start="74" selection-end="74" vertical-scroll-proportion="0.20430107" vertical-offset="0" max-vertical-offset="1102">
           <folding />
         </state>
       </provider>

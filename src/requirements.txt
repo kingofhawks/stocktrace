@@ -1,3 +1,0 @@
-django==1.6.5
-celery==3.1.13
-pymongo==2.7.2
