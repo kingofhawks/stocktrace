@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load i18n staticfiles %}
 
 {% block extra_js %}
         <script type="text/javascript" src="{%static 'js/jquery-waypoints-1.1.7/waypoints.min.js' %}"></script>
@@ -122,12 +122,14 @@
 		</script>
 {%endblock %}
 
+{% block title %}Screen by 52 week high/low pecentage {% endblock %}
+
 {% block left_panel %}
 <a id="next" href="{{context}}/?industry={{industry}}&list={{stockList}}&q=2" >next page?</a>
 <nav>
     <div id="nav">
         <ul>
-            <li><a href="/zytj/alist" data-filter=".cat1">Ascending from Year Low</a></li>
+            <li><a href="/zytj/alist" data-filter=".cat1">{% trans "Ascending from Year Low(52 Week)" %}</a></li>
             <li><a href="/zytj/dlist" data-filter=".cat2">Descending from Year High</a></li>
             <li><a href="/zytj/alist/20/" data-filter=".cat2">Ascending from 20 days</a></li>
         </ul>

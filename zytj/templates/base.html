@@ -3,7 +3,7 @@
 {% load  i18n staticfiles %}
 
 <head>
-    <title>AList Page</title>
+    <title>{% block title %}{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
