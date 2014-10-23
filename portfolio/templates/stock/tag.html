@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Stock Portfolio</title>
+		
+		<link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}vex/css/vex.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}vex/css/vex-theme-os.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}font-awesome-4.0.3/css/font-awesome.min.css" />
+		<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap-tooltip.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/isotope.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/handlebars-v1.3.0.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}vex/js/vex.combined.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/list.min.js"></script>
+        <script>vex.defaultOptions.className = 'vex-theme-os';</script>
+
+        <script id="entry-template" type="text/x-handlebars-template">
+          template content
+        </script>
+
+		<script type="text/javascript">
+        function modify_stock(code){
+            console.log(code);
+            if (typeof(code) === 'number'){
+                var n = code.toString();
+                console.log(n);
+                if (n.length == 3){
+                    code = "000"+n;
+                    console.log(code);
+                }
+            }
+
+            var source   = $("#entry-template").html();
+            var template = Handlebars.compile(source);
+            var context = {title: "My New Post", body: "This is my first post!"}
+            var html    = template(context);
+                $.get( "/detail", { code: code},function( data ) {
+                  //$( ".result" ).html( data );
+                    console.log(data)
+                    amount = data['amount']
+                    up_threshold = data['up_threshold']
+                    down_threshold = data['down_threshold']
+                  //window.location.reload();
+                    vex.dialog.open({
+                      afterOpen: function($vexContent) {
+                          $('#code').val(code)
+                          $('#amount').val(amount)
+                          $('#up_threshold').val(up_threshold)
+                          $('#down_threshold').val(down_threshold)
+                          return $vexContent.append(html);
+                      },
+                      message: 'Enter your code and amount:',
+                      input: "<input id=\"code\" name=\"code\" type=\"text\" placeholder=\"Code\" required />\n<input id=\"amount\" name=\"amount\" type=\"text\" placeholder=\"Amount\" required /><input id=\"up_threshold\" name=\"up_threshold\" type=\"text\" placeholder=\"Up Threshold\" required /><input id=\"down_threshold\" name=\"down_threshold\" type=\"text\" placeholder=\"Down Threshold\" required />",
+                      buttons: [
+                        $.extend({}, vex.dialog.buttons.YES, {
+                          text: 'Submit'
+                        }), $.extend({}, vex.dialog.buttons.NO, {
+                          text: 'Cancel'
+                        })
+                      ],
+                      callback: function(data) {
+                        if (data === false) {
+                          return console.log('Cancelled');
+                        }
+                        $.get( "/update", { code: data.code, amount: data.amount,up_threshold:data.up_threshold,down_threshold:data.down_threshold },function( data ) {
+                          //$( ".result" ).html( data );
+                          window.location.reload();
+                        });
+                        return console.log('Code', data.code, 'Amount', data.amount, 'Up', data.up_threshold, 'Down', data.down_threshold);
+                      }
+                    });
+                });
+
+        }
+		
+		$(document).ready(function(){
+		var $container = $('#content');
+		$container.isotope({
+			filter: '*',
+			animationOptions: {
+		     duration: 750,
+		     easing: 'linear',
+		     queue: false
+		   }
+		});
+
+
+
+        $("#create").click(function() {
+            vex.dialog.open({
+              message: 'Enter your code and amount:',
+              input: "<input name=\"code\" type=\"text\" placeholder=\"Code\" required />\n<input name=\"amount\" type=\"text\" placeholder=\"Amount\" value=\"0\" required />",
+              buttons: [
+                $.extend({}, vex.dialog.buttons.YES, {
+                  text: 'Create'
+                }), $.extend({}, vex.dialog.buttons.NO, {
+                  text: 'Back'
+                })
+              ],
+              callback: function(data) {
+                if (data === false) {
+                  return console.log('Cancelled');
+                }
+                $.get( "/create", { code: data.code, amount: data.amount ,tag: 'top100'},function( data ) {
+                  //$( ".result" ).html( data );
+                  window.location.reload();
+                });
+                return console.log('Username', data.code, 'Password', data.amount);
+              }
+            });
+        });
+
+            var options = {
+              valueNames: [ 'id', 'code', 'market' ]
+            };
+
+            // Init list
+            var contactList = new List('content', options);
+        });
+		</script>
+	</head>
+	
+	<body>
+        <header id="header"><h1>Stock Portfolio</h1></header>
+
+		<div id="content" class="container-fluid">
+            <table class="table table-hover">
+                  <thead>
+                    <tr>
+                        <th class="sort" data-sort="code">Stock</th>
+                        <th class="sort" data-sort="current">Current</th>
+                        <th>Up</th>
+                        <th>Down</th>
+                        <th>Notification</th>
+                        <th>Modify</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    {% for stock in results%}
+                        <tr>
+                            <td class="code">{{stock.code}}</td>
+                            <td class="current">{{stock.current}}</td>
+                            <td>{{stock.up_threshold}}</td>
+                            <td>{{stock.down_threshold}}</td>
+                            <td>
+                                {% if stock.up_threshold and stock.current > stock.up_threshold  %}
+                                <i class="fa fa-exclamation-triangle fa-3x"></i>
+                                {% elif stock.current < stock.down_threshold %}
+						        <i class="fa fa-eye fa-3x"></i>
+                                {% endif %}
+                            </td>
+                            <td><a class="btn btn-default" href="#" onclick="modify_stock('{{stock.code}}')"><i class="fa fa-pencil fa-fw"></i> Modify</a></td>
+                            <td><a class="btn btn-danger" href="/delete/{{stock.code}}"><i class="fa fa-trash-o fa-lg"></i> Delete</a></td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+			<from action="." method="post" class="form">{% csrf_token %}
+                <button class="btn btn-primary btn-lg" id="create">
+                  <i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;Create
+                </button>
+                <button class="btn btn-primary btn-lg" id="import">
+                  <i class="fa fa-plus"></i> Import
+                </button>
+            </from>
+		</div>
+
+		
+        <footer><h3>Test Footer</h3></footer>
+	</body>
+</html>

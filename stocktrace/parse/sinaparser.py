@@ -42,7 +42,7 @@ def getStock(code):
     u_content = name.decode(enc) # decodes from enc to unicode
     utf8_name = u_content.encode("utf8")
     logger.debug(utf8_name)
-    stock = Stock(code,current,percent,low,high,volume)
+    stock = Stock(code, 0, current, percent, low, high, volume)
     stock.name = utf8_name
     
     #check threshold

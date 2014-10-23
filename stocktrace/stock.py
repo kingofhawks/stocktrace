@@ -35,16 +35,19 @@ class Stock:
     alert = False;
     state = 'OK'#OK,WARNING,CRITICAL,UP
     isInSh = False;#Shanghai code
+    amount = 0;
 
-    def __init__(self, code, current=0, percent=0, low=0, high=0, volume=0):
+    def __init__(self, code, amount=0, current=0, percent=0, low=0, high=0, volume=0):
         self.code = code
         self.current = current
         self.percent = percent
         self.low = low
         self.high = high
         self.volume = volume
+        self.amount = amount
 
-    def __str__(self):
+    #python2.7 use __unicode__, for python3 use __str__
+    def __unicode__(self):
         #self.pe = self.current/self.mgsy
         return self.code + '**name:' + str(self.name) + '**now:' + str(
             self.current) + '**state:' + self.state + '**percent:' + str('%.2f' % self.percent + '%') + '**high:' + str(

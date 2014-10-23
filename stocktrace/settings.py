@@ -124,7 +124,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'zytj'
+    'zytj',
+    'portfolio',
     # Uncomment the next line to enable the admin:
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
