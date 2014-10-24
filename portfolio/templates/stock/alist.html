@@ -1,5 +1,5 @@
 {% extends "portfolio/base.html" %}
-{% load staticfiles %}
+{% load staticfiles i18n %}
 
 {% block content %}
     <article>Total:{{market_value}}</article>
@@ -21,7 +21,7 @@
                   <thead>
                     <tr>
                         <th class="sort" data-sort="code">Stock</th>
-                        <th>Amount</th>
+                        <th>{% trans "Amount" %}</th>
                         <th>Current</th>
                         <th class="sort" data-sort="market"><i class="fa fa-sort"></i>Market</th>
                         <th>Modify</th>
@@ -44,7 +44,7 @@
                             </td>
                             <td><a class="btn btn-default" href="#" onclick="modify_stock({{stock.code}})"><i class="fa fa-pencil fa-fw"></i> Modify</a></td>
                             <td><a data-value="{{ stock.code }}" class="btn btn-danger delete" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a></td>
-                            <td>{{stock.tags}}</td>
+                            <td>{{stock.tags }}</td>
                         </tr>
                     {%endfor%}
                 </tbody>
