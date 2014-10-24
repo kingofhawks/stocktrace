@@ -125,10 +125,11 @@
 {% block title %}Screen by 52 week high/low pecentage {% endblock %}
 
 {% block left_panel %}
-<a id="next" href="{{context}}/?industry={{industry}}&list={{stockList}}&q=2" >next page?</a>
+<a id="next" href="{{context}}/?industry={{industry}}&list={{stockList}}&q=2" hidden="hidden">next page?</a>
 <nav>
     <div id="nav">
         <ul>
+            <li><a href="{% url 'portfolio:home' %}" data-filter=".cat1">{% trans "Portfolio" %}</a></li>
             <li><a href="/zytj/alist" data-filter=".cat1">{% trans "Ascending from Year Low(52 Week)" %}</a></li>
             <li><a href="/zytj/dlist" data-filter=".cat2">Descending from Year High</a></li>
             <li><a href="/zytj/alist/20/" data-filter=".cat2">Ascending from 20 days</a></li>

@@ -9,6 +9,7 @@ from portfolio import polling
 from django.http import HttpResponse
 import json
 from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
 
 
 def stock_list2(request):
@@ -26,9 +27,9 @@ def stock_list2(request):
     return render(request, 'stock/alist.html', {'results': results, 'market_value': market_value})
 
 
-def tag(request, tag):
-    print tag
-    results = find_stocks_by_tag(tag)
+def tag(request, pk):
+    print pk
+    results = find_stocks_by_tag(pk)
     print results
 
     return render(request, 'stock/tag.html', {'results': results})
@@ -75,7 +76,9 @@ def update(request):
     return render_to_response('stock/alist.html')
 
 
-def delete(request, code):
-    delete_stock(code)
-    return redirect('/alist')
+def delete(request, pk):
+    print pk
+    delete_stock(pk)
+
+    return redirect(reverse('portfolio:home'))
 

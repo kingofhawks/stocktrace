@@ -10,9 +10,13 @@ logger = slf4p.getLogger(__name__)
 #quote state cache
 stateCache = {}
 
+#Sina API
 def getStock(code):
-    #Sina API
-    if (code.startswith('60')):
+    #hard code for money
+    if code == '999999':
+        stock = Stock(code, 0, 1)
+        return stock
+    elif code.startswith('60'):
         code = 'sh'+code
     else:
         code = 'sz'+code
@@ -75,6 +79,7 @@ def getStock(code):
 
     logger.info( '****Download latest price from SINA finished****'+stock.code)
     #logger.info(stock)
+
     return stock
     
     #print '%.2f'%percent+'%'   

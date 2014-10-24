@@ -1,3 +1,4 @@
+{% extends "portfolio/base.html" %}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -128,48 +129,7 @@
 	<body>
         <header id="header"><h1>Stock Portfolio</h1></header>
 
-		<div id="content" class="container-fluid">
-            <table class="table table-hover">
-                  <thead>
-                    <tr>
-                        <th class="sort" data-sort="code">Stock</th>
-                        <th class="sort" data-sort="current">Current</th>
-                        <th>Up</th>
-                        <th>Down</th>
-                        <th>Notification</th>
-                        <th>Modify</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody class="list">
-                    {% for stock in results%}
-                        <tr>
-                            <td class="code">{{stock.code}}</td>
-                            <td class="current">{{stock.current}}</td>
-                            <td>{{stock.up_threshold}}</td>
-                            <td>{{stock.down_threshold}}</td>
-                            <td>
-                                {% if stock.up_threshold and stock.current > stock.up_threshold  %}
-                                <i class="fa fa-exclamation-triangle fa-3x"></i>
-                                {% elif stock.current < stock.down_threshold %}
-						        <i class="fa fa-eye fa-3x"></i>
-                                {% endif %}
-                            </td>
-                            <td><a class="btn btn-default" href="#" onclick="modify_stock('{{stock.code}}')"><i class="fa fa-pencil fa-fw"></i> Modify</a></td>
-                            <td><a class="btn btn-danger" href="/delete/{{stock.code}}"><i class="fa fa-trash-o fa-lg"></i> Delete</a></td>
-                        </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-			<from action="." method="post" class="form">{% csrf_token %}
-                <button class="btn btn-primary btn-lg" id="create">
-                  <i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;Create
-                </button>
-                <button class="btn btn-primary btn-lg" id="import">
-                  <i class="fa fa-plus"></i> Import
-                </button>
-            </from>
-		</div>
+
 
 		
         <footer><h3>Test Footer</h3></footer>
