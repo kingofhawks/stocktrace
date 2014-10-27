@@ -24,7 +24,7 @@ def stock_list2(request):
         except KeyError as e:
             pass
     print 'market_value:{}'.format(market_value)
-    return render(request, 'stock/alist.html', {'results': results, 'market_value': market_value})
+    return render(request, 'portfolio/index.html', {'results': results, 'market_value': market_value})
 
 
 def tag(request, pk):

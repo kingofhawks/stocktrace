@@ -2,11 +2,14 @@ from django.test import TestCase
 #from unittest import TestCase
 from dao import delete_stock,update_stock_price,update_stock_amount,add_tag,find_stocks_by_tag
 from stocktrace.parse.sinaparser import getStock
-from portfolio import import_portfolio
+from portfolio import import_portfolio, snapshot
 
 
 class TestDao(TestCase):
     code = '600573'
+
+    def test_portfolio(self):
+        snapshot()
 
     def test_delete_stock(self):
         #delete_stock('Money')

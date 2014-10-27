@@ -54,6 +54,7 @@ def insert_stock(stock):
     stocks.insert(data)
     #connection.end_request()
 
+
 #use mongodb array type for tags
 def add_tag(code,tag):
     data = {"code": code, "tags": [tag]}
@@ -69,14 +70,16 @@ def delete_stock(code):
 
 def find_all_stocks():
     #connection = Connection()
-    #db = connection.stock
-    stocks = db.stock
-    result = []
-    for s in stocks.find():
-        #print stock
-        result.append(s)
-    #return stocks.find()
-    return result
+    # #db = connection.stock
+    # stocks = db.stock
+    # result = []
+    # for s in stocks.find():
+    #     #print stock
+    #     result.append(s)
+    # #return stocks.find()
+    # return result
+
+    return list(db.stock.find())
 
 #TODO
 def find_stocks_by_tag(tag):
