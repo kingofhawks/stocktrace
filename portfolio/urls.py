@@ -5,6 +5,7 @@ import views
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', views.stock_list2, name='home'),
+    url(r'^history', views.history, name='history'),
     url(r'^create', views.create_stock),
     url(r'^detail', views.detail),
     url(r'^update', views.update),

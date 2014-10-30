@@ -1,7 +1,11 @@
 from django.db import models
 from django.utils import timezone
-from pymongo import MongoClient
+from django.conf import settings
 
+#print settings
+#print settings.CACHES
+#print settings.DB
+db = settings.DB
 
 # Create your models here.
 class Portfolio(object):
@@ -17,9 +21,9 @@ class Portfolio(object):
         self.date = timezone.now()
 
     def save(self):
-        client = MongoClient('localhost', 27017)
+        #client = MongoClient('localhost', 27017)
         #cache = Cache()
-        db = client.stocktrace
+        #db = client.stocktrace
         stock_list = []
         for stock in self.stocks:
             stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})

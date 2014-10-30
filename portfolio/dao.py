@@ -3,12 +3,11 @@ Created on 2011-3-7
 
 @author: simon
 '''
-import pymongo
 from datetime import date
 from datetime import timedelta
 from datetime import datetime
-from pymongo import MongoClient
 from stocktrace.stock import Stock
+from django.conf import settings
     
 #connection = Connection()
 
@@ -20,10 +19,11 @@ from stocktrace.stock import Stock
 #uri = "mongodb://kingofhawks:lazio_2000@ds061288.mongolab.com:61288/stocktrace"
 #client = MongoClient(uri)
 
-client = MongoClient('localhost', 27017)
-#cache = Cache()
-db = client.stocktrace
-print db
+#client = MongoClient('localhost', 27017)
+##cache = Cache()
+#db = client.stocktrace
+#print db
+db = settings.DB
 
 
 def update_stock_price(code,current):
@@ -79,6 +79,7 @@ def find_all_stocks():
     # #return stocks.find()
     # return result
 
+    #list() method will convert pymongo cursor to python list
     return list(db.stock.find())
 
 #TODO
@@ -97,3 +98,7 @@ def clear():
     db.tickers.remove()
     db.non_existent_tickers.remove()
     db.stock_history.remove()
+
+
+def find_all_portfolio():
+    return list(db.portfolio.find({}))

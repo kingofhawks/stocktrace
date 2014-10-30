@@ -167,3 +167,7 @@ CACHES = {
         'LOCATION': 'my_cache_table', #python manage.py createcachetable my_cache_table
     }
 }
+
+from pymongo import MongoClient
+client = MongoClient('localhost', 27017)
+DB = client.stocktrace

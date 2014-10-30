@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% load i18n staticfiles  %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'c3/c3.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script src="{% static 'd3/d3.min.js'%}"></script>
+    <script src="{% static 'c3/c3.min.js' %}"></script>
+    <script src="{% static 'moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'handlebars/handlebars.min.js' %}"></script>
+
+    <script id="row-template" type="text/x-handlebars-template">
+    {% verbatim %}
+        <tr>
+            <td>{{ date }}</td>
+            <td>{{ market_value }}</td>
+        </tr>
+    {% endverbatim %}
+    </script>
+
+    <script>
+    $(document).ready(function(){
+        var mode = "{{ mode }}";
+
+{#        $("#today").click(function(){#}
+{#            //a trick to pass JS variable to django url template tag#}
+{#            var url = "{% url 'management.adstats'%}";#}
+{#            url = url+'?mode=today';#}
+{#            console.log(url)#}
+{#            window.location.href = url;#}
+{#        });#}
+{##}
+{#        $("#yesterday").click(function(){#}
+{#            //a trick to pass JS variable to django url template tag#}
+{#            var url = "{% url 'management.adstats'%}";#}
+{#            url = url+'?mode=yesterday';#}
+{#            console.log(url)#}
+{#            window.location.href = url;#}
+{#        });#}
+{##}
+{#        $("#last7Days").click(function(){#}
+{#            //a trick to pass JS variable to django url template tag#}
+{#            var url = "{% url 'management.adstats'%}";#}
+{#            url = url+'?mode=last7Days';#}
+{#            console.log(url)#}
+{#            window.location.href = url;#}
+{#        });#}
+{##}
+{#        $("#month").click(function(){#}
+{#            //a trick to pass JS variable to django url template tag#}
+{#            var url = "{% url 'management.adstats'%}";#}
+{#            url = url+'?mode=month';#}
+{#            console.log(url)#}
+{#            window.location.href = url;#}
+{#        });#}
+{##}
+{#        $("#search").click(function(){#}
+{#            //a trick to pass JS variable to django url template tag#}
+{#            var url = "{% url 'management.adstats'%}";#}
+{#            console.log($("#start"));#}
+{#            var start = $('#start').val();#}
+{#            console.log(start);#}
+{#            var end = $('#end').val();#}
+{#            console.log(end);#}
+{#            url = url+'?mode=search&start='+start+'&end='+end;#}
+{#            console.log(url)#}
+{#            window.location.href = url;#}
+{#        });#}
+
+        var stats_json = {{  data |safe}};
+
+        console.log(stats_json);
+
+        var adPresentation = ['广告展示']
+        var dateArray = ['x']
+        var format = "YYYY-MM-D";
+        if (mode === 'today' || mode ==='yesterday'){
+            format = "YYYY-MM-DTHH";
+        }
+        stats_json.forEach(function(element,index,array){
+            console.log(element);
+{#            console.log(element.count);#}
+{#            console.log(element.count === null)#}
+            var count = element.market_value;
+            if (count === null){
+                count = 0;
+            }
+            adPresentation.push(count);
+
+            date = moment(element.date)
+{#            console.log(date);#}
+            dateArray.push(date.format(format));
+
+{#            console.log(date.format("YYYY-MM-D"))#}
+            var source   = $("#row-template").html();
+            var template = Handlebars.compile(source);
+            var context = {date: date.format(format), market_value: count};
+            var html    = template(context);
+{#            console.log(html);#}
+            $('.table > tbody:last').append(html);
+        });
+
+{#        console.log(adPresentation);#}
+{#        console.log(dateArray);#}
+
+        var xFormat = "%Y-%m-%d";
+        if (mode === 'today' || mode ==='yesterday'){
+            xFormat = "%Y-%m-%dT%H";
+        }
+
+        var chart = c3.generate({
+            bindto: '#chart',
+            data: {
+                x:'x',
+               xFormat: xFormat,
+              columns: [
+{#                      ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],#}
+                      dateArray,
+{#                ['广告展示', 30, 200, 100, 400, 150, 250],#}
+                adPresentation,
+{#                ['广告点击', 50, 20, 10, 40, 15, 25]#}
+              ],
+                types: {
+                    广告展示: 'area-spline',
+{#                    广告点击: 'area-spline'#}
+                    // 'line', 'spline', 'step', 'area', 'area-step' are also available to stack
+                }
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: xFormat
+                    }
+                }
+            }
+        });
+
+
+    });
+    </script>
+{% endblock %}
+
+{% block content-header %}
+<h1>
+    {% trans "AD Statistics" %}
+    <small></small>
+</h1>
+{% endblock %}
+
+{% block content %}
+<div>
+    <input type="text" class="datepicker" id="start" placeholder="{% trans 'Start Date' %}">
+    <input type="text" class="datepicker" id="end" placeholder="{% trans 'End Date' %}">
+    <a id="search" class="btn btn-default">{% trans "search" %}</a>
+    <div class="btn-group">
+      <a id="today" class="btn btn-default">{% trans "Today Statistics" %}</a>
+      <a id="yesterday" class="btn btn-default">{% trans "Yesterday Statistics" %}</a>
+      <a id="last7Days" class="btn btn-default">{% trans "Last 7 days Statistics" %}</a>
+      <a id="month" class="btn btn-default">{% trans "Month Statistics" %}</a>
+    </div>
+</div>
+<div id="chart"></div>
+<table class="display table table-bordered" id="table">
+    <thead>
+        <th>{% trans "Date" %}</th>
+        <th>{% trans "Market Value" %}</th>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+{% endblock %}
+
+

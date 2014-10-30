@@ -8,6 +8,8 @@ from portfolio import import_portfolio, snapshot
 class TestDao(TestCase):
     code = '600573'
 
+#E:\SkyDrive\Workspace\stocktrace>python manage.py test portfolio.tests.TestDao.t
+#est_portfolio
     def test_portfolio(self):
         snapshot()
 

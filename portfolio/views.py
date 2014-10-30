@@ -1,9 +1,7 @@
 from django.shortcuts import render
 import os
-from django.shortcuts import render_to_response
-from django.shortcuts import render
-from dao import find_all_stocks, insert_stock, find_stock_by_code, update_stock_price, update_stock_amount, \
-    delete_stock,find_stocks_by_tag, add_tag
+from django.shortcuts import render, render_to_response
+from dao import *
 from stocktrace.stock import Stock
 from portfolio import polling
 from django.http import HttpResponse
@@ -62,7 +60,7 @@ def create_stock(request):
     stock = Stock(code, amount, 0)
     insert_stock(stock)
     add_tag(code, 'top100')
-    return render_to_response('stock/alist.html')
+    return render_to_response('portfolio/index.html')
 
 
 def update(request):
@@ -73,7 +71,7 @@ def update(request):
     print 'code:{0},amount:{1},up_threshold:{2},down_threshold:{3}'.format(code, amount,
                                                                            up_threshold, down_threshold)
     update_stock_amount(code, amount, up_threshold, down_threshold)
-    return render_to_response('stock/alist.html')
+    return render_to_response('portfolio/index.html')
 
 
 def delete(request, pk):
@@ -81,4 +79,15 @@ def delete(request, pk):
     delete_stock(pk)
 
     return redirect(reverse('portfolio:home'))
+
+
+def history(request):
+    results = find_all_portfolio()
+    print results
+
+    # to resolve datetime type JSON serialization issue
+    from bson import json_util
+
+    #return HttpResponse(json.dumps(results, default=json_util.default), content_type='application/json')
+    return render(request, 'portfolio/history.html', {'data': json.dumps(results, default=json_util.default)})
 
