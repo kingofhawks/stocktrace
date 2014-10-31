@@ -18,6 +18,8 @@
         <tr>
             <td>{{ date }}</td>
             <td>{{ market_value }}</td>
+            <td>{{ total }}</td>
+            <td>{{ position_ratio }}</td>
         </tr>
     {% endverbatim %}
     </script>
@@ -98,7 +100,8 @@
 {#            console.log(date.format("YYYY-MM-D"))#}
             var source   = $("#row-template").html();
             var template = Handlebars.compile(source);
-            var context = {date: date.format(format), market_value: count};
+            var context = {date: date.format(format), market_value: count, total: element.total,
+                position_ratio: element.position_ratio};
             var html    = template(context);
 {#            console.log(html);#}
             $('.table > tbody:last').append(html);
@@ -169,6 +172,8 @@
     <thead>
         <th>{% trans "Date" %}</th>
         <th>{% trans "Market Value" %}</th>
+        <th>{% trans "Total" %}</th>
+        <th>{% trans "Position Ratio" %}</th>
     </thead>
     <tbody>
     </tbody>

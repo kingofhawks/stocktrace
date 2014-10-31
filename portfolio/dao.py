@@ -102,3 +102,7 @@ def clear():
 
 def find_all_portfolio():
     return list(db.portfolio.find({}))
+
+
+def delete_portfolio():
+    pass

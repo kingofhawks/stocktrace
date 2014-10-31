@@ -3,7 +3,7 @@ import os
 from django.shortcuts import render, render_to_response
 from dao import *
 from stocktrace.stock import Stock
-from portfolio import polling
+from portfolio import polling, snapshot
 from django.http import HttpResponse
 import json
 from django.shortcuts import redirect
@@ -82,6 +82,9 @@ def delete(request, pk):
 
 
 def history(request):
+    #generate history for today
+    snapshot()
+
     results = find_all_portfolio()
     print results
 
