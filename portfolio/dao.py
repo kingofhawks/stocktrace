@@ -104,5 +104,8 @@ def find_all_portfolio():
     return list(db.portfolio.find({}))
 
 
-def delete_portfolio():
-    pass
+def delete_portfolio_today():
+    from datetime import time
+    today_min = datetime.combine(date.today(), time.min)
+    today_max = datetime.combine(date.today(), time.max)
+    db.portfolio.remove({'date': {'$gte': today_min, '$lt': today_max}})

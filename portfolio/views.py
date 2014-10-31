@@ -83,6 +83,7 @@ def delete(request, pk):
 
 def history(request):
     #generate history for today
+    delete_portfolio_today()
     snapshot()
 
     results = find_all_portfolio()
