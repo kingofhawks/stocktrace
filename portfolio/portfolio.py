@@ -37,11 +37,13 @@ def import_portfolio(file,portfolio):
         # insert_stock(stock)
 
 
-def snapshot():
+def snapshot(save=True):
     stocks = polling()
     from models import Portfolio
     portfolio = Portfolio(stocks)
-    portfolio.save()
+    if save:
+        portfolio.save()
+    return portfolio
 
 
 if __name__=='__main__':

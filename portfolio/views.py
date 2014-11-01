@@ -11,18 +11,12 @@ from django.core.urlresolvers import reverse
 
 
 def stock_list2(request):
-    results = polling()
-    #results = find_all_stocks()
-    #logger.debug(results)
+    portfolio = snapshot(False)
+    results = portfolio.stocks
     print results
-    market_value = 0
-    for stock in results:
-        try:
-            market_value += float(stock['amount'])*float(stock['current'])
-        except KeyError as e:
-            pass
-    print 'market_value:{}'.format(market_value)
-    return render(request, 'portfolio/index.html', {'results': results, 'market_value': market_value})
+    context = {'results': results, 'market_value': portfolio.market_value, 'total': portfolio.total,
+               'position_ratio': portfolio.position_ratio}
+    return render(request, 'portfolio/index.html', context)
 
 
 def tag(request, pk):

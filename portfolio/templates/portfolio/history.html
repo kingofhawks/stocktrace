@@ -77,7 +77,9 @@
 
         console.log(stats_json);
 
-        var adPresentation = ['广告展示']
+        var adPresentation = ['Market Value'];
+        var totalList = ['Total'];
+{#        var ratioList = ['Position Ratio'];#}
         var dateArray = ['x']
         var format = "YYYY-MM-D";
         if (mode === 'today' || mode ==='yesterday'){
@@ -87,11 +89,18 @@
             console.log(element);
 {#            console.log(element.count);#}
 {#            console.log(element.count === null)#}
-            var count = element.market_value;
-            if (count === null){
-                count = 0;
+            var marketValue = element.market_value;
+            if (marketValue === null){
+                marketValue = 0;
             }
-            adPresentation.push(count);
+            adPresentation.push(marketValue);
+            var total = element.total;
+            if (total === null || typeof total === 'undefined'){
+                total = 0;
+            }
+            totalList.push(total);
+{#            ratioList.push(element.position_ratio);#}
+
 
             date = moment(element.date)
 {#            console.log(date);#}
@@ -100,14 +109,15 @@
 {#            console.log(date.format("YYYY-MM-D"))#}
             var source   = $("#row-template").html();
             var template = Handlebars.compile(source);
-            var context = {date: date.format(format), market_value: count, total: element.total,
+            var context = {date: date.format(format), market_value: marketValue, total: element.total,
                 position_ratio: element.position_ratio};
             var html    = template(context);
 {#            console.log(html);#}
             $('.table > tbody:last').append(html);
         });
 
-{#        console.log(adPresentation);#}
+        console.log(adPresentation);
+        console.log(totalList);
 {#        console.log(dateArray);#}
 
         var xFormat = "%Y-%m-%d";
@@ -125,11 +135,12 @@
                       dateArray,
 {#                ['广告展示', 30, 200, 100, 400, 150, 250],#}
                 adPresentation,
-{#                ['广告点击', 50, 20, 10, 40, 15, 25]#}
+                totalList,
+{#                ratioList#}
               ],
                 types: {
-                    广告展示: 'area-spline',
-{#                    广告点击: 'area-spline'#}
+                    'Market Value': 'area-spline',
+                    'Total': 'area-spline'
                     // 'line', 'spline', 'step', 'area', 'area-step' are also available to stack
                 }
             },

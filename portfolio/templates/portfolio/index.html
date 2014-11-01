@@ -2,7 +2,7 @@
 {% load staticfiles i18n %}
 
 {% block content %}
-    <article>Total:{{market_value}}</article>
+    <article>Total:{{total}}  Market:{{market_value}} Position Ratio:{{position_ratio}}</article>
     <small><a href="{% url 'portfolio:history' %}">History</a></small>
     <div id="content" class="container">
 
