@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import datetime
 from django.conf import settings
 
 db = settings.DB
@@ -23,8 +24,12 @@ class Portfolio(object):
                 self.total += float(stock['amount'])*float(stock['current'])
             except KeyError as e:
                 pass
+        # from decimal import *
+        # getcontext().prec = 2
+        # self.position_ratio = Decimal(self.market_value)/Decimal(self.total)
         self.position_ratio = self.market_value/self.total
-        self.date = timezone.now()
+        # self.date = timezone.now()
+        self.date = datetime.now()
 
     def save(self):
         stock_list = []

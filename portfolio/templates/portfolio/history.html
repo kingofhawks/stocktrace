@@ -110,7 +110,7 @@
             var source   = $("#row-template").html();
             var template = Handlebars.compile(source);
             var context = {date: date.format(format), market_value: marketValue, total: element.total,
-                position_ratio: element.position_ratio};
+                position_ratio: parseFloat(element.position_ratio).toFixed(2)};
             var html    = template(context);
 {#            console.log(html);#}
             $('.table > tbody:last').append(html);
@@ -129,19 +129,11 @@
             bindto: '#chart',
             data: {
                 x:'x',
-               xFormat: xFormat,
-              columns: [
-{#                      ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],#}
-                      dateArray,
-{#                ['广告展示', 30, 200, 100, 400, 150, 250],#}
-                adPresentation,
-                totalList,
-{#                ratioList#}
-              ],
+                xFormat: xFormat,
+                columns: [dateArray,adPresentation,totalList],
                 types: {
                     'Market Value': 'area-spline',
                     'Total': 'area-spline'
-                    // 'line', 'spline', 'step', 'area', 'area-step' are also available to stack
                 }
             },
             axis: {
@@ -153,7 +145,6 @@
                 }
             }
         });
-
 
     });
     </script>
