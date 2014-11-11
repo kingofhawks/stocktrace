@@ -19,6 +19,15 @@ def stock_list2(request):
     return render(request, 'portfolio/index.html', context)
 
 
+def detail(request):
+    portfolio = snapshot(False)
+    results = portfolio.stocks
+    print results
+    context = {'results': results, 'market_value': portfolio.market_value, 'total': portfolio.total,
+               'position_ratio': portfolio.position_ratio}
+    return render(request, 'portfolio/index.html', context)
+
+
 def tag(request, pk):
     print pk
     results = find_stocks_by_tag(pk)
@@ -77,15 +86,23 @@ def delete(request, pk):
 
 def history(request):
     #generate history for today
-    delete_portfolio_today()
-    snapshot()
+    # delete_portfolio_today()
+    # snapshot()
 
     results = find_all_portfolio()
     print results
+    print len(results)
 
     # to resolve datetime type JSON serialization issue
     from bson import json_util
 
     #return HttpResponse(json.dumps(results, default=json_util.default), content_type='application/json')
-    return render(request, 'portfolio/history.html', {'data': json.dumps(results, default=json_util.default)})
+    data = json.dumps(results, default=json_util.default)
+    print 'data:{}'.format(data)
+    return render(request, 'portfolio/history.html', {'data': data})
+
+
+def delete_portfolio(request, pk):
+    print 'delete portfolio:{pk}'.format(pk=pk)
+    return HttpResponse(json.dumps('OK'), content_type='application/json')
 

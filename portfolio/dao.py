@@ -8,6 +8,8 @@ from datetime import timedelta
 from datetime import datetime
 from stocktrace.stock import Stock
 from django.conf import settings
+import pymongo
+from bson import ObjectId
     
 #connection = Connection()
 
@@ -102,6 +104,10 @@ def clear():
 
 def find_all_portfolio():
     return list(db.portfolio.find({}))
+
+
+def find_portfolio(oid):
+    return db.portfolio.find_one({'_id': ObjectId(oid)})
 
 
 def delete_portfolio_today():

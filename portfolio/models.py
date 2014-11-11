@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from datetime import datetime
+from datetime import datetime, date
 from django.conf import settings
 
 db = settings.DB
@@ -11,7 +11,11 @@ class Portfolio(object):
     #static variable here
     position_ratio_limit = 90
 
-    def __init__(self, stocks):
+    def __init__(self, stocks, name=None):
+        if name:
+            self.name = name
+        else:
+            self.name = str(date.today())
         self.stocks = stocks
         self.market_value = 0
         self.total = 0
@@ -35,5 +39,6 @@ class Portfolio(object):
         stock_list = []
         for stock in self.stocks:
             stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
-        db.portfolio.insert({'date': self.date, 'stocks': stock_list, 'market_value': self.market_value,
+        db.portfolio.insert({'name':self.name, 'date': self.date, 'stocks': stock_list,
+                             'market_value': self.market_value,
                              'total': self.total, 'position_ratio': self.position_ratio})

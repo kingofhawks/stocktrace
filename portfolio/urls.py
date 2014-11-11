@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^detail', views.detail),
     url(r'^update', views.update),
     url(r'^stock/(?P<pk>\d{6})/delete/$', views.delete, name='delete'),
+    url(r'^(?P<pk>\w+)/delete/$', views.delete_portfolio, name='delete_portfolio'),
     url(r'^tag/(?P<pk>\w+)/$', views.tag),
 
 )

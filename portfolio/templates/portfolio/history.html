@@ -4,6 +4,7 @@
 {% block extra_css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'c3/c3.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome-4.0.3/css/font-awesome.min.css' %}">
 {% endblock %}
 
 {% block extra_js %}
@@ -17,32 +18,29 @@
     {% verbatim %}
         <tr>
             <td>{{ date }}</td>
+            <td>{{ name }}</td>
             <td>{{ market_value }}</td>
             <td>{{ total }}</td>
             <td>{{ position_ratio }}</td>
+            <td><a class="delete" data-row-key="{{oid}}" href="#"><i class="fa fa-trash-o" ></i></a></td>
         </tr>
     {% endverbatim %}
     </script>
 
     <script>
     $(document).ready(function(){
+        //bind "click" event to dynamically created element this way!
+        $(document).on("click",".delete", function(){
+                console.log('clicked');
+            //a trick to pass JS variable to django url template tag
+            var url = "{% url 'portfolio:delete_portfolio' pk=999999 %}";
+            console.log(url);
+            var id = $(this).data("rowKey");
+            url = url.replace(/999999/,id);
+            console.log(url);
+            window.location.href = url;
+        });
         var mode = "{{ mode }}";
-
-{#        $("#today").click(function(){#}
-{#            //a trick to pass JS variable to django url template tag#}
-{#            var url = "{% url 'management.adstats'%}";#}
-{#            url = url+'?mode=today';#}
-{#            console.log(url)#}
-{#            window.location.href = url;#}
-{#        });#}
-{##}
-{#        $("#yesterday").click(function(){#}
-{#            //a trick to pass JS variable to django url template tag#}
-{#            var url = "{% url 'management.adstats'%}";#}
-{#            url = url+'?mode=yesterday';#}
-{#            console.log(url)#}
-{#            window.location.href = url;#}
-{#        });#}
 {##}
 {#        $("#last7Days").click(function(){#}
 {#            //a trick to pass JS variable to django url template tag#}
@@ -82,9 +80,6 @@
 {#        var ratioList = ['Position Ratio'];#}
         var dateArray = ['x']
         var format = "YYYY-MM-D";
-        if (mode === 'today' || mode ==='yesterday'){
-            format = "YYYY-MM-DTHH";
-        }
         stats_json.forEach(function(element,index,array){
             console.log(element);
 {#            console.log(element.count);#}
@@ -101,24 +96,28 @@
             totalList.push(total);
 {#            ratioList.push(element.position_ratio);#}
 
-
+            console.log(element.date);
             date = moment(element.date)
-{#            console.log(date);#}
+            console.log(new Date(element.date));
+            console.log(date);
+            console.log(date.format(format));
+            console.log(element._id.$oid);
             dateArray.push(date.format(format));
 
 {#            console.log(date.format("YYYY-MM-D"))#}
             var source   = $("#row-template").html();
             var template = Handlebars.compile(source);
-            var context = {date: date.format(format), market_value: marketValue, total: element.total,
+            var context = {date: date.format(format), name:element.name,oid:element._id.$oid,
+                market_value: marketValue, total: element.total,
                 position_ratio: parseFloat(element.position_ratio).toFixed(2)};
             var html    = template(context);
-{#            console.log(html);#}
+            console.log(html);
             $('.table > tbody:last').append(html);
         });
 
         console.log(adPresentation);
         console.log(totalList);
-{#        console.log(dateArray);#}
+        console.log(dateArray);
 
         var xFormat = "%Y-%m-%d";
         if (mode === 'today' || mode ==='yesterday'){
@@ -163,8 +162,6 @@
     <input type="text" class="datepicker" id="end" placeholder="{% trans 'End Date' %}">
     <a id="search" class="btn btn-default">{% trans "search" %}</a>
     <div class="btn-group">
-      <a id="today" class="btn btn-default">{% trans "Today Statistics" %}</a>
-      <a id="yesterday" class="btn btn-default">{% trans "Yesterday Statistics" %}</a>
       <a id="last7Days" class="btn btn-default">{% trans "Last 7 days Statistics" %}</a>
       <a id="month" class="btn btn-default">{% trans "Month Statistics" %}</a>
     </div>
@@ -176,6 +173,7 @@
         <th>{% trans "Market Value" %}</th>
         <th>{% trans "Total" %}</th>
         <th>{% trans "Position Ratio" %}</th>
+        <th>{% trans "Operation" %}</th>
     </thead>
     <tbody>
     </tbody>
