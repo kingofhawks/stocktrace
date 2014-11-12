@@ -16,6 +16,17 @@ def polling():
     return stocks
 
 
+#get real-time market value
+def market_value(stocks):
+    total = 0
+    for stock in stocks:
+        code = stock['code']
+        s = getStock(code)
+        print 'current:{} amount:{}'.format(s.current, stock['amount'])
+        total += float(s.current) * float(stock['amount'])
+    return total
+
+
 def import_portfolio(file,portfolio):
     p = []
     content = ''

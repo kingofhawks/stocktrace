@@ -6,7 +6,6 @@ from django.conf import settings
 db = settings.DB
 
 
-# Create your models here.
 class Portfolio(object):
     #static variable here
     position_ratio_limit = 90
@@ -42,3 +41,6 @@ class Portfolio(object):
         db.portfolio.insert({'name':self.name, 'date': self.date, 'stocks': stock_list,
                              'market_value': self.market_value,
                              'total': self.total, 'position_ratio': self.position_ratio})
+
+    def __unicode__(self):
+        return self.name

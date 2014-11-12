@@ -115,3 +115,7 @@ def delete_portfolio_today():
     today_min = datetime.combine(date.today(), time.min)
     today_max = datetime.combine(date.today(), time.max)
     db.portfolio.remove({'date': {'$gte': today_min, '$lt': today_max}})
+
+
+def delete_portfolio_by_id(oid):
+    db.portfolio.remove({"_id": ObjectId(oid)})
