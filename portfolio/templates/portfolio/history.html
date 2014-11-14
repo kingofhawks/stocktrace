@@ -109,7 +109,8 @@
 {#            ratioList.push(element.position_ratio);#}
 
             console.log(element.date);
-            date = moment(element.date)
+{#            date = moment(element.date)#}
+            date = moment(element.name)
             console.log(new Date(element.date));
             console.log(date);
             console.log(date.format(format));
