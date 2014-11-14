@@ -43,7 +43,7 @@
                                     0
                                 {% endif %}
                             </td>
-                            <td><a class="btn btn-default" href="#" onclick="modify_stock({{stock.code}})"><i class="fa fa-pencil fa-fw"></i> Modify</a></td>
+                            <td><a data-value="{{ stock.code }}" class="btn btn-default modify" href="#"><i class="fa fa-pencil fa-fw"></i> Modify</a></td>
                             <td><a data-value="{{ stock.code }}" class="btn btn-danger delete" href="#"><i class="fa fa-trash-o fa-lg"></i> Delete</a></td>
                             <td>{{stock.tags }}</td>
                         </tr>
@@ -109,6 +109,9 @@
         }
 
     $(document).ready(function(){
+        $(".modify").click(function(){
+            modify_stock($(this).data("value"));
+        });
 
         $("#create").click(function() {
             vex.dialog.open({
