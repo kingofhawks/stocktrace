@@ -16,7 +16,7 @@ def getStock(code):
     if code == '999999':
         stock = Stock(code, 0, 1)
         return stock
-    elif code.startswith('60'):
+    elif code.startswith('60') or code.startswith('51'):
         code = 'sh'+code
     else:
         code = 'sz'+code
@@ -151,7 +151,9 @@ def update(code,engine=settings.SINA):
             # updateTickerToLatestPrice(code,quote.close,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow,quote.PercentChangeFromYearHigh,quote.PercentChangeFromYearLow,quote.name)
             updateTickerToLatestPrice(code,quote.current,quote.ma50,quote.ma200,quote.yearHigh,quote.yearLow,quote.PercentChangeFromYearHigh,quote.PercentChangeFromYearLow,quote.name)
             
-if __name__ =="__main__":    
+if __name__ =="__main__":
+    print getStock('510050').current
+    print getStock('600600')
     import time, os, sys, sched
 #    schedule = sched.scheduler(time.time, time.sleep)
 #    schedule.enter(0, 0, getMyStock, ())   # 0==right now
