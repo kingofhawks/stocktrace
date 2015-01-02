@@ -362,7 +362,23 @@ def findAllExistentTickers():
     from sets import Set
     result = Set([])
     for stock in cursor:
+        # print stock
         result.add(stock['code'])
+    return result
+
+
+def find_all_tickers():
+    historyDatas = db.tickers
+    cursor = historyDatas.find();
+    from sets import Set
+    result = Set([])
+    for stock in cursor:
+        code = stock['code']
+        if code.startswith('60'):
+            code = 'SH'+code
+        elif code.startswith('00'):
+            code = 'SZ'+code
+        result.add(code)
     return result
 
 #find all quotes list

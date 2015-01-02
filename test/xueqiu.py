@@ -17,8 +17,12 @@ class XueQiuTestCase(unittest.TestCase):
     sz = Stock('SZ002236')
 
     def test_print_stock(self):
-        xueqiuparser.parse_real_time('SH600583,SZ000728,GS')
+        # xueqiuparser.parse_real_time('SH600583,SZ000728,GS')
+        xueqiuparser.parse_real_time('SH600011')
         print self.sh
+
+    def test_download(self):
+        xueqiuparser.download_statistics()
 
     def test_remove_stock(self):
         remove_stock(self.sh.code)
