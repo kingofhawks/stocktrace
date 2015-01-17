@@ -1,3 +1,4 @@
+#-*- coding: UTF-8 -*-
 #!/usr/bin/env python
 
 import thread,logging
@@ -13,8 +14,13 @@ stateCache = {}
 #Sina API
 def getStock(code):
     #hard code for money
+    #现金
     if code == '999999':
         stock = Stock(code, 0, 1)
+        return stock
+    #融资负债
+    elif code == '999998':
+        stock = Stock(code, 0, -1)
         return stock
     elif code.startswith('60') or code.startswith('51'):
         code = 'sh'+code

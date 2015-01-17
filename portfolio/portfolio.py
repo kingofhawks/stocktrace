@@ -10,7 +10,7 @@ def polling():
         s = getStock(code)
         print s
         try:
-            update_stock_price(code,s.current)
+            update_stock_price(code, s.current)
         except AttributeError:
             continue
     return stocks

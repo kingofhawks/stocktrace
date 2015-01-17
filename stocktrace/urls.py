@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', views.ascendinglist, name='index'),
+    url(r'^$', views.index, name='index'),
     url(r'^zytj/', include('zytj.urls')),
     url(r'^portfolio/', include('portfolio.urls', namespace='portfolio')),
 

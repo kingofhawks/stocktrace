@@ -10,6 +10,7 @@ import redis
 from django.core.cache import cache
 from stocktrace.util import slf4p
 import json
+from django.http import HttpResponseRedirect
 
 logger = slf4p.getLogger(__name__)
 # redclient = redis.StrictRedis(host=settings.REDIS_SERVER, port=6379, db=0)
@@ -24,9 +25,10 @@ def index(request):
       ['06/08/2009', 143.82, 144.56, 136.04, 136.97],      
     ];
     
-    return render(request,'index.html',
-                  {'ohlc':ohlc})   
-    
+    # return render(request,'index.html',
+    #               {'ohlc':ohlc})
+    return HttpResponseRedirect('zytj/alist')
+
 #q:quote code
 def jsoncandle(request,q):
     try:

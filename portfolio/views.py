@@ -15,7 +15,7 @@ from bson import json_util
 def stock_list2(request):
     portfolio = snapshot(False)
     results = portfolio.stocks
-    print results
+    print 'result:{}'.format(results)
     context = {'results': results, 'market_value': portfolio.market_value, 'total': portfolio.total,
                'position_ratio': portfolio.position_ratio}
     return render(request, 'portfolio/index.html', context)

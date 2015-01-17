@@ -7,7 +7,7 @@ Created on 2011-3-7
 def parseMarket():
     from lxml import etree
     from lxml.html import parse
-    page = parse('http://www.sse.com.cn/sseportal/ps/zhs/hqjt/hqjy.shtml').getroot()
+    page = parse('http://www.sse.com.cn/market/').getroot()
     result = etree.tostring(page)
     print result
     import io
