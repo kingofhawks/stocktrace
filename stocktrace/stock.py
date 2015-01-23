@@ -1,8 +1,6 @@
+#-*- coding: UTF-8 -*-
 #from datetime import date
 from stocktrace.util import slf4p, settings
-
-
-
 
 logger = slf4p.getLogger(__name__)
 
@@ -45,6 +43,9 @@ class Stock:
         self.high = high
         self.volume = volume
         self.amount = amount
+        #NHNL indicator
+        self.nh = False #当日新高
+        self.nl = False #当日新低
 
     #python2.7 use __unicode__, for python3 use __str__
     def __unicode__(self):

@@ -62,14 +62,22 @@ def parse_real_time(codes):
         print 'high52week:{} low52week:{}'.format(high52week, low52week)
         percentFromYearLow = (float(current)-float(low52week))*100/float(low52week)
         percentFromYearHigh = (float(high52week)-float(current))*100/float(high52week)
+        nh = False
+        nl = False
+        if high == high52week:
+            nh = True
+        if low == low52week:
+            nl = True
+
         update_quote(code, current=float(current), year_high=float(high52week), year_low=float(low52week),
-                     percentFromYearHigh=percentFromYearHigh,
-                     percentFromYearLow=percentFromYearLow, name=name)
+                     percentFromYearHigh=percentFromYearHigh, percentFromYearLow=percentFromYearLow,
+                     nh=nh, nl=nl,
+                     high=high, low=low, name=name)
 
 
 #Update collection ticker with latest info
 def update_quote(code, current, ma50=0.0, ma200=0.0, year_high=0.0, year_low=0.0, percentFromYearHigh=0.0,
-                 percentFromYearLow=0.0, name=''):
+                 percentFromYearLow=0.0, nh=False, nl=False, high=0.0, low=0.0, name=''):
     if len(code) == 8:
         code = code[2:]
         print '*******************update code******************************:{}'.format(code)
@@ -77,6 +85,7 @@ def update_quote(code, current, ma50=0.0, ma200=0.0, year_high=0.0, year_low=0.0
     logger.info('{} current:{} yearLow:{} yearHigh:{} percentFromYearLow:{} percentFromYearHigh:{}'.format(code,current,year_high,year_low,percentFromYearLow,percentFromYearHigh))
     logger.info(ticker.update({"code": code},
     {"$set":{"current":current,"ma50":ma50,"ma200":ma200,"yearHigh":year_high,"yearLow":year_low,
+             'high': high, 'low': low,'nh': nh, 'nl': nl,
              "percentFromYearHigh":percentFromYearHigh,"percentFromYearLow":percentFromYearLow,"name":name}},
     upsert=True,safe=True))
 
