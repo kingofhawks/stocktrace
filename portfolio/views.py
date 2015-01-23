@@ -17,7 +17,8 @@ def stock_list2(request):
     results = portfolio.stocks
     print 'result:{}'.format(results)
     context = {'results': results, 'market_value': portfolio.market_value, 'total': portfolio.total,
-               'position_ratio': portfolio.position_ratio}
+               'position_ratio': portfolio.position_ratio, 'financing': portfolio.financing,
+               'lever': (portfolio.financing+portfolio.total)/portfolio.total}
     return render(request, 'portfolio/index.html', context)
 
 

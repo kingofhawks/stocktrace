@@ -1,3 +1,4 @@
+#-*- coding: UTF-8 -*-
 from django.db import models
 from django.utils import timezone
 from datetime import datetime, date
@@ -18,10 +19,14 @@ class Portfolio(object):
         self.stocks = stocks
         self.market_value = 0
         self.total = 0
+        #融资
+        self.financing = 0
         for stock in self.stocks:
             try:
                 if stock['code'] == '999999':
                     print 'cash:{}'.format(stock['amount'])
+                elif stock['code'] == '999998':
+                    self.financing = float(stock['amount'])
                 else:
                     self.market_value += float(stock['amount'])*float(stock['current'])
                 self.total += float(stock['amount'])*float(stock['current'])
