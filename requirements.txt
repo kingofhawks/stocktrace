@@ -1,6 +1,5 @@
-django>=1.7
-celery>=3.1.16
-pymongo>=2.7.2
-redis
+django
+pymongo
 lxml
 requests
+celery

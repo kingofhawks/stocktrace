@@ -5,12 +5,31 @@ Created on 2011-3-7
 '''
 import logging
 from stocktrace.util import slf4p
+from lxml import etree
+from lxml.html import parse
 
 logger = slf4p.getLogger(__name__)
 
+# parse shanghai market overall
+def parse_market():
+    page = parse('http://www.sse.com.cn/market/').getroot()
+    result = etree.tostring(page)
+    # print result
+    import io
+    with io.open('test.xml', 'wb') as f:
+        f.writelines(result)
+
+    r = page.get_element_by_id('dateList')
+    statistics = r.text_content().split()
+    for word in statistics:
+        print word
+
+    from stockmarket import Market
+    market = Market(statistics[1], statistics[8], statistics[12], statistics[14])
+    print market
+
+
 def parseMarket():
-    from lxml import etree
-    from lxml.html import parse
     page = parse('http://www.sse.com.cn/sseportal/ps/zhs/home.html').getroot()
     result = etree.tostring(page)
     print result
@@ -237,5 +256,6 @@ if __name__ == '__main__':
     #parseSzMarket()
     #print downloadQuoteList(True)
     #parseCap('600600')
-    parseIndustry()
+    # parseIndustry()
+    parse_market()
     #pass
