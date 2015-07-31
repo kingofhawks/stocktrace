@@ -10,6 +10,7 @@ from lxml.html import parse
 
 logger = slf4p.getLogger(__name__)
 
+
 # parse shanghai market overall
 def parse_market():
     page = parse('http://www.sse.com.cn/market/').getroot()
