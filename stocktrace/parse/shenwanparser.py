@@ -18,29 +18,33 @@ def parse_sw(day='20150729'):
 
     #sort by static PE
     df.sort(columns=static_pe, ascending=False)
-    # print df
+    print df
 
     max_pe = df[static_pe].max()
+    min_pe = df[static_pe].min()
     avg_pe = df[static_pe].mean()
-    print max_pe
-    print avg_pe
+    print 'PE max:{} min:{} average:{}'.format(max_pe, min_pe, avg_pe)
 
     max_pe_index = df.loc[df[static_pe] == max_pe].index
-    print max_pe_index
+    min_pe_index = df.loc[df[static_pe] == min_pe].index
+    print 'max_pe_index:{} min_pe_index:{}'.format(max_pe_index, min_pe_index)
 
-    #get row count via those different ways
+    # get row count via those different ways
     print len(df)
     print len(df.values)
     print len(df.index)
     print df.shape
 
-
     pb = u'市净率'
     max_pb = df[pb].max()
+    min_pb = df[pb].min()
     avg_pb = df[pb].mean()
+    print 'PB max:{} min:{} average:{}'.format(max_pb, min_pb, avg_pb)
 
-    print max_pb
-    print avg_pb
+    max_pb_index = df.loc[df[pb] == max_pb].index
+    min_pb_index = df.loc[df[pb] == min_pb].index
+    print 'max_pb_index:{} min_pb_index:{}'.format(max_pb_index, min_pb_index)
+
 
 
 if __name__ == '__main__':
