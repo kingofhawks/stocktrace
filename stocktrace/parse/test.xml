@@ -1,0 +1,830 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="ie=7" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>&#24066;&#22330;&#25968;&#25454;</title>
+
+		<script>var col_id=128</script>
+
+		<link rel="stylesheet" type="text/css" href="/css/layout.css;pved11d8cadba21862" />
+<link rel="stylesheet" type="text/css" href="/css/style.css;pvc0a228964bf2df1d" />					
+<link href="/css/main_menu_blue.css;pv16ef1bba6aad8e7d" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/s_suggest.css;pv0d46d465faafc2e9" />	
+		<script type="text/javascript" src="/js/common/jquery-1.7.2.min.js;pv77f6d22d31ac6be2"></script>&#13;
+<script type="text/javascript" src="/js/1left.js;pv30d5fcaacbbcc8f6"></script>&#13;
+<script type="text/javascript" src="/js/1mainmenu.js;pv60754a6fffbce8d5"> </script>&#13;
+<script type="text/javascript" src="/js/common/jquery-extend-1.0.js;pv9b9f16ac4f90b8a9"></script>&#13;
+<script type="text/javascript" src="/js/common/validate.js;pv1dbe6c30207c3202"></script>&#13;
+<script type="text/javascript" src="/js/common/DatePicker/WdatePicker.js;pvb65e12c3343a51ff"></script>&#13;
+<script type="text/javascript" src="/js/common/s_suggest.js;pve0e88ad84f215c32"></script>&#13;
+<script type="text/javascript" src="/js/common/verify_utils.js;pv12b17f0adf8f6fb7"></script>&#13;
+<script type="text/javascript" src="/js/common/common.js;pv12fe8589f95ff2dd"></script>&#13;
+<script type="text/javascript" src="/js/common/publicRs.js;pv330c5904dbd20445"></script>&#13;
+<script type="text/javascript" src="/js/common/systemDate_global.js"></script>&#13;
+<!--<script type="text/javascript" src="/js/flgz/sse_date_select.js"></script>-->&#13;
+<script type="text/javascript" src="/js/zqpz/gp/gplb/hyjs/hyjs.js;pv52b415b38057d8e3"></script>&#13;
+<script type="text/javascript" src="/js/zqpz/gp/sjtj/dqhyfl/ahyfl/ahyfl.js;pve14a6f73a14f4a03"></script>&#13;
+<script type="text/javascript" src="/js/scsj/jysj/cjgk/gp/abghjcjgk/yyplqk.js;pv82e82fafae389e55"></script>&#13;
+<script type="text/javascript">&#13;
+          jQuery(document).ready(function(){&#13;
+                 var winOnloadFun = window.onload;&#13;
+                 window.onload = function(){};&#13;
+                 winOnloadFun.apply();&#13;
+         });&#13;
+</script>&#13;
+<script type="text/javascript" src="/js/common/ssesuggestdata.js;pvd306114fe10ff312"></script>&#13;
+<script type="text/javascript" src="/js/common/ssesuggestEbonddata.js;pv437a8cb71c15e0ba"></script>&#13;
+<script type="text/javascript" src="/js/common/ssesuggestfunddata.js;pv21797fc0ac9c9103"></script>&#13;
+<script type="text/javascript" src="/js/common/ssesuggestTbonddata.js;pv25c77b2a11f9b0a4"></script>&#13;
+<script type="text/javascript" src="/js/common/ssesuggestdataAll.js;pvd94dd7982d04da5a"></script>&#13;
+&#13;
+<script type="text/javascript" language="javascript">&#13;
+		&#13;
+	function bluring() {&#13;
+		if (event.srcElement.tagName == 'A'&#13;
+				|| event.srcElement.tagName == 'IMG')&#13;
+			document.body.focus();&#13;
+	}&#13;
+	document.onfocusin = bluring;&#13;
+</script>&#13;
+<script>&#13;
+var flag= "false";var t= 0;&#13;
+if(col_id == '775')&#13;
+{&#13;
+	mainflash_id = '0101';&#13;
+	window.onload = function (){chang();}&#13;
+}&#13;
+else&#13;
+{&#13;
+	readtree();&#13;
+	window.onload = function (){initTree();chang();}	&#13;
+}&#13;
+readtree();&#13;
+function readtree(arrayName)&#13;
+{&#13;
+	var arrayName = "LeftMenu";&#13;
+	findid(arrayName);&#13;
+}&#13;
+&#13;
+function findid(arrayName)&#13;
+{&#13;
+	  	var category = eval(arrayName);&#13;
+&#13;
+		for(var i=0; i &lt;category.length; i++) {&#13;
+		  	var subcolum = category[i][3];&#13;
+			var flash = category[i][1];&#13;
+			var len = category[i][1].length;&#13;
+			var col = category[i][2];&#13;
+			var nodisplay = category[i][6];&#13;
+		  	if(subcolum == 0){&#13;
+		  	}else if (subcolum == 1){ &#13;
+		    	arrayName = "LeftMenu_"+category[i][1];&#13;
+		        findid(arrayName);&#13;
+			}&#13;
+			if(nodisplay != "")&#13;
+			{&#13;
+			parts = nodisplay.split(",");&#13;
+			for( var j=0; j&lt;parts.length;j++)&#13;
+			{&#13;
+				if(parts[j] == col_id)&#13;
+				{&#13;
+					flash_id = flash;&#13;
+					colmain_id = col;&#13;
+					if(flash_id.length == "4")&#13;
+					{&#13;
+						fcol_id = col;&#13;
+						readtree_m();&#13;
+					}&#13;
+					var f_arrayName = "LeftMenu_"+flash_id.substr(0,2);&#13;
+					findid_f(f_arrayName);&#13;
+				}	&#13;
+				&#13;
+			}&#13;
+			&#13;
+			}&#13;
+			if((col_id == col) &amp;&amp; (flash != "01"))&#13;
+			{&#13;
+			  flash_id = flash;	&#13;
+			  colmain_id = col;&#13;
+                                                  if(flash_id.length == "4")&#13;
+	                                 {&#13;
+				fcol_id = col;&#13;
+				readtree_m();&#13;
+			  }&#13;
+			  var f_arrayName = "LeftMenu_"+flash_id.substr(0,2);&#13;
+			  findid_f(f_arrayName);&#13;
+			}&#13;
+&#13;
+		}&#13;
+&#13;
+}&#13;
+&#13;
+function findid_f(f_arrayName)&#13;
+{&#13;
+		var f = eval(f_arrayName);&#13;
+		for (var j=0;j&lt;f.length;j++)&#13;
+		{&#13;
+			var subcolum_f = f[j][3];&#13;
+			if(subcolum_f == 0)&#13;
+			{&#13;
+		  	}&#13;
+			else if (subcolum_f == 1)&#13;
+			{ &#13;
+		    	f_arrayName = "LeftMenu_"+f[j][1];&#13;
+		        findid_f(f_arrayName);&#13;
+			}&#13;
+			for (var k=1;k&lt;flash_id.length/2-1;k++)&#13;
+			{&#13;
+					if((f[j][1] == flash_id.substr(0,flash_id.length - 2 * k)))&#13;
+						&#13;
+						{&#13;
+							fcol_id = f[j][2];&#13;
+							readtree_m();&#13;
+						}&#13;
+						&#13;
+				&#13;
+				}&#13;
+		}&#13;
+		&#13;
+}&#13;
+function readtree_m(arrayName_m)&#13;
+{&#13;
+	var arrayName_m = "MainMenu";&#13;
+	findid_m(arrayName_m);&#13;
+}&#13;
+function findid_m(arrayName_m)&#13;
+{&#13;
+	var tree_m = eval(arrayName_m);&#13;
+	for(var i=0; i &lt;tree_m.length; i++)&#13;
+	 {&#13;
+		var subcolum_m = tree_m[i][3];&#13;
+		var flash_m = tree_m[i][1];&#13;
+		var len_m = tree_m[i][1].length;&#13;
+		var col_m = tree_m[i][2];&#13;
+		&#13;
+		if(subcolum_m == 0)&#13;
+		{&#13;
+		}&#13;
+		else if (subcolum_m == 1)&#13;
+		{ &#13;
+			arrayName_m = "MainMenu_"+tree_m[i][1];&#13;
+			findid_m(arrayName_m);&#13;
+			&#13;
+		}&#13;
+		if((colmain_id == col_m) &amp;&amp; (flash_m != "01"))&#13;
+		{&#13;
+			mainflash_id = flash_m;&#13;
+			flag = "true";&#13;
+		}&#13;
+		if(flag == "false")&#13;
+		{&#13;
+			var aa = "false";&#13;
+			if((fcol_id == col_m) &amp;&amp; (flash_m != "01"))&#13;
+			{&#13;
+&#13;
+				t = t + 1;&#13;
+				if(t == 1)&#13;
+				{&#13;
+					&#13;
+					mainflash_id = flash_m;&#13;
+				}&#13;
+				&#13;
+			}&#13;
+&#13;
+&#13;
+		}&#13;
+		&#13;
+	}&#13;
+	&#13;
+}&#13;
+</script>&#13;
+<script>&#13;
+$(function(){&#13;
+  $("#container tr.targetTR&gt;td").css("background","url(/images/home_cambridge_blue_topbj.gif) repeat-x");&#13;
+})&#13;
+</script>
+	</head>
+
+	<body>
+		<table id="container" align="center" cellspacing="0" cellpadding="0" border="0" bgcolor="#fff">
+			<tr class="targetTR">
+				<td id="left_shadow">&#160;</td>
+				<td height="100%" valign="top" style="vertical-align:top;"><!-- id="siteFrame" -->
+					<table height="100%" class="wrap">
+						<tr height="210" class="targetTR">
+							<td valign="top" style="height:auto;">
+								<div id="head"><!-- &#39029;&#22836;&#24320;&#22987;  -->
+									<script language="javascript">&#13;
+	function doSubmitfooter1() {&#13;
+		if (document.frmfooter1.KeyWord.value == '' || document.frmfooter1.KeyWord.value == '&#36755;&#20837;&#20851;&#38190;&#23383;,&#26597;&#32593;&#31449;&#20869;&#23481;') {&#13;
+			alert("&#35831;&#36755;&#20837;&#23436;&#25972;&#26816;&#32034;&#26465;&#20214;&#21518;&#36827;&#34892;&#26816;&#32034;");&#13;
+			document.frmfooter1.KeyWord.focus();&#13;
+			return false;&#13;
+		} else&#13;
+			return true;&#13;
+	}&#13;
+</script>&#13;
+<script language="javascript">&#13;
+	function doSubmitfrm51n1() {&#13;
+		with (document.frmcheck) {&#13;
+			if (DateDeclare.value == "") {&#13;
+				alert("&#35831;&#36873;&#25321;&#26597;&#35810;&#20844;&#21578;&#26085;&#26399;");&#13;
+				return false;&#13;
+			}&#13;
+			if (!isChkDateAll(DateDeclare.value, ""))&#13;
+				return false;&#13;
+		}&#13;
+		return true;&#13;
+	}&#13;
+</script>&#13;
+<script language="javascript">&#13;
+	function calDateDeclareb() {&#13;
+		with (document.frm5_2_1_2_j41) {&#13;
+			if (isEmpty(InputCond.value)) {&#13;
+				alert("&#35831;&#36755;&#20837;&#26597;&#35810;&#30340;&#35777;&#21048;&#20195;&#30721;&#25110;&#31616;&#31216;");&#13;
+				return false;&#13;
+			}&#13;
+			return true;&#13;
+		}&#13;
+	}&#13;
+</script>&#13;
+<script language="javascript">&#13;
+	function initHistoricalQueryDate() {&#13;
+		var endDate = new Date();&#13;
+		var beginDate = adjustDateOfSpecifiedDate(endDate, -7);&#13;
+		document.forms.frm5_2_1_2_j4.DateDeclareStart.value = dateToString(beginDate);&#13;
+		document.forms.frm5_2_1_2_j4.DateDeclareEnd.value = dateToString(endDate);&#13;
+	}&#13;
+</script>&#13;
+<script language="javascript">&#13;
+	function calDateDeclare1() {&#13;
+		with (document.frm5_2_1_2_j4) {&#13;
+			if (!isEmpty(DateDeclareStart.value)) {&#13;
+				if (!isDate(DateDeclareStart.value)) {&#13;
+					alert("&#35831;&#36873;&#25321;&#27491;&#30830;&#26102;&#38388;");&#13;
+					return false;&#13;
+				}&#13;
+			}&#13;
+			if (!isEmpty(DateDeclareEnd.value)) {&#13;
+				if (!isDate(DateDeclareEnd.value)) {&#13;
+					alert("&#35831;&#36873;&#25321;&#27491;&#30830;&#26102;&#38388;");&#13;
+					return false;&#13;
+				}&#13;
+				if (!isChkDateAll(DateDeclareStart.value, DateDeclareEnd.value))&#13;
+					return false;&#13;
+			}&#13;
+			if (isEmpty(InputCond.value)) {&#13;
+				alert("&#35831;&#36755;&#20837;&#26597;&#35810;&#30340;&#35777;&#21048;&#20195;&#30721;&#25110;&#31616;&#31216;");&#13;
+				return false;&#13;
+			}&#13;
+			return true;&#13;
+		}&#13;
+	}&#13;
+</script>&#13;
+<div class="top_logo">&#13;
+    <a href="http://www.sse.com.cn"><img width="300" height="110" src="/images/blankimage.gif;pv36aad1bee098e12d" /></a>&#13;
+</div><!--&#22836;&#37096;logo -->&#13;
+<div class="headbox_right">&#13;
+    <ul class="headbox_right_top">&#13;
+        <li><a href="http://www.sse.com.cn">&#39318;&#39029;</a> |</li>&#13;
+        <li><a href="/marketservices/servicesupport/websuport/map/">&#32593;&#31449;&#22320;&#22270;</a> |</li>&#13;
+        <li><a href="/marketservices/servicesupport/questions/business/trading/">&#24120;&#35265;&#38382;&#39064;</a> |</li>&#13;
+        <li><a href="/aboutus/contactus/">&#32852;&#31995;&#25105;&#20204;</a></li>&#13;
+        <li><a class="right_en" target="_blank" href="http://english.sse.com.cn"></a></li>&#13;
+    </ul><div class="clear"></div>&#13;
+    <script type="text/javascript">&#13;
+		var homevalidate = function(val) {&#13;
+			if (val == "&#36755;&#20837;&#35777;&#21048;&#20195;&#30721;,&#26597;&#20844;&#21578;") {&#13;
+				val = "";&#13;
+			}&#13;
+			if (jQuery.trim(val).length == 0) {&#13;
+				alert("&#35831;&#36755;&#20837;&#26597;&#35810;&#20851;&#38190;&#35789; &#20851;&#38190;&#23383;&#21487;&#20026; : &#35777;&#21048;&#20195;&#30721;");&#13;
+				return false;&#13;
+			}&#13;
+			if(isNaN(val)){&#13;
+				alert("&#35777;&#21048;&#20195;&#30721;&#24517;&#39035;&#20026;&#25968;&#23383;");&#13;
+				return false;&#13;
+			}&#13;
+			if (val.length &lt; 6 || val.length &gt; 6) {&#13;
+				alert("&#35777;&#21048;&#20195;&#30721;&#24517;&#39035;&#26159;6&#20301;&#25968;&#23383;");&#13;
+				return false;&#13;
+			}&#13;
+			var pattern = new RegExp("[`~!@%#$^&amp;*()=|{}':;',\\[\\].&lt;&gt;/?~&#65281;@#&#65509;&#8230;&#8230;&amp;*&#65288;&#65289;&#8212;&#8212;|{}&#12304;&#12305;&#8216;&#65307;&#65306;&#8221;&#8220;'&#12290;&#65292;&#12289;&#65311;]")&#13;
+			if (pattern.test(val)) {&#13;
+				alert("&#35831;&#36755;&#20837;&#27491;&#30830;&#30340;&#26597;&#35810;&#26465;&#20214;.");&#13;
+				return false;&#13;
+			}&#13;
+			return true;&#13;
+		};&#13;
+		var searchBulletin = function() {&#13;
+			var code = document.getElementById("searchtop").value;&#13;
+			if (!homevalidate(code)) {&#13;
+				return;&#13;
+			}&#13;
+			var flag = utils.checkSecurityCode(code);&#13;
+			if(flag===0||flag===1){&#13;
+				window.open("/assortment/stock/list/stockdetails/announcement/index.shtml?COMPANY_CODE=" + code + "" + "&amp;static=t");&#13;
+			}else if(flag===2){&#13;
+				window.open("/disclosure/bond/tbondissue/tbond_index_n.shtml?productId="+code+"&amp;reportType=qbgg&amp;beginDate="+ utils.changeDateByMonth(utils.dateFormatterToString(new Date()),-12)+"&amp;endDate="+utils.dateFormatterToString(new Date())+"&amp;moreConditions=false");&#13;
+			}else if(flag===3){&#13;
+				window.open("/disclosure/bond/corporate/corporate_index_n.shtml?productId="+code+"&amp;reportType=qbgg&amp;beginDate="+ utils.changeDateByMonth(utils.dateFormatterToString(new Date()),-12)+"&amp;endDate="+utils.dateFormatterToString(new Date())+"&amp;moreConditions=false");&#13;
+			}else if(flag===4){&#13;
+				window.open("/disclosure/fund/announcement/fund_index_n.shtml?reportType2=&#20840;&#37096;&amp;productId="+code+"&amp;beginDate="+utils.changeDateByMonth(utils.dateFormatterToString(new Date()),-12)+"&amp;endDate="+utils.dateFormatterToString(new Date())+"&amp;reportType=&amp;moreConditions=false");&#13;
+			}&#13;
+		};&#13;
+		var searchMarket = function() {&#13;
+			var code = document.getElementById("searchtop").value;&#13;
+			if (!homevalidate(code)) {&#13;
+				return;&#13;
+			}&#13;
+			window.open("/assortment/stock/list/stockdetails/price/index.shtml?COMPANY_CODE=" + code + "" + "");&#13;
+		};&#13;
+		var searchNewTips = function() {&#13;
+			var keywords = jQuery("#searchWholeSite").val();&#13;
+			if (keywords == "&#36755;&#20837;&#20851;&#38190;&#23383;,&#26597;&#32593;&#31449;&#20869;&#23481;") {&#13;
+				keywords = "";&#13;
+			}&#13;
+			if (jQuery.trim(keywords).length == 0) {&#13;
+				alert("&#35831;&#36755;&#20837;&#26597;&#35810;&#20851;&#38190;&#35789;. ");&#13;
+				return false;&#13;
+			}&#13;
+			window.open("/marketservices/servicesupport/websuport/search_result.shtml?keywords=" + keywords);&#13;
+		};&#13;
+    </script>&#13;
+	&#13;
+    <!--&#39030;&#37096;&#21491;&#19978;&#35282;&#38142;&#25509; -->&#13;
+    <div class="headbox_right_bottom">&#13;
+        <input class="searchtop" type="text" style="height: 14px;" onfocus="if(this.value=='&#36755;&#20837;&#35777;&#21048;&#20195;&#30721;,&#26597;&#20844;&#21578;'){this.value='';}" onblur="clearSuggest();if(this.value==''){this.value='&#36755;&#20837;&#35777;&#21048;&#20195;&#30721;,&#26597;&#20844;&#21578;';}" onkeypress="utils.keypress2TriggerClickEvent(event,'bulletinsearchingBtn')" onkeydown="return tabfix(this.value,event,this);" onkeyup="suggest(this.value,event,this,'all');" id="searchtop" maxlength="50" size="21" value="&#36755;&#20837;&#35777;&#21048;&#20195;&#30721;,&#26597;&#20844;&#21578;" name="keyword" />&#13;
+        <a href="javascript:void(0)" onclick="searchBulletin()" id="bulletinsearchingBtn"><img width="41" height="16" src="/images/botton_cgg.gif;pvcf39ec21ba3e569b" /></a>&#13;
+        <a href="javascript:void(0)" onclick="searchMarket()" id="marketsearchingBtn"><img width="41" height="16" src="/images/botton_chq.gif;pveff8329b663c1fb4" /></a>&#13;
+        <input class="search1" type="text" style="height: 14px;" onfocus="if(this.value=='&#36755;&#20837;&#20851;&#38190;&#23383;,&#26597;&#32593;&#31449;&#20869;&#23481;'){this.value='';}" onblur="clearSuggest();if(this.value==''){this.value='&#36755;&#20837;&#20851;&#38190;&#23383;,&#26597;&#32593;&#31449;&#20869;&#23481;';}" onkeydown="return tabfix(this.value,event,this);" onkeypress="utils.keypress2TriggerClickEvent(event,'searchsitecontent')" onkeyup="suggest(this.value,event,this,'all');" id="searchWholeSite" maxlength="50" size="21" value="&#36755;&#20837;&#20851;&#38190;&#23383;,&#26597;&#32593;&#31449;&#20869;&#23481;" name="KeyWord" />&#13;
+        <a href="javascript:void(0)" onclick="searchNewTips()" id="searchsitecontent"><img width="36" height="16" src="/images/botton_ss.gif;pv1168c8bc0efb602b" /></a>&#13;
+    </div>&#13;
+</div>&#13;
+<!--&#22836;&#37096;&#21491;&#36793; -->&#13;
+
+								</div><!-- &#39029;&#22836;&#32467;&#26463;  -->
+
+								<div id="page_nav"><!--&#20013;&#38388;&#20027;&#23548;&#33322;&#24320;&#22987; -->
+									<div id="main_navi"></div>
+<script type="text/javascript" src="/js/flgz/main_menu_cn.js;pvaf540f8306bd95d6"></script>
+<script type="text/javascript" src="/js/flgz/menuList.js;pv4ec9f3843745160f"></script>
+								</div><!--&#20013;&#38388;&#20027;&#23548;&#33322;&#32467;&#26463;-->
+
+								<div id="page_path">
+									<div id="path"></div>
+ <script language="JavaScript" src="/js/flgz/path.js;pv043cd5a8888bba2b"></script>
+
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top" style="vertical-align:top;height:auto;" class="content_bg">
+
+								<div id="main_page">
+									<table id="Area">
+										<tr>
+											<td id="A_Area" width="192" valign="top">
+												<div id="left_page">
+													&#65279;<link href="/css/left_menu_blue_layout.css;pvb54cecf746f656c8" rel="stylesheet" type="text/css" />&#13;
+<link href="/css/left_menu_blue_css.css;pv976d18e80e5e61a2" rel="stylesheet" type="text/css" />&#13;
+&#13;
+<script src="/js/flgz/leftMenu_qm_css.js;pv52565ed7ca1719ac"></script>&#13;
+<div onmousemove="funLeftMenuMove(event,this);">&#13;
+<div id="left_navi_top"></div>&#13;
+<div id="left_navi" onmouseout="funLeftMenuOut(event,this);" onmouseover="funLeftMenuInner(event,this);">&#13;
+<script src="/js/flgz/leftMenu_new_css.js;pvcc709e8df400ebc9"></script></div>&#13;
+</div>&#13;
+<script type="text/javascript">&#13;
+	qm_create(0,true,0,500,'all',false,false,false,false);&#13;
+	&#13;
+		var searchTips = function(){&#13;
+		     var keywords = document.getElementById("leftNavKeyWord").value;&#13;
+                     if($.trim(keywords).length===0||keywords=="&#26412;&#31449;&#26816;&#32034;"){&#13;
+                                alert("&#35831;&#36755;&#20837;&#26597;&#35810;&#20851;&#38190;&#23383;.");&#13;
+                                return;&#13;
+                     }&#13;
+                     //alert(keywords);&#13;
+		     window.open("/marketservices/servicesupport/websuport/search_result.shtml?keywords="+keywords);&#13;
+		};&#13;
+	&#13;
+</script>&#13;
+<br />&#13;
+<div class="bzjs">&#13;
+<input name="KeyWord" id="leftNavKeyWord" type="text" value="&#26412;&#31449;&#26816;&#32034;" size="19" maxlength="120" border="0" onblur="if(this.value==&quot;&quot;){this.value=&quot;&#26412;&#31449;&#26816;&#32034;&quot;;}" onfocus="if(this.value==&quot;&#26412;&#31449;&#26816;&#32034;&quot;){this.value=&quot;&quot;;}" />&#13;
+		<input type="hidden" name="page" value="1" />&#13;
+		<a href="javascript:searchTips()"><img width="26" height="16" src="/images/button_go.gif;pv6446627c0d4e85b6" /></a>&#13;
+</div>&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+<script type="text/javascript">&#13;
+if (( col_id == "1845")||( col_id == "1846")||( col_id == "1847")||( col_id == "1844"))&#13;
+{&#13;
+document.write("&lt;a href ='/marketservices/servicesupport/hotline/home/index.shtml' target='_blank'&gt;&lt;img src ='/images/left_banner_4008888400_192.gif;pv1cb2231041b7db20' border='0'&gt;&lt;/a&gt;");&#13;
+}&#13;
+if (( col_id == "4107"))&#13;
+{&#13;
+document.write("&lt;a href ='https://120.204.69.22/ipo' target='_blank'&gt;&lt;img src ='/images/left_banner_sgpt.gif' border='0'&gt;&lt;/a&gt;");&#13;
+}&#13;
+if (( col_id == "222")||( col_id == "223"))&#13;
+{&#13;
+document.write("&lt;a href ='/marketservices/servicesupport/hotline/home/a/20130114/trade.doc' target='_blank'&gt;&lt;img src ='/images/left_banner_cjwd2007.jpg;pvd6b5d43747846691' border='0'&gt;&lt;/a&gt;&lt;p&gt;&lt;/p&gt;");&#13;
+document.write("&lt;a href ='/marketservices/servicesupport/questions/business/trading/index.shtml' target='_blank'&gt;&lt;img src ='/images/left_banner_ywcjwt.jpg;pv1d57ac226fd8bfc4' border='0'&gt;&lt;/a&gt;");&#13;
+}&#13;
+if (( col_id == "231")||( col_id == "233")||( col_id == "235")||( col_id == "236")||( col_id == "220"))&#13;
+{&#13;
+document.write("&lt;a href ='/marketservices/servicesupport/hotline/home/a/20130114/trade.doc' target='_blank'&gt;&lt;img src ='/images/left_banner_cjwd2007.jpg;pvd6b5d43747846691' border='0'&gt;&lt;p&gt;&lt;/p&gt;");&#13;
+document.write("&lt;a href ='/marketservices/servicesupport/hotline/home/index.shtml' target='_blank'&gt;&lt;img src ='/images/left_banner_4008888400.jpg;pv16f6a1bd1f750127' border='0'&gt;&lt;/a&gt;");&#13;
+}&#13;
+if (( col_id == "367")||( col_id == "358")||( col_id == "359")||( col_id == "362"))&#13;
+{&#13;
+document.write("&lt;a href ='http://www.csindex.com.cn/sseportal/csiportal/zs/jbxx/daily_index_info.jsp' target='_blank'&gt;&lt;img src ='/images/left_banner_zzzsmrbk.jpg;pvee665e8e064e71ab' border='0'&gt;");&#13;
+document.write("&lt;a href ='http://www.csindex.com.cn/sseportal/csiportal/indexquery.do' target='_blank'&gt;&lt;img src ='/images/left_banner_zzzs.jpg;pve38efbf9acdb619e' border='0'&gt;&lt;/a&gt;");&#13;
+}&#13;
+if (( col_id == "33")||( col_id == "42")||( col_id == "54")||( col_id == "55")||( col_id == "57")||( col_id == "56")||( col_id == "884")||( col_id == "674")||&#13;
+( col_id == "425")||( col_id == "428")||( col_id == "429")||( col_id == "430")||( col_id == "431")||( col_id == "434")||( col_id == "435")||( col_id == "436")||( col_id == "437")||( col_id == "319")||( col_id == "41")||( col_id == "875")||( col_id == "881")||( col_id == "882")||( col_id == "883")||( col_id == "884")||( col_id == "60")||( col_id == "580")||( col_id == "189")||( col_id == "282")||( col_id == "95")||( col_id == "7")||( col_id == "160")||( col_id == "106")||( col_id == "107")||( col_id == "132")||( col_id == "64")||( col_id == "675"))&#13;
+{&#13;
+document.write("&lt;a href ='http://bond.sse.com.cn' target='_blank'&gt;&lt;img src ='/images/left_banner_zqxxw_192.jpg;pv4577eb7ee5256ad9' border='0'&gt;&lt;/a&gt;");&#13;
+}&#13;
+if (( col_id == "8")||( col_id == "15")||( col_id == "745")||( col_id == "751")||( col_id == "313")||( col_id == "360"))&#13;
+{&#13;
+document.write("&lt;object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0' width='192' height='58' &gt;&lt;param name='movie' value='/flash/edu_ad.swf' style='margin:10px 0 0 0;'&gt;&lt;param name='quality' value='high'&gt;&lt;embed src='/flash/edu_ad.swf' style='margin:10px 0 0 0;'quality='high' pluginspage='http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash' type='application/x-shockwave-flash' width='192' height='58'&gt;&lt;/embed&gt;&lt;/object&gt;");&#13;
+}&#13;
+if (( col_id == "599"))&#13;
+{&#13;
+document.write("&lt;a href ='/marketservices/servicesupport/hotline/home/' target='_blank'&gt;&lt;img src ='/images/left_banner_4008888400_192.gif;pv1cb2231041b7db20' border='0'&gt;&lt;/a&gt;");&#13;
+document.write("&lt;object classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0' width='192' height='58' &gt;&lt;param name='movie' value='/flash/edu_ad.swf'&gt;&lt;param name='quality' value='high'&gt;&lt;embed src='/flash/edu_ad.swf' style='margin:10px 0 0 0;'quality='high' pluginspage='http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash' type='application/x-shockwave-flash' width='192' height='58'&gt;&lt;/embed&gt;&lt;/object&gt;");&#13;
+}&#13;
+</script>&#13;
+
+												</div>
+											</td>
+											<td id="B_Area" valign="top">
+												<div id="right_page">
+													<span class="page_title">&#24066;&#22330;&#25968;&#25454;</span>
+													
+<div id="content_ab">
+
+   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr><td width="420" valign="top"><div class="block_l1">
+<h1 class="h1_left">&#34892;&#24773;&#20449;&#24687;
+</h1><div style="room:1;z-index:1;position:relative;">
+<script type="text/javascript">	
+         function isValidStockCode(stockCode) {
+	          var pattern = /^\d{6}$/;
+	          if(stockCode.search(pattern) == -1) {
+		        return false;
+	         } else {
+		       return true;
+	       }
+        }						
+       var goPrice = function(event){
+                     var eventTarget;
+					 if($.browser.msie) { 
+					 	eventTarget = event.srcElement
+					 }else if($.browser.mozilla){
+					 	eventTarget = event.target;
+					 }
+                   var stockCode=$("#stockCode").val();
+				   if(stockCode==null||stockCode==undefined||stockCode==""){
+				      alert("&#35831;&#36755;&#20837;&#26597;&#35810;&#20851;&#38190;&#23383;&#20851;&#38190;&#23383;&#21487;&#20026;&#65306;&#35777;&#21048;&#20195;&#30721;&#12289;&#35777;&#21048;&#21517;&#31216;&#65281;");
+					  return false;
+				   }else if(stockCode != "" &amp;&amp; !isValidStockCode(stockCode)) {
+                        alert("&#35777;&#21048;&#20195;&#30721;&#24517;&#39035;&#20026;6&#20301;&#25968;&#23383;&#65281;");
+                       return false;
+		      }
+				  window.location.href="/assortment/stock/list/stockdetails/price/index.shtml?COMPANY_CODE="+stockCode;
+           }	
+        		   
+</script>
+
+<span class="form_term right">
+&#20010;&#32929;&#34892;&#24773;&#26597;&#35810;&#65306;
+<input name="keyword" type="text" value="&#36755;&#20837;&#35777;&#21048;&#20195;&#30721;" size="19" maxlength="50" class="topinput" id="stockCode" onkeyup="suggest(this.value,event,this);" onkeydown="return tabfix(this.value,event,this);" onblur="clearSuggest();if(this.value==&quot;&quot;){this.value=&quot;&#36755;&#20837;&#35777;&#21048;&#20195;&#30721;&quot;;}" onfocus="if(this.value==&quot;&#36755;&#20837;&#35777;&#21048;&#20195;&#30721;&quot;){this.value=&quot;&quot;;}" onkeypress="utils.keypress2TriggerClickEvent(event,'enterPressSearch')" />
+<input type="text" id="keyIndex" style="display: none" />
+<div id="ccl_results"></div>
+<input id="enterPressSearch" width="43" type="image" height="18" src="/images/search_menu_2.gif" onclick="javascript:goPrice(event)" />
+</span>
+</div>
+
+<script type="text/javascript" src="/flash/SuperFlash.js;pve59670d2f7878af7"></script>
+<script type="text/javascript" src="/flash/jquery.js;pv3bf2e48c87ba4cc7"></script>
+<script type="text/javascript" src="/flash/swfobject.js;pv389048698a8d9d68"></script> 
+<script type="text/javascript">
+		swfobject.registerObject("myId", "9.0.0", "expressInstall.swf");
+</script>
+<script language="javascript">
+function flashCallJs(funcName,arg){
+        if(funcName == "navigateURL")
+	if(arg!="undefined"){	  
+          var arg=arg.substring(2,8);	
+	 window.open("/assortment/stock/list/stockdetails/company/index.shtml?COMPANY_CODE="+arg);	
+    }
+}
+</script>    
+ <br />
+
+<object id="myId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="420" height="300">
+				<param name="movie" value="/flash/SimpleQuotationReport.swf" />
+				<param name="base" value="/flash/" />
+        		<!--[if !IE]>-->
+				<object type="application/x-shockwave-flash" data="/flash/SimpleQuotationReport.swf" width="420" height="300" base="/flash/">
+				<!--<![endif]-->
+				<div>
+					<h1>Alternative content</h1>
+					<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+				</div>
+				<!--[if !IE]>-->
+				</object>
+				<!--<![endif]-->
+			</object>
+
+<a href="/market/price/report/" target="_self">&#28857;&#20987;&#36825;&#37324;</a>&#65292;&#26597;&#30475;&#20840;&#37096;&#20010;&#32929;&#34892;&#24773;&#12290;
+<br /></div><div class="block_l1">
+<h1>&#25351;&#25968;&#20449;&#24687;
+</h1><span class="tab"><a class="tab_on" target="" href="/market/sseindex/introduction/">&#160;&#19978;&#35777;&#31995;&#21015;&#25351;&#25968;
+</a><a target="_blank" href="http://www.csindex.com.cn/sseportal/csiportal/indexquery.do">&#160;&#20013;&#35777;&#31995;&#21015;&#25351;&#25968;
+</a></span><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />&#13;
+<meta http-equiv="Pragma" content="no-cache" />&#13;
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate" />&#13;
+<meta http-equiv="Expires" content="0" />&#13;
+<!--<script type="text/javascript" src="/js/common/indexQuotes.js" ></script>-->&#13;
+<script type="text/javascript">&#13;
+	$(document).ready(function() {&#13;
+	//	loadRealTimeQuotes();&#13;
+		jQuery.getScript("/js/common/indexQuotes.js",function(){loadRealTimeQuotes();});&#13;
+	});&#13;
+	function loadRealTimeQuotes() {&#13;
+		var appendHtml = '';&#13;
+		var indicesData = get_AllIndeicesData();&#13;
+		//&#33719;&#21462;&#20840;&#37096;&#34892;&#24773;&#25968;&#25454;&#13;
+		var candidateIndex = ['000016', '000010', '000001', '000015', '000042', '000021', '000029', '000018', '000043', '000045', '000047', '000048', '000049', '000020'];&#13;
+		if (indicesData != null &amp;&amp; indicesData.length != 0) {&#13;
+			//1.&#35774;&#32622;&#25991;&#20214;&#26356;&#26032;&#30340;&#26085;&#26399;&#13;
+			var updateDate = indicesData[0].date;&#13;
+			var showDateHtmlNode = document.getElementById("showDate");&#13;
+			while (showDateHtmlNode.firstChild != null) {&#13;
+				showDateHtmlNode.removeChild(showDateHtmlNode.firstChild);&#13;
+			}&#13;
+			document.getElementById("showDate").innerHTML = updateDate + "&#19978;&#35777;&#25351;&#25968;&#34892;&#24773;";&#13;
+			//2.&#24490;&#29615;&#25340;&#35013;&#25968;&#25454;&#21015;&#34920;&#13;
+			appendHtml += '&lt;table class="tablestyle"&gt;';&#13;
+			appendHtml += '&lt;tr&gt;&lt;th&gt;&#25351;&#25968;&#21517;&#31216;&lt;/th&gt;';&#13;
+			appendHtml += '&lt;th&gt;&#21069;&#25910;&lt;/th&gt;';&#13;
+			appendHtml += '&lt;th&gt;&#24320;&#30424;&lt;/th&gt;';&#13;
+			appendHtml += '&lt;th&gt;&#26368;&#39640;&lt;/th&gt;';&#13;
+			appendHtml += '&lt;th&gt;&#26368;&#20302;&lt;/th&gt;';&#13;
+			appendHtml += '&lt;th&gt;&#26368;&#26032;&lt;/th&gt;';&#13;
+			appendHtml += '&lt;th&gt;&#28072;&#36300;%&lt;/th&gt;&lt;/tr&gt;';&#13;
+			for (var i = 0; i &lt; candidateIndex.length; i++) {&#13;
+				for (var j = 0; j &lt; indicesData.length; j++) {&#13;
+					if (candidateIndex[i] == indicesData[j].ZSDM) {&#13;
+						//alert(" i = "+candidateIndex[i]+" i = "+i+" j = "+indicesData[j].ZSDM+" j =  "+j);&#13;
+						if (indicesData[j].indicsSeq == 0) {&#13;
+							continue;&#13;
+						} else {&#13;
+							appendHtml += '&lt;tr&gt;&lt;td&gt;';&#13;
+							appendHtml += '&lt;a href="/market/sseindex/indexlist/s/i'+indicesData[j].ZSDM+'/intro.shtml?INDEX_Code='+indicesData[j].ZSDM+'" ';;&#13;
+							appendHtml += 'target="_blank"&gt;' + indicesData[j].JC + '&lt;/a&gt;&lt;/td&gt;';&#13;
+							appendHtml += '&lt;td class="td_content_right"&gt;' + indicesData[j].ZRSP + '&lt;/td&gt;';&#13;
+							appendHtml += '&lt;td class="td_content_right"&gt;' + indicesData[j].DRKP + '&lt;/td&gt;';&#13;
+							appendHtml += '&lt;td class="td_content_right"&gt;' + indicesData[j].DRZD + '&lt;/td&gt;';&#13;
+							appendHtml += '&lt;td class="td_content_right"&gt;' + indicesData[j].DRZX + '&lt;/td&gt;';&#13;
+							appendHtml += '&lt;td class="td_content_right"&gt;' + indicesData[j].SSZS + '&lt;/td&gt;';&#13;
+							appendHtml += '&lt;td class="td_content_right"&gt;' + indicesData[j].sRate + '&lt;/td&gt;';&#13;
+							appendHtml += '&lt;/tr&gt;';&#13;
+						}&#13;
+					}&#13;
+				}&#13;
+			}&#13;
+			appendHtml += '&lt;/table&gt;';&#13;
+			var parentHtmlNode = document.getElementById("indicesDataHtml");&#13;
+			while (parentHtmlNode.firstChild != null) {&#13;
+				parentHtmlNode.removeChild(parentHtmlNode.firstChild);&#13;
+			}&#13;
+			document.getElementById("indicesDataHtml").innerHTML = appendHtml;&#13;
+		}&#13;
+	}&#13;
+</script>&#13;
+<ul class="tab_table">&#13;
+    <li id="showDate" class="tab_table_on"> </li>&#13;
+</ul>&#13;
+<span id="staticDate" style="display:none">2015-07-31 18:09:06</span>&#13;
+<div id="indicesDataHtml"></div>
+<a href="/market/sseindex/indexlist/" target="_self">&#28857;&#20987;&#36825;&#37324;</a>&#65292;&#26597;&#30475;&#20840;&#37096;&#19978;&#35777;&#31995;&#21015;&#25351;&#25968;&#12290;
+<br /></div></td><td width="20" background="/images/bkg_vline.gif;pv01eb8dccbe724631"> </td><td width="275" valign="top"><div class="block_l1">
+<h1>&#25968;&#25454;&#32479;&#35745;
+</h1><div class="block_l2">
+<span class="h2_style1">&#25104;&#20132;&#27010;&#20917;
+</span>
+<span class="right list_date" id="turnoverDateShow"></span><span class="tab"><a class="tab_on" target="_self" href="#">&#160;A&#32929;
+</a><a target="_self" href="/market/dealingdata/overview/stock/bshare/">&#160;B&#32929;
+</a>|<a target="_self" href="/market/dealingdata/overview/fund/whole/">&#160;&#22522;&#37329;
+</a>|<a target="_self" href="/market/dealingdata/overview/bond/turnover/">&#160;&#20538;&#21048;
+</a>|<a target="_self" href="/market/dealingdata/overview/warrants/">&#160;&#26435;&#35777;
+</a></span><script type="text/javascript">&#13;
+&#13;
+    $(document).ready(function(){&#13;
+              var turnoverDate=$("#turnoverDate").text();&#13;
+              $("#turnoverDateShow").text(turnoverDate);&#13;
+     });&#13;
+&#13;
+</script>&#13;
+<span id="staticDate" style="display:none">2015-08-01 18:00:01</span>&#13;
+<div id="dateList">				&#13;
+<table class="tablestyle">&#13;
+		    <tr>&#13;
+		        <td class="th_l3">&#24066;&#20215;&#24635;&#20540;(&#20159;&#20803;)</td>&#13;
+		        <td class="td_content_right">298960.52</td>&#13;
+		        <td class="td_content_right" style="display:none" id="turnoverDate">2015-07-31</td>&#13;
+		    </tr>&#13;
+		    <tr>&#13;
+		        <td class="th_l3">&#27969;&#36890;&#24066;&#20540;&#24635;&#20540;<br />(&#20159;&#20803;)</td>&#13;
+		        <td class="td_content_right">257283.18</td>&#13;
+		       &#13;
+		    </tr>&#13;
+		    <tr>&#13;
+		        <td class="th_l3">&#24635;&#25104;&#20132;&#37327;(&#19975;&#32929;)</td>&#13;
+		        <td class="td_content_right">3526234.4</td>&#13;
+		       &#13;
+		    </tr>&#13;
+		    <tr>&#13;
+		        <td class="th_l3"> &#24635;&#25104;&#20132;&#37329;&#39069;<br />(&#19975;&#20803;)</td>&#13;
+		        <td class="td_content_right">46268344.41</td>&#13;
+		       &#13;
+		    </tr>&#13;
+		    <tr>&#13;
+		        <td class="th_l3">&#24635;&#25104;&#20132;&#31508;&#25968;<br />(&#19975;&#31508;)</td>&#13;
+		        <td class="td_content_right">1985.99</td>&#13;
+		       &#13;
+		    </tr>&#13;
+		    <tr>&#13;
+		        <td class="th_l3">&#25442;&#25163;&#29575;</td>&#13;
+		        <td class="td_content_right">1.33</td>&#13;
+		    </tr> &#13;
+		    <tr>&#13;
+		        <td class="th_l3">&#24179;&#22343;&#24066;&#30408;&#29575;</td>&#13;
+		        <td class="td_content_right">18.04</td>&#13;
+		        &#13;
+		    </tr>&#13;
+					</table>&#13;
+</div>		
+<a href="/market/dealingdata/overview/stock/ashare/" target="_self">&#28857;&#20987;&#36825;&#37324;</a>&#65292;&#26597;&#30475;&#35814;&#24773;
+<br /></div><div class="block_l2">
+<div style="margin:10px 0 0 0;">
+<span class="h2_style1">&#20132;&#26131;&#25490;&#21517;
+</span>
+<span class="right list_date" id="tradeDateShow"></span></div><span class="tab"><a class="tab_on" target="_self" href="#">&#160;&#32929;&#31080;&#27963;&#36291;&#24230;
+</a><a target="_self" href="/market/dealingdata/dealrank/marketvalue/">&#160;&#32929;&#31080;&#24066;&#20540;
+</a>|<a target="_self" href="/market/dealingdata/dealrank/livelybondstoprank/">&#160;&#20538;&#21048;&#27963;&#36291;&#24230;
+</a></span><script type="text/javascript">&#13;
+&#13;
+    $(document).ready(function(){&#13;
+              var tradeDate=$("#tradeDate").text();&#13;
+              $("#tradeDateShow").text(tradeDate);&#13;
+     });&#13;
+&#13;
+</script>&#13;
+<span id="staticDate" style="display:none">2015-08-01 18:00:01</span>&#13;
+<div id="hygpm_div">&#13;
+<table class="tablestyle">&#13;
+    <tbody>&#13;
+        <tr>&#13;
+            <th>&#21517;&#27425;</th>&#13;
+            <th>&#32929;&#31080;&#20195;&#30721;</th>&#13;
+            <th>&#32929;&#31080;&#31616;&#31216;</th>&#13;
+            <th>&#28072;&#24133;(%)</th>&#13;
+        </tr>&#13;
+		<tr>&#13;
+			<td>&#13;
+				1&#13;
+			</td>&#13;
+                        <td id="tradeDate" style="display:none">2015-07-31</td>&#13;
+			<td>&#13;
+				600125&#13;
+			</td>&#13;
+			<td>&#13;
+				&#38081;&#40857;&#29289;&#27969;&#13;
+			</td>&#13;
+			<td class="td_content_left_orange td_content_right">&#13;
+				10.04&#13;
+			</td>&#13;
+		</tr>&#13;
+				<tr>&#13;
+			<td>&#13;
+				2&#13;
+			</td>&#13;
+                        <td id="tradeDate" style="display:none">2015-07-31</td>&#13;
+			<td>&#13;
+				600773&#13;
+			</td>&#13;
+			<td>&#13;
+				&#35199;&#34255;&#22478;&#25237;&#13;
+			</td>&#13;
+			<td class="td_content_left_orange td_content_right">&#13;
+				10.03&#13;
+			</td>&#13;
+		</tr>&#13;
+				<tr>&#13;
+			<td>&#13;
+				3&#13;
+			</td>&#13;
+                        <td id="tradeDate" style="display:none">2015-07-31</td>&#13;
+			<td>&#13;
+				600326&#13;
+			</td>&#13;
+			<td>&#13;
+				&#35199;&#34255;&#22825;&#36335;&#13;
+			</td>&#13;
+			<td class="td_content_left_orange td_content_right">&#13;
+				10.03&#13;
+			</td>&#13;
+		</tr>&#13;
+				<tr>&#13;
+			<td>&#13;
+				4&#13;
+			</td>&#13;
+                        <td id="tradeDate" style="display:none">2015-07-31</td>&#13;
+			<td>&#13;
+				600517&#13;
+			</td>&#13;
+			<td>&#13;
+				&#32622;&#20449;&#30005;&#27668;&#13;
+			</td>&#13;
+			<td class="td_content_left_orange td_content_right">&#13;
+				10.03&#13;
+			</td>&#13;
+		</tr>&#13;
+				<tr>&#13;
+			<td>&#13;
+				5&#13;
+			</td>&#13;
+                        <td id="tradeDate" style="display:none">2015-07-31</td>&#13;
+			<td>&#13;
+				600707&#13;
+			</td>&#13;
+			<td>&#13;
+				&#24425;&#34425;&#32929;&#20221;&#13;
+			</td>&#13;
+			<td class="td_content_left_orange td_content_right">&#13;
+				10.02&#13;
+			</td>&#13;
+		</tr>&#13;
+		    </tbody>&#13;
+</table>&#13;
+&#13;
+</div>
+<a href="/market/dealingdata/dealrank/activity/" target="_self">&#28857;&#20987;&#36825;&#37324;</a>&#65292;&#26597;&#30475;&#26356;&#22810;
+<br /><div class="line_height">
+
+
+<span class="h_line">&#160;</span> <a target="_blank" href="http://biz.sse.com.cn/sseportal/webapp/datapresent/querymemberofarearank?rankCndtion=1&amp;startYear=&amp;startMonth=&amp;endYear=&amp;endMonth=" style="margin:0 0 8px 0;">  <img border="0" src="/images/hyjytj.gif;pv22a22c08cb678900" alt="" /> </a><span class="height_5">&#160;</span>  <a target="_blank" href="/researchpublications/publication/monthly/index.shtml" style="margin:0 0 8px 0;">  <img border="0" src="/images/sztjybb.gif;pv05a6def92f943b61" alt="" /> </a><span class="height_5">&#160;</span> <a target="_blank" href="http://www.csindex.com.cn/sseportal/csiportal/indexquery.do" style="margin:0 0 8px 0;">  <img border="0" src="/images/zzzs.gif;pv621fd980d51613e8" alt="" /> </a>
+
+</div>
+
+
+</div></div></td></tr>
+</table>
+
+
+</div>
+ 
+												</div>
+											</td>
+										</tr>
+									</table>
+
+								</div>
+							</td>
+						</tr>
+						<tr height="80" class="targetTR">
+							<td valign="bottom">
+								<div id="footer">
+									<div class="footer_bj">&#13;
+&#13;
+	<span class="bottom_font">&#13;
+		<a href="/aboutus/contactus/index.shtml">&#32852;&#31995;&#25105;&#20204;</a>|&#13;
+		<a href="/marketservices/servicesupport/websuport/feedback/index.shtml">&#29992;&#25143;&#21453;&#39304;</a>|&#13;
+		<a href="/marketservices/servicesupport/websuport/map/index.shtml">&#32593;&#31449;&#22320;&#22270;</a>|&#13;
+		<a href="/marketservices/servicesupport/websuport/links/index.shtml">&#30456;&#20851;&#38142;&#25509;</a>|&#13;
+		<a href="/marketservices/servicesupport/websuport/legal/index.shtml">&#27861;&#24459;&#22768;&#26126;</a>|&#13;
+		<a href="/aboutus/sseintroduction/trademark/index.shtml">&#27880;&#20876;&#21830;&#26631;</a>&#13;
+	</span>&#13;
+	&#13;
+	<span class="font_white bottom_font">&#13;
+		&#169;&#19978;&#28023;&#35777;&#21048;&#20132;&#26131;&#25152;&#29256;&#26435;&#25152;&#26377; 2010       &#27818;ICP&#22791;<a target="_blank" href="http://www.miibeian.gov.cn/">05004045</a>&#21495;     &#160;&#160;&#24314;&#35758;&#20351;&#29992;IE7.0+&#27983;&#35272;&#22120;&#65292;1024x768&#20998;&#36776;&#29575;&#13;
+	</span>&#13;
+&#13;
+</div>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td id="right_shadow">&#160;</td>
+			</tr>
+		</table>
+	</body>
+</html>

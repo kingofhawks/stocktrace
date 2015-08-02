@@ -5,6 +5,7 @@ Created on 2011-3-7
 '''
 import logging
 from stocktrace.util import slf4p
+from market.models import Market
 from lxml import etree
 from lxml.html import parse
 
@@ -25,7 +26,6 @@ def parse_market():
     for word in statistics:
         print word
 
-    from stockmarket import Market
     market = Market(statistics[1], statistics[8], statistics[12], statistics[14])
     print market
 
