@@ -12,24 +12,6 @@ from lxml.html import parse
 logger = slf4p.getLogger(__name__)
 
 
-# parse shanghai market overall
-def parse_market():
-    page = parse('http://www.sse.com.cn/market/').getroot()
-    result = etree.tostring(page)
-    # print result
-    import io
-    with io.open('test.xml', 'wb') as f:
-        f.writelines(result)
-
-    r = page.get_element_by_id('dateList')
-    statistics = r.text_content().split()
-    for word in statistics:
-        print word
-
-    market = Market(statistics[1], statistics[8], statistics[12], statistics[14])
-    print market
-
-
 def parseMarket():
     page = parse('http://www.sse.com.cn/sseportal/ps/zhs/home.html').getroot()
     result = etree.tostring(page)

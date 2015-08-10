@@ -1,11 +1,50 @@
 # -*- coding:utf-8 -*-
 from lxml import etree
 from lxml.html import parse
+from models import Market
 import pandas as pd
 import numpy as np
 import xlrd
 
+# parse shanghai market overall
+def parse_sh_market():
+    page = parse('http://www.sse.com.cn/market/').getroot()
+    # result = etree.tostring(page)
+    # print result
 
+    r = page.get_element_by_id('dateList')
+    statistics = r.text_content().split()
+    for word in statistics:
+        print word
+
+    market = Market(statistics[1], statistics[8], statistics[12], statistics[14])
+    print market
+
+# parse SZ market overall
+def parse_sz_market():
+    page = parse('http://www.szse.cn/main/marketdata/tjsj/jbzb/').getroot()
+    result = etree.tostring(page)
+    # print result
+
+    r = page.get_element_by_id('REPORTID_tab1')
+    print etree.tostring(r)
+    print len(r)
+    for child in r:
+        print(etree.tostring(child))
+    # print r.text_content()
+    # statistics = r.text_content().split()
+    # for word in statistics:
+    #     print word
+    #
+    # market = Market(statistics[1], statistics[8], statistics[12], statistics[14])
+    # print market
+
+def parse_sz_market2():
+    url = 'http://www.szse.cn/main/marketdata/tjsj/jbzb/'
+    dfs = pd.read_html(url)
+    print dfs
+
+# parse PE/PB from 申万行业一级指数
 def parse_sw(day='20150729'):
     # url = 'http://www.swsindex.com/pedata/SwClassifyPePb_{}.xls'.format(day)
 
@@ -64,4 +103,7 @@ def parse_sw(day='20150729'):
 
 
 if __name__ == '__main__':
-    parse_sw()
+    parse_sz_market2()
+    # parse_sh_market()
+    # parse_sw()
+
