@@ -30,7 +30,7 @@ logger = slf4p.getLogger(__name__)
 #codes: SH600583,SZ000728,GS
 def parse_real_time(codes):
     #TODO get access token when login xueqiu
-    payload = {'access_token': 'zsviyNEZkM9JzOleP8iNIi'}
+    payload = {'access_token': 'e41712c72e25cff3ecac5bb38685ebd6ec356e9f'}
     url = 'http://xueqiu.com/stock/quote.json?code='+codes
     print '*************url********************{}'.format(url)
     r = requests.get(url, params=payload)
