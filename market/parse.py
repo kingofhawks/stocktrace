@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 import xlrd
 
-
 # parse shanghai market overall
 def parse_sh_market():
     page = parse('http://www.sse.com.cn/market/').getroot()
@@ -21,8 +20,6 @@ def parse_sh_market():
     market = Market(statistics[1], statistics[8], statistics[12], statistics[14])
     print market
 
-
-#TODO
 # parse SZ market overall
 def parse_sz_market():
     page = parse('http://www.szse.cn/main/marketdata/tjsj/jbzb/').getroot()
@@ -42,21 +39,10 @@ def parse_sz_market():
     # market = Market(statistics[1], statistics[8], statistics[12], statistics[14])
     # print market
 
-
-#TODO
 def parse_sz_market2():
-    # url = 'http://www.szse.cn/main/marketdata/tjsj/jbzb/'
-    # dfs = pd.read_html(url, flavor='lxml')
-    # print dfs
-    page = parse('http://www.szse.cn/main/marketdata/tjsj/jbzb/').getroot()
-    # result = etree.tostring(page)
-    # print result
-
-    r = page.get_element_by_id('REPORTID_tab1')
-    print etree.tostring(r)
-    dfs = pd.read_html(etree.tostring(r), flavor='lxml')
+    url = 'http://www.szse.cn/main/marketdata/tjsj/jbzb/'
+    dfs = pd.read_html(url)
     print dfs
-
 
 # parse PE/PB from 申万行业一级指数
 def parse_sw(day='20150729'):
@@ -113,6 +99,7 @@ def parse_sw(day='20150729'):
     print df.loc[df[pb] == min_pb][columns]
     # print df[int(max_pb_index[0]): int(max_pb_index[0])+1]
     # print df[int(min_pb_index[0]): int(min_pb_index[0])+1]
+
 
 
 if __name__ == '__main__':

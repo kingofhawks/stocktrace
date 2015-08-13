@@ -2,512 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66b78525-0139-49bf-bf19-d1a1442b8f7a" name="Default" comment="">
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\.project" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\.pydevproject" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\.settings\org.eclipse.core.resources.prefs" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\docs\easyExcel.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\docs\excelutil.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\docs\manage.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\docs\pycco.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\docs\trading.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\log\stocktrace.log" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\.bowerrc" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\amazon\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\amazon\s3server.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\amazon\test.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\easyExcel.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\excel\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\excel\main.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\excelutil.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\lottery\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\lottery\lotteryparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\manage.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\emit_log.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\emit_log_topic.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\new_task.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\receive.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\receive_logs.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\receive_logs_topic.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\send.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\rabbitmq\worker.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\requirements.txt" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\resources\stock_list_all" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\resources\stock_list_hold" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\resources\stock_list_self_selection" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\resources\stock_list_top100" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\Gruntfile.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\README.md" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\bower.json" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap-theme.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap-theme.css.map" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap-theme.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap.css.map" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\css\bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\js\bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\dist\js\bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\fonts\glyphicons-halflings-regular.eot" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\fonts\glyphicons-halflings-regular.svg" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\fonts\glyphicons-halflings-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\fonts\glyphicons-halflings-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\grunt\bs-glyphicons-data-generator.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\grunt\bs-lessdoc-parser.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\grunt\bs-raw-files-generator.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\grunt\sauce_browsers.yml" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\affix.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\alert.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\button.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\carousel.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\collapse.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\dropdown.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\modal.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\popover.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\scrollspy.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\tab.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\tooltip.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\js\transition.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\alerts.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\badges.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\bootstrap.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\breadcrumbs.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\button-groups.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\buttons.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\carousel.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\close.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\code.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\component-animations.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\dropdowns.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\forms.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\glyphicons.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\grid.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\input-groups.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\jumbotron.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\labels.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\list-group.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\media.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\alerts.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\background-variant.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\border-radius.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\buttons.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\center-block.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\clearfix.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\forms.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\gradients.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\grid-framework.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\grid.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\hide-text.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\image.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\labels.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\list-group.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\nav-divider.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\nav-vertical-align.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\opacity.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\pagination.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\panels.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\progress-bar.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\reset-filter.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\resize.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\responsive-visibility.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\size.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\tab-focus.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\table-row.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\text-emphasis.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\text-overflow.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\mixins\vendor-prefixes.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\modals.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\navbar.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\navs.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\normalize.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\pager.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\pagination.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\panels.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\popovers.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\print.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\progress-bars.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\responsive-embed.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\responsive-utilities.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\scaffolding.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\tables.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\theme.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\thumbnails.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\tooltip.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\type.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\utilities.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\variables.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\less\wells.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\bootstrap\package.json" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\css\bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\css\style.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\css\font-awesome.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\css\font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\fonts\FontAwesome.otf" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\fonts\fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\fonts\fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\fonts\fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\fonts\fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\bordered-pulled.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\core.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\fixed-width.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\font-awesome.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\icons.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\larger.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\list.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\mixins.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\path.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\rotated-flipped.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\spinning.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\stacked.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\less\variables.less" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_bordered-pulled.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_core.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_fixed-width.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_icons.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_larger.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_list.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_mixins.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_path.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_rotated-flipped.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_spinning.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_stacked.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\_variables.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\font-awesome-4.0.3\scss\font-awesome.scss" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\img\glyphicons-halflings-white.png" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\img\glyphicons-halflings.png" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\MIT-LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\bower.json" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\dist\jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\dist\jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\dist\jquery.min.map" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\jsonp.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\load.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\parseJSON.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\parseXML.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\script.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\ajax\xhr.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes\attr.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes\classes.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes\prop.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes\support.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\attributes\val.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\callbacks.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\core.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\core\access.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\core\init.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\core\parseHTML.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\core\ready.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\addGetHookIf.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\curCSS.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\defaultDisplay.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\hiddenVisibleSelectors.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\support.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\css\swap.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\data.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\data\Data.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\data\accepts.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\deferred.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\deprecated.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\dimensions.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\effects.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\effects\Tween.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\effects\animatedSelector.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\event.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\event\alias.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\event\support.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\exports\amd.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\exports\global.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\intro.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\manipulation.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\manipulation\_evalUrl.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\manipulation\support.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\offset.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\outro.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\queue.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\queue\delay.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\selector-native.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\selector-sizzle.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\selector.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\serialize.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\sizzle\dist\sizzle.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\sizzle\dist\sizzle.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\sizzle\dist\sizzle.min.map" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\traversing.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\traversing\findFilter.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jquery\src\wrap.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\chosen\chosen-sprite.png" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\chosen\chosen.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\chosen\chosen.jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\chosen\chosen.jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\examples.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\images\logo.jpg" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\images\ui-colorpicker.png" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\isotope.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-1.8.2.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\dial-controls\index.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\dial-controls\style.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\infinite-scroll\index.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\infinite-scroll\style.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\modernizr.custom.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\scroll-analytics\index.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\scroll-analytics\style.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\sticky-elements\index.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\examples\sticky-elements\style.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\waypoints.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery-waypoints-1.1.7\waypoints.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.infinitescroll.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.infinitescroll.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\excanvas.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\excanvas.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\jquery.jqplot.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\jquery.jqplot.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.BezierCurveRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.BezierCurveRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.barRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.barRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.blockRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.blockRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.bubbleRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.bubbleRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasAxisLabelRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasAxisLabelRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasAxisTickRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasAxisTickRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasOverlay.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasOverlay.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasTextRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.canvasTextRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.categoryAxisRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.categoryAxisRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.ciParser.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.ciParser.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.cursor.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.cursor.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.dateAxisRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.dateAxisRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.donutRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.donutRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.dragable.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.dragable.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.enhancedLegendRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.enhancedLegendRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.funnelRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.funnelRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.highlighter.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.highlighter.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.json2.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.json2.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.logAxisRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.logAxisRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.mekkoAxisRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.mekkoAxisRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.mekkoRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.mekkoRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.meterGaugeRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.meterGaugeRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.ohlcRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.ohlcRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pieRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pieRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pointLabels.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pointLabels.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidAxisRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidAxisRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidGridRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidGridRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.pyramidRenderer.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.trendline.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.jqplot\plugins\jqplot.trendline.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\LGPL-LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\MIT-LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shAutoloader.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shAutoloader.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shBrushJScript.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shBrushJScript.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shBrushXml.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shBrushXml.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shCore.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\scripts\shCore.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shCore.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shCore.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shCoreDefault.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shCoreDefault.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shThemeDefault.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shThemeDefault.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shThemejqPlot.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\js\syntaxhighlighter\styles\shThemejqPlot.min.css" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\jsondata.txt" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\.bower.json" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\.jshintrc" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\CONTRIBUTING.md" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\Gruntfile.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\README.md" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\bower.json" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\composer.json" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\bloodhound.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\bloodhound.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\typeahead.bundle.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\typeahead.bundle.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\typeahead.jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\dist\typeahead.jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\doc\bloodhound.md" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\doc\jquery_typeahead.md" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\doc\migration\0.10.0.md" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\karma.conf.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\package.json" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\bloodhound.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\lru_cache.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\options_parser.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\persistent_storage.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\search_index.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\tokenizers.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\transport.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\bloodhound\version.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\common\utils.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\css.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\dataset.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\dropdown.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\event_bus.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\event_emitter.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\highlight.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\html.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\input.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\src\typeahead\typeahead.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\bloodhound_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\ci" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\dataset_view_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\dropdown_view_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\event_emitter_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\fixtures\ajax_responses.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\fixtures\data.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\fixtures\html.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\helpers\typeahead_mocks.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\highlight_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\input_view_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\integration\test.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\integration\test.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\lru_cache_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\persistent_storage_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\playground.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\search_index_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\tokenizers_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\transport_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\test\typeahead_view_spec.js" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\static\typeahead.js\typeahead.js.jquery.json" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace.db" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\cron\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\cron\monitor.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\cron\realtimemonitorschedule.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\dao\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\dao\stockdao.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\data.json" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\data\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\data\download.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\data\main.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\memcache\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\memcache\cache.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\bloombergparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\exchangeparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\googleparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\hsiparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\htmltest.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\ifengparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\index.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\industry.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\radar.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\reutersparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\screener.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\sinaparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\sseparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\stockmarket.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\stockparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\windinparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\parse\yahooparser.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\redis\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\redis\redisservice.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\service\AppServerSvc.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\service\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\service\stocktraceservice.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\settings.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\stock.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\stocktrace.db" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\images\bad.svg" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\images\heart.svg" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\images\trash.svg" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\stocktray.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\systray.pyw" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\systray.qrc" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\tray\systray_rc.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\urls.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\util\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\util\mailutil.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\util\mailutil2.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\util\settings.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\util\slf4p.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\stocktrace\wsgi.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test.xls" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\dao_test.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\export_github.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\main.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\mongohq.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\parsetest.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\phones.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\screen_test.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\stock_api_test.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\text_diff_test.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\unitt.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\upload.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\test\yahoo_test.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\trading.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\models.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\task\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\task\run_tasks.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\task\tasks.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\alist_days_ma.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\base.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\candlestick.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\index.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\index_backup.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\isotope_demo.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\ma.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\nhnl-index.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\templates\screen_year_low_high.html" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\tests.py" afterPath="" />
-      <change type="DELETED" beforePath="G:\OneDrive\Workspace\stocktrace\src\zytj\views.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/stocktrace.iml" afterPath="$PROJECT_DIR$/.idea/stocktrace.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/market/parse.py" afterPath="$PROJECT_DIR$/market/parse.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/stocktrace.iml" afterPath="$PROJECT_DIR$/.idea/stocktrace.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="stocktrace.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -516,13 +20,15 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/stocktrace$shenwanparser.coverage" NAME="shenwanparser Coverage Results" MODIFIED="1438572768546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stocktrace/parse" />
     <SUITE FILE_PATH="coverage/stocktrace$main.coverage" NAME="main Coverage Results" MODIFIED="1413602693005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stocktrace/data" />
+    <SUITE FILE_PATH="coverage/stocktrace$parse.coverage" NAME="parse Coverage Results" MODIFIED="1439197643696" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/market" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="DaemonCodeAnalyzer">
-    <disable_hints />
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -530,19 +36,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="yahooparser.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="yahooparser.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stocktrace/parse/yahooparser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="364" column="40" selection-start="14658" selection-end="14658" vertical-scroll-proportion="-19.64" vertical-offset="6235" max-vertical-offset="10279">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="364" column="40" selection-start-line="364" selection-start-column="40" selection-end-line="364" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="yahoo_test.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="yahoo_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/yahoo_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="24" selection-start="614" selection-end="630" vertical-scroll-proportion="-6.08" vertical-offset="171" max-vertical-offset="2014">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -550,52 +58,76 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="readme.md" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="readme.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="76" selection-start="654" selection-end="654" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="779">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="requirements.txt" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="5" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="171">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="trading.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="trading.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/trading.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="12" selection-start="674" selection-end="674" vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="608">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="parse.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/market/parse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="5" selection-start="74" selection-end="74" vertical-scroll-proportion="0.20430107" vertical-offset="0" max-vertical-offset="1102">
+            <state vertical-scroll-proportion="0.15650742">
+              <caret line="57" column="37" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
+              <folding>
+                <element signature="e#23#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/market/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="history.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/history.md">
+      <file leaf-file-name="sseparser.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/stocktrace/parse/sseparser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="203" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -611,36 +143,38 @@
     </option>
   </component>
   <component name="IdeDocumentHistory">
-    <option name="changedFiles">
+    <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/stocktrace/parse/yahooparser.py" />
-        <option value="$PROJECT_DIR$/readme.md" />
-        <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/trading.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/stocktrace/parse/sseparser.py" />
+        <option value="$PROJECT_DIR$/market/parse.py" />
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="10" />
-    <option name="width" value="1346" />
-    <option name="height" value="728" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="false" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
     <ConfirmationsSetting value="1" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-  <component name="ProjectReloadState">
-    <option name="STATE" value="0" />
-  </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -652,7 +186,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -673,6 +206,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -683,8 +218,15 @@
     <property name="last_opened_file_path" value="G:/Workspace" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Workspace\stocktrace\market" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.parse">
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -700,8 +242,45 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/stocktrace/data/main.py" />
       <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="shenwanparser" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/stocktrace/parse" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/stocktrace/parse/shenwanparser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="parse" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/market" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/market/parse.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
@@ -722,6 +301,172 @@
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="stocktrace" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="py.test">
@@ -749,138 +494,6 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Nosetests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="stocktrace" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="stocktrace" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="stocktrace" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="stocktrace" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8000" />
-      <option name="host" value="" />
-      <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
-      <option name="runTestServer" value="false" />
-      <option name="runNoReload" value="false" />
-      <option name="useCustomRunCommand" value="false" />
-      <option name="customRunCommand" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
-      <browser start="false" url="" with-js-debugger="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="stocktrace" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Attests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="stocktrace" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="stocktrace" type="Python.DjangoServer" factoryName="Django server">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -904,13 +517,17 @@
       <option name="customRunCommand" value="" />
       <method />
     </configuration>
-    <list size="2">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Django server.stocktrace" />
       <item index="1" class="java.lang.String" itemvalue="Python.main" />
+      <item index="2" class="java.lang.String" itemvalue="Python.shenwanparser" />
+      <item index="3" class="java.lang.String" itemvalue="Python.parse" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.main" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Python.parse" />
+        <item index="1" class="java.lang.String" itemvalue="Python.shenwanparser" />
+        <item index="2" class="java.lang.String" itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -919,111 +536,352 @@
     <task active="true" id="Default" summary="Default task">
       <changelist id="66b78525-0139-49bf-bf19-d1a1442b8f7a" name="Default" comment="" />
       <created>1413602611856</created>
+      <option name="number" value="Default" />
       <updated>1413602611856</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="10" y="0" width="1346" height="728" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2489019" sideWeight="0.6700337" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32861635" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962406" sideWeight="0.6700337" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32996634" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32861635" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32861635" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <option name="myTodoPanelSettings">
-      <TodoPanelSettings />
-    </option>
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/stocktrace/data/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="299" selection-end="299" vertical-scroll-proportion="-6.84" vertical-offset="0" max-vertical-offset="285">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stocktrace/parse/yahooparser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="364" column="40" selection-start="14658" selection-end="14658" vertical-scroll-proportion="-19.64" vertical-offset="6235" max-vertical-offset="10279">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="364" column="40" selection-start-line="364" selection-start-column="40" selection-end-line="364" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/yahoo_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="24" selection-start="614" selection-end="630" vertical-scroll-proportion="-6.08" vertical-offset="171" max-vertical-offset="2014">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/history.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="203" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.bowerrc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="372">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="76" selection-start="654" selection-end="654" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="779">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="5" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="171">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/trading.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="12" selection-start="674" selection-end="674" vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="608">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/market/parse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#23#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/market/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stocktrace/parse/sseparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stocktrace/parse/yahooparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="364" column="40" selection-start-line="364" selection-start-column="40" selection-end-line="364" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/yahoo_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="5" selection-start="74" selection-end="74" vertical-scroll-proportion="0.20430107" vertical-offset="0" max-vertical-offset="1102">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stocktrace/parse/yahooparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="364" column="40" selection-start-line="364" selection-start-column="40" selection-end-line="364" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/yahoo_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stocktrace/parse/yahooparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="364" column="40" selection-start-line="364" selection-start-column="40" selection-end-line="364" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/yahoo_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stocktrace/data/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.84">
+          <caret line="10" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stocktrace/parse/yahooparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="364" column="40" selection-start-line="364" selection-start-column="40" selection-end-line="364" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/yahoo_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.bowerrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stocktrace/parse/sseparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/market/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/market/parse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15650742">
+          <caret line="57" column="37" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
+          <folding>
+            <element signature="e#23#45#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
   </component>
 </project>
-
