@@ -7,6 +7,7 @@ import numpy as np
 import xlrd
 import requests
 
+
 # parse shanghai market overall
 def parse_sh_market():
     page = parse('http://www.sse.com.cn/market/').getroot()
@@ -21,6 +22,7 @@ def parse_sh_market():
     market = Market(statistics[1], statistics[8], statistics[12], statistics[14])
     print market
 
+
 # parse SZ market overall
 def parse_sz_market():
         # url = 'http://www.szse.cn/main/marketdata/tjsj/jbzb/'
@@ -32,7 +34,7 @@ def parse_sz_market():
 
     r = page.get_element_by_id('REPORTID_tab1')
     print etree.tostring(r)
-    # read html to list of DataFrame
+    # read html <table> to list of DataFrame
     dfs = pd.read_html(etree.tostring(r), flavor='lxml')
     # print dfs
     # print len(dfs)
@@ -50,6 +52,7 @@ def parse_sz_market():
         # print df.columns
         # print df.values
         # print df.describe()
+
 
 # parse PE/PB from 申万行业一级指数
 def parse_sw(day='20150729'):
@@ -112,6 +115,7 @@ def parse_sw(day='20150729'):
 def parse_securitization_rate():
     pass
 
+
 # get access token for xueqiu.com
 def login_xue_qiu():
     url = 'http://xueqiu.com/user/login'
@@ -131,6 +135,7 @@ def login_xue_qiu():
     print access_token
     return access_token
 
+
 # get stock count by price
 def get_stock_count_by_price(low=0.1, high=3, access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=symbol&order=desc&current={}_{}&pct=ALL&page=1&_=1438835212122'
@@ -146,6 +151,7 @@ def get_stock_count_by_price(low=0.1, high=3, access_token='e41712c72e25cff3ecac
     print count
     return count
 
+
 # stock ratio with low price
 def low_price_ratio():
     count = get_stock_count_by_price()
@@ -154,6 +160,7 @@ def low_price_ratio():
     print ratio
     return ratio
 
+
 # stock ratio with high price
 def high_price_ratio():
     count = get_stock_count_by_price(low=100, high=10000)
@@ -161,6 +168,7 @@ def high_price_ratio():
     ratio = float(count)/total
     print ratio
     return ratio
+
 
 # sina real time API
 def sina(code):
@@ -175,13 +183,60 @@ def sina(code):
     print r.text
     test = r.content.split(',')
     print test
-    current = float(test[3])
+    if code.startswith('hk'):
+        current = float(test[6])
+    else:
+        current = float(test[3])
     print current
     return current
 
+
+# HK to RMB exchange rate from boc.cn
+def hk_rmb_exchange_rate():
+    # url = 'http://www.boc.cn/sourcedb/whpj/'
+    # r = requests.get(url)
+    # print r.content
+    page = parse('http://www.boc.cn/sourcedb/whpj/').getroot()
+    # result = etree.tostring(page)
+    # print result
+    tables = page.xpath("//table")
+
+    # import lxml.html as H
+    # doc = H.document_fromstring(result)
+    # tables=doc.xpath("//table")
+
+    # print len(tables)
+
+    dfs = pd.read_html(etree.tostring(tables[1]), flavor='lxml')
+    # print len(dfs)
+    df = dfs[0]
+    print df
+    hk_to_rmb = df.iloc[8][5]
+    print hk_to_rmb
+    return hk_to_rmb
+
+
 # AH ratio
-def ah_ratio():
-    pass
+def ah_ratio(ah_pair=('600036', '03968')):
+    current_a = sina(ah_pair[0])
+    current_h = sina(ah_pair[1])*(float(hk_rmb_exchange_rate())/100)
+    ratio = current_a/current_h
+    # ratio = current_h/current_a
+    print ratio
+    return ratio
+
+
+# AH premium index: average of sample stock's AH ratio
+def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111', '00753')]):
+    ratio_list = []
+    for sample in samples:
+        ratio = ah_ratio(sample)
+        ratio_list.append(ratio)
+    print ratio_list
+    ah_index = np.mean(ratio_list)
+    print ah_index
+    return ah_index
+
 
 if __name__ == '__main__':
     # parse_sh_market()
@@ -193,5 +248,9 @@ if __name__ == '__main__':
     # login_xue_qiu()
     # sina('600030')
     # sina('002294')
-    sina('02601')
+    # sina('00168')
+    # sina('02318')
+    # ah_ratio()
+    ah_premium_index()
+    # hk_rmb_exchange_rate()
 
