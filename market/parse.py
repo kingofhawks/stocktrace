@@ -112,6 +112,7 @@ def parse_sw(day='20150729'):
 
 
 # TODO
+# GDP data can save locally
 def parse_securitization_rate():
     pass
 
