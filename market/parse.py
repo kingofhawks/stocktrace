@@ -116,6 +116,22 @@ def parse_securitization_rate():
     pass
 
 
+def parse_xue_qiu_comment(stock='SH600029', access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+    url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
+    url = url.format(stock)
+    payload = {'access_token': access_token}
+    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
+
+    r = requests.get(url, params=payload, headers=headers )
+    print r
+    print r.json()
+    comments = r.json().get('list')
+    print comments
+    print len(comments)
+    for comment in comments:
+        print comment.get('created_at')
+
+
 # get access token for xueqiu.com
 def login_xue_qiu():
     url = 'http://xueqiu.com/user/login'
@@ -217,9 +233,9 @@ def hk_rmb_exchange_rate():
 
 
 # AH ratio
-def ah_ratio(ah_pair=('600036', '03968')):
+def ah_ratio(hk_rmb_change_rate, ah_pair=('600036', '03968'), ):
     current_a = sina(ah_pair[0])
-    current_h = sina(ah_pair[1])*(float(hk_rmb_exchange_rate())/100)
+    current_h = sina(ah_pair[1])*hk_rmb_change_rate
     ratio = current_a/current_h
     # ratio = current_h/current_a
     print ratio
@@ -229,8 +245,9 @@ def ah_ratio(ah_pair=('600036', '03968')):
 # AH premium index: average of sample stock's AH ratio
 def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111', '00753')]):
     ratio_list = []
+    hk_to_rmb = float(hk_rmb_exchange_rate())/100
     for sample in samples:
-        ratio = ah_ratio(sample)
+        ratio = ah_ratio(hk_to_rmb, sample)
         ratio_list.append(ratio)
     print ratio_list
     ah_index = np.mean(ratio_list)
@@ -251,6 +268,7 @@ if __name__ == '__main__':
     # sina('00168')
     # sina('02318')
     # ah_ratio()
-    ah_premium_index()
+    # ah_premium_index()
     # hk_rmb_exchange_rate()
+    parse_xue_qiu_comment()
 
