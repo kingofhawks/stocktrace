@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 import xlrd
 import requests
+import arrow
 
 
 # parse shanghai market overall
@@ -117,6 +118,7 @@ def parse_securitization_rate():
     pass
 
 
+# get comment between trading time
 def parse_xue_qiu_comment(stock='SH600029', access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
     url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
     url = url.format(stock)
@@ -129,8 +131,26 @@ def parse_xue_qiu_comment(stock='SH600029', access_token='e41712c72e25cff3ecac5b
     comments = r.json().get('list')
     print comments
     print len(comments)
+    now = arrow.now()
+    print now
+    today = now.date()
+
+    morning_begin = arrow.get(str(today)+' 09:30')
+    morning_end = arrow.get(str(today)+' 11:30')
+    print morning_begin
+    print morning_end
+
+    afternoon_begin = arrow.get(str(today)+' 13:00')
+    afternoon_end = arrow.get(str(today)+' 15:00')
+    print afternoon_begin
+    print afternoon_end
     for comment in comments:
-        print comment.get('created_at')
+        timestamp = comment.get('created_at')
+        utc = arrow.get(long(timestamp)/1000)
+        local = utc.to('local')
+        # print local
+        if (morning_begin.timestamp < timestamp and timestamp<morning_end.timestamp) or (afternoon_begin.timestamp < timestamp and timestamp<afternoon_end.timestamp):
+            print local
 
 
 # get access token for xueqiu.com
