@@ -135,22 +135,33 @@ def parse_xue_qiu_comment(stock='SH600029', access_token='e41712c72e25cff3ecac5b
     print now
     today = now.date()
 
-    morning_begin = arrow.get(str(today)+' 09:30')
-    morning_end = arrow.get(str(today)+' 11:30')
+    morning_begin = arrow.get(str(today)+' 09:30+08:00')
+    morning_end = arrow.get(str(today)+' 11:30+08:00')
     print morning_begin
     print morning_end
+    print morning_begin.timestamp
+    print morning_end.timestamp
 
-    afternoon_begin = arrow.get(str(today)+' 13:00')
-    afternoon_end = arrow.get(str(today)+' 15:00')
+    afternoon_begin = arrow.get(str(today)+' 13:00+08:00')
+    afternoon_end = arrow.get(str(today)+' 15:00+08:00')
     print afternoon_begin
     print afternoon_end
+    print afternoon_begin.timestamp
+    print afternoon_end.timestamp
+
+    count = 0
     for comment in comments:
-        timestamp = comment.get('created_at')
-        utc = arrow.get(long(timestamp)/1000)
+        timestamp = long(comment.get('created_at'))/1000
+        utc = arrow.get(timestamp)
         local = utc.to('local')
         # print local
-        if (morning_begin.timestamp < timestamp and timestamp<morning_end.timestamp) or (afternoon_begin.timestamp < timestamp and timestamp<afternoon_end.timestamp):
-            print local
+        if (morning_begin < utc and utc < morning_end) or (afternoon_begin < utc and utc < afternoon_end):
+            print '***comment when trading***{}'.format(local)
+            count += 1
+        else:
+            print 'comment not when trading:{}'.format(local)
+    print 'stock {} comment:{}'.format(stock, count)
+    return count
 
 
 # get access token for xueqiu.com
