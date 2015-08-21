@@ -9,7 +9,7 @@ import requests
 import arrow
 
 
-# parse shanghai market overall
+#1 parse shanghai market overall
 def parse_sh_market():
     page = parse('http://www.sse.com.cn/market/').getroot()
     # result = etree.tostring(page)
@@ -55,7 +55,7 @@ def parse_sz_market():
         # print df.describe()
 
 
-# parse PE/PB from 申万行业一级指数
+#2 parse PE/PB from 申万行业一级指数
 def parse_sw(day='20150729'):
     # url = 'http://www.swsindex.com/pedata/SwClassifyPePb_{}.xls'.format(day)
 
@@ -113,13 +113,13 @@ def parse_sw(day='20150729'):
 
 
 # TODO
-# GDP data can save locally
+#3 GDP data can save locally
 def parse_securitization_rate():
     pass
 
 
-# get comment between trading time
-def parse_xue_qiu_comment(stock='SH600029', access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+#4 parse comment in last day
+def parse_xue_qiu_comment_last_day(stock='SH600029', access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
     url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
     url = url.format(stock)
     payload = {'access_token': access_token}
@@ -134,16 +134,53 @@ def parse_xue_qiu_comment(stock='SH600029', access_token='e41712c72e25cff3ecac5b
     now = arrow.now()
     print now
     today = now.date()
+    print str(today)
 
-    morning_begin = arrow.get(str(today)+' 09:30+08:00')
-    morning_end = arrow.get(str(today)+' 11:30+08:00')
+    today_begin = arrow.get(str(today)+'T00:00+08:00')
+    today_end = arrow.get(str(today)+'T23:59+08:00')
+
+    count = 0
+    for comment in comments:
+        timestamp = long(comment.get('created_at'))/1000
+        utc = arrow.get(timestamp)
+        local = utc.to('local')
+        # print local
+        if today_begin < utc and utc < today_end:
+            print '***comment when trading***{}'.format(local)
+            count += 1
+        else:
+            print 'comment not when trading:{}'.format(local)
+    print 'stock {} comment:{}'.format(stock, count)
+    return count
+
+
+# get comment between trading time
+def parse_xue_qiu_comment(stock='SH600027', access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+    url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
+    url = url.format(stock)
+    payload = {'access_token': access_token}
+    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
+
+    r = requests.get(url, params=payload, headers=headers )
+    print r
+    print r.json()
+    comments = r.json().get('list')
+    print comments
+    print len(comments)
+    now = arrow.now()
+    print now
+    today = now.date()
+    print str(today)
+
+    morning_begin = arrow.get(str(today)+'T09:30+08:00')
+    morning_end = arrow.get(str(today)+'T11:30+08:00')
     print morning_begin
     print morning_end
     print morning_begin.timestamp
     print morning_end.timestamp
 
-    afternoon_begin = arrow.get(str(today)+' 13:00+08:00')
-    afternoon_end = arrow.get(str(today)+' 15:00+08:00')
+    afternoon_begin = arrow.get(str(today)+'T13:00+08:00')
+    afternoon_end = arrow.get(str(today)+'T15:00+08:00')
     print afternoon_begin
     print afternoon_end
     print afternoon_begin.timestamp
@@ -185,7 +222,7 @@ def login_xue_qiu():
 
 
 # get stock count by price
-def get_stock_count_by_price(low=0.1, high=3, access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+def screen_by_price(low=0.1, high=3, access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=symbol&order=desc&current={}_{}&pct=ALL&page=1&_=1438835212122'
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
@@ -200,21 +237,78 @@ def get_stock_count_by_price(low=0.1, high=3, access_token='e41712c72e25cff3ecac
     return count
 
 
-# stock ratio with low price
+# get stock count by market value
+def screen_by_market_value(low, high=60000, access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+    url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=symbol&order=desc&current=ALL&pct=ALL&page=1&mc={}_{}&_=1438834686129'
+    payload = {'access_token': access_token}
+    url2 = url.format(low, high)
+    # print '*************url********************{}'.format(url2)
+    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
+    r = requests.get(url2, params=payload, headers=headers)
+    # print r.text
+    # print r.content
+    result = r.json()
+    count = result.get('count')
+    print count
+    return count
+
+
+# get stock count by PB
+def screen_by_pb(low=0.1, high=1, access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+    url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pb&order=desc&current=ALL&pct=ALL&page=1&pb={}_{}&_=1440168645679'
+    payload = {'access_token': access_token}
+    url2 = url.format(low, high)
+    # print '*************url********************{}'.format(url2)
+    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
+    r = requests.get(url2, params=payload, headers=headers)
+    # print r.text
+    # print r.content
+    result = r.json()
+    count = result.get('count')
+    print count
+    return count
+
+
+# get stock count by static PE
+def screen_by_static_pe(low=1, high=10, access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+    url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pelyr&order=desc&current=ALL&pct=ALL&page=1&pelyr={}_{}&_=1440168752260'
+    payload = {'access_token': access_token}
+    url2 = url.format(low, high)
+    # print '*************url********************{}'.format(url2)
+    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
+    r = requests.get(url2, params=payload, headers=headers)
+    # print r.text
+    # print r.content
+    result = r.json()
+    count = result.get('count')
+    print count
+    return count
+
+
+#5 stock ratio with low price
 def low_price_ratio():
-    count = get_stock_count_by_price()
-    total = get_stock_count_by_price(high=10000)
+    count = screen_by_price()
+    total = screen_by_price(high=10000)
     ratio = float(count)/total
     print ratio
     return ratio
 
 
-# stock ratio with high price
+#6 stock ratio with high price
 def high_price_ratio():
-    count = get_stock_count_by_price(low=100, high=10000)
-    total = get_stock_count_by_price(high=10000)
+    count = screen_by_price(low=100, high=10000)
+    total = screen_by_price(high=10000)
     ratio = float(count)/total
     print ratio
+    return ratio
+
+
+#7 stock ratio with high market value
+def high_market_value_ratio():
+    count = screen_by_market_value(rmb_exchange_rate()[1])
+    total = screen_by_market_value(1)
+    ratio = float(count)/total
+    print 'count:{} total:{} ratio:{}'.format(count, total, ratio)
     return ratio
 
 
@@ -239,8 +333,8 @@ def sina(code):
     return current
 
 
-# HK to RMB exchange rate from boc.cn
-def hk_rmb_exchange_rate():
+# HK and USD to RMB exchange rate from boc.cn
+def rmb_exchange_rate():
     # url = 'http://www.boc.cn/sourcedb/whpj/'
     # r = requests.get(url)
     # print r.content
@@ -260,8 +354,10 @@ def hk_rmb_exchange_rate():
     df = dfs[0]
     print df
     hk_to_rmb = df.iloc[8][5]
-    print hk_to_rmb
-    return hk_to_rmb
+    usd_to_rmb = df.iloc[22][5]
+    print 'hk_to_rmb:{}'.format(hk_to_rmb)
+    print 'usd_to_rmb:{}'.format(usd_to_rmb)
+    return hk_to_rmb, usd_to_rmb
 
 
 # AH ratio
@@ -274,10 +370,10 @@ def ah_ratio(hk_rmb_change_rate, ah_pair=('600036', '03968'), ):
     return ratio
 
 
-# AH premium index: average of sample stock's AH ratio
+#8 AH premium index: average of sample stock's AH ratio
 def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111', '00753')]):
     ratio_list = []
-    hk_to_rmb = float(hk_rmb_exchange_rate())/100
+    hk_to_rmb = float(rmb_exchange_rate()[0])/100
     for sample in samples:
         ratio = ah_ratio(hk_to_rmb, sample)
         ratio_list.append(ratio)
@@ -285,6 +381,9 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
     ah_index = np.mean(ratio_list)
     print ah_index
     return ah_index
+
+
+
 
 
 if __name__ == '__main__':
@@ -301,6 +400,10 @@ if __name__ == '__main__':
     # sina('02318')
     # ah_ratio()
     # ah_premium_index()
-    # hk_rmb_exchange_rate()
-    parse_xue_qiu_comment()
-
+    # rmb_exchange_rate()
+    # parse_xue_qiu_comment()
+    # parse_xue_qiu_comment_last_day('SZ000963')
+    # screen_by_market_value(600)
+    # high_market_value_ratio()
+    # screen_by_pb()
+    screen_by_static_pe()
