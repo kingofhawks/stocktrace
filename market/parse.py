@@ -269,6 +269,15 @@ def screen_by_pb(low=0.1, high=1, access_token='e41712c72e25cff3ecac5bb38685ebd6
     return count
 
 
+#6 stock ratio PB<1
+def low_pb_ratio():
+    count = screen_by_pb()
+    total = screen_by_market_value(1)
+    ratio = float(count)/total
+    print ratio
+    return ratio
+
+
 # get stock count by static PE
 def screen_by_static_pe(low=1, high=10, access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pelyr&order=desc&current=ALL&pct=ALL&page=1&pelyr={}_{}&_=1440168752260'
@@ -285,10 +294,19 @@ def screen_by_static_pe(low=1, high=10, access_token='e41712c72e25cff3ecac5bb386
     return count
 
 
+#6 stock ratio PE<10
+def low_pe_ratio():
+    count = screen_by_static_pe()
+    total = screen_by_market_value(1)
+    ratio = float(count)/total
+    print ratio
+    return ratio
+
+
 #5 stock ratio with low price
 def low_price_ratio():
     count = screen_by_price()
-    total = screen_by_price(high=10000)
+    total = screen_by_market_value(1)
     ratio = float(count)/total
     print ratio
     return ratio
@@ -297,7 +315,7 @@ def low_price_ratio():
 #6 stock ratio with high price
 def high_price_ratio():
     count = screen_by_price(low=100, high=10000)
-    total = screen_by_price(high=10000)
+    total = screen_by_market_value(1)
     ratio = float(count)/total
     print ratio
     return ratio
@@ -403,7 +421,10 @@ if __name__ == '__main__':
     # rmb_exchange_rate()
     # parse_xue_qiu_comment()
     # parse_xue_qiu_comment_last_day('SZ000963')
-    # screen_by_market_value(600)
+    screen_by_market_value(600)
     # high_market_value_ratio()
     # screen_by_pb()
-    screen_by_static_pe()
+    # screen_by_static_pe()
+    # low_pb_ratio()
+    low_pe_ratio()
+    # screen_by_price()
