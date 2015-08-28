@@ -56,13 +56,10 @@ def parse_sz_market():
 
 
 #2 parse PE/PB from 申万行业一级指数
-def parse_sw(day=None):
-    if day is None:
-        now = arrow.now()
-        day = now.format('YYYYMMDD')
-    url = 'http://www.swsindex.com/pedata/SwClassifyPePb_{}.xls'.format(day)
+def parse_sw(day='20150729'):
+    # url = 'http://www.swsindex.com/pedata/SwClassifyPePb_{}.xls'.format(day)
 
-    # url = 'sw.xls'
+    url = 'sw.xls'
     df = pd.read_excel(url)
     # print df
     # print df.columns
@@ -80,8 +77,7 @@ def parse_sw(day=None):
     max_pe = df[static_pe].max()
     min_pe = df[static_pe].min()
     avg_pe = df[static_pe].mean()
-    median_pe = df[static_pe].median()
-    print 'PE max:{} min:{} average:{} median:{}'.format(max_pe, min_pe, avg_pe, median_pe)
+    print 'PE max:{} min:{} average:{}'.format(max_pe, min_pe, avg_pe)
 
     columns = [u'一级行业名称', u'静态市盈率', u'市净率']
     max_pe_index = df.loc[df[static_pe] == max_pe].index
@@ -393,7 +389,7 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
 if __name__ == '__main__':
     # parse_sh_market()
     # parse_sz_market()
-    parse_sw()
+    # parse_sw()
     # access_token = login_xue_qiu()
     # low_price_ratio()
     # high_price_ratio()
@@ -410,4 +406,4 @@ if __name__ == '__main__':
     # screen_by_market_value(600)
     # high_market_value_ratio()
     # screen_by_pb()
-    # screen_by_static_pe()
+    screen_by_static_pe()
