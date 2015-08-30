@@ -7,6 +7,7 @@ import numpy as np
 import xlrd
 import requests
 import arrow
+from datetime import timedelta
 
 
 #1 parse shanghai market overall
@@ -59,7 +60,10 @@ def parse_sz_market():
 def parse_sw(day=None):
     if day is None:
         now = arrow.now()
-        day = now.format('YYYYMMDD')
+        week_day = now-timedelta(now.weekday()-4)
+        day = week_day.format('YYYYMMDD')
+        print day
+
     url = 'http://www.swsindex.com/pedata/SwClassifyPePb_{}.xls'.format(day)
 
     # url = 'sw.xls'
