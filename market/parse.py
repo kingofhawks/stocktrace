@@ -23,6 +23,20 @@ def parse_sh_market():
 
     market = Market(statistics[1], statistics[8], statistics[12], statistics[14])
     print market
+    return market
+
+# average PE for shanghai
+def avg_sh_pe():
+    dates = pd.date_range('19991231', periods=16, freq='BM')
+    # Dec PE from 1999~
+    pe_list = [38.14, 59.14, 37.59, 34.5, 36.64, 24.29, 16.38, 33.38, 59.24, 14.86, 28.78, 21.6, 13.41, 12.29, 10.99,
+               15.99]
+    s = pd.Series(pe_list, dates)
+    df = pd.DataFrame(s, index=dates, columns=['PE'])
+    print df
+    print df['PE'].min()
+    print df['PE'].max()
+    print df['PE'].mean()
 
 
 # parse SZ market overall
@@ -54,7 +68,56 @@ def parse_sz_market():
         # print df.columns
         # print df.values
         # print df.describe()
+        return market
 
+
+# parse 300 market overall
+def parse_cyb_market():
+    page = parse('http://www.szse.cn/main/chinext/scsj/jbzb/').getroot()
+    # result = etree.tostring(page)
+    # print result
+
+    r = page.get_element_by_id('REPORTID_tab1')
+    print etree.tostring(r)
+    # read html <table> to list of DataFrame
+    dfs = pd.read_html(etree.tostring(r), flavor='lxml')
+    # print dfs
+    # print len(dfs)
+    if len(dfs) >= 1:
+        df = dfs[0]
+        print df
+        total_market = df.iloc[5][1]
+        volume = df.iloc[7][1]
+        pe = df.iloc[10][1]
+        high_pe = df.iloc[10][3]
+        market = Market(total_market, volume, 0, pe)
+        print market
+        # print df.index
+        # print df.columns
+        # print df.values
+        # print df.describe()
+
+# parse 002 zxb market overall
+def parse_zxb_market():
+    page = parse('http://www.szse.cn/main/sme/xqsj/jbzb/').getroot()
+    # result = etree.tostring(page)
+    # print result
+
+    r = page.get_element_by_id('REPORTID_tab1')
+    print etree.tostring(r)
+    # read html <table> to list of DataFrame
+    dfs = pd.read_html(etree.tostring(r), flavor='lxml')
+    # print dfs
+    # print len(dfs)
+    if len(dfs) >= 1:
+        df = dfs[0]
+        print df
+        total_market = df.iloc[5][1]
+        volume = df.iloc[7][1]
+        pe = df.iloc[10][1]
+        high_pe = df.iloc[10][3]
+        market = Market(total_market, volume, 0, pe)
+        print market
 
 #2 parse PE/PB from 申万行业一级指数
 def parse_sw(day=None):
@@ -120,10 +183,19 @@ def parse_sw(day=None):
     # print df[int(min_pb_index[0]): int(min_pb_index[0])+1]
 
 
-# TODO
-#3 GDP data can save locally
+# 3 GDP data can save locally
 def parse_securitization_rate():
-    pass
+    # 2014 GDP
+    last_year_gdp = 636462.71
+    sh = parse_sh_market()
+    sz = parse_sz_market()
+    gdp = float(sh.total_market_cap)+float(sz.total_market_cap)/100000000
+    print gdp
+    securitization_rate = gdp/last_year_gdp
+    print 'securitization_rate:{.2f}'.format(securitization_rate)
+    return securitization_rate
+
+
 
 
 #4 parse comment in last day
@@ -397,7 +469,11 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
 if __name__ == '__main__':
     # parse_sh_market()
     # parse_sz_market()
-    parse_sw()
+    # parse_cyb_market()
+    # parse_zxb_market()
+    # avg_sh_pe()
+    parse_securitization_rate()
+    # parse_sw()
     # access_token = login_xue_qiu()
     # low_price_ratio()
     # high_price_ratio()
