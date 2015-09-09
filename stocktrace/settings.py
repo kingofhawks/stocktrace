@@ -124,12 +124,19 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'zytj',
     'portfolio',
+    'api',
     # Uncomment the next line to enable the admin:
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGE_SIZE': 10
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

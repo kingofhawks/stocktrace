@@ -14,16 +14,21 @@ Revision History
 
 2.Support NHNL screener
 
-stock trace will parse finance data from famous finance web sites and generate some useful report
+http://localhost:8000/zytj/alist
 
-1.Parse stock data, both realtime and history data from xueqiu/Sina/Yahoo(csv or YDN)/ifeng/Google/reuters
+stocktrace will parse finance data from famous finance web sites and generate some useful report
 
-2.Generate OHLC chart
+* Parse stock data, both real time and history data from xueqiu/shenwan/Sina/Yahoo(csv or YDN)/ifeng/Google/reuters etc
 
-3.Screen stocks based on 52 week's high or low percentage
+* Generate OHLC chart
+
+* Market Analysis based on PB/PE/GDP/turnover etc
+
+* Screen stocks based on 52 week's high or low percentage
 
 
 How to run tests
+
 1. run module
 
 > python manage.py test test.yahoo_test
@@ -37,6 +42,8 @@ How to run tests
 Trade history tracking, stock price notification, compare with worldwide companies.  
 
 ### Reference
+
+www.xueqiu.com
 
 https://www.robinhood.com/
 
