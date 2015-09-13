@@ -70,7 +70,7 @@ def parse_sz_market():
     # print len(dfs)
     if len(dfs) >= 1:
         df = dfs[0]
-        # print df
+        print df
         total_market = df.iloc[10][1]
         volume = df.iloc[12][1]
         avg_price = df.iloc[13][1]
@@ -85,7 +85,7 @@ def parse_sz_market():
         return market
 
 
-# parse 300 market overall
+# 创业板 market overall
 def parse_cyb_market():
     page = parse('http://www.szse.cn/main/chinext/scsj/jbzb/').getroot()
     # result = etree.tostring(page)
@@ -104,6 +104,7 @@ def parse_cyb_market():
         volume = df.iloc[7][1]
         pe = df.iloc[10][1]
         high_pe = df.iloc[10][3]
+
         market = Market(total_market, volume, 0, pe)
         print market
         # print df.index
@@ -111,7 +112,8 @@ def parse_cyb_market():
         # print df.values
         # print df.describe()
 
-# parse 002 zxb market overall
+
+# 中小板 market overall
 def parse_zxb_market():
     page = parse('http://www.szse.cn/main/sme/xqsj/jbzb/').getroot()
     # result = etree.tostring(page)
@@ -132,6 +134,24 @@ def parse_zxb_market():
         high_pe = df.iloc[10][3]
         market = Market(total_market, volume, 0, pe)
         print market
+
+
+# market overall
+def market_overall():
+    sh = parse_sh_market()
+    sz = parse_sz_market()
+    cyb = parse_cyb_market()
+    zxb = parse_zxb_market()
+    overall = []
+    overall.append(sh)
+    overall.append(sz)
+    overall.append(cyb)
+    overall.append(zxb)
+    overall = sh, sz, cyb, zxb
+
+    # overall = {'sh': sh, 'sz': sz, 'cyb': cyb, 'zxb': zxb}
+    print overall
+    return overall
 
 
 #2 parse PE/PB from 申万行业一级指数
@@ -210,8 +230,6 @@ def parse_securitization_rate():
     securitization_rate = gdp/last_year_gdp
     print 'securitization_rate:{.2f}'.format(securitization_rate)
     return securitization_rate
-
-
 
 
 #4 parse comment in last day
@@ -504,6 +522,7 @@ if __name__ == '__main__':
     # parse_sz_market()
     # parse_cyb_market()
     # parse_zxb_market()
+    market_overall()
     # avg_sh_pe()
     # parse_securitization_rate()
     # parse_sw('20140312')
@@ -517,7 +536,7 @@ if __name__ == '__main__':
     # sina('02318')
     # ah_ratio()
     # ah_premium_index()
-    rmb_exchange_rate()
+    # rmb_exchange_rate()
     # parse_xue_qiu_comment()
     # parse_xue_qiu_comment_last_day('SZ000963')
     # screen_by_market_value(600)

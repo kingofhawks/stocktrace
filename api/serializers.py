@@ -7,3 +7,16 @@ class MarketSerializer(serializers.Serializer):
     turnover_rate = serializers.FloatField(required=False)
     pe = serializers.FloatField(required=False)
 
+
+class MarketOverallSerializer(serializers.Serializer):
+    # markets = MarketSerializer(many=True)  # A nested list of 'edit' items.
+    sh = MarketSerializer()
+    sz = MarketSerializer()
+    cyb = MarketSerializer()
+    zxb = MarketSerializer()
+
+
+class MarketsSerializer(serializers.Serializer):
+    markets = MarketSerializer(many=True)  # A nested list of 'edit' items.
+
+
