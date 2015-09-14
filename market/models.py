@@ -6,17 +6,9 @@ class Market(object):
     '''
     classdocs
     '''
-    # ssgs = 0
-    # sszq = 0
-    # ssgp = 0
-    # totalShares = 0
-    # totalFloatingShares = 0
-    # totalCap = 0
-    # totalMarketCap = 0
-    # marketPe = 0
-    # avgPrice = 0
 
-    def __init__(self, total_market_cap, volume, turnover_rate, pe):
+    def __init__(self, name, total_market_cap, volume, turnover_rate, pe):
+        self.name = name
         try:
             self.total_market_cap = float(total_market_cap)
         except TypeError:
@@ -42,5 +34,5 @@ class Market(object):
         '''
 
     def __str__(self):
-        return 'total market:{} volume:{} turnover rate:{} PE:{}'.format(self.total_market_cap,
+        return '{} total market:{} volume:{} turnover rate:{} PE:{}'.format(self.name, self.total_market_cap,
                                                                          self.volume, self.turnover_rate, self.pe)

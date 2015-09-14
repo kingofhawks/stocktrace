@@ -21,7 +21,7 @@ def parse_sh_market():
     for word in statistics:
         print word
 
-    market = Market(statistics[1], statistics[8], statistics[12], statistics[14])
+    market = Market('sh', statistics[1], statistics[8], statistics[12], statistics[14])
     print market
     return market
 
@@ -76,7 +76,7 @@ def parse_sz_market():
         avg_price = df.iloc[13][1]
         pe = df.iloc[14][1]
         turnover_rate = df.iloc[15][1]
-        market = Market(total_market, volume, turnover_rate, pe)
+        market = Market('sz', total_market, volume, turnover_rate, pe)
         print market
         # print df.index
         # print df.columns
@@ -105,8 +105,9 @@ def parse_cyb_market():
         pe = df.iloc[10][1]
         high_pe = df.iloc[10][3]
 
-        market = Market(total_market, volume, 0, pe)
+        market = Market('cyb', total_market, volume, 0, pe)
         print market
+        return market
         # print df.index
         # print df.columns
         # print df.values
@@ -132,8 +133,9 @@ def parse_zxb_market():
         volume = df.iloc[7][1]
         pe = df.iloc[10][1]
         high_pe = df.iloc[10][3]
-        market = Market(total_market, volume, 0, pe)
+        market = Market('zxb', total_market, volume, 0, pe)
         print market
+        return market
 
 
 # market overall
