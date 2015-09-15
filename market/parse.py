@@ -10,7 +10,7 @@ import arrow
 from datetime import timedelta
 
 
-#1 parse shanghai market overall
+# 1 parse shanghai market overall
 def parse_sh_market():
     page = parse('http://www.sse.com.cn/market/').getroot()
     # result = etree.tostring(page)
@@ -21,7 +21,7 @@ def parse_sh_market():
     for word in statistics:
         print word
 
-    market = Market('sh', statistics[1], statistics[8], statistics[12], statistics[14])
+    market = Market('sh', statistics[1], float(statistics[8])/10000, statistics[12], statistics[14])
     print market
     return market
 
@@ -76,7 +76,7 @@ def parse_sz_market():
         avg_price = df.iloc[13][1]
         pe = df.iloc[14][1]
         turnover_rate = df.iloc[15][1]
-        market = Market('sz', total_market, volume, turnover_rate, pe)
+        market = Market('sz', float(total_market)/100000000, float(volume)/100000000, turnover_rate, pe)
         print market
         # print df.index
         # print df.columns
@@ -105,7 +105,7 @@ def parse_cyb_market():
         pe = df.iloc[10][1]
         high_pe = df.iloc[10][3]
 
-        market = Market('cyb', total_market, volume, 0, pe)
+        market = Market('cyb', float(total_market)/100000000, float(volume)/100000000, 0, pe)
         print market
         return market
         # print df.index
@@ -133,7 +133,7 @@ def parse_zxb_market():
         volume = df.iloc[7][1]
         pe = df.iloc[10][1]
         high_pe = df.iloc[10][3]
-        market = Market('zxb', total_market, volume, 0, pe)
+        market = Market('zxb', float(total_market)/100000000, float(volume)/100000000, 0, pe)
         print market
         return market
 
@@ -144,19 +144,13 @@ def market_overall():
     sz = parse_sz_market()
     cyb = parse_cyb_market()
     zxb = parse_zxb_market()
-    overall = []
-    overall.append(sh)
-    overall.append(sz)
-    overall.append(cyb)
-    overall.append(zxb)
-    overall = sh, sz, cyb, zxb
 
-    # overall = {'sh': sh, 'sz': sz, 'cyb': cyb, 'zxb': zxb}
+    overall = [sh, sz, cyb, zxb]
     print overall
     return overall
 
 
-#2 parse PE/PB from 申万行业一级指数
+# 2 parse PE/PB from 申万行业一级指数
 def parse_sw(day=None):
     if day is None:
         now = arrow.now()
@@ -234,7 +228,7 @@ def parse_securitization_rate():
     return securitization_rate
 
 
-#4 parse comment in last day
+# 4 parse comment in last day
 def parse_xue_qiu_comment_last_day(stock='SH600029', access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
     url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
     url = url.format(stock)
@@ -322,7 +316,8 @@ def login_xue_qiu():
     url = 'http://xueqiu.com/user/login'
     payload = {'username': 'kingofhawks@qq.com', 'areacode': 86, 'remember_me': 1,
                'password': '1FA727F4CFC8E494E55524897EEC631E'}
-    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
+    headers = {'content-type': 'application/json',
+               'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
     r = requests.post(url, params=payload, headers=headers)
     response_headers = r.headers
@@ -370,7 +365,7 @@ def screen_by_market_value(low, high=60000, access_token='e41712c72e25cff3ecac5b
 
 
 # get stock count by PB
-def screen_by_pb(low=0.1, high=1, access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+def screen_by_pb(low=0.1, high=1, access_token='43362ebbe2c45cf7fb176cef9765031df7e53415'):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pb&order=desc&current=ALL&pct=ALL&page=1&pb={}_{}&_=1440168645679'
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
@@ -380,9 +375,26 @@ def screen_by_pb(low=0.1, high=1, access_token='e41712c72e25cff3ecac5bb38685ebd6
     # print r.text
     # print r.content
     result = r.json()
+    print result
     count = result.get('count')
     print count
     return count
+
+
+def low_pb_ratio():
+    count = screen_by_pb()
+    total = screen_by_price(high=10000)
+    ratio = float(count)/total
+    print ratio
+    return ratio
+
+
+def high_pb_ratio():
+    count = screen_by_pb()
+    total = screen_by_price(high=10000)
+    ratio = float(count)/total
+    print ratio
+    return ratio
 
 
 # get stock count by static PE
@@ -410,7 +422,7 @@ def low_price_ratio():
     return ratio
 
 
-#6 stock ratio with high price
+# 6 stock ratio with high price
 def high_price_ratio():
     count = screen_by_price(low=100, high=10000)
     total = screen_by_price(high=10000)
@@ -419,7 +431,7 @@ def high_price_ratio():
     return ratio
 
 
-#7 stock ratio with high market value
+# 7 stock ratio with high market value
 def high_market_value_ratio():
     count = screen_by_market_value(rmb_exchange_rate()[1])
     total = screen_by_market_value(1)
@@ -486,7 +498,7 @@ def ah_ratio(hk_rmb_change_rate, ah_pair=('600036', '03968'), ):
     return ratio
 
 
-#8 AH premium index: average of sample stock's AH ratio
+# 8 AH premium index: average of sample stock's AH ratio
 def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111', '00753')]):
     samples = [('600585', '00914'), ('601318', '02318'), ('000002', '02202'),
                ('600036', '03968'), ('600600', '00168'), ('600196', '02196'),
@@ -524,7 +536,7 @@ if __name__ == '__main__':
     # parse_sz_market()
     # parse_cyb_market()
     # parse_zxb_market()
-    market_overall()
+    # market_overall()
     # avg_sh_pe()
     # parse_securitization_rate()
     # parse_sw('20140312')
@@ -545,3 +557,4 @@ if __name__ == '__main__':
     # high_market_value_ratio()
     # screen_by_pb()
     # screen_by_static_pe()
+    low_pb_ratio()

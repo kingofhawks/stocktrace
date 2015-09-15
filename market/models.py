@@ -7,7 +7,7 @@ class Market(object):
     classdocs
     '''
 
-    def __init__(self, name, total_market_cap, volume, turnover_rate, pe):
+    def __init__(self, name, total_market_cap, volume, turnover, pe):
         self.name = name
         try:
             self.total_market_cap = float(total_market_cap)
@@ -20,9 +20,9 @@ class Market(object):
             self.volume = 0
 
         try:
-            self.turnover_rate = float(turnover_rate)
+            self.turnover = float(turnover)
         except TypeError:
-            self.turnover_rate = 0
+            self.turnover = 0
 
         try:
             self.pe = float(pe)
@@ -35,4 +35,4 @@ class Market(object):
 
     def __str__(self):
         return '{} total market:{} volume:{} turnover rate:{} PE:{}'.format(self.name, self.total_market_cap,
-                                                                         self.volume, self.turnover_rate, self.pe)
+                                                                         self.volume, self.turnover, self.pe)

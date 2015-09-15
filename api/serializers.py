@@ -5,7 +5,7 @@ class MarketSerializer(serializers.Serializer):
     name = serializers.CharField(read_only=True)
     total_market_cap = serializers.FloatField(read_only=True)
     volume = serializers.FloatField(required=False)
-    turnover_rate = serializers.FloatField(required=False)
+    turnover = serializers.FloatField(required=False)
     pe = serializers.FloatField(required=False)
 
 
