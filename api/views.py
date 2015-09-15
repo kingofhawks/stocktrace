@@ -31,6 +31,7 @@ class MarketView(APIView):
         print '**********content:{}'.format(content)
         json_output = json.loads(content)
         print '****json:{}'.format(json_output)
-        response = Response(json_output.get('markets'), status=status.HTTP_200_OK)
+        # response = Response(json_output.get('markets'), status=status.HTTP_200_OK)
+        response = Response(json_output, status=status.HTTP_200_OK)
 
         return response
