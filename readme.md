@@ -38,6 +38,9 @@ How to run tests
 > python manage.py test test.yahoo_test.TestSequenceFunctions.test_print_stock
 
 
+xueqiu.com API token:
+
+Login xueqiu.com check http request Cookie "xq_a_token"
 
 Trade history tracking, stock price notification, compare with worldwide companies.  
 

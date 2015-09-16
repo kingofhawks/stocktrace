@@ -21,8 +21,7 @@ class MarketView(APIView):
         print '*'*15
         # market = Market(1000, 100, 1.2, 20)
         # serializer = MarketSerializer(market)
-        market = market_overall()
-        # print json.dumps(market)
+        market = market_list()
         # serializer = MarketOverallSerializer(market)
         serializer = MarketsSerializer({'markets': market})
         # print serializer.is_valid()

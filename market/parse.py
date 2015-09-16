@@ -9,6 +9,8 @@ import requests
 import arrow
 from datetime import timedelta
 
+# check xueqiu http cookie "xq_a_token"
+access_token = '956d8e7a7e5b0a34d2fb90df5096f4891df8b88b'
 
 # 1 parse shanghai market overall
 def parse_sh_market():
@@ -138,22 +140,24 @@ def parse_zxb_market():
         return market
 
 
-# market overall
-def market_overall():
+# market list
+def market_list():
     sh = parse_sh_market()
     sz = parse_sz_market()
     cyb = parse_cyb_market()
     zxb = parse_zxb_market()
 
-    overall = [sh, sz, cyb, zxb]
-    print overall
-    return overall
+    markets = [sh, sz, cyb, zxb]
+    print markets
+    return markets
 
 
 # 2 parse PE/PB from 申万行业一级指数
 def parse_sw(day=None):
     if day is None:
         now = arrow.now()
+        print now
+        print now.weekday()
         week_day = now-timedelta(now.weekday()-4)
         day = week_day.format('YYYYMMDD')
         print day
@@ -229,7 +233,7 @@ def parse_securitization_rate():
 
 
 # 4 parse comment in last day
-def parse_xue_qiu_comment_last_day(stock='SH600029', access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+def parse_xue_qiu_comment_last_day(stock='SH600029', access_token=access_token):
     url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
     url = url.format(stock)
     payload = {'access_token': access_token}
@@ -265,7 +269,7 @@ def parse_xue_qiu_comment_last_day(stock='SH600029', access_token='e41712c72e25c
 
 
 # get comment between trading time
-def parse_xue_qiu_comment(stock='SH600027', access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+def parse_xue_qiu_comment(stock='SH600027', access_token=access_token):
     url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
     url = url.format(stock)
     payload = {'access_token': access_token}
@@ -333,7 +337,7 @@ def login_xue_qiu():
 
 
 # get stock count by price
-def screen_by_price(low=0.1, high=3, access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+def screen_by_price(low=0.1, high=3, access_token=access_token):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=symbol&order=desc&current={}_{}&pct=ALL&page=1&_=1438835212122'
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
@@ -349,7 +353,7 @@ def screen_by_price(low=0.1, high=3, access_token='e41712c72e25cff3ecac5bb38685e
 
 
 # get stock count by market value
-def screen_by_market_value(low, high=60000, access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+def screen_by_market_value(low, high=60000, access_token=access_token):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=symbol&order=desc&current=ALL&pct=ALL&page=1&mc={}_{}&_=1438834686129'
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
@@ -365,7 +369,7 @@ def screen_by_market_value(low, high=60000, access_token='e41712c72e25cff3ecac5b
 
 
 # get stock count by PB
-def screen_by_pb(low=0.1, high=1, access_token='43362ebbe2c45cf7fb176cef9765031df7e53415'):
+def screen_by_pb(low=0.1, high=1, access_token=access_token):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pb&order=desc&current=ALL&pct=ALL&page=1&pb={}_{}&_=1440168645679'
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
@@ -398,7 +402,7 @@ def high_pb_ratio():
 
 
 # get stock count by static PE
-def screen_by_static_pe(low=1, high=10, access_token='e41712c72e25cff3ecac5bb38685ebd6ec356e9f'):
+def screen_by_static_pe(low=1, high=10, access_token=access_token):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pelyr&order=desc&current=ALL&pct=ALL&page=1&pelyr={}_{}&_=1440168752260'
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
@@ -413,7 +417,7 @@ def screen_by_static_pe(low=1, high=10, access_token='e41712c72e25cff3ecac5bb386
     return count
 
 
-#5 stock ratio with low price
+# 5 stock ratio with low price
 def low_price_ratio():
     count = screen_by_price()
     total = screen_by_price(high=10000)
@@ -539,7 +543,7 @@ if __name__ == '__main__':
     # market_overall()
     # avg_sh_pe()
     # parse_securitization_rate()
-    # parse_sw('20140312')
+    # parse_sw()
     # access_token = login_xue_qiu()
     # low_price_ratio()
     # high_price_ratio()
