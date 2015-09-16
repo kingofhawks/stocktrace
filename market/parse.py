@@ -10,7 +10,8 @@ import arrow
 from datetime import timedelta
 
 # check xueqiu http cookie "xq_a_token"
-access_token = '956d8e7a7e5b0a34d2fb90df5096f4891df8b88b'
+xq_a_token = '956d8e7a7e5b0a34d2fb90df5096f4891df8b88b'
+
 
 # 1 parse shanghai market overall
 def parse_sh_market():
@@ -23,15 +24,14 @@ def parse_sh_market():
     for word in statistics:
         print word
 
-    market = Market('sh', statistics[1], float(statistics[8])/10000, statistics[12], statistics[14])
+    market = Market('sh', statistics[1], float(statistics[8])/10000, statistics[12], statistics[14], date=statistics[2])
     print market
     return market
 
 
 # average PE for shanghai
 def avg_sh_pe():
-    dates = pd.date_range('20000131', periods=187, freq='M')
-    # Dec PE from 2000~201507
+    # Dec PE from 2000~201508
     pe_list = [42.42, 47.99, 49.92, 51.13, 54.02, 55.22, 58.21, 58.13, 54.83, 56.31, 59.89, 59.14,
                59.39, 56.82, 60.88, 60.99, 55.92, 56.55, 49.26, 42.14, 40.61, 38.84, 40.08, 37.59,
                34.31, 35.11, 37.16, 39.08, 38.75, 44.47, 42.4, 43.02, 40.4, 38.23, 36.46, 34.5,
@@ -47,7 +47,9 @@ def avg_sh_pe():
                14.01, 14.86, 13.86, 14.7, 12.67, 11.9, 11.29, 11.03, 11.25, 11.17, 10.71, 12.29,
                12.97, 12.89, 12.18, 11.89, 11.81, 10.16, 10.26, 10.8, 11.19, 11.05, 11.46, 10.99,
                10.57, 10.73, 10.66, 10.65, 9.76, 9.8, 10.58, 10.68, 11.48, 11.8, 13.14, 15.99,
-               15.94, 16.57, 18.97, 22.55, 21.92, 20.92, 18.04]
+               15.94, 16.57, 18.97, 22.55, 21.92, 20.92, 18.04, 15.81]
+
+    dates = pd.date_range('20000131', periods=len(pe_list), freq='M')
     s = pd.Series(pe_list, dates)
     df = pd.DataFrame(s, index=dates, columns=['PE'])
     print df
@@ -78,7 +80,14 @@ def parse_sz_market():
         avg_price = df.iloc[13][1]
         pe = df.iloc[14][1]
         turnover_rate = df.iloc[15][1]
-        market = Market('sz', float(total_market)/100000000, float(volume)/100000000, turnover_rate, pe)
+
+        if type(total_market) == type(pd.NaT):
+            total_market = 0
+        if type(volume) == type(pd.NaT):
+            volume = 0
+        print 'total_market:{}'.format(total_market)
+        print 'volume:{}'.format(volume)
+        market = Market('sz', float(total_market)/100000000, float(volume)/100000000, turnover_rate, pe, 0)
         print market
         # print df.index
         # print df.columns
@@ -89,53 +98,79 @@ def parse_sz_market():
 
 # 创业板 market overall
 def parse_cyb_market():
-    page = parse('http://www.szse.cn/main/chinext/scsj/jbzb/').getroot()
-    # result = etree.tostring(page)
-    # print result
-
-    r = page.get_element_by_id('REPORTID_tab1')
-    print etree.tostring(r)
-    # read html <table> to list of DataFrame
-    dfs = pd.read_html(etree.tostring(r), flavor='lxml')
-    # print dfs
-    # print len(dfs)
-    if len(dfs) >= 1:
-        df = dfs[0]
-        print df
-        total_market = df.iloc[5][1]
-        volume = df.iloc[7][1]
-        pe = df.iloc[10][1]
-        high_pe = df.iloc[10][3]
-
-        market = Market('cyb', float(total_market)/100000000, float(volume)/100000000, 0, pe)
-        print market
-        return market
-        # print df.index
-        # print df.columns
-        # print df.values
-        # print df.describe()
+    return parse_sz_market_common('cyb', 'http://www.szse.cn/main/chinext/scsj/jbzb/')
+    #
+    # page = parse('http://www.szse.cn/main/chinext/scsj/jbzb/').getroot()
+    # # result = etree.tostring(page)
+    # # print result
+    #
+    # r = page.get_element_by_id('REPORTID_tab1')
+    # print etree.tostring(r)
+    # # read html <table> to list of DataFrame
+    # dfs = pd.read_html(etree.tostring(r), flavor='lxml')
+    # # print dfs
+    # # print len(dfs)
+    # if len(dfs) >= 1:
+    #     df = dfs[0]
+    #     print df
+    #     total_market = df.iloc[5][1]
+    #     volume = df.iloc[7][1]
+    #     pe = df.iloc[10][1]
+    #     high_pe = df.iloc[10][3]
+    #
+    #     if type(total_market) == type(pd.NaT):
+    #         total_market = 0
+    #     if type(volume) == type(pd.NaT):
+    #         volume = 0
+    #
+    #     market = Market('cyb', float(total_market)/100000000, float(volume)/100000000, 0, pe)
+    #     print market
+    #     return market
+    #     # print df.index
+    #     # print df.columns
+    #     # print df.values
+    #     # print df.describe()
 
 
 # 中小板 market overall
 def parse_zxb_market():
-    page = parse('http://www.szse.cn/main/sme/xqsj/jbzb/').getroot()
-    # result = etree.tostring(page)
-    # print result
+        return parse_sz_market_common('zxb', 'http://www.szse.cn/main/sme/xqsj/jbzb/')
+
+
+# parse sz market util
+def parse_sz_market_common(name, url):
+    page = parse(url).getroot()
 
     r = page.get_element_by_id('REPORTID_tab1')
     print etree.tostring(r)
     # read html <table> to list of DataFrame
     dfs = pd.read_html(etree.tostring(r), flavor='lxml')
-    # print dfs
-    # print len(dfs)
     if len(dfs) >= 1:
         df = dfs[0]
         print df
+        tradable_shares = df.iloc[4][1]
         total_market = df.iloc[5][1]
-        volume = df.iloc[7][1]
+        volume_money = df.iloc[7][1]
+        volume = df.iloc[8][1]
         pe = df.iloc[10][1]
         high_pe = df.iloc[10][3]
-        market = Market('zxb', float(total_market)/100000000, float(volume)/100000000, 0, pe)
+        value = df.iloc[13][1]
+
+        if isinstance(tradable_shares, type(pd.NaT)):
+            tradable_shares = 0
+        if type(total_market) == type(pd.NaT):
+            total_market = 0
+        if isinstance(volume_money, type(pd.NaT)):
+            volume_money = 0
+        if isinstance(volume, type(pd.NaT)):
+            volume = 0
+
+        # 换手率＝成交量÷当日实际流通量
+        if tradable_shares == 0:
+            turnover = 0
+        else:
+            turnover = float(volume)/float(tradable_shares)
+        market = Market(name, float(total_market)/100000000, float(volume_money)/100000000, turnover, pe, value)
         print market
         return market
 
@@ -153,7 +188,20 @@ def market_list():
 
 
 # 2 parse PE/PB from 申万行业一级指数
-def parse_sw(day=None):
+def parse_sw():
+    for i in range(0, 4):
+        print i
+        now = arrow.now()
+        print now
+        print now.weekday()
+        week_day = now-timedelta(i)
+        day = week_day.format('YYYYMMDD')
+        sw = parse_sw_with_day(day)
+        if sw is not None:
+            return sw
+
+
+def parse_sw_with_day(day=None):
     if day is None:
         now = arrow.now()
         print now
@@ -163,6 +211,13 @@ def parse_sw(day=None):
         print day
 
     url = 'http://www.swsindex.com/pedata/SwClassifyPePb_{}.xls'.format(day)
+
+    res = requests.get(url)
+    if res.ok:
+        print 'ok'
+    else:
+        print 'can not download url:{}'.format(url)
+        return None
 
     # url = 'sw.xls'
     df = pd.read_excel(url)
@@ -212,11 +267,14 @@ def parse_sw(day=None):
 
     max_pb_index = df.loc[df[pb] == max_pb].index
     min_pb_index = df.loc[df[pb] == min_pb].index
+    # median_pb_index = df.loc[df[pb] == avg_pb].index
     print 'max_pb_index:{} min_pb_index:{}'.format(max_pb_index, min_pb_index)
     print df.loc[df[pb] == max_pb][columns]
     print df.loc[df[pb] == min_pb][columns]
+    # print df.loc[df[pb] == median_pb_index][columns]
     # print df[int(max_pb_index[0]): int(max_pb_index[0])+1]
     # print df[int(min_pb_index[0]): int(min_pb_index[0])+1]
+    return df
 
 
 # 3 GDP data can save locally
@@ -233,7 +291,7 @@ def parse_securitization_rate():
 
 
 # 4 parse comment in last day
-def parse_xue_qiu_comment_last_day(stock='SH600029', access_token=access_token):
+def parse_xue_qiu_comment_last_day(stock='SH600029', access_token=xq_a_token):
     url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
     url = url.format(stock)
     payload = {'access_token': access_token}
@@ -269,7 +327,7 @@ def parse_xue_qiu_comment_last_day(stock='SH600029', access_token=access_token):
 
 
 # get comment between trading time
-def parse_xue_qiu_comment(stock='SH600027', access_token=access_token):
+def parse_xue_qiu_comment(stock='SH600027', access_token=xq_a_token):
     url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
     url = url.format(stock)
     payload = {'access_token': access_token}
@@ -337,7 +395,7 @@ def login_xue_qiu():
 
 
 # get stock count by price
-def screen_by_price(low=0.1, high=3, access_token=access_token):
+def screen_by_price(low=0.1, high=3, access_token=xq_a_token):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=symbol&order=desc&current={}_{}&pct=ALL&page=1&_=1438835212122'
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
@@ -353,7 +411,7 @@ def screen_by_price(low=0.1, high=3, access_token=access_token):
 
 
 # get stock count by market value
-def screen_by_market_value(low, high=60000, access_token=access_token):
+def screen_by_market_value(low, high=60000, access_token=xq_a_token):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=symbol&order=desc&current=ALL&pct=ALL&page=1&mc={}_{}&_=1438834686129'
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
@@ -369,7 +427,7 @@ def screen_by_market_value(low, high=60000, access_token=access_token):
 
 
 # get stock count by PB
-def screen_by_pb(low=0.1, high=1, access_token=access_token):
+def screen_by_pb(low=0.1, high=1, access_token=xq_a_token):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pb&order=desc&current=ALL&pct=ALL&page=1&pb={}_{}&_=1440168645679'
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
@@ -402,7 +460,7 @@ def high_pb_ratio():
 
 
 # get stock count by static PE
-def screen_by_static_pe(low=1, high=10, access_token=access_token):
+def screen_by_static_pe(low=1, high=10, access_token=xq_a_token):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pelyr&order=desc&current=ALL&pct=ALL&page=1&pelyr={}_{}&_=1440168752260'
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
@@ -540,10 +598,10 @@ if __name__ == '__main__':
     # parse_sz_market()
     # parse_cyb_market()
     # parse_zxb_market()
-    # market_overall()
+    # market_list()
     # avg_sh_pe()
     # parse_securitization_rate()
-    # parse_sw()
+    parse_sw()
     # access_token = login_xue_qiu()
     # low_price_ratio()
     # high_price_ratio()
@@ -561,4 +619,4 @@ if __name__ == '__main__':
     # high_market_value_ratio()
     # screen_by_pb()
     # screen_by_static_pe()
-    low_pb_ratio()
+    # low_pb_ratio()
