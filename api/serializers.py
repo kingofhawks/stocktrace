@@ -7,8 +7,10 @@ class MarketSerializer(serializers.Serializer):
     volume = serializers.FloatField(required=False)
     turnover = serializers.FloatField(required=False)
     pe = serializers.FloatField(required=False)
+    date = serializers.CharField(required=False)
 
 
+@DeprecationWarning
 class MarketOverallSerializer(serializers.Serializer):
     # markets = MarketSerializer(many=True)  # A nested list of 'edit' items.
     sh = MarketSerializer()
