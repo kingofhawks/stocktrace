@@ -211,6 +211,8 @@ def parse_sw_with_day(day=None):
         print day
 
     url = 'http://www.swsindex.com/pedata/SwClassifyPePb_{}.xls'.format(day)
+    static_pe = u'静态市盈率'
+    pb = u'市净率'
 
     res = requests.get(url)
     if res.ok:
@@ -225,14 +227,34 @@ def parse_sw_with_day(day=None):
     # print df.columns
     # print df.T
 
-    # select 一级行业rows
+    # select PB<1
+    df2 = df.copy()
+    df2 = df2[df2[pb] < 1]
+    print df2
+
+    # select PB>10
+    df3 = df.copy()
+    df3 = df3[df3[pb] > 10]
+    print df3
+
+    # select PE<10
+    df4 = df.copy()
+    df4 = df4[df4[static_pe] < 10]
+    print df4
+
+    # select PE>100
+    df5 = df.copy()
+    df5 = df5[df5[static_pe] > 100]
+    print df5
+    ##### end of PB/PE check ######
+
+    # select 一级行业, ignore 二级行业
     df = df[pd.isnull(df[u'二级行业名称'])]
     print df
 
-    static_pe = u'静态市盈率'
     #sort by static PE
     df = df.sort(columns=static_pe, ascending=False)
-    print df
+    print '******DataFrame sort by PE:{}'.format(df)
 
     max_pe = df[static_pe].max()
     min_pe = df[static_pe].min()
@@ -255,9 +277,9 @@ def parse_sw_with_day(day=None):
     # print len(df.index)
     # print df.shape
 
-    pb = u'市净率'
+
     df = df.sort(columns=pb, ascending=False)
-    print df
+    print '******DataFrame sort by PB:{}'.format(df)
 
     max_pb = df[pb].max()
     min_pb = df[pb].min()
@@ -408,6 +430,13 @@ def screen_by_price(low=0.1, high=3, access_token=xq_a_token):
     count = result.get('count')
     print count
     return count
+
+
+# get stock price position
+def position(code):
+    current = sina(code)
+    count = screen_by_price(current, high=60000)
+    print count
 
 
 # get stock count by market value
@@ -598,7 +627,7 @@ if __name__ == '__main__':
     # parse_sz_market()
     # parse_cyb_market()
     # parse_zxb_market()
-    market_list()
+    # market_list()
     # avg_sh_pe()
     # parse_securitization_rate()
     # parse_sw()
@@ -620,3 +649,4 @@ if __name__ == '__main__':
     # screen_by_pb()
     # screen_by_static_pe()
     # low_pb_ratio()
+    position('600600')
