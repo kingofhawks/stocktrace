@@ -305,10 +305,10 @@ def parse_securitization_rate():
     last_year_gdp = 636462.71
     sh = parse_sh_market()
     sz = parse_sz_market()
-    gdp = float(sh.total_market_cap)+float(sz.total_market_cap)/100000000
-    print gdp
-    securitization_rate = gdp/last_year_gdp
-    print 'securitization_rate:{.2f}'.format(securitization_rate)
+    total_market = float(sh.total_market_cap)+float(sz.total_market_cap)
+    print total_market
+    securitization_rate = total_market/last_year_gdp
+    print 'securitization_rate:{0:.2f}'.format(securitization_rate)
     return securitization_rate
 
 
@@ -554,9 +554,6 @@ def sina(code):
 
 # HK and USD to RMB exchange rate from boc.cn
 def rmb_exchange_rate():
-    # url = 'http://www.boc.cn/sourcedb/whpj/'
-    # r = requests.get(url)
-    # print r.content
     page = parse('http://www.boc.cn/sourcedb/whpj/').getroot()
     # result = etree.tostring(page)
     # print result
@@ -572,6 +569,10 @@ def rmb_exchange_rate():
     # print len(dfs)
     df = dfs[0]
     print df
+    print df.index
+    print df.columns
+
+    # TODO check column 0 name
     hk_to_rmb = df.iloc[8][5]
     usd_to_rmb = df.iloc[22][5]
     print 'hk_to_rmb:{}'.format(hk_to_rmb)
@@ -641,7 +642,7 @@ if __name__ == '__main__':
     # sina('02318')
     # ah_ratio()
     # ah_premium_index()
-    # rmb_exchange_rate()
+    rmb_exchange_rate()
     # parse_xue_qiu_comment()
     # parse_xue_qiu_comment_last_day('SZ000963')
     # screen_by_market_value(600)
@@ -649,4 +650,4 @@ if __name__ == '__main__':
     # screen_by_pb()
     # screen_by_static_pe()
     # low_pb_ratio()
-    position('600600')
+    # position('600600')
