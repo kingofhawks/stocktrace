@@ -565,18 +565,29 @@ def rmb_exchange_rate():
 
     # print len(tables)
 
-    dfs = pd.read_html(etree.tostring(tables[1]), flavor='lxml')
+    # use the first row as DF columns
+    dfs = pd.read_html(etree.tostring(tables[1]), header=0, flavor='lxml')
     # print len(dfs)
     df = dfs[0]
     print df
     print df.index
     print df.columns
-
-    # TODO check column 0 name
-    hk_to_rmb = df.iloc[8][5]
-    usd_to_rmb = df.iloc[22][5]
-    print 'hk_to_rmb:{}'.format(hk_to_rmb)
+    name = u'货币名称'
+    usd = u'美元'
+    hk = u'港币'
+    zh = u'中行折算价'
+    usd_to_rmb = df.loc[df[name] == usd][zh]
     print 'usd_to_rmb:{}'.format(usd_to_rmb)
+    hk_to_rmb = df.loc[df[name] == hk][zh]
+    print 'hk_to_rmb:{}'.format(hk_to_rmb)
+    # print type(hk_to_rmb)
+    print df.loc[df[name] == usd]
+
+    # select with iloccheck column 0 name
+    # hk_to_rmb = df.iloc[8][5]
+    # usd_to_rmb = df.iloc[22][5]
+    # print 'hk_to_rmb:{}'.format(hk_to_rmb)
+    # print 'usd_to_rmb:{}'.format(usd_to_rmb)
     return hk_to_rmb, usd_to_rmb
 
 
