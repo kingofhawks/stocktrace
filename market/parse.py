@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from lxml import etree
 from lxml.html import parse
+from pandas.util.testing import DataFrame
 from models import Market
 import pandas as pd
 import numpy as np
@@ -576,29 +577,39 @@ def rmb_exchange_rate():
     usd = u'美元'
     hk = u'港币'
     zh = u'中行折算价'
-    usd_to_rmb = df.loc[df[name] == usd][zh]
-    print 'usd_to_rmb:{}'.format(usd_to_rmb)
-    hk_to_rmb = df.loc[df[name] == hk][zh]
-    print 'hk_to_rmb:{}'.format(hk_to_rmb)
+    # usd_to_rmb = df.loc[df[name] == usd][zh]
+    # print 'usd_to_rmb:{}'.format(usd_to_rmb)
+    # hk_to_rmb = df.loc[df[name] == hk][zh]
+    # print 'hk_to_rmb:{}'.format(hk_to_rmb)
     # print type(hk_to_rmb)
-    print df.loc[df[name] == usd]
+    usd_df = df.loc[df[name] == usd]
+    usd_to_rmb = usd_df.iloc[0][5]
+
+    hk_df = df.loc[df[name] == hk]
+    hk_to_rmb = hk_df.iloc[0][5]
+
+    result = hk_to_rmb, usd_to_rmb
+    print result
 
     # select with iloccheck column 0 name
     # hk_to_rmb = df.iloc[8][5]
     # usd_to_rmb = df.iloc[22][5]
     # print 'hk_to_rmb:{}'.format(hk_to_rmb)
     # print 'usd_to_rmb:{}'.format(usd_to_rmb)
-    return hk_to_rmb, usd_to_rmb
+    return result
 
 
 # AH ratio
 def ah_ratio(hk_rmb_change_rate, ah_pair=('600036', '03968'), ):
     current_a = sina(ah_pair[0])
-    current_h = sina(ah_pair[1])*hk_rmb_change_rate
-    ratio = current_a/current_h
-    # ratio = current_h/current_a
-    print ratio
-    return ratio
+    current_h = sina(ah_pair[1])
+    current_h_rmb = current_h * hk_rmb_change_rate
+    if current_h_rmb == 0:
+        return None
+    ratio = current_a/current_h_rmb
+    result = {'price_a': current_a, 'price_h': current_h, 'ratio': ratio}
+    print result
+    return result
 
 
 # 8 AH premium index: average of sample stock's AH ratio
@@ -623,13 +634,28 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
                ('601727', '02727'), ('600188', '01171'), ('601238', '02238'),
                ('601919', '01919'), ('601866', '02866'), ('601618', '01618'),
                ('600026', '01138'), ('601880', '02880'), ('600874', '01065')]
+    a_list = []
+    h_list = []
+    price_a_list = []
+    price_h_list = []
     ratio_list = []
     hk_to_rmb = float(rmb_exchange_rate()[0])/100
     for sample in samples:
         ratio = ah_ratio(hk_to_rmb, sample)
-        ratio_list.append(ratio)
-    print ratio_list
-    ah_index = np.mean(ratio_list)
+        if ratio:
+            a_list.append(sample[0])
+            h_list.append(sample[1])
+            price_a_list.append(ratio.get('price_a'))
+            price_h_list.append(ratio.get('price_h'))
+            ratio_list.append(ratio.get('ratio'))
+    df_dict = {'A': a_list, 'Price_A': price_a_list, 'H': h_list, 'Price_H': price_h_list, 'ratio': ratio_list}
+    print df_dict
+    df = DataFrame(df_dict)
+    print df
+    df = df.sort(columns='ratio', ascending=True)
+    print df
+    # ah_index = np.mean(ratio_list)
+    ah_index = df['ratio'].mean()
     print ah_index
     return ah_index
 
@@ -652,8 +678,8 @@ if __name__ == '__main__':
     # sina('00168')
     # sina('02318')
     # ah_ratio()
-    # ah_premium_index()
-    rmb_exchange_rate()
+    ah_premium_index()
+    # rmb_exchange_rate()
     # parse_xue_qiu_comment()
     # parse_xue_qiu_comment_last_day('SZ000963')
     # screen_by_market_value(600)
