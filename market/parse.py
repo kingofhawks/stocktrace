@@ -428,9 +428,16 @@ def screen_by_price(low=0.1, high=3, access_token=xq_a_token):
     # print r.text
     # print r.content
     result = r.json()
+    print result
     count = result.get('count')
-    print count
-    return count
+    stock_list = result.get('list')
+    stocks = []
+    if stock_list:
+        for stock in stock_list:
+            stocks.append(stock.get('symbol'))
+    result_dict = {'count': count, 'stocks': stocks}
+    print result_dict
+    return result_dict
 
 
 # get stock price position
@@ -469,13 +476,21 @@ def screen_by_pb(low=0.1, high=1, access_token=xq_a_token):
     result = r.json()
     print result
     count = result.get('count')
-    print count
-    return count
+    # print count
+    # return count
+    stock_list = result.get('list')
+    stocks = []
+    if stock_list:
+        for stock in stock_list:
+            stocks.append(stock.get('symbol'))
+    result_dict = {'count': count, 'stocks': stocks}
+    print result_dict
+    return result_dict
 
 
 def low_pb_ratio():
-    count = screen_by_pb()
-    total = screen_by_price(high=10000)
+    count = screen_by_pb()['count']
+    total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
     print ratio
     return ratio
@@ -516,8 +531,8 @@ def low_price_ratio():
 
 # 6 stock ratio with high price
 def high_price_ratio():
-    count = screen_by_price(low=100, high=10000)
-    total = screen_by_price(high=10000)
+    count = screen_by_price(low=100, high=10000)['count']
+    total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
     print ratio
     return ratio
@@ -678,7 +693,7 @@ if __name__ == '__main__':
     # sina('00168')
     # sina('02318')
     # ah_ratio()
-    ah_premium_index()
+    # ah_premium_index()
     # rmb_exchange_rate()
     # parse_xue_qiu_comment()
     # parse_xue_qiu_comment_last_day('SZ000963')
@@ -686,5 +701,5 @@ if __name__ == '__main__':
     # high_market_value_ratio()
     # screen_by_pb()
     # screen_by_static_pe()
-    # low_pb_ratio()
-    # position('600600')
+    low_pb_ratio()
+    # position('600276')
