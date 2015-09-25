@@ -643,7 +643,7 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
                ('600012', '00995'), ('601633', '02333'), ('601800', '01800'),
                ('601333', '00525'), ('601111', '00753'), ('600875', '01072'),
                ('601390', '00390'), ('601898', '01898'), ('601899', '02899'),
-               ('000898', '00347'), ('000157', '01157'), ('600585', '00317'),
+               ('000898', '00347'), ('000157', '01157'), ('600685', '00317'),
                ('601992', '02009'), ('601600', '02600'), ('601991', '00991'),
                ('600115', '00670'), ('601808', '02883'), ('600871', '01033'),
                ('601727', '02727'), ('600188', '01171'), ('601238', '02238'),
@@ -666,7 +666,7 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
     df_dict = {'A': a_list, 'Price_A': price_a_list, 'H': h_list, 'Price_H': price_h_list, 'ratio': ratio_list}
     print df_dict
     df = DataFrame(df_dict)
-    print df
+    # print df
     df = df.sort(columns='ratio', ascending=True)
     print df
     # ah_index = np.mean(ratio_list)
@@ -693,7 +693,7 @@ if __name__ == '__main__':
     # sina('00168')
     # sina('02318')
     # ah_ratio()
-    # ah_premium_index()
+    ah_premium_index()
     # rmb_exchange_rate()
     # parse_xue_qiu_comment()
     # parse_xue_qiu_comment_last_day('SZ000963')
@@ -701,5 +701,5 @@ if __name__ == '__main__':
     # high_market_value_ratio()
     # screen_by_pb()
     # screen_by_static_pe()
-    low_pb_ratio()
+    # low_pb_ratio()
     # position('600276')
