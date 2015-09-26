@@ -9,6 +9,7 @@ import xlrd
 import requests
 import arrow
 from datetime import timedelta
+from stocktrace.stock import Stock
 
 # check xueqiu http cookie "xq_a_token"
 xq_a_token = '956d8e7a7e5b0a34d2fb90df5096f4891df8b88b'
@@ -568,6 +569,30 @@ def sina(code):
     return current
 
 
+# parse real time data from xueqiu
+def xueqiu(code='SH600276', access_token=xq_a_token):
+    url = 'http://xueqiu.com/v4/stock/quote.json?code={}&_=1443253485389'
+    url = url.format(code)
+    payload = {'access_token': access_token}
+    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
+
+    r = requests.get(url, params=payload, headers=headers)
+    print r
+    print r.json()
+    data = r.json().get(code)
+    print data
+    time = data.get('time')
+    import arrow
+    time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
+    print time
+    stock = Stock(code=code, name=data.get('name').encode("utf-8"),
+                  current=data.get('current'), percentage=data.get('percentage'),
+                  open_price=data.get('open'), high=data.get('high'), low=data.get('low'), close=data.get('close'),
+                  low52week=data.get('low52week'), high52week=data.get('high52week'),
+                  pe_lyr=data.get('pe_lyr'), pb=data.get('pb'), date=time)
+    print stock
+
+
 # HK and USD to RMB exchange rate from boc.cn
 def rmb_exchange_rate():
     page = parse('http://www.boc.cn/sourcedb/whpj/').getroot()
@@ -693,7 +718,7 @@ if __name__ == '__main__':
     # sina('00168')
     # sina('02318')
     # ah_ratio()
-    ah_premium_index()
+    # ah_premium_index()
     # rmb_exchange_rate()
     # parse_xue_qiu_comment()
     # parse_xue_qiu_comment_last_day('SZ000963')
@@ -703,3 +728,4 @@ if __name__ == '__main__':
     # screen_by_static_pe()
     # low_pb_ratio()
     # position('600276')
+    xueqiu()
