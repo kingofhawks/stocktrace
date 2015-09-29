@@ -13,6 +13,7 @@ from stocktrace.stock import Stock
 
 # check xueqiu http cookie "xq_a_token"
 xq_a_token = '956d8e7a7e5b0a34d2fb90df5096f4891df8b88b'
+headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
 
 # 1 parse shanghai market overall
@@ -61,12 +62,7 @@ def avg_sh_pe():
 
 # parse SZ market overall
 def parse_sz_market():
-        # url = 'http://www.szse.cn/main/marketdata/tjsj/jbzb/'
-    # dfs = pd.read_html(url, flavor='lxml')
-    # print dfs
     page = parse('http://www.szse.cn/main/marketdata/tjsj/jbzb/').getroot()
-    # result = etree.tostring(page)
-    # print result
 
     r = page.get_element_by_id('REPORTID_tab1')
     print etree.tostring(r)
@@ -101,37 +97,6 @@ def parse_sz_market():
 # 创业板 market overall
 def parse_cyb_market():
     return parse_sz_market_common('cyb', 'http://www.szse.cn/main/chinext/scsj/jbzb/')
-    #
-    # page = parse('http://www.szse.cn/main/chinext/scsj/jbzb/').getroot()
-    # # result = etree.tostring(page)
-    # # print result
-    #
-    # r = page.get_element_by_id('REPORTID_tab1')
-    # print etree.tostring(r)
-    # # read html <table> to list of DataFrame
-    # dfs = pd.read_html(etree.tostring(r), flavor='lxml')
-    # # print dfs
-    # # print len(dfs)
-    # if len(dfs) >= 1:
-    #     df = dfs[0]
-    #     print df
-    #     total_market = df.iloc[5][1]
-    #     volume = df.iloc[7][1]
-    #     pe = df.iloc[10][1]
-    #     high_pe = df.iloc[10][3]
-    #
-    #     if type(total_market) == type(pd.NaT):
-    #         total_market = 0
-    #     if type(volume) == type(pd.NaT):
-    #         volume = 0
-    #
-    #     market = Market('cyb', float(total_market)/100000000, float(volume)/100000000, 0, pe)
-    #     print market
-    #     return market
-    #     # print df.index
-    #     # print df.columns
-    #     # print df.values
-    #     # print df.describe()
 
 
 # 中小板 market overall
@@ -319,7 +284,6 @@ def parse_xue_qiu_comment_last_day(stock='SH600029', access_token=xq_a_token):
     url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
     url = url.format(stock)
     payload = {'access_token': access_token}
-    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
     r = requests.get(url, params=payload, headers=headers )
     print r
@@ -355,9 +319,8 @@ def parse_xue_qiu_comment(stock='SH600027', access_token=xq_a_token):
     url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
     url = url.format(stock)
     payload = {'access_token': access_token}
-    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
-    r = requests.get(url, params=payload, headers=headers )
+    r = requests.get(url, params=payload, headers=headers)
     print r
     print r.json()
     comments = r.json().get('list')
@@ -402,8 +365,6 @@ def login_xue_qiu():
     url = 'http://xueqiu.com/user/login'
     payload = {'username': 'kingofhawks@qq.com', 'areacode': 86, 'remember_me': 1,
                'password': '1FA727F4CFC8E494E55524897EEC631E'}
-    headers = {'content-type': 'application/json',
-               'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
     r = requests.post(url, params=payload, headers=headers)
     response_headers = r.headers
@@ -424,7 +385,6 @@ def screen_by_price(low=0.1, high=3, access_token=xq_a_token):
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
     # print '*************url********************{}'.format(url2)
-    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
     r = requests.get(url2, params=payload, headers=headers)
     # print r.text
     # print r.content
@@ -454,7 +414,6 @@ def screen_by_market_value(low, high=60000, access_token=xq_a_token):
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
     # print '*************url********************{}'.format(url2)
-    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
     r = requests.get(url2, params=payload, headers=headers)
     # print r.text
     # print r.content
@@ -470,7 +429,6 @@ def screen_by_pb(low=0.1, high=1, access_token=xq_a_token):
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
     # print '*************url********************{}'.format(url2)
-    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
     r = requests.get(url2, params=payload, headers=headers)
     # print r.text
     # print r.content
@@ -511,7 +469,6 @@ def screen_by_static_pe(low=1, high=10, access_token=xq_a_token):
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
     # print '*************url********************{}'.format(url2)
-    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
     r = requests.get(url2, params=payload, headers=headers)
     # print r.text
     # print r.content
@@ -574,7 +531,6 @@ def xueqiu(code='SH600276', access_token=xq_a_token):
     url = 'http://xueqiu.com/v4/stock/quote.json?code={}&_=1443253485389'
     url = url.format(code)
     payload = {'access_token': access_token}
-    headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
     r = requests.get(url, params=payload, headers=headers)
     print r
