@@ -58,11 +58,10 @@ def insert_stock(stock):
 
 
 #use mongodb array type for tags
-def add_tag(code,tag):
+def add_tag(code, tag):
     data = {"code": code, "tags": [tag]}
     stocks = db.stock
-    return stocks.update({"code":code},
-    {"$set":{"tags":[tag]}}, upsert=True,safe=True)
+    return stocks.update({"code": code}, {"$set": {"tags": [tag]}}, upsert=True)
 
 
 def delete_stock(code):

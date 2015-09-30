@@ -35,7 +35,9 @@ class Portfolio(object):
         # from decimal import *
         # getcontext().prec = 2
         # self.position_ratio = Decimal(self.market_value)/Decimal(self.total)
-        self.position_ratio = self.market_value/self.total
+        self.position_ratio = 0
+        if self.total != 0:
+            self.position_ratio = self.market_value/self.total
         # self.date = timezone.now()
         self.date = datetime.now()
 

@@ -1,10 +1,10 @@
 #-*- coding: UTF-8 -*-
 #from datetime import date
-from stocktrace.util import settings
+from django.conf import settings
 # from stocktrace.util import slf4p
 
 # logger = slf4p.getLogger(__name__)
-
+db = settings.DB
 
 class Stock:
     mgsy = 0  # EPS TTM
@@ -52,8 +52,11 @@ class Stock:
         #NHNL indicator
         self.nh = False  # 当日新高
         self.nl = False  # 当日新低
-        self.PercentChangeFromYearLow = (float(self.close) - float(self.low52week))/float(self.low52week)
-        self.PercentChangeFromYearHigh = (float(self.close) - float(self.high52week))/float(self.high52week)
+        if self.low52week != 0:
+            self.PercentChangeFromYearLow = (float(self.close) - float(self.low52week))/float(self.low52week)
+
+        if self.high52week != 0:
+            self.PercentChangeFromYearHigh = (float(self.close) - float(self.high52week))/float(self.high52week)
 
     #python2.7 use __unicode__, for python3 use __str__
     def __unicode__(self):
@@ -99,31 +102,46 @@ class Stock:
             self.pb = self.current/float(self.mgjzc)
         self.rank = self.pe * self.pb
 
+    def save(self):
+        stocks = db.stock
+        data = {"code": self.code,
+            "high": self.high,
+            "low": self.low,
+            "open": self.open_price,
+            "close": self.close,
+            "volume": self.volume,
+            "date": self.date,
+            "amount": self.amount,
+            "current": self.current}
+        stocks.insert(data)
 
-def download_stock(stock, download_latest=True, realtime_engine=settings.SINA, download_history=True,
-                   history_engine=settings.CSV_ENGINE, download_statistics=False):
-    # logger.info('Start download finance data:{}'.format(stock.code))
+    def download_stock(self, download_latest=True, realtime_engine=settings.SINA, download_history=True,
+                       history_engine=settings.CSV_ENGINE, download_statistics=False):
+        # logger.info('Start download finance data:{}'.format(stock.code))
 
-    #download statistics from reuters
-    if download_statistics:
-        from stocktrace.parse.reutersparser import downloadKeyStatDatas
-        downloadKeyStatDatas()
+        #download statistics from reuters
+        if download_statistics:
+            from stocktrace.parse.reutersparser import downloadKeyStatDatas
+            downloadKeyStatDatas()
 
-    #update latest price from yahoo or sina
-    #Seems YQL API is not stable,tables often to be locked
-    if download_latest:
-        from stocktrace.parse.sinaparser import update
-        update(stock.code, realtime_engine)
+        #update latest price from yahoo or sina
+        #Seems YQL API is not stable,tables often to be locked
+        if download_latest:
+            from stocktrace.parse.sinaparser import update
+            update(self.code, realtime_engine)
 
-    if download_history:
-    #    #download history data from yahoo CSV or YDN
-        from stocktrace.parse.yahooparser import download_history_data
-        download_history_data(stock.code, save=True, begin_date='2012-01-01')
+        if download_history:
+        #    #download history data from yahoo CSV or YDN
+            from stocktrace.parse.yahooparser import download_history_data
+            download_history_data(self.code, save=True, begin_date='2012-01-01')
 
-    if realtime_engine == settings.SINA and history_engine == settings.CSV_ENGINE:
-        from stocktrace.dao.stockdao import update_week52
-        update_week52(stock.code)
+        if realtime_engine == settings.SINA and history_engine == settings.CSV_ENGINE:
+            from stocktrace.dao.stockdao import update_week52
+            update_week52(self.code)
 
-    # logger.info('Finish download finance data:{}'.format(stock.code))
+        # logger.info('Finish download finance data:{}'.format(stock.code))
+
+
+
 
 

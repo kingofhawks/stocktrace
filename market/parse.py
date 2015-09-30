@@ -514,6 +514,7 @@ def sina(code):
     else:
         code = 'sz'+code
     url = "http://hq.sinajs.cn/list="+code
+    print 'url:{}'.format(url)
     r = requests.get(url)
     print r.text
     test = r.content.split(',')
@@ -527,7 +528,7 @@ def sina(code):
 
 
 # parse real time data from xueqiu
-def xueqiu(code='SH600276', access_token=xq_a_token):
+def xueqiu(code='SH600036', access_token=xq_a_token):
     url = 'http://xueqiu.com/v4/stock/quote.json?code={}&_=1443253485389'
     url = url.format(code)
     payload = {'access_token': access_token}
@@ -541,12 +542,13 @@ def xueqiu(code='SH600276', access_token=xq_a_token):
     import arrow
     time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
     print time
-    stock = Stock(code=code, name=data.get('name').encode("utf-8"),
+    stock = Stock(code=code, name=data.get('name').encode("GB2312"),
                   current=data.get('current'), percentage=data.get('percentage'),
                   open_price=data.get('open'), high=data.get('high'), low=data.get('low'), close=data.get('close'),
                   low52week=data.get('low52week'), high52week=data.get('high52week'),
                   pe_lyr=data.get('pe_lyr'), pb=data.get('pb'), date=time)
     print stock
+    return stock
 
 
 # HK and USD to RMB exchange rate from boc.cn
@@ -684,4 +686,5 @@ if __name__ == '__main__':
     # screen_by_static_pe()
     # low_pb_ratio()
     # position('600276')
-    xueqiu()
+    stock = xueqiu()
+    stock.save()
