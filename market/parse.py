@@ -9,7 +9,8 @@ import xlrd
 import requests
 import arrow
 from datetime import timedelta
-from stocktrace.stock import Stock
+from stocktrace.stock import Stock, StockHistory
+
 
 # check xueqiu http cookie "xq_a_token"
 xq_a_token = '956d8e7a7e5b0a34d2fb90df5096f4891df8b88b'
@@ -573,6 +574,39 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
     return stock
 
 
+# parse history data from xueqiu
+def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=1412158358740, end_date=1443694358740):
+    if code.startswith('60') or code.startswith('51'):
+        code = 'SH'+code
+    elif len(code) == 5:
+        code = 'HK'+code
+    elif len(code) == 6:
+        code = 'SZ'+code
+
+    url = 'http://xueqiu.com/stock/forchartk/stocklist.json?symbol={}&period=1day&type=normal&begin={}&end={}&_=1443694358741'
+    url = url.format(code, begin_date, end_date)
+    payload = {'access_token': access_token}
+
+    r = requests.get(url, params=payload, headers=headers)
+    print r.json()
+    data_list = r.json().get('chartlist')
+    print data_list
+    print len(data_list)
+    result = []
+    for data in data_list:
+        print data
+        time = data.get('time')
+        time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
+        print time
+        history = StockHistory(code=code, percent=data.get('percent'),
+                               ma5=data.get('ma5'), ma10=data.get('ma10'), ma30=data.get('ma30'),
+                               open_price=data.get('open'), high=data.get('high'), low=data.get('low'),
+                               close=data.get('close'), time=time)
+        print history
+        result.append(history)
+    return result
+
+
 # HK and USD to RMB exchange rate from boc.cn
 def rmb_exchange_rate():
     page = parse('http://www.boc.cn/sourcedb/whpj/').getroot()
@@ -698,7 +732,8 @@ if __name__ == '__main__':
     # sina('00168')
     # sina('02318')
     # ah_ratio()
-    ah_premium_index()
+    # ah_premium_index()
+    xueqiu_history()
     # rmb_exchange_rate()
     # parse_xue_qiu_comment()
     # parse_xue_qiu_comment_last_day('SZ000963')

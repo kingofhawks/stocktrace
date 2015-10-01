@@ -337,12 +337,11 @@ def download_history_data(code, save=True, begin_date='2012-01-01', engine=setti
         logger.exception(e)
         logger.error('Fail to download history data for:'+code)
         traceback.print_exc(file=sys.stdout) 
-        
-        
+
         
 #get history data from yahoo CSV API 
 # http://ichart.finance.yahoo.com/table.csv?s=300072.sz&d=7&e=23&f=2010&a=5&b=11&c=2010   
-def getCSVHistorialData(code,save = True,beginDate = '',endDate = str(date.today())):
+def getCSVHistorialData(code='600276', save=True, beginDate='', endDate =str(date.today())):
     from lxml import etree
     #yahoo stock ticker need post-fix ".SS" for Shanghai,'.SZ' for shenzheng
     if (len(code) == 9):
@@ -354,6 +353,7 @@ def getCSVHistorialData(code,save = True,beginDate = '',endDate = str(date.today
 
     begin = beginDate.split('-')
     end = endDate.split('-')
+    print 'begin:{} end:{}'.format(begin, end)
     period = '&d='+(str)(int(end[1])-1)+'&e='+end[2]+'&f='+end[0]+'&a='+(str)(int(begin[1])-1)+'&b='+begin[2]+'&c='+begin[0]    
     url = 'http://ichart.finance.yahoo.com/table.csv?s='+code2+period
     logger.debug(url)
@@ -520,8 +520,9 @@ def computeNhnlIndexWithinRangeWithStocks(stocks,lastDays,nearDays,beginDate = s
                     
 if __name__ == '__main__':
     stocks = ['600327','600829','600573','600369','601688','600132','600332','601866','600718','600048']
+    getCSVHistorialData(beginDate='2014-01-01')
     #parseTickers();
-    print parseFinanceData('600327')
+    # print parseFinanceData('600327')
     #print getCSVHistorialData('600327',beginDate='2012-01-01')
     #getHistorialData('000001.SS',beginDate='2012-04-01')
     #getHistorialData('600327',beginDate='2012-04-01')

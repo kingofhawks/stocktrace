@@ -1,9 +1,7 @@
 #-*- coding: UTF-8 -*-
 #from datetime import date
 from mongoengine import *
-# from stocktrace.util import slf4p
 
-# logger = slf4p.getLogger(__name__)
 
 class Stock(Document):
     code = StringField()
@@ -148,6 +146,25 @@ class Stock(Document):
         # logger.info('Finish download finance data:{}'.format(stock.code))
 
 
+class StockHistory(Document):
+    code = StringField()
+    percent = FloatField()
+    volume = FloatField()
+    open_price = FloatField()
+    high = FloatField()
+    low = FloatField()
+    close = FloatField()
+    pb = FloatField()
+    time = DateTimeField()
+    turn_rate = FloatField()
+    ma5 = FloatField()
+    ma10 = FloatField()
+    ma30 = FloatField()
+
+    def __str__(self):
+        return 'code:{} percent:{} open:{} high:{} low:{} close:{} turnover:{} time:{}' .format(self.code,
+               self.percent, self.open_price, self.high, self.low, self.close, self.turn_rate, self.time
+        )
 
 
 
