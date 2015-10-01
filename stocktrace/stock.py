@@ -1,62 +1,81 @@
 #-*- coding: UTF-8 -*-
 #from datetime import date
-from django.conf import settings
+from mongoengine import *
 # from stocktrace.util import slf4p
 
 # logger = slf4p.getLogger(__name__)
-db = settings.DB
 
-class Stock:
-    mgsy = 0  # EPS TTM
-    mgjzc = 0  # booking value MRQ
-    pe_ttm = 0  # PE TTM
-    pe_lyr = 0  # last year static PE
-    ps = 0  # price/sales ratio
-    rank = 0
-    lastUpdate = ''
-    totalCap = 0
-    floatingCap = 0
-    date = ''
-    hasGap = False
-    PercentChangeFromYearLow = 0
-    PercentChangeFromYearHigh = 0
-    ma50 = 0
-    ma200 = 0
-    PercentChangeFromTwoHundreddayMovingAverage = ''
-    PercentChangeFromFiftydayMovingAverage = ''
-    alert = False
-    state = 'OK'  # OK,WARNING,CRITICAL,UP
-    isInSh = False  # Shanghai code
-    amount = 0
+class Stock(Document):
+    code = StringField()
+    name = StringField()
+    current = FloatField()
+    percentage = FloatField()
+    volume = FloatField()
+    open_price = FloatField()
+    high = FloatField()
+    low = FloatField()
+    close = FloatField()
+    low52week = FloatField()
+    high52week = FloatField()
+    pb = FloatField()
+    # EPS TTM
+    mgsy = FloatField()
+    # booking value MRQ
+    mgjzc = FloatField()
+    # PE TTM
+    pe_ttm = FloatField()
+    # last year static PE
+    pe_lyr = FloatField()
+    # PS ratio
+    ps = FloatField()
+    rank = FloatField()
+    lastUpdate = DateTimeField()
+    totalCap = FloatField()
+    floatingCap = FloatField()
+    date = DateTimeField()
+    hasGap = BooleanField(default=False)
+    PercentChangeFromYearLow = FloatField()
+    PercentChangeFromYearHigh = FloatField()
+    ma50 = FloatField()
+    ma200 = FloatField()
+    PercentChangeFromTwoHundreddayMovingAverage = FloatField()
+    PercentChangeFromFiftydayMovingAverage = FloatField()
+    alert = BooleanField(default=False)
+    state = StringField(default='OK')  # OK,WARNING,CRITICAL,UP
+    isInSh = BooleanField(default=False)  # Shanghai code
+    amount = IntField(default=0)
+    tags = ListField(StringField())
+    up_threshold = FloatField()
+    down_threshold = FloatField()
 
-    def __init__(self, code, amount=0, current=0, percentage=0, open_price=0, high=0, low=0, close=0, volume=0,
-                 turnover=0, low52week=0, high52week=0, pb=0, net_assets=0, name='', eps=0, pe_lyr=0, date=''):
-        self.code = code
-        self.current = current
-        self.percentage = percentage
-        self.open_price = open_price
-        self.high = high
-        self.low = low
-        self.close = close
-        self.volume = volume
-        self.amount = amount
-        self.turnover = turnover
-        self.low52week = low52week
-        self.high52week = high52week
-        self.pb = pb
-        self.net_assets = net_assets
-        self.name = name
-        self.eps = eps
-        self.pe_lyr = pe_lyr
-        self.date = date
-        #NHNL indicator
-        self.nh = False  # 当日新高
-        self.nl = False  # 当日新低
-        if self.low52week != 0:
-            self.PercentChangeFromYearLow = (float(self.close) - float(self.low52week))/float(self.low52week)
-
-        if self.high52week != 0:
-            self.PercentChangeFromYearHigh = (float(self.close) - float(self.high52week))/float(self.high52week)
+    # def __init__(self, code, amount=0, current=0, percentage=0, open_price=0, high=0, low=0, close=0, volume=0,
+    #              turnover=0, low52week=0, high52week=0, pb=0, net_assets=0, name='', eps=0, pe_lyr=0, date=''):
+    #     self.code = code
+    #     self.current = current
+    #     self.percentage = percentage
+    #     self.open_price = open_price
+    #     self.high = high
+    #     self.low = low
+    #     self.close = close
+    #     self.volume = volume
+    #     self.amount = amount
+    #     self.turnover = turnover
+    #     self.low52week = low52week
+    #     self.high52week = high52week
+    #     self.pb = pb
+    #     self.net_assets = net_assets
+    #     self.name = name
+    #     self.eps = eps
+    #     self.pe_lyr = pe_lyr
+    #     self.date = date
+    #     #NHNL indicator
+    #     self.nh = False  # 当日新高
+    #     self.nl = False  # 当日新低
+    #     if self.low52week != 0:
+    #         self.PercentChangeFromYearLow = (float(self.close) - float(self.low52week))/float(self.low52week)
+    #
+    #     if self.high52week != 0:
+    #         self.PercentChangeFromYearHigh = (float(self.close) - float(self.high52week))/float(self.high52week)
 
     #python2.7 use __unicode__, for python3 use __str__
     def __unicode__(self):
@@ -102,21 +121,8 @@ class Stock:
             self.pb = self.current/float(self.mgjzc)
         self.rank = self.pe * self.pb
 
-    def save(self):
-        stocks = db.stock
-        data = {"code": self.code,
-            "high": self.high,
-            "low": self.low,
-            "open": self.open_price,
-            "close": self.close,
-            "volume": self.volume,
-            "date": self.date,
-            "amount": self.amount,
-            "current": self.current}
-        stocks.insert(data)
-
-    def download_stock(self, download_latest=True, realtime_engine=settings.SINA, download_history=True,
-                       history_engine=settings.CSV_ENGINE, download_statistics=False):
+    def download_stock(self, download_latest=True, realtime_engine='sina', download_history=True,
+                       history_engine='csv', download_statistics=False):
         # logger.info('Start download finance data:{}'.format(stock.code))
 
         #download statistics from reuters
@@ -135,7 +141,7 @@ class Stock:
             from stocktrace.parse.yahooparser import download_history_data
             download_history_data(self.code, save=True, begin_date='2012-01-01')
 
-        if realtime_engine == settings.SINA and history_engine == settings.CSV_ENGINE:
+        if realtime_engine == 'sina' and history_engine == 'csv':
             from stocktrace.dao.stockdao import update_week52
             update_week52(self.code)
 

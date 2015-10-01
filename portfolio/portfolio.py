@@ -1,22 +1,31 @@
-from dao import find_all_stocks,update_stock_price,insert_stock,add_tag
-from stocktrace.parse.sinaparser import getStock
+from dao import find_all_stocks, update_stock_price, insert_stock, add_tag, find_stock_by_code
+from market.parse import sina, xueqiu
 from stocktrace.stock import Stock
+import traceback
 
 
 def polling():
     stocks = find_all_stocks()
+    result = []
     for stock in stocks:
         code = stock['code']
-        s = getStock(code)
+        s = xueqiu(code)
         print s
         try:
-            update_stock_price(code, s.current)
-        except AttributeError:
+            stock = Stock.objects.get(code=code)
+            if stock:
+                stock.current = s.current
+                stock.volume = s.volume
+                stock.percentage = s.percentage
+                stock.save()
+                result.append(stock)
+        except Exception as e:
+            print traceback.format_exc()
             continue
-    return stocks
+    return result
 
 
-#get real-time market value
+# get real-time market value
 def market_value(stocks):
     total = 0
     for stock in stocks:

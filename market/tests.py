@@ -1,3 +1,29 @@
 from django.test import TestCase
+from parse import *
 
-# Create your tests here.
+
+class ParseTest(TestCase):
+    code = '600036'
+
+    def test_sina(self):
+        sina(self.code)
+
+    def test_xueqiu(self):
+        xueqiu(self.code)
+
+    def test_ah_ratio(self):
+        ah_ratio(0.8)
+
+    def test_ah(self):
+        ah_premium_index()
+
+    def test_sh(self):
+        parse_sh_market()
+
+    def test_sh_pe(self):
+        avg_sh_pe()
+
+    def test_gdp(self):
+        parse_securitization_rate()
+
+

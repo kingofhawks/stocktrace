@@ -28,16 +28,17 @@ from bson import ObjectId
 db = settings.DB
 
 
-def update_stock_price(code,current):
+def update_stock_price(code, current):
     stocks = db.stock
-    return stocks.update({"code":code},
-    {"$set":{"current":float(current)}}, upsert=True,safe=True)
+    return stocks.update({"code": code}, {"$set": {"current": float(current)}}, upsert=True)
 
 
-def update_stock_amount(code,amount,up_threshold,down_threshold):
+def update_stock_amount(code, amount, up_threshold, down_threshold):
     stocks = db.stock
-    return stocks.update({"code":code},
-    {"$set":{"amount":int(amount),"up_threshold":float(up_threshold),"down_threshold":float(down_threshold)}}, upsert=True,safe=True)
+    return stocks.update({"code": code},
+                         {"$set": {"amount": int(amount),
+                                  "up_threshold": float(up_threshold), "down_threshold": float(down_threshold)}},
+                                  upsert=True)
 
 
 def insert_stock(stock):
@@ -57,7 +58,7 @@ def insert_stock(stock):
     #connection.end_request()
 
 
-#use mongodb array type for tags
+# use mongodb array type for tags
 def add_tag(code, tag):
     data = {"code": code, "tags": [tag]}
     stocks = db.stock
@@ -70,17 +71,7 @@ def delete_stock(code):
 
 
 def find_all_stocks():
-    #connection = Connection()
-    # #db = connection.stock
-    # stocks = db.stock
-    # result = []
-    # for s in stocks.find():
-    #     #print stock
-    #     result.append(s)
-    # #return stocks.find()
-    # return result
-
-    #list() method will convert pymongo cursor to python list
+    # list() method will convert pymongo cursor to python list
     return list(db.stock.find())
 
 #TODO

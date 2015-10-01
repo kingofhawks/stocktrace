@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 from bson import json_util
 
 
-def stock_list2(request):
+def stock_list(request):
     portfolio = snapshot(False)
     results = portfolio.stocks
     print 'result:{}'.format(results)

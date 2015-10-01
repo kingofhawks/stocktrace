@@ -6,3 +6,4 @@ requests
 celery
 arrow
 djangorestframework
+mongoengine

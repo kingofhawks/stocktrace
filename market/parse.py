@@ -27,7 +27,8 @@ def parse_sh_market():
     for word in statistics:
         print word
 
-    market = Market('sh', statistics[1], float(statistics[8])/10000, statistics[12], statistics[14], date=statistics[2])
+    market = Market(name='sh', total_market_cap=statistics[1], volume=float(statistics[8])/10000,
+                    turnover=statistics[12], pe=statistics[14], date=statistics[2])
     print market
     return market
 
@@ -506,7 +507,7 @@ def high_market_value_ratio():
 
 
 # sina real time API
-def sina(code):
+def sina(code='600276'):
     if code.startswith('60') or code.startswith('51'):
         code = 'sh'+code
     elif len(code) == 5:
@@ -523,12 +524,33 @@ def sina(code):
         current = float(test[6])
     else:
         current = float(test[3])
-    print current
-    return current
+
+    yesterday = float(test[2])
+    high = float(test[4])
+    low = float(test[5])
+    volume = float(test[8])
+    if yesterday != 0:
+        percent = (current-yesterday)/yesterday*100
+    else:
+        percent = 0
+    name = test[0].split('"')[1]
+    enc = "gbk"
+    u_content = name.decode(enc) # decodes from enc to unicode
+    utf8_name = u_content.encode("utf8")
+    stock = Stock(code, 0, current, percent, low, high, volume)
+    print stock
+    return stock
 
 
 # parse real time data from xueqiu
 def xueqiu(code='SH600036', access_token=xq_a_token):
+    if code.startswith('60') or code.startswith('51'):
+        code = 'SH'+code
+    elif len(code) == 5:
+        code = 'HK'+code
+    elif len(code) == 6:
+        code = 'SZ'+code
+
     url = 'http://xueqiu.com/v4/stock/quote.json?code={}&_=1443253485389'
     url = url.format(code)
     payload = {'access_token': access_token}
@@ -599,8 +621,8 @@ def rmb_exchange_rate():
 
 # AH ratio
 def ah_ratio(hk_rmb_change_rate, ah_pair=('600036', '03968'), ):
-    current_a = sina(ah_pair[0])
-    current_h = sina(ah_pair[1])
+    current_a = sina(ah_pair[0]).current
+    current_h = sina(ah_pair[1]).current
     current_h_rmb = current_h * hk_rmb_change_rate
     if current_h_rmb == 0:
         return None
@@ -676,7 +698,7 @@ if __name__ == '__main__':
     # sina('00168')
     # sina('02318')
     # ah_ratio()
-    # ah_premium_index()
+    ah_premium_index()
     # rmb_exchange_rate()
     # parse_xue_qiu_comment()
     # parse_xue_qiu_comment_last_day('SZ000963')
@@ -686,5 +708,6 @@ if __name__ == '__main__':
     # screen_by_static_pe()
     # low_pb_ratio()
     # position('600276')
-    stock = xueqiu()
-    stock.save()
+    # stock = xueqiu()
+    # sina()
+

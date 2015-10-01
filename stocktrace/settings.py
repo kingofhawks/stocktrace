@@ -176,8 +176,12 @@ CACHES = {
 }
 
 from pymongo import MongoClient
-client = MongoClient('localhost', 27017)
+import mongoengine
+
+DB_HOST = 'localhost'
+client = MongoClient(DB_HOST, 27017)
 DB = client.stocktrace
+mongoengine.connect(host=DB_HOST, db='stocktrace')
 
 YAHOO = "yahoo"
 SINA = 'sina'
