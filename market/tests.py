@@ -26,4 +26,10 @@ class ParseTest(TestCase):
     def test_gdp(self):
         parse_securitization_rate()
 
+    def test_low_pb(self):
+        low_pb_ratio()
+
+    def test_high_pb(self):
+        high_pb_ratio()
+
 

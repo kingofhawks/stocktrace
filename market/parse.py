@@ -85,9 +85,13 @@ def parse_sz_market():
             total_market = 0
         if type(volume) == type(pd.NaT):
             volume = 0
-        print 'total_market:{}'.format(total_market)
-        print 'volume:{}'.format(volume)
-        market = Market('sz', float(total_market)/100000000, float(volume)/100000000, turnover_rate, pe, 0)
+        if type(turnover_rate) == type(pd.NaT):
+            turnover_rate = 0
+        if type(pe) == type(pd.NaT):
+            pe = 0
+        print 'total_market:{} volume:{} turnover_rate:{} pe:{}'.format(total_market, volume, turnover_rate, pe)
+        market = Market('sz', total_market_cap=float(total_market)/100000000, volume=float(volume)/100000000,
+                        turnover=float(turnover_rate), pe=float(pe))
         print market
         # print df.index
         # print df.columns
@@ -453,15 +457,15 @@ def low_pb_ratio():
     count = screen_by_pb()['count']
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
-    print ratio
+    print 'low_pb_ratio:{}'.format(ratio)
     return ratio
 
 
 def high_pb_ratio():
-    count = screen_by_pb()
-    total = screen_by_price(high=10000)
+    count = screen_by_pb(low=10, high=10000)['count']
+    total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
-    print ratio
+    print 'high_pb_ratio:{}'.format(ratio)
     return ratio
 
 
@@ -574,9 +578,18 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
     return stock
 
 
-# parse history data from xueqiu
-def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=1412158358740, end_date=1443694358740):
-    if code.startswith('60') or code.startswith('51'):
+# parse history data from xueqiu 1412158358740
+def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_date=None):
+    if begin_date is None:
+        begin = arrow.get('2014-08-01')
+        begin_date = begin.timestamp*1000
+        print begin_date
+    if end_date is None:
+        end = arrow.now()
+        end_date = end.timestamp*1000
+    if len(code) == 8:
+        pass
+    elif code.startswith('60') or code.startswith('51'):
         code = 'SH'+code
     elif len(code) == 5:
         code = 'HK'+code
@@ -604,6 +617,21 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=1412158358
                                close=data.get('close'), time=time)
         print history
         result.append(history)
+    df = DataFrame(data_list)
+    print df
+    max_turnover = df['turnrate'].max()
+    min_turnover = df['turnrate'].min()
+    print df['turnrate'].mean()
+    # max_turnover_index = df.loc[df['turnrate'] == max_turnover].index
+    # print max_turnover_index
+    columns = ['time', 'turnrate', 'volume', 'close']
+    print df.loc[df['turnrate'] == max_turnover][columns]
+    print df.loc[df['turnrate'] == min_turnover][columns]
+    max_volume = df['volume'].max()
+    min_volume = df['volume'].min()
+    mean_volume = df['volume'].mean()
+    print df.loc[df['volume'] == max_volume][columns]
+    print df.loc[df['volume'] == min_volume][columns]
     return result
 
 
@@ -733,7 +761,8 @@ if __name__ == '__main__':
     # sina('02318')
     # ah_ratio()
     # ah_premium_index()
-    xueqiu_history()
+    # xueqiu_history('SH000001')
+    xueqiu_history('600196')
     # rmb_exchange_rate()
     # parse_xue_qiu_comment()
     # parse_xue_qiu_comment_last_day('SZ000963')
