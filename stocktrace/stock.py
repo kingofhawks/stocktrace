@@ -46,6 +46,15 @@ class Stock(Document):
     up_threshold = FloatField()
     down_threshold = FloatField()
 
+    def __init__(self, *args, **kwargs):
+            Document.__init__(self, *args, **kwargs)
+
+            if self.low52week != 0:
+                self.PercentChangeFromYearLow = (float(self.close) - float(self.low52week))/float(self.low52week)
+
+            if self.high52week != 0:
+                self.PercentChangeFromYearHigh = (float(self.close) - float(self.high52week))/float(self.high52week)
+
     # def __init__(self, code, amount=0, current=0, percentage=0, open_price=0, high=0, low=0, close=0, volume=0,
     #              turnover=0, low52week=0, high52week=0, pb=0, net_assets=0, name='', eps=0, pe_lyr=0, date=''):
     #     self.code = code

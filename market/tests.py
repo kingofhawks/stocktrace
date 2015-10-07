@@ -2,7 +2,7 @@ from django.test import TestCase
 from parse import *
 
 
-class ParseTest(TestCase):
+class ParseTestCase(TestCase):
     code = '600036'
 
     def test_sina(self):
@@ -31,5 +31,8 @@ class ParseTest(TestCase):
 
     def test_high_pb(self):
         high_pb_ratio()
+
+    def test_history(self):
+        xueqiu_history()
 
 
