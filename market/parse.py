@@ -13,7 +13,7 @@ from stocktrace.stock import Stock, StockHistory
 
 
 # check xueqiu http cookie "xq_a_token"
-xq_a_token = '956d8e7a7e5b0a34d2fb90df5096f4891df8b88b'
+xq_a_token = 'a5d36914fb6e9c29509ad6002849842ab9d5d20c'
 headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
 
@@ -682,7 +682,7 @@ def rmb_exchange_rate():
 
 
 # AH ratio
-def ah_ratio(hk_rmb_change_rate, ah_pair=('600036', '03968'), ):
+def ah_ratio(hk_rmb_change_rate, ah_pair=('600585', '00914'), ):
     current_a = sina(ah_pair[0]).current
     current_h = sina(ah_pair[1]).current
     current_h_rmb = current_h * hk_rmb_change_rate

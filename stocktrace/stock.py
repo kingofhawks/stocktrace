@@ -49,40 +49,12 @@ class Stock(Document):
     def __init__(self, *args, **kwargs):
             Document.__init__(self, *args, **kwargs)
 
-            if self.low52week != 0:
+            if self.low52week != 0 and self.close:
                 self.PercentChangeFromYearLow = (float(self.close) - float(self.low52week))/float(self.low52week)
 
-            if self.high52week != 0:
+            if self.high52week != 0 and self.close:
                 self.PercentChangeFromYearHigh = (float(self.close) - float(self.high52week))/float(self.high52week)
 
-    # def __init__(self, code, amount=0, current=0, percentage=0, open_price=0, high=0, low=0, close=0, volume=0,
-    #              turnover=0, low52week=0, high52week=0, pb=0, net_assets=0, name='', eps=0, pe_lyr=0, date=''):
-    #     self.code = code
-    #     self.current = current
-    #     self.percentage = percentage
-    #     self.open_price = open_price
-    #     self.high = high
-    #     self.low = low
-    #     self.close = close
-    #     self.volume = volume
-    #     self.amount = amount
-    #     self.turnover = turnover
-    #     self.low52week = low52week
-    #     self.high52week = high52week
-    #     self.pb = pb
-    #     self.net_assets = net_assets
-    #     self.name = name
-    #     self.eps = eps
-    #     self.pe_lyr = pe_lyr
-    #     self.date = date
-    #     #NHNL indicator
-    #     self.nh = False  # 当日新高
-    #     self.nl = False  # 当日新低
-    #     if self.low52week != 0:
-    #         self.PercentChangeFromYearLow = (float(self.close) - float(self.low52week))/float(self.low52week)
-    #
-    #     if self.high52week != 0:
-    #         self.PercentChangeFromYearHigh = (float(self.close) - float(self.high52week))/float(self.high52week)
 
     #python2.7 use __unicode__, for python3 use __str__
     def __unicode__(self):
