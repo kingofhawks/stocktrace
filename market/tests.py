@@ -1,6 +1,8 @@
 from django.test import TestCase
 from parse import *
 
+# > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
+
 
 class ParseTestCase(TestCase):
     code = '600036'
