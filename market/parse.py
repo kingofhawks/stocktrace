@@ -12,8 +12,8 @@ from datetime import timedelta
 from stocktrace.stock import Stock, StockHistory
 
 
-# check xueqiu http cookie "xq_a_token"
-xq_a_token = 'a5d36914fb6e9c29509ad6002849842ab9d5d20c'
+# check xueqiu HTTP request cookie "xq_a_token"
+xq_a_token = '709c0ecbbbe9cf4a07c4b230f1631c79bae0bb04'
 headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
 
@@ -540,7 +540,7 @@ def sina(code='600276'):
         percent = 0
     name = test[0].split('"')[1]
     enc = "gbk"
-    u_content = name.decode(enc) # decodes from enc to unicode
+    u_content = name.decode(enc)  # decodes from enc to unicode
     utf8_name = u_content.encode("utf8")
     stock = Stock(code, 0, current, percent, low, high, volume)
     print stock
@@ -682,15 +682,16 @@ def rmb_exchange_rate():
 
 
 # AH ratio
-def ah_ratio(hk_rmb_change_rate, ah_pair=('600585', '00914'), ):
+def ah_ratio(hk_rmb_change_rate, ah_pair=('000002', '02202'), ):
     current_a = sina(ah_pair[0]).current
     current_h = sina(ah_pair[1]).current
-    current_h_rmb = current_h * hk_rmb_change_rate
-    if current_h_rmb == 0:
+    if current_a * current_h == 0:
         return None
+
+    current_h_rmb = current_h * hk_rmb_change_rate
     ratio = current_a/current_h_rmb
     result = {'price_a': current_a, 'price_h': current_h, 'ratio': ratio}
-    print result
+    print 'ah_ratio:{}'.format(result)
     return result
 
 
@@ -715,7 +716,16 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
                ('600115', '00670'), ('601808', '02883'), ('600871', '01033'),
                ('601727', '02727'), ('600188', '01171'), ('601238', '02238'),
                ('601919', '01919'), ('601866', '02866'), ('601618', '01618'),
-               ('600026', '01138'), ('601880', '02880'), ('600874', '01065')]
+               ('600026', '01138'), ('601880', '02880'), ('600874', '01065'),
+               ('600660', '03606'), ('600377', '00177'), ('000776', '01776'),
+               ('601688', '06886'), ('000338', '02338'), ('600029', '01055'),
+               ('603993', '03993'), ('601005', '01053'), ('600688', '00338'),
+               ('600548', '00548'), ('002672', '00895'), ('000513', '01513'),
+               ('000488', '01812'), ('601107', '00107'), ('601588', '00588'),
+               ('600808', '00323'), ('000921', '00921'), ('600775', '00553'),
+               ('600860', '00187'), ('000756', '00719'), ('601038', '00038'),
+               ('600806', '00300'), ('002490', '00568'), ('002703', '01057'),
+               ('600876', '01108'), ('601717', '00564'), ('000585', '00042')]
     a_list = []
     h_list = []
     price_a_list = []
@@ -738,7 +748,7 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
     print df
     # ah_index = np.mean(ratio_list)
     ah_index = df['ratio'].mean()
-    print ah_index
+    print 'ah_index:{}'.format(ah_index)
     return ah_index
 
 
