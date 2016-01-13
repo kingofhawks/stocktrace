@@ -749,6 +749,7 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
     # ah_index = np.mean(ratio_list)
     ah_index = df['ratio'].mean()
     print 'ah_index:{}'.format(ah_index)
+    print 'discount stock:{}'.format(df[df.ratio < 1])
     return ah_index
 
 
