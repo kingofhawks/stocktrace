@@ -457,7 +457,7 @@ def low_pb_ratio():
     count = screen_by_pb()['count']
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
-    print 'low_pb_ratio:{}'.format(ratio)
+    print 'low_pb_ratio:{} size:{}'.format(ratio, count)
     return ratio
 
 
@@ -465,7 +465,7 @@ def high_pb_ratio():
     count = screen_by_pb(low=10, high=10000)['count']
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
-    print 'high_pb_ratio:{}'.format(ratio)
+    print 'high_pb_ratio:{} size:{}'.format(ratio, count)
     return ratio
 
 

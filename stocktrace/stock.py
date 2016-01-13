@@ -15,6 +15,9 @@ class Stock(Document):
     close = FloatField()
     low52week = FloatField()
     high52week = FloatField()
+    # NH-NL index
+    nh = BooleanField(default=False)
+    nl = BooleanField(default=False)
     pb = FloatField()
     # EPS TTM
     mgsy = FloatField()
@@ -55,6 +58,11 @@ class Stock(Document):
             if self.high52week != 0 and self.close:
                 self.PercentChangeFromYearHigh = (float(self.close) - float(self.high52week))/float(self.high52week)
 
+            if self.low52week != 0 and self.low52week == self.low:
+                self.nl = True
+
+            if self.high52week != 0 and self.high52week == self.high:
+                self.nh = True
 
     #python2.7 use __unicode__, for python3 use __str__
     def __unicode__(self):
@@ -69,10 +77,10 @@ class Stock(Document):
 
     def __str__(self):
         return 'code:{} name:{} current:{} percentage:{} open:{} high:{} low:{} close:{} ' \
-               'low52week:{} high52week:{} PercentChangeFromYearLow:{} PercentChangeFromYearHigh:{} ' \
+               'low52week:{} nl:{}  high52week:{} nh:{} PercentChangeFromYearLow:{} PercentChangeFromYearHigh:{} ' \
                'pe:{} pb:{} date:{}'.format(
             self.code, self.name, self.current, self.percentage, self.open_price, self.high, self.low, self.close,
-            self.low52week, self.high52week,self.PercentChangeFromYearLow, self.PercentChangeFromYearHigh,
+            self.low52week, self.nl, self.high52week, self.nh,  self.PercentChangeFromYearLow, self.PercentChangeFromYearHigh,
             self.pe_lyr, self.pb, self.date
         )
 

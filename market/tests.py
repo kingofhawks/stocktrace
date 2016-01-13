@@ -5,7 +5,7 @@ from parse import *
 
 
 class ParseTestCase(TestCase):
-    code = '600036'
+    code = '600886'
 
     def test_sina(self):
         sina(self.code)
