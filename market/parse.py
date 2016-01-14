@@ -137,12 +137,19 @@ def parse_sz_market_common(name, url):
             volume_money = 0
         if isinstance(volume, type(pd.NaT)):
             volume = 0
+        if isinstance(pe, type(pd.NaT)):
+            pe = 0
+        if type(value) != float:
+            value = 0.0
 
         # 换手率＝成交量÷当日实际流通量
         if tradable_shares == 0:
             turnover = 0
         else:
             turnover = float(volume)/float(tradable_shares)
+        print 'name:{} total_market:{} volume:{} turnover:{} pe:{} value:{}'.format(name,
+                                                                                   total_market, volume_money,
+                                                                                   turnover, pe, value)
         market = Market(name, float(total_market)/100000000, float(volume_money)/100000000, turnover, pe, value)
         print market
         return market

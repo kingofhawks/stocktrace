@@ -25,6 +25,12 @@ class ParseTestCase(TestCase):
     def test_sh_pe(self):
         avg_sh_pe()
 
+    def test_cyb(self):
+        parse_cyb_market()
+
+    def test_zxb(self):
+        parse_zxb_market()
+
     def test_gdp(self):
         parse_securitization_rate()
 
