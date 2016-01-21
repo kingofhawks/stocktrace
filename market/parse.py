@@ -13,7 +13,7 @@ from stocktrace.stock import Stock, StockHistory
 
 
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = '709c0ecbbbe9cf4a07c4b230f1631c79bae0bb04'
+xq_a_token = 'f47e7edeb23d7157ee40d6e3a361ec84a8901949'
 headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
 
@@ -105,6 +105,51 @@ def parse_cyb_market():
     return parse_sz_market_common('cyb', 'http://www.szse.cn/main/chinext/scsj/jbzb/')
 
 
+# 创业板指数
+def parse_cyb2(url='http://www.szse.cn/szseWeb/FrontController.szse?randnum=0.5328349224291742'):
+    payload = {'ACTIONID': 7, 'AJAX': 'AJAX-TRUE','CATALOGID':'1898_nm','TABKEY':'tab1','txtQueryDate':'2016-01-15','REPORT_ACTION':'reach'}
+    res = requests.post(url, data=payload)
+    print res.text
+    # read html <table> to list of DataFrame
+    dfs = pd.read_html(res.text, flavor='lxml')
+    # dfs = pd.read_html(etree.tostring(r), flavor='bs4')
+    if len(dfs) >= 1:
+        df = dfs[0]
+        print df
+        tradable_shares = df.iloc[4][1]
+        total_market = df.iloc[5][1]
+        volume_money = df.iloc[7][1]
+        volume = df.iloc[8][1]
+        pe = df.iloc[10][1]
+        high_pe = df.iloc[10][3]
+        value = df.iloc[13][1]
+
+        if isinstance(tradable_shares, type(pd.NaT)):
+            tradable_shares = 0
+        if type(total_market) == type(pd.NaT):
+            total_market = 0
+        if isinstance(volume_money, type(pd.NaT)):
+            volume_money = 0
+        if isinstance(volume, type(pd.NaT)):
+            volume = 0
+        if isinstance(pe, type(pd.NaT)):
+            pe = 0
+        if type(value) != float:
+            value = 0.0
+
+        # 换手率＝成交量÷当日实际流通量
+        if tradable_shares == 0:
+            turnover = 0
+        else:
+            turnover = float(volume)/float(tradable_shares)
+        print 'name:{} total_market:{} volume:{} turnover:{} pe:{} value:{}'.format(name,
+                                                                                   total_market, volume_money,
+                                                                                   turnover, pe, value)
+        market = Market(name, float(total_market)/100000000, float(volume_money)/100000000, turnover, pe, value)
+        print market
+        return market
+
+
 # 中小板 market overall
 def parse_zxb_market():
         return parse_sz_market_common('zxb', 'http://www.szse.cn/main/sme/xqsj/jbzb/')
@@ -113,11 +158,18 @@ def parse_zxb_market():
 # parse sz market util
 def parse_sz_market_common(name, url):
     page = parse(url).getroot()
+    result = etree.tostring(page)
+    # print '*'*20
+    # print result
+    # print '*'*20
 
     r = page.get_element_by_id('REPORTID_tab1')
+    print '*'*20
     print etree.tostring(r)
+    print '*'*20
     # read html <table> to list of DataFrame
     dfs = pd.read_html(etree.tostring(r), flavor='lxml')
+    # dfs = pd.read_html(etree.tostring(r), flavor='bs4')
     if len(dfs) >= 1:
         df = dfs[0]
         print df
@@ -277,6 +329,33 @@ def parse_sw_with_day(day=None):
     # print df[int(max_pb_index[0]): int(max_pb_index[0])+1]
     # print df[int(min_pb_index[0]): int(min_pb_index[0])+1]
     return df
+
+
+# parse history PE/PB from 申万一级行业
+def parse_sw_history(begin_date='2016-01-20', end_date='2016-01-20'):
+    codes = ('801010','801020','801030','801040','801050','801060','801070','801080','801090','801100',
+     '801110','801120','801130','801140','801150','801160','801170','801180','801190','801200',
+     '801210','801220','801230',
+     '801710','801720','801730','801740','801750','801760','801770','801780','801790',
+     '801880','801890')
+    condition = 'swindexcode in {} and BargainDate>=\'{}\' and BargainDate<=\'{}\''
+    where = condition.format(codes, begin_date, end_date)
+    print where
+    payload = {'tablename':'swindexhistory',
+    'key':'id',
+    'p':1,
+    'where': where ,
+    'orderby':'swindexcode asc,BargainDate_1',
+    'fieldlist':'SwIndexCode,SwIndexName,BargainDate,CloseIndex,BargainAmount,Markup,OpenIndex,MaxIndex,MinIndex,BargainSum',
+    'pagecount':28,
+    'timed':1453385628267
+    }
+    url = 'http://www.swsindex.com/handler.aspx'
+    res = requests.post(url, data=payload)
+    print res.text
+    payload.update({'p': 2})
+    res2 = requests.post(url, data=payload)
+    print res2.text
 
 
 # 3 GDP data can save locally

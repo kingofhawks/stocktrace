@@ -5,7 +5,7 @@ from parse import *
 
 
 class ParseTestCase(TestCase):
-    code = '600886'
+    code = '002294'
 
     def test_sina(self):
         sina(self.code)
@@ -28,6 +28,9 @@ class ParseTestCase(TestCase):
     def test_cyb(self):
         parse_cyb_market()
 
+    def test_cyb2(self):
+        parse_cyb2()
+
     def test_zxb(self):
         parse_zxb_market()
 
@@ -41,6 +44,9 @@ class ParseTestCase(TestCase):
         high_pb_ratio()
 
     def test_history(self):
-        xueqiu_history()
+        xueqiu_history(self.code)
+
+    def test_sw(self):
+        parse_sw_history()
 
 

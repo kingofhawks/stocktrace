@@ -7,3 +7,4 @@ celery
 arrow
 djangorestframework
 mongoengine
+tushare

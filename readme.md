@@ -1,4 +1,6 @@
 Revision History
+2016/1/15--v0.4
+1. use tushare to parse finance data
 
 2013/02/05--v0.3
 
