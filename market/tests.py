@@ -43,10 +43,16 @@ class ParseTestCase(TestCase):
     def test_high_pb(self):
         high_pb_ratio()
 
+    def test_high_price(self):
+        high_price_ratio()
+
     def test_history(self):
         xueqiu_history(self.code)
 
-    def test_sw(self):
-        parse_sw_history()
+    def test_sw_low(self):
+        parse_sw_history('2014-03-12','2014-03-12')
+
+    def test_sw_now(self):
+        parse_sw_history('2016-01-26','2016-01-26')
 
 

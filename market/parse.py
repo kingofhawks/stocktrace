@@ -8,6 +8,7 @@ import numpy as np
 import xlrd
 import requests
 import arrow
+import json
 from datetime import timedelta
 from stocktrace.stock import Stock, StockHistory
 
@@ -332,7 +333,7 @@ def parse_sw_with_day(day=None):
 
 
 # parse history PE/PB from 申万一级行业
-def parse_sw_history(begin_date='2016-01-20', end_date='2016-01-20'):
+def parse_sw_history(begin_date='2014-03-12', end_date='2014-03-12'):
     codes = ('801010','801020','801030','801040','801050','801060','801070','801080','801090','801100',
      '801110','801120','801130','801140','801150','801160','801170','801180','801190','801200',
      '801210','801220','801230',
@@ -341,21 +342,36 @@ def parse_sw_history(begin_date='2016-01-20', end_date='2016-01-20'):
     condition = 'swindexcode in {} and BargainDate>=\'{}\' and BargainDate<=\'{}\''
     where = condition.format(codes, begin_date, end_date)
     print where
-    payload = {'tablename':'swindexhistory',
-    'key':'id',
-    'p':1,
-    'where': where ,
-    'orderby':'swindexcode asc,BargainDate_1',
-    'fieldlist':'SwIndexCode,SwIndexName,BargainDate,CloseIndex,BargainAmount,Markup,OpenIndex,MaxIndex,MinIndex,BargainSum',
-    'pagecount':28,
-    'timed':1453385628267
-    }
-    url = 'http://www.swsindex.com/handler.aspx'
-    res = requests.post(url, data=payload)
-    print res.text
-    payload.update({'p': 2})
-    res2 = requests.post(url, data=payload)
-    print res2.text
+    all_data = []
+    for index in range(1, 1000):
+        payload = {'tablename':'swindexhistory',
+        'key':'id',
+        'p': index,
+        'where': where ,
+        'orderby':'swindexcode asc,BargainDate_1',
+        'fieldlist':'SwIndexCode,SwIndexName,BargainDate,CloseIndex,BargainAmount,Markup,'
+                    'TurnoverRate,PE,PB,MeanPrice,BargainSumRate,DP',
+        'pagecount':28,
+        'timed':1453385628267
+        }
+        url = 'http://www.swsindex.com/handler.aspx'
+        res = requests.post(url, data=payload)
+        data = res.text.replace('\'', '\"')
+        result = json.loads(data)
+        data_list = result.get('root')
+        if len(data_list) == 0:
+            break
+        else:
+           all_data.extend(data_list)
+    df = DataFrame(all_data)
+    df[['PE', 'PB']] = df[['PE', 'PB']].astype(float)
+    # df['PE'] = df['PE'].astype(float)
+    # df['PB'] = df['PB'].astype(float)
+    print df
+    df = df.sort(columns='PE', ascending=True)
+    print df
+    df = df.sort(columns='PB', ascending=True)
+    print df
 
 
 # 3 GDP data can save locally
@@ -584,7 +600,7 @@ def high_price_ratio():
     count = screen_by_price(low=100, high=10000)['count']
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
-    print ratio
+    print 'count:{} total:{} ratio:{}'.format(count, total, ratio)
     return ratio
 
 
