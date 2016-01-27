@@ -333,7 +333,12 @@ def parse_sw_with_day(day=None):
 
 
 # parse history PE/PB from 申万一级行业
-def parse_sw_history(begin_date='2014-03-12', end_date='2014-03-12'):
+def parse_sw_history(begin_date='2014-03-12', end_date=None):
+    if end_date is None:
+        now = arrow.now()
+        end_date = str(now.date())
+    print begin_date
+    print end_date
     codes = ('801010','801020','801030','801040','801050','801060','801070','801080','801090','801100',
      '801110','801120','801130','801140','801150','801160','801170','801180','801190','801200',
      '801210','801220','801230',
@@ -372,6 +377,9 @@ def parse_sw_history(begin_date='2014-03-12', end_date='2014-03-12'):
     print df
     df = df.sort(columns='PB', ascending=True)
     print df
+    print 'PE mean:{}'.format(df['PE'].mean())
+    print 'PB mean:{}'.format(df['PB'].mean())
+    print 'PB<1:{}'.format(df[df.PB < 1])
 
 
 # 3 GDP data can save locally

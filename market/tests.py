@@ -20,7 +20,8 @@ class ParseTestCase(TestCase):
         ah_premium_index()
 
     def test_sh(self):
-        parse_sh_market()
+        parse_sh()
+        # parse_sh_market()
 
     def test_sh_pe(self):
         avg_sh_pe()
@@ -53,6 +54,9 @@ class ParseTestCase(TestCase):
         parse_sw_history('2014-03-12','2014-03-12')
 
     def test_sw_now(self):
-        parse_sw_history('2016-01-26','2016-01-26')
+        import arrow
+        now = arrow.now()
+        begin_date = str(now.date())
+        parse_sw_history(begin_date)
 
 
