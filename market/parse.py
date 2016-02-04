@@ -711,10 +711,10 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
     payload = {'access_token': access_token}
 
     r = requests.get(url, params=payload, headers=headers)
-    print r.json()
+    # print r.json()
     data_list = r.json().get('chartlist')
-    print data_list
-    print len(data_list)
+    # print data_list
+    # print len(data_list)
     result = []
     for data in data_list:
         print data
@@ -724,8 +724,8 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
         history = StockHistory(code=code, percent=data.get('percent'),
                                ma5=data.get('ma5'), ma10=data.get('ma10'), ma30=data.get('ma30'),
                                open_price=data.get('open'), high=data.get('high'), low=data.get('low'),
-                               close=data.get('close'), time=time)
-        print history
+                               close=data.get('close'), time=time.datetime)
+        # print history
         result.append(history)
     df = DataFrame(data_list)
     print df

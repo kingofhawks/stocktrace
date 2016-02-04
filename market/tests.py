@@ -1,5 +1,6 @@
 from django.test import TestCase
 from parse import *
+from stocktrace.parse.yahooparser import *
 
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -48,7 +49,12 @@ class ParseTestCase(TestCase):
         high_price_ratio()
 
     def test_history(self):
-        xueqiu_history(self.code)
+        history_list = xueqiu_history(self.code)
+        for history in history_list:
+            history.save()
+
+    def test_history_yahoo(self):
+        download_history_data(self.code)
 
     def test_sw_low(self):
         parse_sw_history('2014-03-12','2014-03-12')

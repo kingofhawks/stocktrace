@@ -344,9 +344,9 @@ def download_history_data(code, save=True, begin_date='2012-01-01', engine=setti
 def getCSVHistorialData(code='600276', save=True, beginDate='', endDate =str(date.today())):
     from lxml import etree
     #yahoo stock ticker need post-fix ".SS" for Shanghai,'.SZ' for shenzheng
-    if (len(code) == 9):
+    if len(code) == 9:
         code2 = code
-    elif (code.startswith('6')):
+    elif code.startswith('6'):
         code2 = code +".SS"
     else:
         code2 = code +".SZ"
@@ -386,27 +386,27 @@ def getCSVHistorialData(code='600276', save=True, beginDate='', endDate =str(dat
         stock.date = datas[0]
         stock.high = float(datas[2])
         stock.low = float(datas[3])  
-        stock.openPrice = float(datas[1])
+        stock.open_price = float(datas[1])
         stock.close = float(datas[4])
         stock.volume = float(datas[5])
         
-        isNewData = True;
+        isNewData = True
         if lastStock is not None:            
             isNewData = (stock.date > lastStock['date']) or (stock.date < oldestStock['date'])
         #print stock.date+'***isNewData***'+str(isNewData)
         if isNewData and save:  
-            saveStock(stock);
+            # saveStock(stock)
+            stock.save()
         #print stock    
         historyDatas.append(stock) 
-    historyDatas.sort(key=lambda item:item.date,reverse=True) 
+    historyDatas.sort(key=lambda item: item.date, reverse=True)
     
-    if (len(historyDatas) == 0):
+    if len(historyDatas) == 0:
         logger.warning("No data downloaded for "+code)
     else:
         # update_week52(code)
         logger.info(str(len(historyDatas))+" history Data downloaded for "+code)
-        
-       
+
    
     
 #lastDays: the last range to check the index,default will be 1 year's data(52 weeks),i.e,the sampling period
