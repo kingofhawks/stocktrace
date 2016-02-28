@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from lxml import etree
 from lxml.html import parse
+from pandas._testing import isnull
 from pandas.util.testing import DataFrame
 from models import Market
 import pandas as pd
@@ -333,37 +334,38 @@ def parse_sw_with_day(day=None):
 
 
 # parse history PE/PB from 申万一级行业
-def parse_sw_history(begin_date='2014-03-12', end_date=None):
+def parse_sw_history(begin_date='2014-03-12', end_date=None, codes=None):
     if end_date is None:
         now = arrow.now()
         end_date = str(now.date())
-    print begin_date
-    print end_date
-    codes = ('801010','801020','801030','801040','801050','801060','801070','801080','801090','801100',
-     '801110','801120','801130','801140','801150','801160','801170','801180','801190','801200',
-     '801210','801220','801230',
-     '801710','801720','801730','801740','801750','801760','801770','801780','801790',
-     '801880','801890')
+    if codes is None:
+        codes = ('801010', '801020', '801030', '801040', '801050', '801060', '801070', '801080', '801090',
+                 '801100', '801110', '801120', '801130', '801140', '801150', '801160', '801170', '801180', '801190',
+                 '801200', '801210', '801220', '801230',
+                 '801710', '801720', '801730', '801740', '801750', '801760', '801770', '801780', '801790',
+                 '801880', '801890')
     condition = 'swindexcode in {} and BargainDate>=\'{}\' and BargainDate<=\'{}\''
     where = condition.format(codes, begin_date, end_date)
     print where
     all_data = []
     for index in range(1, 1000):
         payload = {'tablename':'swindexhistory',
-        'key':'id',
-        'p': index,
-        'where': where ,
-        'orderby':'swindexcode asc,BargainDate_1',
-        'fieldlist':'SwIndexCode,SwIndexName,BargainDate,CloseIndex,BargainAmount,Markup,'
-                    'TurnoverRate,PE,PB,MeanPrice,BargainSumRate,DP',
-        'pagecount':28,
-        'timed':1453385628267
-        }
+                'key': 'id',
+                'p': index,
+                'where': where,
+                'orderby': 'swindexcode asc,BargainDate_1',
+                'fieldlist': 'SwIndexCode,SwIndexName,BargainDate,CloseIndex,BargainAmount,Markup,'
+                               'TurnoverRate,PE,PB,MeanPrice,BargainSumRate,DP',
+                'pagecount': 28,
+                'timed': 1453385628267
+            }
         url = 'http://www.swsindex.com/handler.aspx'
         res = requests.post(url, data=payload)
         data = res.text.replace('\'', '\"')
         result = json.loads(data)
         data_list = result.get('root')
+        print 'url****'+url
+        print len(data_list)
         if len(data_list) == 0:
             break
         else:
@@ -372,6 +374,8 @@ def parse_sw_history(begin_date='2014-03-12', end_date=None):
     df[['PE', 'PB']] = df[['PE', 'PB']].astype(float)
     # df['PE'] = df['PE'].astype(float)
     # df['PB'] = df['PB'].astype(float)
+    print '*'*20
+    print len(df)
     print df
     df = df.sort(columns='PE', ascending=True)
     print df
@@ -380,6 +384,52 @@ def parse_sw_history(begin_date='2014-03-12', end_date=None):
     print 'PE mean:{}'.format(df['PE'].mean())
     print 'PB mean:{}'.format(df['PB'].mean())
     print 'PB<1:{}'.format(df[df.PB < 1])
+    return df
+
+
+def parse_sw_history2(begin_date='2014-03-12', end_date=None, code='801150'):
+    if end_date is None:
+        now = arrow.now()
+        end_date = str(now.date())
+    condition = 'swindexcode=\'{}\' and BargainDate>=\'{}\' and BargainDate<=\'{}\' and type=\'Day\''
+    where = condition.format(code, begin_date, end_date)
+    all_data = []
+    for index in range(1, 1000):
+        payload = {'tablename':'V_Report',
+                'key': 'id',
+                'p': index,
+                'where': where,
+                'orderby': 'swindexcode asc,BargainDate_1',
+                'fieldlist': 'SwIndexCode,SwIndexName,BargainDate,CloseIndex,BargainAmount,Markup,'
+                               'TurnoverRate,PE,PB,MeanPrice,BargainSumRate,DP',
+                'pagecount': 1,
+                'timed': 1456667319778
+        }
+        url = 'http://www.swsindex.com/handler.aspx'
+        res = requests.post(url, data=payload)
+        data = res.text.replace('\'', '\"')
+        print data
+        result = json.loads(data)
+        data_list = result.get('root')
+        print 'url****'+url
+        print len(data_list)
+        if len(data_list) == 0:
+            break
+        else:
+           all_data.extend(data_list)
+    df = DataFrame(all_data)
+    df[['PE', 'PB']] = df[['PE', 'PB']].astype(float)
+    print '*'*20
+    print len(df)
+
+    df = df.sort(columns='PE', ascending=True)
+    print df
+    df = df.sort(columns='PB', ascending=True)
+    print df
+    print 'PE mean:{}'.format(df['PE'].mean())
+    print 'PB mean:{}'.format(df['PB'].mean())
+    print 'PB<1:{}'.format(df[df.PB < 1])
+    return df
 
 
 # 3 GDP data can save locally

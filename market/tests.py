@@ -1,6 +1,7 @@
 from django.test import TestCase
 from parse import *
 from stocktrace.parse.yahooparser import *
+from stocktrace.dao.stockdao import *
 
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -19,10 +20,6 @@ class ParseTestCase(TestCase):
 
     def test_ah(self):
         ah_premium_index()
-
-    def test_sh(self):
-        parse_sh()
-        # parse_sh_market()
 
     def test_sh_pe(self):
         avg_sh_pe()
@@ -57,12 +54,21 @@ class ParseTestCase(TestCase):
         download_history_data(self.code)
 
     def test_sw_low(self):
-        parse_sw_history('2014-03-12','2014-03-12')
+        df = parse_sw_history('2014-03-12', '2014-03-13')
+        df_to_collection(df, 'sw')
 
     def test_sw_now(self):
         import arrow
         now = arrow.now()
         begin_date = str(now.date())
         parse_sw_history(begin_date)
+
+    def test_sw_history(self):
+        df = parse_sw_history('2005-01-01')
+        df_to_collection(df, 'sw')
+
+    def test_sw_history2(self):
+        df = parse_sw_history2('2015-01-01', '2016-01-01')
+        df_to_collection(df, 'sw')
 
 

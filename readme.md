@@ -1,4 +1,5 @@
 Revision History
+
 2016/1/15--v0.4
 1. use tushare to parse finance data
 
@@ -18,15 +19,17 @@ Revision History
 
 http://localhost:8000/zytj/alist
 
+
 stocktrace will parse finance data from famous finance web sites and generate some useful report
 
 * Parse stock data, both real time and history data from xueqiu/shenwan/Sina/Yahoo(csv or YDN)/ifeng/Google/reuters etc
 
-* Generate OHLC chart
-
-* Market Analysis based on PB/PE/GDP/turnover etc
+* Market Analysis based on PB/PE/GDP/turnover/AH etc
 
 * Screen stocks based on 52 week's high or low percentage
+
+* Generate OHLC chart
+
 
 
 How to run tests
@@ -42,17 +45,16 @@ How to run tests
 
 xueqiu.com API token:
 
-Login xueqiu.com check http request Cookie "xq_a_token"
+> Login xueqiu.com check HTTP request Cookie "xq_a_token"
 
-Trade history tracking, stock price notification, compare with worldwide companies.  
 
 ### Reference
 
-www.xueqiu.com
+[xueqiu](www.xueqiu.com)
 
-https://www.robinhood.com/
+[robinhood](https://www.robinhood.com/)
 
-http://www.tradehero.mobi/
+[tradehero](http://www.tradehero.mobi/)
 
 [pandas to parse Excel](http://pbpython.com/excel-pandas-comp.html)
 

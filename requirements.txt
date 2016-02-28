@@ -1,5 +1,5 @@
 django
-pymongo
+pymongo==2.8
 pandas
 lxml
 requests

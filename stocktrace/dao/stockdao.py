@@ -7,18 +7,18 @@ import pymongo
 from datetime import date
 from datetime import timedelta
 from datetime import datetime
-from stocktrace.util import slf4p,settings
-#from stocktrace.memcache.cache import Cache 
-#from memorised.decorators import memorise
+from stocktrace.util import slf4p, settings
 from stocktrace.stock import Stock
 import pandas as pd
+import json
 
 DB_NAME = 'stocktrace'
 DB_HOST = 'localhost'
 db = getattr(pymongo.MongoClient(host=DB_HOST),DB_NAME)
 #cache = Cache() 
 logger = slf4p.getLogger(__name__)
-    
+
+
 def insertStock():
     collection = db.test_collection
     import datetime
@@ -656,10 +656,12 @@ def findQuoteByCode(code,condition=settings.HIGHER):
     
     return s
 
+
 #find top N quotes by Price Volatility from yearHigh
 def find_topn_high(top=20):
     historyDatas = db.tickers
     return historyDatas.find().sort([("percentFromYearHigh",pymongo.DESCENDING)]).limit(top);
+
 
 #find code price percent since from_date(string format:'2014-01-01')
 def find_percentage(code_list,from_date):
@@ -708,6 +710,13 @@ def find_percentage(code_list,from_date):
     # logger.debug('open:{}'.format(df_by_code[0,'close']))
     # logger.debug('close:{}'.format(df_by_code[low_week52_index:low_week52_index+1]['close']))
 
+
+def df_to_collection(df, collection):
+    records = json.loads(df.T.to_json()).values()
+    print records
+    #TODO get_collection is not supported in pymongo 2.8
+    # db.get_collection(collection).insert(records)
+    db.sw.insert(records)
     
 if __name__ == '__main__':
     from stocktrace.stock import Stock
