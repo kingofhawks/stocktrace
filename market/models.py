@@ -1,5 +1,6 @@
 from django.db import models
 from mongoengine import *
+import datetime
 
 
 # Create your models here.
@@ -54,3 +55,8 @@ class Market(Document):
                                                                                   self.volume, self.turnover,
                                                                                   self.pe, self.value,
                                                                                   self.date)
+
+
+class AhIndex(Document):
+    value = FloatField()
+    date = DateTimeField(default=datetime.datetime.now())

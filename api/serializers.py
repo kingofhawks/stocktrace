@@ -23,3 +23,10 @@ class MarketsSerializer(serializers.Serializer):
     markets = MarketSerializer(many=True)  # A nested list of 'edit' items.
 
 
+class AhSerializer(serializers.Serializer):
+    value = serializers.FloatField(read_only=True)
+    date = serializers.CharField(required=False)
+
+
+class AhIndexSerializer(serializers.Serializer):
+    items = AhSerializer(many=True)  # A nested list of 'edit' items.

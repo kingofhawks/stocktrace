@@ -1,9 +1,8 @@
 # -*- coding:utf-8 -*-
 from lxml import etree
 from lxml.html import parse
-from pandas._testing import isnull
 from pandas.util.testing import DataFrame
-from models import Market
+from models import Market, AhIndex
 import pandas as pd
 import numpy as np
 import xlrd
@@ -910,39 +909,5 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
     ah_index = df['ratio'].mean()
     print 'ah_index:{}'.format(ah_index)
     print 'discount stock:{}'.format(df[df.ratio < 1])
-    return ah_index
-
-
-if __name__ == '__main__':
-    # parse_sh_market()
-    # parse_sz_market()
-    # parse_cyb_market()
-    # parse_zxb_market()
-    # market_list()
-    # avg_sh_pe()
-    # parse_securitization_rate()
-    # parse_sw()
-    # access_token = login_xue_qiu()
-    # low_price_ratio()
-    # high_price_ratio()
-    # login_xue_qiu()
-    # sina('600030')
-    # sina('002294')
-    # sina('00168')
-    # sina('02318')
-    # ah_ratio()
-    # ah_premium_index()
-    # xueqiu_history('SH000001')
-    xueqiu_history('600196')
-    # rmb_exchange_rate()
-    # parse_xue_qiu_comment()
-    # parse_xue_qiu_comment_last_day('SZ000963')
-    # screen_by_market_value(600)
-    # high_market_value_ratio()
-    # screen_by_pb()
-    # screen_by_static_pe()
-    # low_pb_ratio()
-    # position('600276')
-    # stock = xueqiu()
-    # sina()
+    return AhIndex(ah_index)
 

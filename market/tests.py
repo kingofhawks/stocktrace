@@ -19,7 +19,8 @@ class ParseTestCase(TestCase):
         ah_ratio(0.8)
 
     def test_ah(self):
-        ah_premium_index()
+        ah = ah_premium_index()
+        ah.save()
 
     def test_sh_pe(self):
         avg_sh_pe()
