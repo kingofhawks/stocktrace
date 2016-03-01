@@ -43,6 +43,13 @@ class AhView(APIView):
         # If you don't need to process get params,
         # you can skip this part
         ah_data = AhIndex.objects()
+        print ah_data
+        df = DataFrame(list(ah_data))
+        print df
+        max_ah = df['value'].max()
+        min_ah = df['value'].min()
+        avg_ah = df['value'].mean()
+        print 'PE max:{} min:{} average:{} median:{}'.format(max_ah, min_ah, avg_ah)
         serializer = AhIndexSerializer({'items': ah_data})
         content = JSONRenderer().render(serializer.data)
         print '**********content:{}'.format(content)
