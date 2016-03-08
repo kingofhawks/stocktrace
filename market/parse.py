@@ -417,14 +417,23 @@ def parse_sw_history2(begin_date='2014-03-12', end_date=None, code='801150'):
         else:
            all_data.extend(data_list)
     df = DataFrame(all_data)
+    print df
+    print df.info()
+    print df.describe()
+    # print df['PE']
+    # print df[df['BargainDate'] == '2015-10-16 0:00:00']
+    # clean data with empty PE or PB
+    df = df[df['PE'] != '']
+    df = df[df['PB'] != '']
+    print df
     df[['PE', 'PB']] = df[['PE', 'PB']].astype(float)
     print '*'*20
     print len(df)
 
-    df = df.sort(columns='PE', ascending=True)
-    print df
-    df = df.sort(columns='PB', ascending=True)
-    print df
+    df_sort_pe = df.sort(columns='PE', ascending=True)
+    print df_sort_pe
+    df_sort_pb = df.sort(columns='PB', ascending=True)
+    print df_sort_pb
     print 'PE mean:{}'.format(df['PE'].mean())
     print 'PB mean:{}'.format(df['PB'].mean())
     print 'PB<1:{}'.format(df[df.PB < 1])
