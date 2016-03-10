@@ -2,6 +2,7 @@ from django.test import TestCase
 from parse import *
 from stocktrace.parse.yahooparser import *
 from stocktrace.dao.stockdao import *
+from analysis import *
 
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -69,7 +70,11 @@ class ParseTestCase(TestCase):
         df_to_collection(df, 'sw')
 
     def test_sw_history2(self):
-        df = parse_sw_history2('2015-01-01', '2016-01-01')
+        df = parse_sw_history2('2005-01-01', '2016-03-08', code='801150')
         df_to_collection(df, 'sw')
+
+    def test_sw(self):
+        sw()
+
 
 
