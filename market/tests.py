@@ -70,7 +70,7 @@ class ParseTestCase(TestCase):
         df_to_collection(df, 'sw')
 
     def test_sw_history2(self):
-        df = parse_sw_history2('2005-01-01', '2016-03-08', code='801150')
+        df = parse_sw_history2(begin_date='2005-01-01', code='801150')
         df_to_collection(df, 'sw')
 
     def test_sw(self):

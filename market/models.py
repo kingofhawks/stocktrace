@@ -60,3 +60,18 @@ class Market(Document):
 class AhIndex(Document):
     value = FloatField()
     date = DateTimeField(default=datetime.datetime.now())
+
+
+class Sw(Document):
+    BargainDate = DateTimeField()
+    PB = FloatField()
+    PE = FloatField()
+    TurnoverRate = FloatField()
+    SwIndexName = StringField()
+    CloseIndex = FloatField()
+    MeanPrice = FloatField()
+    BargainSumRate = FloatField()
+    SwIndexCode = StringField()
+    BargainAmount = IntField()
+    Markup = FloatField()
+    DP = FloatField()

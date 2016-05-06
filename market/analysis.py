@@ -18,6 +18,14 @@ def sw():
     print 'PB min:{}'.format(df['PB'].min())
     print 'PB mean:{}'.format(df['PB'].mean())
     print 'PB max:{}'.format(df['PB'].max())
+    df = df.sort_index(by='PB')
+    # print df
+    df = df.sort_index(by='BargainDate', ascending=False)
+    # print df
+    latest = df[0:1]
+    print latest
+    print len(df)
+    return df
 
 
 

@@ -30,3 +30,13 @@ class AhSerializer(serializers.Serializer):
 
 class AhIndexSerializer(serializers.Serializer):
     items = AhSerializer(many=True)  # A nested list of 'edit' items.
+
+
+class SwSerializer(serializers.Serializer):
+    BargainDate = serializers.CharField(required=False)
+    PB = serializers.FloatField(read_only=True)
+    PE = serializers.FloatField(read_only=True)
+
+
+class SwIndexSerializer(serializers.Serializer):
+    items = SwSerializer(many=True)  # A nested list of 'edit' items.
