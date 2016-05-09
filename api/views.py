@@ -70,9 +70,12 @@ class SwView(APIView):
         # Process any get params that you may need
         # If you don't need to process get params,
         # you can skip this part
+        code = request.GET.get('code')
+        print 'code {}'.format(code)
+
         # limit to 1000 points
         # sw_data = Sw.objects[:1000].order_by('BargainDate')
-        sw_data = Sw.objects().order_by('BargainDate')
+        sw_data = Sw.objects(SwIndexCode=code).order_by('BargainDate')
         # print sw_data
 
         sw_col = db.sw.find()

@@ -407,33 +407,33 @@ def parse_sw_history2(begin_date='2014-03-12', end_date=None, code='801150'):
         url = 'http://www.swsindex.com/handler.aspx'
         res = requests.post(url, data=payload)
         data = res.text.replace('\'', '\"')
-        print data
+        # print data
         result = json.loads(data)
         data_list = result.get('root')
         print 'url****'+url
-        print len(data_list)
+        # print len(data_list)
         if len(data_list) == 0:
             break
         else:
            all_data.extend(data_list)
     df = DataFrame(all_data)
-    print df
-    print df.info()
-    print df.describe()
+    # print df
+    # print df.info()
+    # print df.describe()
     # print df['PE']
     # print df[df['BargainDate'] == '2015-10-16 0:00:00']
     # clean data with empty PE or PB
     df = df[df['PE'] != '']
     df = df[df['PB'] != '']
-    print df
+    # print df
     df[['PE', 'PB']] = df[['PE', 'PB']].astype(float)
-    print '*'*20
-    print len(df)
+    # print '*'*20
+    # print len(df)
 
     df_sort_pe = df.sort(columns='PE', ascending=True)
-    print df_sort_pe
+    # print df_sort_pe
     df_sort_pb = df.sort(columns='PB', ascending=True)
-    print df_sort_pb
+    # print df_sort_pb
     print 'PE mean:{}'.format(df['PE'].mean())
     print 'PB mean:{}'.format(df['PB'].mean())
     print 'PB<1:{}'.format(df[df.PB < 1])
