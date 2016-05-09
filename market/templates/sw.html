@@ -10,7 +10,7 @@ $(function () {
                 zoomType: 'x'
             },
             title: {
-                text: 'SW index average PB over time'
+                text: 'SW index over time'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -19,13 +19,54 @@ $(function () {
             xAxis: {
                 type: 'datetime'
             },
-            yAxis: {
-                title: {
-                    text: 'PB'
-                }
-            },
+            yAxis: [
+                {
+                    title: {
+                        text: 'PB'
+                    },
+                    plotLines: [{
+                    color: '#000',
+                    dashStyle: 'Solid', //Dash,Dot,Solid,默认Solid
+                    width: 1.5,
+                    value: data['PB_avg'],
+                    zIndex: 5,
+                    label: {
+                        text: 'average PB:'+data['PB_avg'],
+                        align: 'center',
+                        style: {
+                            color: 'blue'
+                        }
+                    }
+                }]
+                },
+                {
+                    title: {
+                        text: 'PE'
+                    },
+                    plotLines: [{
+                    color: '#000',
+                    dashStyle: 'Dash', //Dash,Dot,Solid,默认Solid
+                    width: 1.5,
+                    value: data['PE_avg'],
+                    zIndex: 5,
+                    label: {
+                        text: 'average PE:'+data['PE_avg'],
+                        align: 'center',
+                        style: {
+                            color: 'red'
+                        }
+                    }
+                }],
+                    opposite: true //right-side y-axis
+                }],
             legend: {
-                enabled: false
+                layout: 'vertical',
+                align: 'left',
+                x: 80,
+                verticalAlign: 'top',
+                y: 55,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
             },
             plotOptions: {
                 area: {
@@ -56,11 +97,15 @@ $(function () {
                     turboThreshold:5000//set it to a larger threshold, it is by default to render 1000 points
                 }
             },
-
             series: [{
                 type: 'area',
                 name: 'PB',
-                data: data
+                data: data['PB']
+            },{
+                type: 'area',
+                name: 'PE',
+                yAxis: 1,
+                data: data['PE']
             }]
         });
     });

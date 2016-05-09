@@ -10,7 +10,11 @@ from rest_framework import status
 from serializers import MarketSerializer, MarketOverallSerializer, MarketsSerializer, AhIndexSerializer, SwIndexSerializer
 from market.models import Market, Sw
 from market.parse import *
+import pymongo
 
+DB_NAME = 'stocktrace'
+DB_HOST = 'localhost'
+db = getattr(pymongo.MongoClient(host=DB_HOST), DB_NAME)
 
 class MarketView(APIView):
 
@@ -69,25 +73,31 @@ class SwView(APIView):
         # limit to 1000 points
         # sw_data = Sw.objects[:1000].order_by('BargainDate')
         sw_data = Sw.objects().order_by('BargainDate')
-        print len(sw_data)
-        print sw_data
-        df = DataFrame(list(sw_data))
+        # print sw_data
+
+        sw_col = db.sw.find()
+        df = pd.DataFrame(list(sw_col))
+        # df = DataFrame(list(sw_data))
         print df
         # df = df.sort_index(by='BargainDate', ascending=False)
-        # max_ah = df['value'].max()
-        # min_ah = df['value'].min()
-        # avg_ah = df['value'].mean()
-        # print 'PE max:{} min:{} average:{} median:{}'.format(max_ah, min_ah, avg_ah)
+        print 'PE min:{}'.format(df['PE'].min())
+        print 'PE mean:{}'.format(df['PE'].mean())
+        print 'PE max:{}'.format(df['PE'].max())
+        print 'PB min:{}'.format(df['PB'].min())
+        print 'PB mean:{}'.format(df['PB'].mean())
+        print 'PB max:{}'.format(df['PB'].max())
         serializer = SwIndexSerializer({'items': sw_data})
         content = JSONRenderer().render(serializer.data)
-        print '**********content:{}'.format(content)
+        # print '**********content:{}'.format(content)
         json_output = json.loads(content)
-        print '****json:{}'.format(json_output)
-        # json_output = [['2005-1-10 0:00:00', 100], ['2005-1-11 0:00:00', 120]]
-        result = []
+        # print '****json:{}'.format(json_output)
+        pb_list = []
+        pe_list = []
         for item in json_output.get('items'):
-            # print item
-            result.append([item.get('BargainDate'), item.get('PB')])
+            date = item.get('BargainDate')
+            pb_list.append([date, item.get('PB')])
+            pe_list.append([date, item.get('PE')])
+        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['PB'].mean(), 'PE_avg': df['PE'].mean()}
         response = Response(result, status=status.HTTP_200_OK)
 
         return response
