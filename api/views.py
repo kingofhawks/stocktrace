@@ -66,7 +66,10 @@ class SwView(APIView):
         # Process any get params that you may need
         # If you don't need to process get params,
         # you can skip this part
+        # limit to 1000 points
+        # sw_data = Sw.objects[:1000].order_by('BargainDate')
         sw_data = Sw.objects().order_by('BargainDate')
+        print len(sw_data)
         print sw_data
         df = DataFrame(list(sw_data))
         print df
@@ -80,6 +83,11 @@ class SwView(APIView):
         print '**********content:{}'.format(content)
         json_output = json.loads(content)
         print '****json:{}'.format(json_output)
-        response = Response(json_output, status=status.HTTP_200_OK)
+        # json_output = [['2005-1-10 0:00:00', 100], ['2005-1-11 0:00:00', 120]]
+        result = []
+        for item in json_output.get('items'):
+            # print item
+            result.append([item.get('BargainDate'), item.get('PB')])
+        response = Response(result, status=status.HTTP_200_OK)
 
         return response

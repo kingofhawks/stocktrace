@@ -1,0 +1,70 @@
+<html>
+<script src="../static/jquery/dist/jquery.min.js"></script>
+<script src="../static/highcharts/highcharts.js"></script>
+<script>
+$(function () {
+    $.getJSON('http://localhost:8000/api/sw', function (data) {
+        console.log(data);
+        $('#container').highcharts({
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: 'SW index average PB over time'
+            },
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: 'PB'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                },
+                series:{
+                    turboThreshold:5000//set it to a larger threshold, it is by default to render 1000 points
+                }
+            },
+
+            series: [{
+                type: 'area',
+                name: 'PB',
+                data: data
+            }]
+        });
+    });
+});
+</script>
+<div id="container" style="width:100%; height:400px;"></div>
+</html>

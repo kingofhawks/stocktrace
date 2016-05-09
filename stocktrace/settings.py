@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'zytj',
     'portfolio',
+    'market',
     'api',
     # Uncomment the next line to enable the admin:
     # Uncomment the next line to enable admin documentation:

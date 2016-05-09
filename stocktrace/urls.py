@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^zytj/', include('zytj.urls')),
     url(r'^portfolio/', include('portfolio.urls', namespace='portfolio')),
     url(r'^api/', include('api.urls', namespace='api')),
+    url(r'^market/', include('market.urls', namespace='market')),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
