@@ -2,10 +2,20 @@
 <script src="../static/jquery/dist/jquery.min.js"></script>
 <script src="../static/highcharts/highcharts.js"></script>
 <script>
+function getDate(data){
+    var date = new Date(data[0]);
+    console.log(date);
+    data[0] = date;
+    return data;
+}
 function render(code){
     console.log("render chart with code***"+code);
     $.getJSON('http://localhost:8000/api/sw?code='+code, function (data) {
         console.log(data);
+        pbList = data['PB'];
+        console.log(pbList);
+        result = pbList.map(getDate);
+        console.log(result);
         $('#container').highcharts({
             chart: {
                 zoomType: 'x'

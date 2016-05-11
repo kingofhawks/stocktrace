@@ -422,13 +422,16 @@ def parse_sw_history2(begin_date='2014-03-12', end_date=None, code='801150'):
     # print df.describe()
     # print df['PE']
     # print df[df['BargainDate'] == '2015-10-16 0:00:00']
+
     # clean data with empty PE or PB
     df = df[df['PE'] != '']
     df = df[df['PB'] != '']
-    # print df
+
+    # convert string to datetime(timestamp)
+    df['BargainDate'] = pd.to_datetime(df['BargainDate'])
+
+    # convert string to float
     df[['PE', 'PB']] = df[['PE', 'PB']].astype(float)
-    # print '*'*20
-    # print len(df)
 
     df_sort_pe = df.sort(columns='PE', ascending=True)
     # print df_sort_pe
