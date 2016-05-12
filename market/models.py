@@ -63,7 +63,9 @@ class AhIndex(Document):
 
 
 class Sw(Document):
-    BargainDate = DateTimeField()
+    # BargainDate = DateTimeField()
+    #! use IntField instead or DateTimeField, because highcharts will render x-axis time series data with timestamp value
+    BargainDate = IntField()
     PB = FloatField()
     PE = FloatField()
     TurnoverRate = FloatField()

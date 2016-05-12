@@ -33,7 +33,7 @@ class AhIndexSerializer(serializers.Serializer):
 
 
 class SwSerializer(serializers.Serializer):
-    BargainDate = serializers.CharField(required=False)
+    BargainDate = serializers.IntegerField(required=False)
     PB = serializers.FloatField(read_only=True)
     PE = serializers.FloatField(read_only=True)
 

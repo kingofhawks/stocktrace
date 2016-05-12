@@ -2,20 +2,14 @@
 <script src="../static/jquery/dist/jquery.min.js"></script>
 <script src="../static/highcharts/highcharts.js"></script>
 <script>
-function getDate(data){
-    var date = new Date(data[0]);
-    console.log(date);
-    data[0] = date;
-    return data;
-}
 function render(code){
     console.log("render chart with code***"+code);
     $.getJSON('http://localhost:8000/api/sw?code='+code, function (data) {
         console.log(data);
-        pbList = data['PB'];
-        console.log(pbList);
-        result = pbList.map(getDate);
-        console.log(result);
+        averagePB = data['PB_avg'];
+        averagePE = data['PE_avg'];
+        console.log(averagePB);
+        console.log(averagePE);
         $('#container').highcharts({
             chart: {
                 zoomType: 'x'
@@ -39,10 +33,10 @@ function render(code){
                     color: '#000',
                     dashStyle: 'Solid', //Dash,Dot,Solid,默认Solid
                     width: 1.5,
-                    value: data['PB_avg'],
+                    value: averagePB,
                     zIndex: 5,
                     label: {
-                        text: 'average PB:'+data['PB_avg'],
+                        text: 'average PB:'+averagePB,
                         align: 'center',
                         style: {
                             color: 'blue'
@@ -58,10 +52,10 @@ function render(code){
                     color: '#000',
                     dashStyle: 'Dash', //Dash,Dot,Solid,默认Solid
                     width: 1.5,
-                    value: data['PE_avg'],
+                    value: averagePE,
                     zIndex: 5,
                     label: {
-                        text: 'average PE:'+data['PE_avg'],
+                        text: 'average PE:'+averagePE,
                         align: 'center',
                         style: {
                             color: 'red'

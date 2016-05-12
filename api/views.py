@@ -76,18 +76,22 @@ class SwView(APIView):
         # limit to 1000 points
         # sw_data = Sw.objects[:1000].order_by('BargainDate')
         sw_data = Sw.objects(SwIndexCode=code).order_by('BargainDate')
-        # print sw_data
+        print len(sw_data)
 
-        sw_col = db.sw.find()
+        sw_col = db.sw.find({'SwIndexCode': code})
+        print sw_col
         df = pd.DataFrame(list(sw_col))
+        print len(df)
         # df = DataFrame(list(sw_data))
         print df
         # df = df.sort_index(by='BargainDate', ascending=False)
         print 'PE min:{}'.format(df['PE'].min())
         print 'PE mean:{}'.format(df['PE'].mean())
+        print 'PE median:{}'.format(df['PE'].median())
         print 'PE max:{}'.format(df['PE'].max())
         print 'PB min:{}'.format(df['PB'].min())
         print 'PB mean:{}'.format(df['PB'].mean())
+        print 'PB median:{}'.format(df['PB'].median())
         print 'PB max:{}'.format(df['PB'].max())
         serializer = SwIndexSerializer({'items': sw_data})
         content = JSONRenderer().render(serializer.data)
@@ -97,7 +101,7 @@ class SwView(APIView):
         pb_list = []
         pe_list = []
         for item in json_output.get('items'):
-            date = item.get('BargainDate')
+            date = int(item.get('BargainDate'))
             pb_list.append([date, item.get('PB')])
             pe_list.append([date, item.get('PE')])
         result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['PB'].mean(), 'PE_avg': df['PE'].mean()}
