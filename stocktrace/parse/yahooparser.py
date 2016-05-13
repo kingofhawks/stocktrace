@@ -7,7 +7,7 @@ import sys, traceback
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
-from stocktrace.stock import Stock
+from stocktrace.stock import Stock, StockHistory
 from lxml import etree
 from lxml.html import parse
 from stocktrace.dao.stockdao import *
@@ -158,8 +158,10 @@ def parseFinanceData(code):
         logger.exception(ex)
         return None 
 
+
 #get history data from yahoo finance API 
-#http://developer.yahoo.com/yql/console/   
+#http://developer.yahoo.com/yql/console/
+@DeprecationWarning
 def getHistorialData(code,save = True,beginDate = '',endDate = str(date.today())):
     from lxml import etree
     from lxml.html import parse
@@ -312,13 +314,11 @@ def downloadHistoryData(stocks = findAllExistentTickers(),beginDate='2012-01-01'
     
 def download_history_data(code, save=True, begin_date='2012-01-01', engine=settings.CSV_ENGINE):
     try:
-        #latest= redclient.get(code)
         latest = begin_date
         last_update = findLastUpdate(code)
         if last_update is not None:
             latest = last_update['date']
         logger.debug(latest)
-        # latest = None
         today = date.today()
         yesterday = date.today()+timedelta(-1)
         if latest is None:
@@ -328,7 +328,7 @@ def download_history_data(code, save=True, begin_date='2012-01-01', engine=setti
             return
 
         if engine == settings.CSV_ENGINE:
-            getCSVHistorialData(code, save, latest)
+            get_csv_history(code, save, latest)
         else:
             getHistorialData(code, save, latest)
                                             
@@ -341,7 +341,7 @@ def download_history_data(code, save=True, begin_date='2012-01-01', engine=setti
         
 #get history data from yahoo CSV API 
 # http://ichart.finance.yahoo.com/table.csv?s=300072.sz&d=7&e=23&f=2010&a=5&b=11&c=2010   
-def getCSVHistorialData(code='600276', save=True, beginDate='', endDate =str(date.today())):
+def get_csv_history(code='600276', save=True, begin_date='', end_date=str(date.today())):
     from lxml import etree
     #yahoo stock ticker need post-fix ".SS" for Shanghai,'.SZ' for shenzheng
     if len(code) == 9:
@@ -351,10 +351,10 @@ def getCSVHistorialData(code='600276', save=True, beginDate='', endDate =str(dat
     else:
         code2 = code +".SZ"
 
-    begin = beginDate.split('-')
-    end = endDate.split('-')
+    begin = begin_date.split('-')
+    end = end_date.split('-')
     print 'begin:{} end:{}'.format(begin, end)
-    period = '&d='+(str)(int(end[1])-1)+'&e='+end[2]+'&f='+end[0]+'&a='+(str)(int(begin[1])-1)+'&b='+begin[2]+'&c='+begin[0]    
+    period = '&d='+str(int(end[1])-1)+'&e='+end[2]+'&f='+end[0]+'&a='+str(int(begin[1])-1)+'&b='+begin[2]+'&c='+begin[0]
     url = 'http://ichart.finance.yahoo.com/table.csv?s='+code2+period
     logger.debug(url)
     
@@ -382,13 +382,20 @@ def getCSVHistorialData(code='600276', save=True, beginDate='', endDate =str(dat
 
         datas = a.split(',')
         #print datas
-        stock = Stock(code)           
-        stock.date = datas[0]
-        stock.high = float(datas[2])
-        stock.low = float(datas[3])  
-        stock.open_price = float(datas[1])
-        stock.close = float(datas[4])
-        stock.volume = float(datas[5])
+        # stock = StockHi(code)
+        # stock.date = datas[0]
+        # stock.high = float(datas[2])
+        # stock.low = float(datas[3])
+        # stock.open_price = float(datas[1])
+        # stock.close = float(datas[4])
+        # stock.volume = float(datas[5])
+        import arrow
+        time = arrow.get(datas[0])
+        timestamp = time.timestamp*1000
+        stock = StockHistory(code=code,
+                             open_price=float(datas[1]), high=float(datas[2]), low=float(datas[3]), close=float(datas[4]),
+                             time=time.datetime, timestamp=timestamp,
+                             volume=float(datas[5]))
         
         isNewData = True
         if lastStock is not None:            
@@ -518,29 +525,3 @@ def computeNhnlIndexWithinRangeWithStocks(stocks,lastDays,nearDays,beginDate = s
         result.append(temp)        
     return result                  
                     
-if __name__ == '__main__':
-    stocks = ['600327','600829','600573','600369','601688','600132','600332','601866','600718','600048']
-    getCSVHistorialData(beginDate='2014-01-01')
-    #parseTickers();
-    # print parseFinanceData('600327')
-    #print getCSVHistorialData('600327',beginDate='2012-01-01')
-    #getHistorialData('000001.SS',beginDate='2012-04-01')
-    #getHistorialData('600327',beginDate='2012-04-01')
-    #triggered = triggerNhNl('600655',200,5) 
-#    for stock in stocks:
-#        getHistorialData(stock,beginDate='2012-04-01')
-    #print computeNhnlIndexWithinRangeWithStocks(stocks,60,7,'2012-04-01')
-    #getHistorialData('600327',True,'2011-01-01')
-    #parseAllHistoryDataInDB()
-#    parseAllHistoryData('stock_list_all')
-    #computeNhnlIndex('stock_list_all',52*7,7)
-#    computeNhnlIndexWithinRange('stock_list',52*7,7,'2012-01-01')
-    
-#    from dao.stockdao import findAllStocks
-#    findAllStocks();
-#                
-#    import logging
-#    LOG_FILENAME = 'example.log'
-#    logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
-#
-#    logging.error('This message should go to the log file')

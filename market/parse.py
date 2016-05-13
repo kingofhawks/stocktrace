@@ -20,9 +20,9 @@ headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windo
 
 # 1 parse shanghai market overall
 def parse_sh_market():
-    page = parse('http://www.sse.com.cn/market/').getroot()
-    # result = etree.tostring(page)
-    # print result
+    page = parse('http://www.sse.com.cn/market/stockdata/overview/day/').getroot()
+    result = etree.tostring(page)
+    print result
 
     r = page.get_element_by_id('dateList')
     statistics = r.text_content().split()
@@ -787,7 +787,9 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
                                ma5=data.get('ma5'), ma10=data.get('ma10'), ma30=data.get('ma30'),
                                open_price=data.get('open'), high=data.get('high'), low=data.get('low'),
                                close=data.get('close'), time=time.datetime, timestamp=timestamp,
-                               volume=data.get('volume'))
+                               volume=data.get('volume'),
+                               # 注：指数无法取得换手率
+                               turn_rate=data.get('turnrate'))
         # print history
         result.append(history)
     df = DataFrame(data_list)

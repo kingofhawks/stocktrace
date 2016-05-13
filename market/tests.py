@@ -48,12 +48,22 @@ class ParseTestCase(TestCase):
         high_price_ratio()
 
     def test_history(self):
-        history_list = xueqiu_history(self.code)
-        for history in history_list:
-            history.save()
+        for code in ['600029', '601111']:
+            history_list = xueqiu_history(code)
+            for history in history_list:
+                history.save()
+
+    def test_index_history(self):
+        for code in ['SH000001', 'SZ399001', 'SZ399005', 'SZ399006']:
+            history_list = xueqiu_history(code)
+            for history in history_list:
+                history.save()
 
     def test_history_yahoo(self):
         download_history_data(self.code)
+
+    def test_history_sh(self):
+        download_history_data('000001.SS')
 
     def test_sw_low(self):
         df = parse_sw_history('2014-03-12', '2014-03-13')
