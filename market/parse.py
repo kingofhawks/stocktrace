@@ -782,7 +782,7 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
         time = data.get('time')
         time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
         print time
-        timestamp = time.timestamp
+        timestamp = time.timestamp*1000
         history = StockHistory(code=code, percent=data.get('percent'),
                                ma5=data.get('ma5'), ma10=data.get('ma10'), ma30=data.get('ma30'),
                                open_price=data.get('open'), high=data.get('high'), low=data.get('low'),

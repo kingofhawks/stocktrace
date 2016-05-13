@@ -2,6 +2,7 @@ import json
 from django.shortcuts import render
 
 # Create your views here.
+from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 
 from rest_framework.views import APIView
@@ -120,8 +121,6 @@ class StockView(APIView):
         code = request.GET.get('code')
         print 'code {}'.format(code)
 
-        # limit to 1000 points
-        # sw_data = Sw.objects[:1000].order_by('BargainDate')
         sw_data = StockHistory.objects(code=code).order_by('time')
         print len(sw_data)
 
@@ -155,3 +154,28 @@ class StockView(APIView):
         response = Response(result, status=status.HTTP_200_OK)
 
         return response
+
+
+@api_view(['GET'])
+def diff(request):
+    result = {}
+    code = request.GET.get('code')
+    codes = code.split(',')
+    print codes
+    print 'code {}'.format(code)
+    for code in codes:
+        sw_data = StockHistory.objects(code=code).order_by('time')
+        serializer = StockListSerializer({'items': sw_data})
+        content = JSONRenderer().render(serializer.data)
+        # print '**********content:{}'.format(content)
+        json_output = json.loads(content)
+        # print '****json:{}'.format(json_output)
+        close_list = []
+        for item in json_output.get('items'):
+            date = int(item.get('timestamp'))
+            close_list.append([date, item.get('close')])
+        # result = {'close': close_list}
+        result.update({code: close_list})
+    response = Response(result, status=status.HTTP_200_OK)
+
+    return response

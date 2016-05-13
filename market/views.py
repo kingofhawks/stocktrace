@@ -7,3 +7,6 @@ def sw(request):
 
 def history(request):
     return render(request, 'stock_history.html')
+
+def diff(request):
+    return render(request, 'stock_diff.html')
