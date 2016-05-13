@@ -8,7 +8,7 @@ from analysis import *
 
 
 class ParseTestCase(TestCase):
-    code = '002294'
+    code = '600029'
 
     def test_sina(self):
         sina(self.code)
@@ -66,11 +66,17 @@ class ParseTestCase(TestCase):
         parse_sw_history(begin_date)
 
     def test_sw_history(self):
-        df = parse_sw_history('2005-01-01')
-        df_to_collection(df, 'sw')
+        codes = ['801020', '801030', '801040', '801050', '801080',
+                '801110', '801120', '801130', '801140', '801150', '801160', '801170', '801180',
+                '801200', '801210', '801230',
+                '801710', '801720', '801730', '801740', '801750', '801760', '801770', '801780', '801790',
+                '801880', '801890']
+        for code in codes:
+            df = parse_sw_history2(begin_date='2005-01-01', code=code)
+            df_to_collection(df, 'sw')
 
     def test_sw_history2(self):
-        df = parse_sw_history2(begin_date='2016-01-01', code='801150')
+        df = parse_sw_history2(begin_date='2005-01-01', code='801080')
         df_to_collection(df, 'sw')
 
     def test_sw_history3(self):

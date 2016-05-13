@@ -145,6 +145,7 @@ class StockHistory(Document):
     close = FloatField()
     pb = FloatField()
     time = DateTimeField()
+    timestamp = IntField()
     turn_rate = FloatField()
     ma5 = FloatField()
     ma10 = FloatField()

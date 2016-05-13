@@ -14,7 +14,7 @@ from stocktrace.stock import Stock, StockHistory
 
 
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = 'f47e7edeb23d7157ee40d6e3a361ec84a8901949'
+xq_a_token = 'ed2a5436b138606afe070da9a71551ad4137f0ed'
 headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
 
@@ -782,10 +782,12 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
         time = data.get('time')
         time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
         print time
+        timestamp = time.timestamp
         history = StockHistory(code=code, percent=data.get('percent'),
                                ma5=data.get('ma5'), ma10=data.get('ma10'), ma30=data.get('ma30'),
                                open_price=data.get('open'), high=data.get('high'), low=data.get('low'),
-                               close=data.get('close'), time=time.datetime)
+                               close=data.get('close'), time=time.datetime, timestamp=timestamp,
+                               volume=data.get('volume'))
         # print history
         result.append(history)
     df = DataFrame(data_list)

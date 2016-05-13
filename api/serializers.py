@@ -40,3 +40,13 @@ class SwSerializer(serializers.Serializer):
 
 class SwIndexSerializer(serializers.Serializer):
     items = SwSerializer(many=True)  # A nested list of 'edit' items.
+
+
+class StockSerializer(serializers.Serializer):
+    code = serializers.CharField(required=False)
+    close = serializers.FloatField(read_only=True)
+    volume = serializers.FloatField(read_only=True)
+    timestamp = serializers.IntegerField(read_only=True)
+
+class StockListSerializer(serializers.Serializer):
+    items = StockSerializer(many=True)  # A nested list of 'edit' items.

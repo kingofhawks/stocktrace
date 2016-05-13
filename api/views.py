@@ -7,7 +7,8 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from serializers import MarketSerializer, MarketOverallSerializer, MarketsSerializer, AhIndexSerializer, SwIndexSerializer
+from serializers import MarketSerializer, MarketOverallSerializer, MarketsSerializer, AhIndexSerializer, SwIndexSerializer, \
+    StockListSerializer
 from market.models import Market, Sw
 from market.parse import *
 import pymongo
@@ -105,6 +106,52 @@ class SwView(APIView):
             pb_list.append([date, item.get('PB')])
             pe_list.append([date, item.get('PE')])
         result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['PB'].mean(), 'PE_avg': df['PE'].mean()}
+        response = Response(result, status=status.HTTP_200_OK)
+
+        return response
+
+
+class StockView(APIView):
+
+    def get(self, request, *args, **kw):
+        # Process any get params that you may need
+        # If you don't need to process get params,
+        # you can skip this part
+        code = request.GET.get('code')
+        print 'code {}'.format(code)
+
+        # limit to 1000 points
+        # sw_data = Sw.objects[:1000].order_by('BargainDate')
+        sw_data = StockHistory.objects(code=code).order_by('time')
+        print len(sw_data)
+
+        sw_col = db.stock_history.find({'code': code})
+        print sw_col
+        df = pd.DataFrame(list(sw_col))
+        print len(df)
+        # df = DataFrame(list(sw_data))
+        print df
+        # df = df.sort_index(by='BargainDate', ascending=False)
+        # print 'PE min:{}'.format(df['PE'].min())
+        # print 'PE mean:{}'.format(df['PE'].mean())
+        print 'volume median:{}'.format(df['volume'].median())
+        # print 'PE max:{}'.format(df['PE'].max())
+        # print 'PB min:{}'.format(df['PB'].min())
+        # print 'PB mean:{}'.format(df['PB'].mean())
+        # print 'PB median:{}'.format(df['PB'].median())
+        # print 'PB max:{}'.format(df['PB'].max())
+        serializer = StockListSerializer({'items': sw_data})
+        content = JSONRenderer().render(serializer.data)
+        # print '**********content:{}'.format(content)
+        json_output = json.loads(content)
+        # print '****json:{}'.format(json_output)
+        close_list = []
+        volume_list = []
+        for item in json_output.get('items'):
+            date = int(item.get('timestamp'))
+            close_list.append([date, item.get('close')])
+            volume_list.append([date, item.get('volume')])
+        result = {'close': close_list, 'volume': volume_list, 'volume_avg': df['volume'].mean()}
         response = Response(result, status=status.HTTP_200_OK)
 
         return response
