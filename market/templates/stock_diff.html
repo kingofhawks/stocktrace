@@ -1,0 +1,131 @@
+<html>
+<script src="../static/jquery/dist/jquery.min.js"></script>
+<script src="../static/highcharts/highcharts.js"></script>
+<script>
+function findItem(data, item){
+    var result = [item[0], -1];
+    data.forEach(function(entry){
+        if (entry[0] == item[0]){
+            result = entry;
+        }
+    })
+    return result;
+}
+function diff(data0, data1){
+    var result = []
+    if (data0.length >= data1.length){
+        data0.forEach(function(entry){
+            console.log(entry);
+            var item = findItem(data1, entry);
+            var ratio = [entry[0], entry[1]/item[1]];
+            if (ratio[1]<0){
+                //if missing data, set ratio to 0
+                ratio[1] = 0;
+            }
+            result.push(ratio);
+        })
+    } else{
+        data1.forEach(function(entry){
+            console.log(entry);
+            result.push(entry);
+        })
+    }
+    return result;
+}
+function render(code){
+    var codes = code.split(',');
+    console.log("render chart with code***"+codes);
+    $.getJSON('http://localhost:8000/api/diff?code='+code, function (data) {
+        console.log(data);
+        var data0 = data[codes[0]];
+        var data1 = data[codes[1]];
+        var ratio = diff(data0, data1);
+        console.log(ratio);
+        $('#container').highcharts({
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: 'Stock history over time'
+            },
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: [
+                {
+                    title: {
+                        text: 'Price'
+                    }
+                },
+                {
+                    title: {
+                        text: 'Diff'
+                    },
+                    opposite: true //right-side y-axis
+                }],
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 80,
+                verticalAlign: 'top',
+                y: 55,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                },
+                series:{
+                    turboThreshold:5000//set it to a larger threshold, it is by default to render 1000 points
+                }
+            },
+            series: [{
+                type: 'area',
+                name: codes[0],
+                data: data0
+            },{
+                type: 'area',
+                name: codes[1],
+                data: data1
+            },{
+                type: 'spline',
+                name: 'Diff',
+                data: ratio,
+                yAxis: 1,
+            }]
+        });
+    });
+    }
+
+$(function () {
+    render('{{ code }}');
+});
+</script>
+<div id="container" style="width:100%; height:400px;"></div>
+</html>

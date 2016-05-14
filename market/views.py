@@ -9,4 +9,5 @@ def history(request):
     return render(request, 'stock_history.html')
 
 def diff(request):
-    return render(request, 'stock_diff.html')
+    code = request.GET.get('code')
+    return render(request, 'stock_diff.html', {'code': code})
