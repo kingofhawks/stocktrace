@@ -18,6 +18,7 @@ DB_NAME = 'stocktrace'
 DB_HOST = 'localhost'
 db = getattr(pymongo.MongoClient(host=DB_HOST), DB_NAME)
 
+
 class MarketView(APIView):
 
     def get(self, request, *args, **kw):
@@ -182,4 +183,23 @@ def diff(request):
         result.update({code: close_list})
     response = Response(result, status=status.HTTP_200_OK)
 
+    return response
+
+
+@api_view(['GET'])
+def sh(request):
+    df = avg_sh_pe()
+    print df
+    pe_avg = df['PE'].mean()
+    data = df.to_json(orient="records")
+    print 'sh***{}'.format(data)
+    print 'pe_avg***{}'.format(pe_avg)
+    items = json.loads(data)
+    pe_list = []
+    for item in items:
+        # print 'item:{}'.format(item)
+        date = int(item.get('Date'))
+        pe_list.append([date, item.get('PE')])
+    result = {'pe_list': pe_list, 'PE_avg': pe_avg}
+    response = Response(result, status=status.HTTP_200_OK)
     return response
