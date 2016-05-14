@@ -122,18 +122,18 @@ class StockView(APIView):
         print 'code {}'.format(code)
 
         sw_data = StockHistory.objects(code=code).order_by('time')
-        print len(sw_data)
+        # print sw_data
 
         sw_col = db.stock_history.find({'code': code})
-        print sw_col
+        # print sw_col
         df = pd.DataFrame(list(sw_col))
-        print len(df)
+        # print len(df)
         # df = DataFrame(list(sw_data))
-        print df
+        # print df
         # df = df.sort_index(by='BargainDate', ascending=False)
         # print 'PE min:{}'.format(df['PE'].min())
         # print 'PE mean:{}'.format(df['PE'].mean())
-        print 'volume median:{}'.format(df['volume'].median())
+        print 'turnover median:{}'.format(df['turn_rate'].median())
         # print 'PE max:{}'.format(df['PE'].max())
         # print 'PB min:{}'.format(df['PB'].min())
         # print 'PB mean:{}'.format(df['PB'].mean())
@@ -146,11 +146,15 @@ class StockView(APIView):
         # print '****json:{}'.format(json_output)
         close_list = []
         volume_list = []
+        turn_over_list = []
         for item in json_output.get('items'):
+            # print 'item *** {}'.format(item)
             date = int(item.get('timestamp'))
             close_list.append([date, item.get('close')])
             volume_list.append([date, item.get('volume')])
-        result = {'close': close_list, 'volume': volume_list, 'volume_avg': df['volume'].mean()}
+            turn_over_list.append([date, item.get('turn_rate')])
+        result = {'close': close_list, 'volume': volume_list, 'turnover': turn_over_list,
+                  'volume_avg': df['volume'].mean(), 'turnover_avg': df['turn_rate'].mean()}
         response = Response(result, status=status.HTTP_200_OK)
 
         return response

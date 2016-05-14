@@ -47,6 +47,7 @@ class StockSerializer(serializers.Serializer):
     close = serializers.FloatField(read_only=True)
     volume = serializers.FloatField(read_only=True)
     timestamp = serializers.IntegerField(read_only=True)
+    turn_rate = serializers.FloatField(read_only=True)
 
 class StockListSerializer(serializers.Serializer):
     items = StockSerializer(many=True)  # A nested list of 'edit' items.

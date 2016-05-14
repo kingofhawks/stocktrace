@@ -6,6 +6,7 @@ function render(code){
     console.log("render chart with code***"+code);
     $.getJSON('http://localhost:8000/api/stock?code='+code, function (data) {
         console.log(data);
+        console.log(data['turnover']);
         $('#container').highcharts({
             chart: {
                 zoomType: 'x'
@@ -30,6 +31,23 @@ function render(code){
                     title: {
                         text: 'Volume'
                     },
+                    opposite: true //right-side y-axis
+                },
+                {
+                    title: {
+                        text: 'Turnover'
+                    },
+                    plotLines: [{
+                        color: '#000',
+                        dashStyle: 'Solid',
+                        width: 1.5,
+                        value: data['turnover_avg'],
+                        zIndex: 5,
+                        label: {
+                            text: 'average turnover:'+data['turnover_avg'],
+                            align: 'center',
+                        }
+                    }],
                     opposite: true //right-side y-axis
                 }],
             legend: {
@@ -75,22 +93,22 @@ function render(code){
                 name: 'Price',
                 data: data['close']
             },{
-                type: 'area',
+                type: 'column',
                 name: 'Volume',
                 yAxis: 1,
                 data: data['volume']
+            },{
+                type: 'spline',
+                name: 'Turnover',
+                yAxis: 2,
+                data: data['turnover']
             }]
         });
     });
     }
 
 $(function () {
-    render('SH600029');
-
-    $( "#code" ).change(function() {
-    var code = $(this).val();
-    render(code);
-});
+    render('{{ code }}');
 });
 </script>
 <div id="container" style="width:100%; height:400px;"></div>
