@@ -20,6 +20,9 @@ class ParseTestCase(TestCase):
         ah_ratio(0.8)
 
     def test_ah(self):
+        ah_history()
+
+    def test_ah2(self):
         ah = ah_premium_index()
         ah.save()
 
@@ -39,10 +42,10 @@ class ParseTestCase(TestCase):
         parse_securitization_rate()
 
     def test_low_pb(self):
-        low_pb_ratio()
+        print low_pb_ratio()
 
     def test_high_pb(self):
-        high_pb_ratio()
+        print high_pb_ratio()
 
     def test_high_price(self):
         high_price_ratio()

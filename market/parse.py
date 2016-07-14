@@ -14,7 +14,7 @@ from stocktrace.stock import Stock, StockHistory
 
 
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = 'ed2a5436b138606afe070da9a71551ad4137f0ed'
+xq_a_token = '75f6b147f36c5dc2e5e090774d3eaf0afed02bfc'
 headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
 
@@ -633,19 +633,21 @@ def screen_by_pb(low=0.1, high=1, access_token=xq_a_token):
 
 
 def low_pb_ratio():
-    count = screen_by_pb()['count']
+    data = screen_by_pb()
+    count = data['count']
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
     print 'low_pb_ratio:{} size:{}'.format(ratio, count)
-    return ratio
+    return ratio, data['stocks']
 
 
 def high_pb_ratio():
-    count = screen_by_pb(low=10, high=10000)['count']
+    data = screen_by_pb(low=10, high=10000)
+    count = data['count']
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
     print 'high_pb_ratio:{} size:{}'.format(ratio, count)
-    return ratio
+    return ratio, data['stocks']
 
 
 # get stock count by static PE
@@ -876,6 +878,10 @@ def ah_ratio(hk_rmb_change_rate, ah_pair=('000002', '02202'), ):
     result = {'price_a': current_a, 'price_h': current_h, 'ratio': ratio}
     print 'ah_ratio:{}'.format(result)
     return result
+
+
+def ah_history():
+    xueqiu_history('HKHSAHP')
 
 
 # 8 AH premium index: average of sample stock's AH ratio
