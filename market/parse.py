@@ -36,8 +36,8 @@ def parse_sh_market():
 
 
 # average PE for shanghai http://www.sse.com.cn/market/stockdata/overview/monthly/
-def avg_sh_pe():
-    # Dec PE from 200001~201604
+def avg_sh_pe(begin_date):
+    # shanghai A PE from 200001~201606
     pe_list = [42.42, 47.99, 49.92, 51.13, 54.02, 55.22, 58.21, 58.13, 54.83, 56.31, 59.89, 59.14,
                59.39, 56.82, 60.88, 60.99, 55.92, 56.55, 49.26, 42.14, 40.61, 38.84, 40.08, 37.59,
                34.31, 35.11, 37.16, 39.08, 38.75, 44.47, 42.4, 43.02, 40.4, 38.23, 36.46, 34.5,
@@ -54,7 +54,7 @@ def avg_sh_pe():
                12.97, 12.89, 12.18, 11.89, 11.81, 10.16, 10.26, 10.8, 11.19, 11.05, 11.46, 10.99,
                10.57, 10.73, 10.66, 10.65, 9.76, 9.8, 10.58, 10.68, 11.48, 11.8, 13.14, 15.99,
                15.94, 16.57, 18.97, 22.55, 21.92, 20.92, 18.04, 15.81, 15.1, 16.69, 17.04, 17.61,
-               13.73, 13.5, 15.08, 14.75]
+               13.73, 13.5, 15.08, 14.75, 14.32, 14.43]
 
     dates = pd.date_range('20000131', periods=len(pe_list), freq='M')
     print dates
@@ -65,6 +65,8 @@ def avg_sh_pe():
     # df = pd.DataFrame(s, columns=['Date','PE'])
     # Create DF from dict of list
     df = pd.DataFrame(s)
+    if begin_date:
+        df = df[df.Date > begin_date]
     print df
     print 'SH PE min:{} max:{} average:{}'.format(df['PE'].min(), df['PE'].max(), df['PE'].mean())
     # return df['PE'].min(), df['PE'].max(), df['PE'].mean()
@@ -470,7 +472,7 @@ def parse_xue_qiu_comment_last_day(stock='SH600029', access_token=xq_a_token):
     url = url.format(stock)
     payload = {'access_token': access_token}
 
-    r = requests.get(url, params=payload, headers=headers )
+    r = requests.get(url, params=payload, headers=headers)
     print r
     print r.json()
     comments = r.json().get('list')
