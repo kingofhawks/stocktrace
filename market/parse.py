@@ -343,6 +343,7 @@ def parse_sw_with_day(day=None):
 
 
 # parse history PE/PB from 申万一级行业
+@DeprecationWarning
 def parse_sw_history(begin_date='2014-03-12', end_date=None, codes=None):
     if end_date is None:
         now = arrow.now()
@@ -457,6 +458,19 @@ def parse_sw_history2(begin_date='2014-03-12', end_date=None, code='801150'):
 def parse_securitization_rate():
     # 2014 GDP
     last_year_gdp = 636462.71
+    sh = parse_sh_market()
+    sz = parse_sz_market()
+    total_market = float(sh.total_market_cap)+float(sz.total_market_cap)
+    print total_market
+    securitization_rate = total_market/last_year_gdp
+    print 'securitization_rate:{0:.2f}'.format(securitization_rate)
+    return securitization_rate
+
+
+# SZ399001+SH000001/last year GDP
+def gdp_rate():
+    # 2015 GDP http://data.eastmoney.com/cjsj/gdp.html
+    last_year_gdp = 676707.80
     sh = parse_sh_market()
     sz = parse_sz_market()
     total_market = float(sh.total_market_cap)+float(sz.total_market_cap)

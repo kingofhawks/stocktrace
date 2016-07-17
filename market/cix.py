@@ -38,6 +38,15 @@ def cix(day):
     print ah
     value += ah
 
+    #4 high price
+    high_price = high_price_ratio()
+    print high_price
+    high = interp(high_price, [0, 0.036], weight_range)
+    print high
+    value += high
+
+    #5 SW index sample
+
     return value
 
 if __name__ == '__main__':
