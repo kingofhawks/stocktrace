@@ -50,3 +50,6 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+
+#  Node modules
+node_modules

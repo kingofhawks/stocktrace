@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
-from zytj import views
+from zytj import views as zyt_views
+from base import views as base_views
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -7,7 +8,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', views.index, name='index'),
+    # url(r'^$', zyt_views.index, name='index'),
+    url(r'^$', base_views.index, name='index'),
     url(r'^zytj/', include('zytj.urls')),
     url(r'^portfolio/', include('portfolio.urls', namespace='portfolio')),
     url(r'^api/', include('api.urls', namespace='api')),

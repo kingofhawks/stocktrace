@@ -96,6 +96,7 @@ class SwView(APIView):
         print 'PB mean:{}'.format(df['PB'].mean())
         print 'PB median:{}'.format(df['PB'].median())
         print 'PB max:{}'.format(df['PB'].max())
+        print sw_data
         serializer = SwIndexSerializer({'items': sw_data})
         content = JSONRenderer().render(serializer.data)
         # print '**********content:{}'.format(content)

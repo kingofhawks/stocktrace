@@ -166,7 +166,7 @@ def jsonnhnl(request):
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 def nhnl(request):
-    return render(request,'nhnl-index.html') 
+    return render(request,'nhnl-index.html')
 
 def ma(request):
     return render(request,'ma.html') 

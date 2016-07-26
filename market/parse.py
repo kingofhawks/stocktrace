@@ -36,7 +36,7 @@ def parse_sh_market():
 
 
 # average PE for shanghai http://www.sse.com.cn/market/stockdata/overview/monthly/
-def avg_sh_pe(begin_date):
+def avg_sh_pe(begin_date='2009-12-31'):
     # shanghai A PE from 200001~201606
     pe_list = [42.42, 47.99, 49.92, 51.13, 54.02, 55.22, 58.21, 58.13, 54.83, 56.31, 59.89, 59.14,
                59.39, 56.82, 60.88, 60.99, 55.92, 56.55, 49.26, 42.14, 40.61, 38.84, 40.08, 37.59,
