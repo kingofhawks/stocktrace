@@ -77,3 +77,8 @@ class Sw(Document):
     BargainAmount = IntField()
     Markup = FloatField()
     DP = FloatField()
+
+
+class Cix(Document):
+    value = FloatField()
+    timestamp = IntField()

@@ -1,10 +1,11 @@
 ## crazy index
 from numpy import interp
 from parse import *
+from .models import Cix
 
 
 # return value [0,100]
-def cix(day):
+def cix(day='2016-08-06'):
     value = 0
     weight_range = [0, 10]
 
@@ -20,13 +21,12 @@ def cix(day):
     print pe
     value += pe
 
-    #2  low PB
+    #2 low PB
     pb_ratio = low_pb_ratio()
     low_pb = pb_ratio[0]
     print low_pb
     min_low_pb = 0
     max_low_pb = 0.1
-    # pb = interp(low_pb, [min_low_pb, max_low_pb], [0, 10])
     pb = interp(-low_pb, [-max_low_pb, min_low_pb], weight_range)
     print pb
     value += pb
@@ -47,7 +47,9 @@ def cix(day):
 
     #5 SW index sample
 
-    return value
+    date = arrow.get(day)
+    time_stamp = date.timestamp*1000
+    return Cix(value,time_stamp)
 
 if __name__ == '__main__':
     print cix(None)

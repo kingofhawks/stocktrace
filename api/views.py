@@ -9,8 +9,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from serializers import MarketSerializer, MarketOverallSerializer, MarketsSerializer, AhIndexSerializer, SwIndexSerializer, \
-    StockListSerializer
-from market.models import Market, Sw
+    StockListSerializer, CixListSerializer
+from market.models import Market, Sw, Cix
 from market.parse import *
 import pymongo
 
@@ -204,3 +204,30 @@ def sh(request):
     result = {'pe_list': pe_list, 'PE_avg': pe_avg}
     response = Response(result, status=status.HTTP_200_OK)
     return response
+
+
+class CixView(APIView):
+
+    def get(self, request, *args, **kw):
+        # Process any get params that you may need
+        # If you don't need to process get params,
+        # you can skip this part
+        cix_data = Cix.objects()
+        print cix_data
+        df = DataFrame(list(cix_data))        
+        print df
+        # max_ah = df['value'].max()
+        # min_ah = df['value'].min()
+        # avg_ah = df['value'].mean()
+        # print 'PE max:{} min:{} average:{} median:{}'.format(max_ah, min_ah, avg_ah)
+        serializer = CixListSerializer({'items': cix_data})
+        content = JSONRenderer().render(serializer.data)
+        print '**********content:{}'.format(content)
+        json_output = json.loads(content)
+        print '****json:{}'.format(json_output)
+        cix_list = []
+        for item in json_output.get('items'):
+            cix_list.append([item.get('timestamp'), item.get('value')])
+        response = Response({'items': cix_list}, status=status.HTTP_200_OK)
+
+        return response

@@ -5,7 +5,7 @@
     <section class="content-header">
       <h1>
         Market
-        <small>Stock History</small>
+        <small>CIX</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -26,20 +26,15 @@
 {% block extra_js %}
 <script src="../static/highcharts/highcharts.js"></script>
 <script>
-function render(code){
-    console.log("render chart with code***"+code);
-    $.getJSON('http://localhost:8000/api/stock?code='+code, function (data) {
+function render(){
+    $.getJSON('http://localhost:8000/api/cix', function (data) {
         console.log(data);
-        console.log(data['turnover']);
         $('#container').highcharts({
-            tooltip: {
-                xDateFormat: '%Y-%m-%d'
-            },
             chart: {
                 zoomType: 'x'
             },
             title: {
-                text: 'Stock history over time'
+                text: 'CIX history over time'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -51,31 +46,8 @@ function render(code){
             yAxis: [
                 {
                     title: {
-                        text: 'Price'
+                        text: 'Value'
                     }
-                },
-                {
-                    title: {
-                        text: 'Volume'
-                    },
-                    opposite: true //right-side y-axis
-                },
-                {
-                    title: {
-                        text: 'Turnover'
-                    },
-                    plotLines: [{
-                        color: '#000',
-                        dashStyle: 'Solid',
-                        width: 1.5,
-                        value: data['turnover_avg'],
-                        zIndex: 5,
-                        label: {
-                            text: 'average turnover:'+data['turnover_avg'],
-                            align: 'center',
-                        }
-                    }],
-                    opposite: true //right-side y-axis
                 }],
             legend: {
                 layout: 'vertical',
@@ -117,25 +89,16 @@ function render(code){
             },
             series: [{
                 type: 'area',
-                name: 'Price',
-                data: data['close']
-            },{
-                type: 'column',
-                name: 'Volume',
-                yAxis: 1,
-                data: data['volume']
-            },{
-                type: 'spline',
-                name: 'Turnover',
-                yAxis: 2,
-                data: data['turnover']
+                name: 'CIX',
+                data: data['items']
             }]
         });
     });
     }
 
 $(function () {
-    render('{{ code }}');
+    render();
 });
 </script>
 {% endblock %}
+

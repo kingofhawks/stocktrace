@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^stock/$', views.StockView.as_view()),
     url(r'^diff', views.diff),
     url(r'^sh', views.sh),
+    url(r'^cix', views.CixView.as_view()),
 )

@@ -51,3 +51,12 @@ class StockSerializer(serializers.Serializer):
 
 class StockListSerializer(serializers.Serializer):
     items = StockSerializer(many=True)  # A nested list of 'edit' items.
+
+
+class CixSerializer(serializers.Serializer):
+    value = serializers.FloatField(read_only=True)
+    timestamp = serializers.IntegerField(required=False)
+
+
+class CixListSerializer(serializers.Serializer):
+    items = CixSerializer(many=True)  # A nested list of 'edit' items.

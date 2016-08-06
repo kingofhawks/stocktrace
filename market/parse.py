@@ -14,7 +14,7 @@ from stocktrace.stock import Stock, StockHistory
 
 
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = '75f6b147f36c5dc2e5e090774d3eaf0afed02bfc'
+xq_a_token = '5b87c53ee445d66ad2634e2109202d98f0e9c6bb'
 headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
 
@@ -778,7 +778,7 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
 # parse history data from xueqiu 1412158358740
 def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_date=None):
     if begin_date is None:
-        begin = arrow.get('2014-08-01')
+        begin = arrow.get('2014-01-01')
         begin_date = begin.timestamp*1000
         print begin_date
     if end_date is None:

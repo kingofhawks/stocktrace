@@ -3,6 +3,7 @@ from parse import *
 from stocktrace.parse.yahooparser import *
 from stocktrace.dao.stockdao import *
 from analysis import *
+from cix import *
 
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -51,7 +52,7 @@ class ParseTestCase(TestCase):
         high_price_ratio()
 
     def test_history(self):
-        for code in ['600029', '601111']:
+        for code in ['600029','601111','600276','600196','002294','601933','601607','002422','002179','600030','601009']:
             history_list = xueqiu_history(code)
             for history in history_list:
                 history.save()
@@ -100,6 +101,10 @@ class ParseTestCase(TestCase):
 
     def test_sw(self):
         sw()
+
+    def test_cix(self):
+        cix_data = cix()
+        cix_data.save()
 
 
 
