@@ -750,6 +750,8 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
         code = 'SH'+code
     elif len(code) == 5:
         code = 'HK'+code
+    elif code == '999999' or code == '999998':
+        return Stock(code=code, current=1)
     elif len(code) == 6:
         code = 'SZ'+code
 

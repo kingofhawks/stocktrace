@@ -1,8 +1,29 @@
-{% extends "portfolio/base.html" %}
+{% extends "base.html" %}
 {% load staticfiles i18n %}
-
+{% block extra_css %} 
+<link rel="stylesheet" href="{% static 'vex/css/vex.css' %}" />
+<link rel="stylesheet" href="{% static 'vex/css/vex-theme-os.css' %}" />
+<link rel="stylesheet" href="{% static 'font-awesome-4.0.3/css/font-awesome.min.css' %}" />
+{% endblock %}
 {% block content %}
-    <article>Name:{{ name }} Total:{{total}} Financing: {{ financing }} Lever:{{ lever }} Real Time Market:{{ real_time_market }} Market:{{market_value}} Position Ratio:{{position_ratio}}</article>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Portfolio
+        <small>Portfolio</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <section class="col-xs-12">
+                <article>Total:{{total}} Net:{{net_asset}} Financing:{{ financing }} Lever:{{ lever }}</article>
+                <article>Market:{{market_value}} Position:{{position_ratio}} Profit:{{profit_ratio}}</article>
     <small><a href="{% url 'portfolio:history' %}">History</a></small>
     <div id="content" class="container">
 
@@ -58,10 +79,18 @@
                 </button>
             </from>
 		</div>
+                            </section>
+            </div>
+    </section>
+</div>
+    
 {% endblock %}
 
 {% block extra_js %}
-    <script id="entry-template" type="text/x-handlebars-template">
+        <script type="text/javascript" src="{% static 'handlebars/handlebars.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'vex/js/vex.combined.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/list.min.js' %}"></script>
+        <script id="entry-template" type="text/x-handlebars-template">
           template content
         </script>
 

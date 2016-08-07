@@ -16,12 +16,11 @@ def stock_list(request):
     portfolio = snapshot(False)
     results = portfolio.stocks
     print 'result:{}'.format(results)
-    lever = 0
-    if portfolio.total != 0:
-        lever = (portfolio.financing+portfolio.total)/portfolio.total
+
     context = {'results': results, 'market_value': portfolio.market_value, 'total': portfolio.total,
+               'net_asset': portfolio.net_asset,
                'position_ratio': portfolio.position_ratio, 'financing': portfolio.financing,
-               'lever': lever}
+               'lever': portfolio.lever, 'profit_ratio': portfolio.profit_ratio}
     return render(request, 'portfolio/index.html', context)
 
 
@@ -56,6 +55,7 @@ def apply_tag(request, tag):
 
 
 def detail(request):
+    print '*'*10
     stock = find_stock_by_code(request.GET.get('code'))
     print stock
     # print json.loads(stock)
@@ -71,7 +71,7 @@ def create_stock(request):
     amount = request.GET.get('amount')
     stock_tag = request.GET.get('tag')
     print 'code:{},amount:{},tag:{}'.format(code, amount, stock_tag)
-    stock = Stock(code, amount)
+    stock = Stock(code, amount=amount)
     stock.save()
     # insert_stock(stock)
     add_tag(code, 'top100')
