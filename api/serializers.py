@@ -49,6 +49,7 @@ class StockSerializer(serializers.Serializer):
     timestamp = serializers.IntegerField(read_only=True)
     turn_rate = serializers.FloatField(read_only=True)
 
+
 class StockListSerializer(serializers.Serializer):
     items = StockSerializer(many=True)  # A nested list of 'edit' items.
 
@@ -56,6 +57,10 @@ class StockListSerializer(serializers.Serializer):
 class CixSerializer(serializers.Serializer):
     value = serializers.FloatField(read_only=True)
     timestamp = serializers.IntegerField(required=False)
+    pe = serializers.FloatField(read_only=True)
+    low_pb = serializers.FloatField(read_only=True)
+    ah = serializers.FloatField(read_only=True)
+    high_price = serializers.FloatField(read_only=True)
 
 
 class CixListSerializer(serializers.Serializer):

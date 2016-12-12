@@ -82,3 +82,7 @@ class Sw(Document):
 class Cix(Document):
     value = FloatField()
     timestamp = IntField()
+    pe = FloatField()
+    low_pb = FloatField()
+    ah = FloatField()
+    high_price = FloatField()

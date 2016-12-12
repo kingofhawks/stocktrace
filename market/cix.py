@@ -9,7 +9,7 @@ def cix(day='2016-08-06'):
     value = 0
     weight_range = [0, 10]
 
-    #1 SH PE from 2010 year
+    # 1 SH PE from 2010 year
     pe_df = avg_sh_pe('2009-12-31')
     max_pe = pe_df['PE'].max()
     min_pe = pe_df['PE'].min()
@@ -21,7 +21,7 @@ def cix(day='2016-08-06'):
     print pe
     value += pe
 
-    #2 low PB
+    # 2 low PB
     pb_ratio = low_pb_ratio()
     low_pb = pb_ratio[0]
     print low_pb
@@ -31,25 +31,25 @@ def cix(day='2016-08-06'):
     print pb
     value += pb
 
-    #3 AH premium index
+    # 3 AH premium index
     ah_now = xueqiu('HKHSAHP')
     ah_current = ah_now.current
     ah = interp(ah_current, [100, 150], weight_range)
     print ah
     value += ah
 
-    #4 high price
+    # 4 high price
     high_price = high_price_ratio()
     print high_price
     high = interp(high_price, [0, 0.036], weight_range)
     print high
     value += high
 
-    #5 SW index sample
+    # 5 SW index sample
 
     date = arrow.get(day)
     time_stamp = date.timestamp*1000
-    return Cix(value,time_stamp)
+    return Cix(value, time_stamp, latest_pe, low_pb, ah_current, high_price)
 
 if __name__ == '__main__':
     print cix(None)
