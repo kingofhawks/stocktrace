@@ -12,10 +12,10 @@ import json
 from datetime import timedelta
 from stocktrace.stock import Stock, StockHistory
 
-
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = '31284d772a32cac1998bc7871464e12e63b67ee2'
-headers = {'content-type': 'application/json', 'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
+xq_a_token = 'acfaecb15b852ee83e8a2facf47d06483639c659'
+headers = {'content-type': 'application/json',
+           'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
 
 # 1 parse shanghai market overall
@@ -36,9 +36,9 @@ def parse_sh_market():
 
 
 # average PE for shanghai http://www.sse.com.cn/market/stockdata/overview/monthly/
-def avg_sh_pe(begin_date='2009-12-31'):
-    # shanghai A PE from 200001~201606
-    pe_list = [42.42, 47.99, 49.92, 51.13, 54.02, 55.22, 58.21, 58.13, 54.83, 56.31, 59.89, 59.14,
+def avg_sh_pe(begin_date='1999-12-31'):
+    # shanghai A PE from 200001
+    pe_list = [42.42, 47.99, 49.92, 51.13, 54.02, 55.22, 58.21, 58.13, 54.83, 56.31, 59.89, 59.14,  # year 2000
                59.39, 56.82, 60.88, 60.99, 55.92, 56.55, 49.26, 42.14, 40.61, 38.84, 40.08, 37.59,
                34.31, 35.11, 37.16, 39.08, 38.75, 44.47, 42.4, 43.02, 40.4, 38.23, 36.46, 34.5,
                37.92, 38.2, 38.2, 38.53, 38.28, 36.13, 35.78, 34.37, 32.97, 32.51, 34, 36.64,
@@ -54,7 +54,8 @@ def avg_sh_pe(begin_date='2009-12-31'):
                12.97, 12.89, 12.18, 11.89, 11.81, 10.16, 10.26, 10.8, 11.19, 11.05, 11.46, 10.99,
                10.57, 10.73, 10.66, 10.65, 9.76, 9.8, 10.58, 10.68, 11.48, 11.8, 13.14, 15.99,
                15.94, 16.57, 18.97, 22.55, 21.92, 20.92, 18.04, 15.81, 15.1, 16.69, 17.04, 17.61,
-               13.73, 13.5, 15.08, 14.75, 14.32, 14.43, 14.77, 15.42, 15.09, 15.73, 16.56]
+               13.73, 13.5, 15.08, 14.75, 14.32, 14.43, 14.77, 15.42, 15.09, 15.73, 16.56, 15.91,
+               16.32]
 
     dates = pd.date_range('20000131', periods=len(pe_list), freq='M')
     print dates
@@ -904,6 +905,8 @@ def ah_history():
 
 
 # 8 AH premium index: average of sample stock's AH ratio
+# AH history https://xueqiu.com/S/HKHSAHP
+@DeprecationWarning
 def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111', '00753')]):
     samples = [('600585', '00914'), ('601318', '02318'), ('000002', '02202'),
                ('600036', '03968'), ('600600', '00168'), ('600196', '02196'),
