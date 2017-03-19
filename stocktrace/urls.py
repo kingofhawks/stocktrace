@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from zytj import views as zyt_views
 from base import views as base_views
 
@@ -6,7 +6,7 @@ from base import views as base_views
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
     # url(r'^$', zyt_views.index, name='index'),
     url(r'^$', base_views.index, name='index'),
@@ -16,6 +16,6 @@ urlpatterns = patterns('',
     url(r'^market/', include('market.urls', namespace='market')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
-    
-)
+    url(r'^admin/', include(admin.site.urls))
+]
+

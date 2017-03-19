@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.http import Http404
 from stocktrace.util import settings
 from stocktrace.dao.stockdao import findTopN,remove_stock
-import redis
+# import redis
 from django.core.cache import cache
 from stocktrace.util import slf4p
 import json
@@ -32,7 +32,7 @@ def index(request):
 #q:quote code
 def jsoncandle(request,q):
     try:
-        print q
+        # print q
     #    quote = request.GET.get('q', 'test')
     #    print request.GET
     #    print quote    
@@ -110,10 +110,10 @@ def jsoncandle(request,q):
             
             ma5sum = 0.0;
             for j in range(i-4,i+1):
-                print ohlc[j][4]
+                # print ohlc[j][4]
                 ma5sum = ma5sum +ohlc[j][4]
             ma5.append(ma5sum/5)
-            print ma5
+            # print ma5
             ma4.append(ma5)
     except:
         import sys, traceback
@@ -154,15 +154,15 @@ def jsonnhnl(request):
     from stocktrace.parse.yahooparser import computeNhnlIndexWithinRangeWithStocks
     stocks = ['600327','600573','600583','600600','600221','601111','600718']
     result = computeNhnlIndexWithinRangeWithStocks(stocks,60,7,'2012-09-01')
-    print result
+    # print result
     data = []
     for record in result:
-      print record
+      # print record
       s = []
       s.append(record['date'])
       s.append(record['nhnl'])      
       data.append(s)
-    print data  
+    # print data
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 def nhnl(request):
@@ -183,10 +183,10 @@ def listall(request,condition):
     dest = 'screen_year_low_high.html'
 
     cache.set('my_key', 'hello, world!', 30)
-    print cache.get('my_key')
+    # print cache.get('my_key')
     
     c = request.GET.get('c')
-    print c
+    # print c
     
     if condition == settings.HIGHER:
         orderByAlist = True
@@ -197,7 +197,7 @@ def listall(request,condition):
         results = []
         from stocktrace.dao.stockdao import findQuoteByCode
         stock = findQuoteByCode(c,condition)
-        print stock.yearHighLow()
+        # print stock.yearHighLow()
         results.append(stock)
         return render(request,dest,{'results':results,'orderByAlist':orderByAlist})
     else:
@@ -205,7 +205,7 @@ def listall(request,condition):
         industry = request.GET.get('industry')
         if industry is None:
             industry = 'all'
-        print 'industry:'+industry
+        # print 'industry:'+industry
         
         if condition == settings.HIGHER:
             topn = findTopN(settings.PAGING_TOTAL);
@@ -229,9 +229,9 @@ def listall(request,condition):
         start = time.clock()
         topn = filterStocksByList(topn,stockList)
         finish = time.clock()
-        print finish-start
+        # print finish-start
         import timeit
-        print timeit.timeit('char in text', setup='text = "sample string"; char = "g"')
+        # print timeit.timeit('char in text', setup='text = "sample string"; char = "g"')
         
         if q is None:
             results = topn[0:settings.PAGING_ITEM]
@@ -256,16 +256,16 @@ def listall(request,condition):
 def alist_days_ma(request,days):
     from stocktrace.parse.screener import findByMa
     result = findByMa(int(days),10,condition=settings.LOWER)
-    print result
-    print '**************************'
+    # print result
+    # print '**************************'
     return render(request,'alist_days_ma.html',{'results':result})
 
 #ascending list during last days by price
 def alist_days(request,days):
     from stocktrace.parse.screener import findByMa
     result = findByMa(int(days),10,condition=settings.LOWER)
-    print result
-    print '**************************'
+    # print result
+    # print '**************************'
     return render(request,'alist_days.html',{'results':result})
 
 def quotes(request):

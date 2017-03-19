@@ -1,11 +1,11 @@
-from django.conf.urls import patterns, include, url
-import views
+from django.conf.urls import include, url
+import zytj.views as views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
     url(r'^$', views.index),
     #candlestick chart
@@ -26,6 +26,5 @@ urlpatterns = patterns('',
     url(r'^dlist', views.descendinglist, name='zytj.dlist'), #des from year high
     url(r'^quotes', views.quotes),#show all quotes
     url(r'^delete', views.delete_stock),#delete stock
+]
 
-    
-)

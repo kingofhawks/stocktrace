@@ -3,10 +3,10 @@ Created on 2012-9-20
 logging wrapper class
 @author: Simon
 '''
-import logging,os,settings
+import logging,os
 from stocktrace.settings import BASE_DIR
 
-print BASE_DIR
+# print BASE_DIR
 #parent = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
 #print parent
 #print os.path.join(parent, "zytj","templates")

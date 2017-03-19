@@ -1,4 +1,4 @@
-from dao import find_all_stocks, update_stock_price, insert_stock, add_tag, find_stock_by_code
+from portfolio.dao import find_all_stocks, update_stock_price, insert_stock, add_tag, find_stock_by_code
 from market.parse import sina, xueqiu
 from stocktrace.stock import Stock
 import traceback
@@ -10,7 +10,7 @@ def polling():
     for stock in stocks:
         code = stock['code']
         s = xueqiu(code)
-        print s
+        # print s
         try:
             stock = Stock.objects.get(code=code)
             if stock:
@@ -20,7 +20,7 @@ def polling():
                 stock.save()
                 result.append(stock)
         except Exception as e:
-            print traceback.format_exc()
+            # print traceback.format_exc()
             continue
     return result
 
@@ -30,9 +30,9 @@ def market_value(stocks):
     total = 0
     for stock in stocks:
         code = stock['code']
-        s = getStock(code)
-        print 'current:{} amount:{}'.format(s.current, stock['amount'])
-        total += float(s.current) * float(stock['amount'])
+        # s = getStock(code)
+        # # print 'current:{} amount:{}'.format(s.current, stock['amount'])
+        # total += float(s.current) * float(stock['amount'])
     return total
 
 
@@ -51,7 +51,7 @@ def import_portfolio(file,portfolio):
     for line in p:
         code = line[1:]
         #logger.debug(code)
-        print code
+        # print code
         add_tag(code,portfolio)
         # stock = Stock(code)
         # insert_stock(stock)
@@ -59,12 +59,12 @@ def import_portfolio(file,portfolio):
 
 def snapshot(save=True):
     stocks = polling()
-    from models import Portfolio
+    from portfolio.models import Portfolio
     portfolio = Portfolio(stocks)
     if save:
         portfolio.save()
     return portfolio
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     polling()

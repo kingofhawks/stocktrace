@@ -30,8 +30,8 @@ def insertStock():
     posts.insert(post)
     posts.find_one()
     posts.find_one({"author": "Mike"})
-    for post in posts.find():
-        print post
+    # for post in posts.find():
+    #     print post
  
 #save stock trading history         
 def saveStock(stock):
@@ -48,12 +48,12 @@ def saveStock(stock):
         
 def findAllStocks():
     historyDatas = db.stock_history
-    for stock in historyDatas.find():
-        print stock   
+    # for stock in historyDatas.find():
+    #     print stock
         
 #find last update stock record        
 def findLastUpdate(code):
-    print "To find latest update****"+code
+    # print "To find latest update****"+code
     historyDatas = db.stock_history
 #    print historyDatas.find_one({"code": code})
     #print historyDatas.find({"code": code}).sort([("date",pymongo.DESCENDING)]).limit(1)
@@ -61,7 +61,7 @@ def findLastUpdate(code):
 
 #find the oldest stock record        
 def findOldestUpdate(code):
-    print "To find oldest update****"+code
+    # print "To find oldest update****"+code
     historyDatas = db.stock_history
 #    print historyDatas.find_one({"code": code})
     #print historyDatas.find({"code": code}).sort([("date",pymongo.DESCENDING)]).limit(1)
@@ -115,10 +115,9 @@ def update_week52(code):
     logger.debug(current)
     percentFromYearHigh = (year_high-current)*100/year_high
     percentFromYearLow = (current-year_low)*100/year_low
-    print ticker.update({"code":code},
+    ticker.update({"code":code},
     {"$set":{"yearHigh":year_high,"yearLow":year_low,"percentFromYearHigh":percentFromYearHigh,"percentFromYearLow":percentFromYearLow}},
     upsert=True,safe=True)
-
 
 
 def countByCode(code):
@@ -131,15 +130,15 @@ def findLastStockByDays(code,lastDays):
     from datetime import date
     from datetime import datetime
     from datetime import timedelta
-    print date.today()
+    # print date.today()
     delta = timedelta(-lastDays)
     begin = date.today()+delta
-    print begin
+    # print begin
     #print datetime.strptime(date,'%Y-%m-%d')
     #print type(date.today())    
        
     key = str(code)+'_'+str(lastDays)
-    print key
+    # print key
     try:
         #result = cache.get(key)
         result = None
@@ -148,7 +147,7 @@ def findLastStockByDays(code,lastDays):
         traceback.print_exc(file=sys.stdout)
     
     if result is not None:
-        print 'cache'
+        # print 'cache'
         return result
     else:
         result = historyDatas.find({"code":code,"date" : {"$gt":str(begin)}}).sort([("date",pymongo.ASCENDING)]);
@@ -159,7 +158,7 @@ def findLastStockByDays(code,lastDays):
             cols.append(record)
         #print cols
         #cache.set(key, cols)
-        print 'sql'
+        # print 'sql'
         return cols
     
     #return historyDatas.find({"code":code,"date" : {"$gt":str(begin)}}).sort([("date",pymongo.ASCENDING)]);
@@ -168,17 +167,17 @@ def findLastStockByDays(code,lastDays):
 def findPeakStockByDays(code,lastDays,endDate = str(date.today())):
     delta = timedelta(-lastDays)
     end = datetime.strptime(endDate,'%Y-%m-%d').date()
-    print end
+    # print end
     begin = end+delta
 #    begin = date.today()+delta
     
-    print begin
+    # print begin
 #    print begin.weekday()
     key = str(code)+'_'+str(lastDays)+'_'+endDate+'_high'
     # peak = cache.get(key)
     peak = None
     if peak is not None:
-        print 'cache'
+        # print 'cache'
         return peak
     else:
         connection = Connection()
@@ -187,7 +186,7 @@ def findPeakStockByDays(code,lastDays,endDate = str(date.today())):
         peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("high",pymongo.DESCENDING)]).limit(1);
         logger.debug(peak[0])
         try:
-            print code+' peak price****'+str(peak[0])
+            # print code+' peak price****'+str(peak[0])
             # cache.set(key,peak[0])
             return peak[0]
         except Exception as ex:
@@ -223,18 +222,18 @@ def findBottomStockByDays(code,lastDays,endDate = str(date.today())):
 def findHighOrLowStockByDays(code,lastDays,mode=1,endDate = str(date.today())):    
     delta = timedelta(-lastDays)
     end = datetime.strptime(endDate,'%Y-%m-%d').date()
-    print end
+    # print end
     begin = end+delta
 #    begin = date.today()+delta
     
-    print begin
+    # print begin
 #    print begin.weekday()
     key = str(code)+'_'+str(lastDays)+'_'+endDate+'_high'
     if mode == 2:
         key = str(code)+'_'+str(lastDays)+'_'+endDate+'_low'
     peak = cache.get(key)
     if peak is not None:
-        print 'cache'
+        # print 'cache'
         return peak
     else:
         connection = Connection()
@@ -245,7 +244,7 @@ def findHighOrLowStockByDays(code,lastDays,mode=1,endDate = str(date.today())):
         else:
             peak = historyDatas.find({"code":code,"date" : {"$gte":str(begin),"$lte":str(end)}}).sort([("low",pymongo.ASCENDING)]).limit(1);
         try:
-            print code+' peak price****'+str(peak[0])
+            # print code+' peak price****'+str(peak[0])
             cache.set(key,peak[0])
             return peak[0]
         except:
@@ -264,7 +263,7 @@ def triggerNhNl(code,lastDays=200,nearDays=5,endDate = str(date.today())):
 #    if count <= 20:
 #        return 0;
     peak = findPeakStockByDays(code,lastDays,endDate)
-    print code+str(peak)
+    # print code+str(peak)
     
     if peak is None:
         return 0;
@@ -280,13 +279,13 @@ def triggerNhNl(code,lastDays=200,nearDays=5,endDate = str(date.today())):
     result = datetime.strptime(peak.get('date'),'%Y-%m-%d').date()>=begin
 #    print datetime.strptime(peak.get('date'),'%Y-%m-%d').date()<=date.today()
     if result:
-        print code+' trigger NH index at '+str(peak)
+        # print code+' trigger NH index at '+str(peak)
         return {'date':peak.get('date'),'value':1};
     
     
     #find bottom price during the last days
     bottom = findBottomStockByDays(code,lastDays,endDate)
-    print bottom
+    # print bottom
     if bottom is None:
         return 0;
     #check bottom price whether happen during near days
@@ -297,9 +296,9 @@ def triggerNhNl(code,lastDays=200,nearDays=5,endDate = str(date.today())):
 #    begin = date.today()+delta
 #    print begin
     result = datetime.strptime(bottom.get('date'),'%Y-%m-%d').date()>=begin
-    print datetime.strptime(bottom.get('date'),'%Y-%m-%d').date()<=end
+    # print datetime.strptime(bottom.get('date'),'%Y-%m-%d').date()<=end
     if result:
-        print code+' trigger NL index at '+str(bottom)
+        # print code+' trigger NL index at '+str(bottom)
         #return -1;
         return {'date':bottom.get('date'),'value':-1};
     return 0
@@ -327,7 +326,7 @@ def batchInsertTicker(stocks):
 #Update ticker with key statistics data
 def updateTickerWithKeyStats(stock,eps,bookingValue,marketCap = 0):
     ticker = db.tickers
-    print ticker.update({"code":stock},
+    ticker.update({"code":stock},
     {"$set":{"mgsy":float(eps), "mgjzc":float(bookingValue)}}, upsert=True,safe=True)
      #,"marketCap":marketCap}
     
@@ -426,7 +425,7 @@ def getAvgPe():
         #result.add(stock['code'])
     peList.sort()
     mid = len(peList)/2
-    print mid
+    # print mid
     midPe = peList[mid]
     return midPe
 
@@ -713,7 +712,7 @@ def find_percentage(code_list,from_date):
 
 def df_to_collection(df, collection):
     records = json.loads(df.T.to_json()).values()
-    print records
+    # print records
     #TODO get_collection is not supported in pymongo 2.8
     # db.get_collection(collection).insert(records)
     db.sw.insert(records)
@@ -721,8 +720,8 @@ def df_to_collection(df, collection):
 if __name__ == '__main__':
     from stocktrace.stock import Stock
     stock = Stock('600880')
-    print findQuoteByCode('600327').yearHighLow()
-    print findQuoteByCode('600327',settings.LOWER).yearHighLow()
+    # print findQuoteByCode('600327').yearHighLow()
+    # print findQuoteByCode('600327',settings.LOWER).yearHighLow()
     #findAllNonExistentTickers()
     #updateTickerWithKeyStats('600004',14.00,2.36,0.56,2333.5)
 #    stocks = findAllExistentTickers()
@@ -745,8 +744,8 @@ if __name__ == '__main__':
 #    result = findStockByGroup()
 #    print len(result)
 #    print result[1]['list']
-    print findTopN()[0].yearHighLow()
-    print findTopN(condition=settings.LOWER)[0].yearHighLow()
+#     print findTopN()[0].yearHighLow()
+#     print findTopN(condition=settings.LOWER)[0].yearHighLow()
     #findPeakStockByDays('600327',10)
 #    result = findByYearLow(5)
 #    for stock in result:

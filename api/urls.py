@@ -1,14 +1,14 @@
-from django.conf.urls import patterns, url
-import views
+from django.conf.urls import url
+from api.views import *
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
-    url(r'^market', views.MarketView.as_view()),
-    url(r'^ah', views.AhView.as_view()),
-    url(r'^sw', views.SwView.as_view()),
-    url(r'^stock/$', views.StockView.as_view()),
-    url(r'^diff', views.diff),
-    url(r'^sh', views.sh),
-    url(r'^cix', views.CixView.as_view()),
-)
+    url(r'^market', MarketView.as_view()),
+    url(r'^ah', AhView.as_view()),
+    url(r'^sw', SwView.as_view()),
+    url(r'^stock/$', StockView.as_view()),
+    url(r'^diff', diff),
+    url(r'^sh', sh),
+    url(r'^cix', CixView.as_view())
+]

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from cix import cix as cix2
+from market.cix import cix as cix2
 
 
 # Create your views here.
@@ -23,5 +23,5 @@ def sh(request):
 
 def cix(request):
     cix_index = cix2()
-    print cix_index
+    # print cix_index
     return render(request, 'cix.html', {'cix': cix_index})

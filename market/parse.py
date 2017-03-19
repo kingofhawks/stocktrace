@@ -2,7 +2,7 @@
 from lxml import etree
 from lxml.html import parse
 from pandas.util.testing import DataFrame
-from models import Market, AhIndex
+from market.models import Market, AhIndex
 import pandas as pd
 import numpy as np
 import xlrd
@@ -22,16 +22,16 @@ headers = {'content-type': 'application/json',
 def parse_sh_market():
     page = parse('http://www.sse.com.cn/market/stockdata/overview/day/').getroot()
     result = etree.tostring(page)
-    print result
+    # print result
 
     r = page.get_element_by_id('dateList')
     statistics = r.text_content().split()
-    for word in statistics:
-        print word
+    # for word in statistics:
+    #     print word
 
     market = Market(name='sh', total_market_cap=statistics[1], volume=float(statistics[8])/10000,
                     turnover=statistics[12], pe=statistics[14], date=statistics[2])
-    print market
+    # print market
     return market
 
 
@@ -55,10 +55,10 @@ def avg_sh_pe(begin_date='1999-12-31'):
                10.57, 10.73, 10.66, 10.65, 9.76, 9.8, 10.58, 10.68, 11.48, 11.8, 13.14, 15.99,
                15.94, 16.57, 18.97, 22.55, 21.92, 20.92, 18.04, 15.81, 15.1, 16.69, 17.04, 17.61,
                13.73, 13.5, 15.08, 14.75, 14.32, 14.43, 14.77, 15.42, 15.09, 15.73, 16.56, 15.91,
-               16.32]
+               16.32, 16.83]
 
     dates = pd.date_range('20000131', periods=len(pe_list), freq='M')
-    print dates
+    # print dates
     # s = pd.Series(pe_list, dates)
     # print s
     s = {'Date': dates, 'PE': pe_list}
@@ -68,8 +68,7 @@ def avg_sh_pe(begin_date='1999-12-31'):
     df = pd.DataFrame(s)
     if begin_date:
         df = df[df.Date > begin_date]
-    print df
-    print 'SH PE min:{} max:{} average:{}'.format(df['PE'].min(), df['PE'].max(), df['PE'].mean())
+    # print 'SH PE min:{} max:{} average:{}'.format(df['PE'].min(), df['PE'].max(), df['PE'].mean())
     # return df['PE'].min(), df['PE'].max(), df['PE'].mean()
     return df
 
@@ -79,14 +78,14 @@ def parse_sz_market():
     page = parse('http://www.szse.cn/main/marketdata/tjsj/jbzb/').getroot()
 
     r = page.get_element_by_id('REPORTID_tab1')
-    print etree.tostring(r)
+    # print etree.tostring(r)
     # read html <table> to list of DataFrame
     dfs = pd.read_html(etree.tostring(r), flavor='lxml')
     # print dfs
     # print len(dfs)
     if len(dfs) >= 1:
         df = dfs[0]
-        print df
+        # print df
         total_market = df.iloc[10][1]
         volume = df.iloc[12][1]
         avg_price = df.iloc[13][1]
@@ -101,10 +100,10 @@ def parse_sz_market():
             turnover_rate = 0
         if type(pe) == type(pd.NaT):
             pe = 0
-        print 'total_market:{} volume:{} turnover_rate:{} pe:{}'.format(total_market, volume, turnover_rate, pe)
+        # print 'total_market:{} volume:{} turnover_rate:{} pe:{}'.format(total_market, volume, turnover_rate, pe)
         market = Market('sz', total_market_cap=float(total_market)/100000000, volume=float(volume)/100000000,
                         turnover=float(turnover_rate), pe=float(pe))
-        print market
+        # print market
         # print df.index
         # print df.columns
         # print df.values
@@ -121,13 +120,13 @@ def parse_cyb_market():
 def parse_cyb2(url='http://www.szse.cn/szseWeb/FrontController.szse?randnum=0.5328349224291742'):
     payload = {'ACTIONID': 7, 'AJAX': 'AJAX-TRUE','CATALOGID':'1898_nm','TABKEY':'tab1','txtQueryDate':'2016-01-15','REPORT_ACTION':'reach'}
     res = requests.post(url, data=payload)
-    print res.text
+    # print res.text
     # read html <table> to list of DataFrame
     dfs = pd.read_html(res.text, flavor='lxml')
     # dfs = pd.read_html(etree.tostring(r), flavor='bs4')
     if len(dfs) >= 1:
         df = dfs[0]
-        print df
+        # print df
         tradable_shares = df.iloc[4][1]
         total_market = df.iloc[5][1]
         volume_money = df.iloc[7][1]
@@ -154,11 +153,11 @@ def parse_cyb2(url='http://www.szse.cn/szseWeb/FrontController.szse?randnum=0.53
             turnover = 0
         else:
             turnover = float(volume)/float(tradable_shares)
-        print 'name:{} total_market:{} volume:{} turnover:{} pe:{} value:{}'.format(name,
-                                                                                   total_market, volume_money,
-                                                                                   turnover, pe, value)
-        market = Market(name, float(total_market)/100000000, float(volume_money)/100000000, turnover, pe, value)
-        print market
+        # print 'name:{} total_market:{} volume:{} turnover:{} pe:{} value:{}'.format(name,
+        #                                                                            total_market, volume_money,
+        #                                                                            turnover, pe, value)
+        market = Market('CYB', float(total_market)/100000000, float(volume_money)/100000000, turnover, pe, value)
+        # print market
         return market
 
 
@@ -176,15 +175,15 @@ def parse_sz_market_common(name, url):
     # print '*'*20
 
     r = page.get_element_by_id('REPORTID_tab1')
-    print '*'*20
-    print etree.tostring(r)
-    print '*'*20
+    # print '*'*20
+    # print etree.tostring(r)
+    # print '*'*20
     # read html <table> to list of DataFrame
     dfs = pd.read_html(etree.tostring(r), flavor='lxml')
     # dfs = pd.read_html(etree.tostring(r), flavor='bs4')
     if len(dfs) >= 1:
         df = dfs[0]
-        print df
+        # print df
         tradable_shares = df.iloc[4][1]
         total_market = df.iloc[5][1]
         volume_money = df.iloc[7][1]
@@ -211,11 +210,11 @@ def parse_sz_market_common(name, url):
             turnover = 0
         else:
             turnover = float(volume)/float(tradable_shares)
-        print 'name:{} total_market:{} volume:{} turnover:{} pe:{} value:{}'.format(name,
-                                                                                   total_market, volume_money,
-                                                                                   turnover, pe, value)
+        # print 'name:{} total_market:{} volume:{} turnover:{} pe:{} value:{}'.format(name,
+        #                                                                            total_market, volume_money,
+        #                                                                            turnover, pe, value)
         market = Market(name, float(total_market)/100000000, float(volume_money)/100000000, turnover, pe, value)
-        print market
+        # print market
         return market
 
 
@@ -227,17 +226,17 @@ def market_list():
     zxb = parse_zxb_market()
 
     markets = [sh, sz, cyb, zxb]
-    print markets
+    # print markets
     return markets
 
 
 # 2 parse PE/PB from 申万行业一级指数
 def parse_sw():
     for i in range(0, 4):
-        print i
+        # print i
         now = arrow.now()
-        print now
-        print now.weekday()
+        # print now
+        # print now.weekday()
         week_day = now-timedelta(i)
         day = week_day.format('YYYYMMDD')
         sw = parse_sw_with_day(day)
@@ -248,11 +247,11 @@ def parse_sw():
 def parse_sw_with_day(day=None):
     if day is None:
         now = arrow.now()
-        print now
-        print now.weekday()
+        # print now
+        # print now.weekday()
         week_day = now-timedelta(now.weekday()-4)
         day = week_day.format('YYYYMMDD')
-        print day
+        # print day
 
     url = 'http://www.swsindex.com/pedata/SwClassifyPePb_{}.xls'.format(day)
     static_pe = u'静态市盈率'
@@ -260,9 +259,9 @@ def parse_sw_with_day(day=None):
 
     res = requests.get(url)
     if res.ok:
-        print 'ok'
+        print('ok')
     else:
-        print 'can not download url:{}'.format(url)
+        # print 'can not download url:{}'.format(url)
         return None
 
     # url = 'sw.xls'
@@ -274,44 +273,44 @@ def parse_sw_with_day(day=None):
     # select PB<1
     df2 = df.copy()
     df2 = df2[df2[pb] < 1]
-    print df2
+    # print df2
 
     # select PB>10
     df3 = df.copy()
     df3 = df3[df3[pb] > 10]
-    print df3
+    # print df3
 
     # select PE<10
     df4 = df.copy()
     df4 = df4[df4[static_pe] < 10]
-    print df4
+    # print df4
 
     # select PE>100
     df5 = df.copy()
     df5 = df5[df5[static_pe] > 100]
-    print df5
+    # print df5
     ##### end of PB/PE check ######
 
     # select 一级行业, ignore 二级行业
     df = df[pd.isnull(df[u'二级行业名称'])]
-    print df
+    # print df
 
     #sort by static PE
     df = df.sort(columns=static_pe, ascending=False)
-    print '******DataFrame sort by PE:{}'.format(df)
+    # print '******DataFrame sort by PE:{}'.format(df)
 
     max_pe = df[static_pe].max()
     min_pe = df[static_pe].min()
     avg_pe = df[static_pe].mean()
     median_pe = df[static_pe].median()
-    print 'PE max:{} min:{} average:{} median:{}'.format(max_pe, min_pe, avg_pe, median_pe)
+    # print 'PE max:{} min:{} average:{} median:{}'.format(max_pe, min_pe, avg_pe, median_pe)
 
     columns = [u'一级行业名称', u'静态市盈率', u'市净率']
     max_pe_index = df.loc[df[static_pe] == max_pe].index
     min_pe_index = df.loc[df[static_pe] == min_pe].index
-    print 'max_pe_index:{} min_pe_index:{}'.format(max_pe_index, min_pe_index)
-    print df.loc[df[static_pe] == max_pe][columns]
-    print df.loc[df[static_pe] == min_pe][columns]
+    # print 'max_pe_index:{} min_pe_index:{}'.format(max_pe_index, min_pe_index)
+    # print df.loc[df[static_pe] == max_pe][columns]
+    # print df.loc[df[static_pe] == min_pe][columns]
     # print df[int(max_pe_index[0]): int(max_pe_index[0])+1]
     # print df[int(min_pe_index[0]): int(min_pe_index[0])+1]
 
@@ -323,20 +322,20 @@ def parse_sw_with_day(day=None):
 
 
     df = df.sort(columns=pb, ascending=False)
-    print '******DataFrame sort by PB:{}'.format(df)
+    # print '******DataFrame sort by PB:{}'.format(df)
 
     max_pb = df[pb].max()
     min_pb = df[pb].min()
     avg_pb = df[pb].mean()
     median_pb = df[pb].median()
-    print 'PB max:{} min:{} average:{} median_pb:{}'.format(max_pb, min_pb, avg_pb, median_pb)
+    # print 'PB max:{} min:{} average:{} median_pb:{}'.format(max_pb, min_pb, avg_pb, median_pb)
 
     max_pb_index = df.loc[df[pb] == max_pb].index
     min_pb_index = df.loc[df[pb] == min_pb].index
     # median_pb_index = df.loc[df[pb] == avg_pb].index
-    print 'max_pb_index:{} min_pb_index:{}'.format(max_pb_index, min_pb_index)
-    print df.loc[df[pb] == max_pb][columns]
-    print df.loc[df[pb] == min_pb][columns]
+    # print 'max_pb_index:{} min_pb_index:{}'.format(max_pb_index, min_pb_index)
+    # print df.loc[df[pb] == max_pb][columns]
+    # print df.loc[df[pb] == min_pb][columns]
     # print df.loc[df[pb] == median_pb_index][columns]
     # print df[int(max_pb_index[0]): int(max_pb_index[0])+1]
     # print df[int(min_pb_index[0]): int(min_pb_index[0])+1]
@@ -357,7 +356,7 @@ def parse_sw_history(begin_date='2014-03-12', end_date=None, codes=None):
                  '801880', '801890')
     condition = 'swindexcode in {} and BargainDate>=\'{}\' and BargainDate<=\'{}\''
     where = condition.format(codes, begin_date, end_date)
-    print where
+    # print where
     all_data = []
     for index in range(1, 1000):
         payload = {'tablename':'swindexhistory',
@@ -375,8 +374,8 @@ def parse_sw_history(begin_date='2014-03-12', end_date=None, codes=None):
         data = res.text.replace('\'', '\"')
         result = json.loads(data)
         data_list = result.get('root')
-        print 'url****'+url
-        print len(data_list)
+        # print 'url****'+url
+        # print len(data_list)
         if len(data_list) == 0:
             break
         else:
@@ -385,16 +384,16 @@ def parse_sw_history(begin_date='2014-03-12', end_date=None, codes=None):
     df[['PE', 'PB']] = df[['PE', 'PB']].astype(float)
     # df['PE'] = df['PE'].astype(float)
     # df['PB'] = df['PB'].astype(float)
-    print '*'*20
-    print len(df)
-    print df
+    # print '*'*20
+    # print len(df)
+    # print df
     df = df.sort(columns='PE', ascending=True)
-    print df
+    # print df
     df = df.sort(columns='PB', ascending=True)
-    print df
-    print 'PE mean:{}'.format(df['PE'].mean())
-    print 'PB mean:{}'.format(df['PB'].mean())
-    print 'PB<1:{}'.format(df[df.PB < 1])
+    # print df
+    # print 'PE mean:{}'.format(df['PE'].mean())
+    # print 'PB mean:{}'.format(df['PB'].mean())
+    # print 'PB<1:{}'.format(df[df.PB < 1])
     return df
 
 
@@ -422,7 +421,7 @@ def parse_sw_history2(begin_date='2014-03-12', end_date=None, code='801150'):
         # print data
         result = json.loads(data)
         data_list = result.get('root')
-        print 'url****'+url
+        # print 'url****'+url
         # print len(data_list)
         if len(data_list) == 0:
             break
@@ -449,9 +448,9 @@ def parse_sw_history2(begin_date='2014-03-12', end_date=None, code='801150'):
     # print df_sort_pe
     df_sort_pb = df.sort(columns='PB', ascending=True)
     # print df_sort_pb
-    print 'PE mean:{}'.format(df['PE'].mean())
-    print 'PB mean:{}'.format(df['PB'].mean())
-    print 'PB<1:{}'.format(df[df.PB < 1])
+    # print 'PE mean:{}'.format(df['PE'].mean())
+    # print 'PB mean:{}'.format(df['PB'].mean())
+    # print 'PB<1:{}'.format(df[df.PB < 1])
     return df
 
 
@@ -462,9 +461,9 @@ def parse_securitization_rate():
     sh = parse_sh_market()
     sz = parse_sz_market()
     total_market = float(sh.total_market_cap)+float(sz.total_market_cap)
-    print total_market
+    # print total_market
     securitization_rate = total_market/last_year_gdp
-    print 'securitization_rate:{0:.2f}'.format(securitization_rate)
+    # print 'securitization_rate:{0:.2f}'.format(securitization_rate)
     return securitization_rate
 
 
@@ -475,9 +474,9 @@ def gdp_rate():
     sh = parse_sh_market()
     sz = parse_sz_market()
     total_market = float(sh.total_market_cap)+float(sz.total_market_cap)
-    print total_market
+    # print total_market
     securitization_rate = total_market/last_year_gdp
-    print 'securitization_rate:{0:.2f}'.format(securitization_rate)
+    # print 'securitization_rate:{0:.2f}'.format(securitization_rate)
     return securitization_rate
 
 
@@ -488,31 +487,29 @@ def parse_xue_qiu_comment_last_day(stock='SH600029', access_token=xq_a_token):
     payload = {'access_token': access_token}
 
     r = requests.get(url, params=payload, headers=headers)
-    print r
-    print r.json()
+    # print r
+    # print r.json()
     comments = r.json().get('list')
-    print comments
-    print len(comments)
     now = arrow.now()
-    print now
+    # print now
     today = now.date()
-    print str(today)
+    # print str(today)
 
     today_begin = arrow.get(str(today)+'T00:00+08:00')
     today_end = arrow.get(str(today)+'T23:59+08:00')
 
     count = 0
     for comment in comments:
-        timestamp = long(comment.get('created_at'))/1000
+        timestamp = int(comment.get('created_at'))/1000
         utc = arrow.get(timestamp)
         local = utc.to('local')
         # print local
         if today_begin < utc and utc < today_end:
-            print '***comment when trading***{}'.format(local)
+            # print '***comment when trading***{}'.format(local)
             count += 1
         else:
-            print 'comment not when trading:{}'.format(local)
-    print 'stock {} comment:{}'.format(stock, count)
+            print('comment not when trading:{}'.format(local))
+    # print 'stock {} comment:{}'.format(stock, count)
     return count
 
 
@@ -523,42 +520,40 @@ def parse_xue_qiu_comment(stock='SH600027', access_token=xq_a_token):
     payload = {'access_token': access_token}
 
     r = requests.get(url, params=payload, headers=headers)
-    print r
-    print r.json()
+    # print r
+    # print r.json()
     comments = r.json().get('list')
-    print comments
-    print len(comments)
+    # print comments
+    # print len(comments)
     now = arrow.now()
-    print now
     today = now.date()
-    print str(today)
 
     morning_begin = arrow.get(str(today)+'T09:30+08:00')
     morning_end = arrow.get(str(today)+'T11:30+08:00')
-    print morning_begin
-    print morning_end
-    print morning_begin.timestamp
-    print morning_end.timestamp
+    # print morning_begin
+    # print morning_end
+    # print morning_begin.timestamp
+    # print morning_end.timestamp
 
     afternoon_begin = arrow.get(str(today)+'T13:00+08:00')
     afternoon_end = arrow.get(str(today)+'T15:00+08:00')
-    print afternoon_begin
-    print afternoon_end
-    print afternoon_begin.timestamp
-    print afternoon_end.timestamp
+    # print afternoon_begin
+    # print afternoon_end
+    # print afternoon_begin.timestamp
+    # print afternoon_end.timestamp
 
     count = 0
     for comment in comments:
-        timestamp = long(comment.get('created_at'))/1000
+        timestamp = int(comment.get('created_at'))/1000
         utc = arrow.get(timestamp)
         local = utc.to('local')
         # print local
         if (morning_begin < utc and utc < morning_end) or (afternoon_begin < utc and utc < afternoon_end):
-            print '***comment when trading***{}'.format(local)
+            # print '***comment when trading***{}'.format(local)
             count += 1
         else:
-            print 'comment not when trading:{}'.format(local)
-    print 'stock {} comment:{}'.format(stock, count)
+            print('comment not when trading:{}'.format(local))
+    # print 'stock {} comment:{}'.format(stock, count)
     return count
 
 
@@ -571,13 +566,13 @@ def login_xue_qiu():
     r = requests.post(url, params=payload, headers=headers)
     response_headers = r.headers
     cookie = response_headers.get('set-cookie')
-    print cookie
+    # print cookie
     words = cookie.split(';')
     # print words
     xq_r_token = words[3]
     # print xq_r_token
     access_token = xq_r_token.split('=')[1]
-    print access_token
+    # print access_token
     return access_token
 
 
@@ -591,7 +586,7 @@ def screen_by_price(low=0.1, high=3, access_token=xq_a_token):
     # print r.text
     # print r.content
     result = r.json()
-    print result
+    # print result
     count = result.get('count')
     stock_list = result.get('list')
     stocks = []
@@ -599,7 +594,7 @@ def screen_by_price(low=0.1, high=3, access_token=xq_a_token):
         for stock in stock_list:
             stocks.append(stock.get('symbol'))
     result_dict = {'count': count, 'stocks': stocks}
-    print result_dict
+    # print result_dict
     return result_dict
 
 
@@ -607,7 +602,7 @@ def screen_by_price(low=0.1, high=3, access_token=xq_a_token):
 def position(code):
     current = sina(code)
     count = screen_by_price(current, high=60000)
-    print count
+    # print count
 
 
 # get stock count by market value
@@ -621,7 +616,7 @@ def screen_by_market_value(low, high=60000, access_token=xq_a_token):
     # print r.content
     result = r.json()
     count = result.get('count')
-    print count
+    # print count
     return count
 
 
@@ -635,7 +630,7 @@ def screen_by_pb(low=0.1, high=1, access_token=xq_a_token):
     # print r.text
     # print r.content
     result = r.json()
-    print result
+    # print result
     count = result.get('count')
     # print count
     # return count
@@ -645,17 +640,17 @@ def screen_by_pb(low=0.1, high=1, access_token=xq_a_token):
         for stock in stock_list:
             stocks.append(stock.get('symbol'))
     result_dict = {'count': count, 'stocks': stocks}
-    print result_dict
+    # print result_dict
     return result_dict
 
 
 def low_pb_ratio():
     data = screen_by_pb()
-    print data
+    # print data
     count = data['count']
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
-    print 'low_pb_ratio:{} size:{}'.format(ratio, count)
+    # print 'low_pb_ratio:{} size:{}'.format(ratio, count)
     return ratio, data['stocks']
 
 
@@ -664,7 +659,7 @@ def high_pb_ratio():
     count = data['count']
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
-    print 'high_pb_ratio:{} size:{}'.format(ratio, count)
+    # print 'high_pb_ratio:{} size:{}'.format(ratio, count)
     return ratio, data['stocks']
 
 
@@ -679,7 +674,7 @@ def screen_by_static_pe(low=1, high=10, access_token=xq_a_token):
     # print r.content
     result = r.json()
     count = result.get('count')
-    print count
+    # print count
     return count
 
 
@@ -688,7 +683,7 @@ def low_price_ratio():
     count = screen_by_price()
     total = screen_by_price(high=10000)
     ratio = float(count)/total
-    print ratio
+    # print ratio
     return ratio
 
 
@@ -697,7 +692,7 @@ def high_price_ratio():
     count = screen_by_price(low=100, high=10000)['count']
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
-    print 'count:{} total:{} ratio:{}'.format(count, total, ratio)
+    # print 'count:{} total:{} ratio:{}'.format(count, total, ratio)
     return ratio
 
 
@@ -706,7 +701,7 @@ def high_market_value_ratio():
     count = screen_by_market_value(rmb_exchange_rate()[1])
     total = screen_by_market_value(1)
     ratio = float(count)/total
-    print 'count:{} total:{} ratio:{}'.format(count, total, ratio)
+    # print 'count:{} total:{} ratio:{}'.format(count, total, ratio)
     return ratio
 
 
@@ -719,11 +714,11 @@ def sina(code='600276'):
     else:
         code = 'sz'+code
     url = "http://hq.sinajs.cn/list="+code
-    print 'url:{}'.format(url)
+    # print 'url:{}'.format(url)
     r = requests.get(url)
-    print r.text
+    # print r.text
     test = r.content.split(',')
-    print test
+    # print test
     if code.startswith('hk'):
         current = float(test[6])
     else:
@@ -742,7 +737,7 @@ def sina(code='600276'):
     u_content = name.decode(enc)  # decodes from enc to unicode
     utf8_name = u_content.encode("utf8")
     stock = Stock(code, 0, current, percent, low, high, volume)
-    print stock
+    # print stock
     return stock
 
 
@@ -762,20 +757,20 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
     payload = {'access_token': access_token}
 
     r = requests.get(url, params=payload, headers=headers)
-    print r
-    print r.json()
+    # print r
+    # print r.json()
     data = r.json().get(code)
-    print data
+    # print data
     time = data.get('time')
     import arrow
     time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
-    print time
+    # print time
     stock = Stock(code=code, name=data.get('name').encode("GB2312"),
                   current=data.get('current'), percentage=data.get('percentage'),
                   open_price=data.get('open'), high=data.get('high'), low=data.get('low'), close=data.get('close'),
                   low52week=data.get('low52week'), high52week=data.get('high52week'),
                   pe_lyr=data.get('pe_lyr'), pb=data.get('pb'), date=time)
-    print stock
+    # print stock
     return stock
 
 
@@ -784,7 +779,7 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
     if begin_date is None:
         begin = arrow.get('2014-01-01')
         begin_date = begin.timestamp*1000
-        print begin_date
+        # print begin_date
     if end_date is None:
         end = arrow.now()
         end_date = end.timestamp*1000
@@ -808,10 +803,10 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
     # print len(data_list)
     result = []
     for data in data_list:
-        print data
+        # print data
         time = data.get('time')
         time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
-        print time
+        # print time
         timestamp = time.timestamp*1000
         history = StockHistory(code=code, percent=data.get('percent'),
                                ma5=data.get('ma5'), ma10=data.get('ma10'), ma30=data.get('ma30'),
@@ -823,20 +818,20 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
         # print history
         result.append(history)
     df = DataFrame(data_list)
-    print df
+    # print df
     max_turnover = df['turnrate'].max()
     min_turnover = df['turnrate'].min()
-    print df['turnrate'].mean()
+    # print df['turnrate'].mean()
     # max_turnover_index = df.loc[df['turnrate'] == max_turnover].index
     # print max_turnover_index
     columns = ['time', 'turnrate', 'volume', 'close']
-    print df.loc[df['turnrate'] == max_turnover][columns]
-    print df.loc[df['turnrate'] == min_turnover][columns]
+    # print df.loc[df['turnrate'] == max_turnover][columns]
+    # print df.loc[df['turnrate'] == min_turnover][columns]
     max_volume = df['volume'].max()
     min_volume = df['volume'].min()
     mean_volume = df['volume'].mean()
-    print df.loc[df['volume'] == max_volume][columns]
-    print df.loc[df['volume'] == min_volume][columns]
+    # print df.loc[df['volume'] == max_volume][columns]
+    # print df.loc[df['volume'] == min_volume][columns]
     return result
 
 
@@ -857,9 +852,9 @@ def rmb_exchange_rate():
     dfs = pd.read_html(etree.tostring(tables[1]), header=0, flavor='lxml')
     # print len(dfs)
     df = dfs[0]
-    print df
-    print df.index
-    print df.columns
+    # print df
+    # print df.index
+    # print df.columns
     name = u'货币名称'
     usd = u'美元'
     hk = u'港币'
@@ -876,7 +871,7 @@ def rmb_exchange_rate():
     hk_to_rmb = hk_df.iloc[0][5]
 
     result = hk_to_rmb, usd_to_rmb
-    print result
+    # print result
 
     # select with iloccheck column 0 name
     # hk_to_rmb = df.iloc[8][5]
@@ -896,7 +891,7 @@ def ah_ratio(hk_rmb_change_rate, ah_pair=('000002', '02202'), ):
     current_h_rmb = current_h * hk_rmb_change_rate
     ratio = current_a/current_h_rmb
     result = {'price_a': current_a, 'price_h': current_h, 'ratio': ratio}
-    print 'ah_ratio:{}'.format(result)
+    # print 'ah_ratio:{}'.format(result)
     return result
 
 
@@ -952,14 +947,14 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
             price_h_list.append(ratio.get('price_h'))
             ratio_list.append(ratio.get('ratio'))
     df_dict = {'A': a_list, 'Price_A': price_a_list, 'H': h_list, 'Price_H': price_h_list, 'ratio': ratio_list}
-    print df_dict
+    # print df_dict
     df = DataFrame(df_dict)
     # print df
     df = df.sort(columns='ratio', ascending=True)
-    print df
+    # print df
     # ah_index = np.mean(ratio_list)
     ah_index = df['ratio'].mean()
-    print 'ah_index:{}'.format(ah_index)
-    print 'discount stock:{}'.format(df[df.ratio < 1])
+    # print 'ah_index:{}'.format(ah_index)
+    # print 'discount stock:{}'.format(df[df.ratio < 1])
     return AhIndex(ah_index)
 

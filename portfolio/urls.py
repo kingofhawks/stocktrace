@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, url
-import views
+from django.conf.urls import url
+import portfolio.views as views
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$', views.stock_list, name='home'),
     url(r'^history', views.history, name='history'),
     url(r'^create', views.create_stock),
@@ -13,5 +13,4 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\w+)/delete/$', views.delete_portfolio, name='delete_portfolio'),
     url(r'^tag/(?P<pk>\w+)/$', views.tag),
     url(r'^snapshot', views.snapshot_view, name='snapshot'),
-
-)
+]
