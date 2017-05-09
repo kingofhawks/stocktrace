@@ -37,7 +37,7 @@ How to run tests
 
 1. run module
 
-> python manage.py test test.yahoo_test
+> python manage.py test market.tests.ParseTestCase.test_sw_history
 
 2. run test method
 
@@ -48,6 +48,12 @@ xueqiu.com API token:
 
 > Login xueqiu.com check HTTP request Cookie "xq_a_token"
 
+
+Upgrade from python2 to 3  
+$2to3 -w analysis.py  
+https://docs.python.org/3/howto/pyporting.html  
+https://docs.python.org/3/library/2to3.html  
+http://python-future.org/  
 
 ### Reference
 

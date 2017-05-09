@@ -1,9 +1,9 @@
 from django.test import TestCase
-from parse import *
-from stocktrace.parse.yahooparser import *
+from market.parse import *
+# from stocktrace.parse.yahooparser import *
 from stocktrace.dao.stockdao import *
-from analysis import *
-from cix import *
+from market.analysis import *
+from market.cix import *
 
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -43,10 +43,10 @@ class ParseTestCase(TestCase):
         parse_securitization_rate()
 
     def test_low_pb(self):
-        print low_pb_ratio()
+        print(low_pb_ratio())
 
     def test_high_pb(self):
-        print high_pb_ratio()
+        print(high_pb_ratio())
 
     def test_high_price(self):
         high_price_ratio()
@@ -63,11 +63,11 @@ class ParseTestCase(TestCase):
             for history in history_list:
                 history.save()
 
-    def test_history_yahoo(self):
-        download_history_data(self.code)
+    # def test_history_yahoo(self):
+    #     download_history_data(self.code)
 
-    def test_history_sh(self):
-        download_history_data('000001.SS')
+    # def test_history_sh(self):
+    #     download_history_data('000001.SS')
 
     def test_sw_low(self):
         df = parse_sw_history('2014-03-12', '2014-03-13')
@@ -95,9 +95,9 @@ class ParseTestCase(TestCase):
 
     def test_sw_history3(self):
         df = parse_sw_history2(begin_date='2016-01-01', code='801150')
-        print df
+        print(df)
         records = json.loads(df.T.to_json()).values()
-        print records
+        print(records)
 
     def test_sw(self):
         sw()
