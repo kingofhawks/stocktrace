@@ -107,4 +107,7 @@ class ParseTestCase(TestCase):
         cix_data.save()
 
 
+    def test_alert(self):
+        alert_high_diff()
+
 

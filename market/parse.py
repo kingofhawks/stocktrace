@@ -11,6 +11,9 @@ import arrow
 import json
 from datetime import timedelta
 from stocktrace.stock import Stock, StockHistory
+import tushare as ts
+from PyQt5 import Qt
+import sys
 
 # check xueqiu HTTP request cookie "xq_a_token"
 xq_a_token = 'acfaecb15b852ee83e8a2facf47d06483639c659'
@@ -957,4 +960,21 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
     # print 'ah_index:{}'.format(ah_index)
     # print 'discount stock:{}'.format(df[df.ratio < 1])
     return AhIndex(ah_index)
+
+
+def alert_high_diff():
+    # df = ts.get_realtime_quotes('600196')
+    df = ts.get_realtime_quotes(['600196', '600519', '300482'])
+    print(df[['code', 'name', 'price', 'b1_v', 'b1_p', 'a1_v', 'a1_p']])
+    for index, row in df.iterrows():
+        # 差价超过0.1%就预警
+        if ((float(row['a1_p'])-float(row['b1_p']))/float(row['price'])) >= 0.001:
+            print(row["name"], row["b1_p"])
+            app = Qt.QApplication(sys.argv)
+            systemtray_icon = Qt.QSystemTrayIcon(Qt.QIcon('/path/to/image'))
+            systemtray_icon.show()
+            systemtray_icon.showMessage('Title', row["name"])
+
+
+
 
