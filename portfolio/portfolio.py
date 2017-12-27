@@ -4,26 +4,6 @@ from stocktrace.stock import Stock
 import traceback
 
 
-def polling():
-    stocks = find_all_stocks()
-    result = []
-    for stock in stocks:
-        code = stock['code']
-        s = xueqiu(code)
-        # print s
-        try:
-            stock = Stock.objects.get(code=code)
-            if stock:
-                stock.current = s.current
-                stock.volume = s.volume
-                stock.percentage = s.percentage
-                stock.save()
-                result.append(stock)
-        except Exception as e:
-            # print traceback.format_exc()
-            continue
-    return result
-
 
 # get real-time market value
 def market_value(stocks):

@@ -10,13 +10,15 @@ import requests
 import arrow
 import json
 from datetime import timedelta
+
+from portfolio.dao import find_all_stocks
 from stocktrace.stock import Stock, StockHistory
 import tushare as ts
 from PyQt5 import Qt
 import sys
 
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = 'acfaecb15b852ee83e8a2facf47d06483639c659'
+xq_a_token = '6f760e58e577602f06087f53c9587c120acda7bd'
 headers = {'content-type': 'application/json',
            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
@@ -257,8 +259,8 @@ def parse_sw_with_day(day=None):
         # print day
 
     url = 'http://www.swsindex.com/pedata/SwClassifyPePb_{}.xls'.format(day)
-    static_pe = u'静态市盈率'
-    pb = u'市净率'
+    static_pe = '静态市盈率'
+    pb = '市净率'
 
     res = requests.get(url)
     if res.ok:
@@ -295,7 +297,7 @@ def parse_sw_with_day(day=None):
     ##### end of PB/PE check ######
 
     # select 一级行业, ignore 二级行业
-    df = df[pd.isnull(df[u'二级行业名称'])]
+    df = df[pd.isnull(df['二级行业名称'])]
     # print df
 
     #sort by static PE
@@ -308,7 +310,7 @@ def parse_sw_with_day(day=None):
     median_pe = df[static_pe].median()
     # print 'PE max:{} min:{} average:{} median:{}'.format(max_pe, min_pe, avg_pe, median_pe)
 
-    columns = [u'一级行业名称', u'静态市盈率', u'市净率']
+    columns = ['一级行业名称', '静态市盈率', '市净率']
     max_pe_index = df.loc[df[static_pe] == max_pe].index
     min_pe_index = df.loc[df[static_pe] == min_pe].index
     # print 'max_pe_index:{} min_pe_index:{}'.format(max_pe_index, min_pe_index)
@@ -511,7 +513,7 @@ def parse_xue_qiu_comment_last_day(stock='SH600029', access_token=xq_a_token):
             # print '***comment when trading***{}'.format(local)
             count += 1
         else:
-            print('comment not when trading:{}'.format(local))
+            print(('comment not when trading:{}'.format(local)))
     # print 'stock {} comment:{}'.format(stock, count)
     return count
 
@@ -555,7 +557,7 @@ def parse_xue_qiu_comment(stock='SH600027', access_token=xq_a_token):
             # print '***comment when trading***{}'.format(local)
             count += 1
         else:
-            print('comment not when trading:{}'.format(local))
+            print(('comment not when trading:{}'.format(local)))
     # print 'stock {} comment:{}'.format(stock, count)
     return count
 
@@ -765,15 +767,19 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
     data = r.json().get(code)
     # print data
     time = data.get('time')
+    print(time)
     import arrow
+    #Wed Dec 27 14:59:59 +0800 2017
     time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
-    # print time
-    stock = Stock(code=code, name=data.get('name').encode("GB2312"),
+    print(time)
+    stock = Stock(code=code,
+                  #name=data.get('name').encode("GB2312"),
                   current=data.get('current'), percentage=data.get('percentage'),
                   open_price=data.get('open'), high=data.get('high'), low=data.get('low'), close=data.get('close'),
                   low52week=data.get('low52week'), high52week=data.get('high52week'),
-                  pe_lyr=data.get('pe_lyr'), pb=data.get('pb'), date=time)
-    # print stock
+                  pe_lyr=data.get('pe_lyr'), pb=data.get('pb'),
+                  date=time.datetime)
+    print(stock)
     return stock
 
 
@@ -858,10 +864,10 @@ def rmb_exchange_rate():
     # print df
     # print df.index
     # print df.columns
-    name = u'货币名称'
-    usd = u'美元'
-    hk = u'港币'
-    zh = u'中行折算价'
+    name = '货币名称'
+    usd = '美元'
+    hk = '港币'
+    zh = '中行折算价'
     # usd_to_rmb = df.loc[df[name] == usd][zh]
     # print 'usd_to_rmb:{}'.format(usd_to_rmb)
     # hk_to_rmb = df.loc[df[name] == hk][zh]
@@ -965,16 +971,47 @@ def ah_premium_index(samples=[('600036', '03968'), ('600196', '02196'), ('601111
 def alert_high_diff():
     # df = ts.get_realtime_quotes('600196')
     df = ts.get_realtime_quotes(['600196', '600519', '300482'])
-    print(df[['code', 'name', 'price', 'b1_v', 'b1_p', 'a1_v', 'a1_p']])
+    print((df[['code', 'name', 'price', 'b1_v', 'b1_p', 'a1_v', 'a1_p']]))
     for index, row in df.iterrows():
         # 差价超过0.1%就预警
         if ((float(row['a1_p'])-float(row['b1_p']))/float(row['price'])) >= 0.001:
-            print(row["name"], row["b1_p"])
+            print((row["name"], row["b1_p"]))
             app = Qt.QApplication(sys.argv)
             systemtray_icon = Qt.QSystemTrayIcon(Qt.QIcon('/path/to/image'))
             systemtray_icon.show()
             systemtray_icon.showMessage('Title', row["name"])
 
 
+def stock_list():
+    import tushare as ts
+    df = ts.get_stock_basics()
+    stocks = df.index.tolist()
+    print((len(stocks)))
+    print(stocks)
+    for stock in stocks:
+        s = Stock()
+        s.code = stock
+        s.save()
 
 
+def polling():
+    stocks = find_all_stocks()
+    result = []
+    for stock in stocks:
+        code = stock['code']
+        s = xueqiu(code)
+        try:
+            stock = Stock.objects.get(code=code)
+            if stock:
+                stock.current = s.current
+                stock.volume = s.volume
+                stock.percentage = s.percentage
+                #TODO
+                stock.save()
+                result.append(stock)
+            else:
+                s.save()
+        except Exception as e:
+            # print traceback.format_exc()
+            continue
+    return result

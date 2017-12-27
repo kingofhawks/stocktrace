@@ -4,7 +4,7 @@ pandas
 lxml
 requests
 celery
-arrow
+arrow==0.12.0
 djangorestframework
 mongoengine
 tushare

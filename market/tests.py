@@ -9,13 +9,15 @@ from market.cix import *
 
 
 class ParseTestCase(TestCase):
-    code = '600029'
+    code = '601997'
 
     def test_sina(self):
         sina(self.code)
 
     def test_xueqiu(self):
-        xueqiu(self.code)
+        stock = xueqiu(self.code)
+        if stock:
+            stock.save()
 
     def test_ah_ratio(self):
         ah_ratio(0.8)
@@ -111,3 +113,8 @@ class ParseTestCase(TestCase):
         alert_high_diff()
 
 
+    def test_stock_list(self):
+        stock_list()
+
+    def test_polling(self):
+        polling()
