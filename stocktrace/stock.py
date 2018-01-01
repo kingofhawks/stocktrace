@@ -1,5 +1,4 @@
 #-*- coding: UTF-8 -*-
-#from datetime import date
 from mongoengine import *
 
 
@@ -34,17 +33,15 @@ class Stock(Document):
     totalCap = FloatField()
     floatingCap = FloatField()
     date = DateTimeField()
-    hasGap = BooleanField(default=False)
     PercentChangeFromYearLow = FloatField()
     PercentChangeFromYearHigh = FloatField()
     ma50 = FloatField()
     ma200 = FloatField()
     PercentChangeFromTwoHundreddayMovingAverage = FloatField()
     PercentChangeFromFiftydayMovingAverage = FloatField()
-    alert = BooleanField(default=False)
-    state = StringField(default='OK')  # OK,WARNING,CRITICAL,UP
-    isInSh = BooleanField(default=False)  # Shanghai code
-    amount = IntField(default=0)
+    alert = BooleanField()
+    state = StringField()  # OK,WARNING,CRITICAL,UP
+    amount = IntField()
     tags = ListField(StringField())
     up_threshold = FloatField()
     down_threshold = FloatField()
@@ -58,10 +55,12 @@ class Stock(Document):
             if self.high52week != 0 and self.close:
                 self.PercentChangeFromYearHigh = (float(self.close) - float(self.high52week))/float(self.high52week)
 
-            if self.low52week != 0 and self.low52week == self.low:
+            if self.low52week and self.low and self.low52week != 0 and self.low52week == self.low \
+                    and abs(self.percentage) < 20:  # 忽略新股
                 self.nl = True
 
-            if self.high52week != 0 and self.high52week == self.high:
+            if self.high52week and self.high and self.high52week != 0 and self.high52week == self.high \
+                    and abs(self.percentage) < 20:
                 self.nh = True
 
     #python2.7 use __unicode__, for python3 use __str__

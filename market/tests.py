@@ -9,37 +9,52 @@ from market.cix import *
 
 
 class ParseTestCase(TestCase):
-    code = '601997'
+    code = '600609'
 
-    def test_sina(self):
-        sina(self.code)
+    # def test_sina(self):
+    #     sina(self.code)
 
     def test_xueqiu(self):
         stock = xueqiu(self.code)
         if stock:
             stock.save()
 
-    def test_ah_ratio(self):
-        ah_ratio(0.8)
-
     def test_ah(self):
         ah_history()
-
-    def test_ah2(self):
-        ah = ah_premium_index()
-        ah.save()
 
     def test_sh_pe(self):
         avg_sh_pe()
 
+    def test_sh(self):
+        download_zz_index('20171225')
+        # market = parse_sh_market2()
+        # if market:
+        #     market.save()
+
+    def test_sz(self):
+        market = parse_sz_market()
+        if market:
+            market.save()
+
+    def test_szzb(self):
+        market = parse_szzb_market()
+        if market:
+            market.save()
+
+    def test_zxb(self):
+        market = parse_zxb_market()
+        if market:
+            market.save()
+
+
     def test_cyb(self):
-        parse_cyb_market()
+        market = parse_cyb_market()
+        if market:
+            market.save()
 
     def test_cyb2(self):
         parse_cyb2()
 
-    def test_zxb(self):
-        parse_zxb_market()
 
     def test_gdp(self):
         parse_securitization_rate()
@@ -70,16 +85,16 @@ class ParseTestCase(TestCase):
 
     # def test_history_sh(self):
     #     download_history_data('000001.SS')
-
-    def test_sw_low(self):
-        df = parse_sw_history('2014-03-12', '2014-03-13')
-        df_to_collection(df, 'sw')
-
-    def test_sw_now(self):
-        import arrow
-        now = arrow.now()
-        begin_date = str(now.date())
-        parse_sw_history(begin_date)
+    #
+    # def test_sw_low(self):
+    #     df = parse_sw_history('2014-03-12', '2014-03-13')
+    #     df_to_collection(df, 'sw')
+    #
+    # def test_sw_now(self):
+    #     import arrow
+    #     now = arrow.now()
+    #     begin_date = str(now.date())
+    #     parse_sw_history(begin_date)
 
     def test_sw_history(self):
         codes = ['801020', '801030', '801040', '801050', '801080',
@@ -113,8 +128,8 @@ class ParseTestCase(TestCase):
         alert_high_diff()
 
 
-    def test_stock_list(self):
-        stock_list()
-
-    def test_polling(self):
-        polling()
+    # def test_stock_list(self):
+    #     stock_list()
+    #
+    # def test_polling(self):
+    #     polling()

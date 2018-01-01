@@ -1,6 +1,8 @@
 django==1.10.5
 pymongo==2.8
 pandas
+cssselect
+xlrd
 lxml
 requests
 celery

@@ -10,7 +10,7 @@ import requests
 import arrow
 import json
 from datetime import timedelta
-
+import arrow
 from portfolio.dao import find_all_stocks
 from stocktrace.stock import Stock, StockHistory
 import tushare as ts
@@ -18,7 +18,7 @@ from PyQt5 import Qt
 import sys
 
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = '6f760e58e577602f06087f53c9587c120acda7bd'
+xq_a_token = '858067b79675b5998f822ff62f7c0b83ac009405'
 headers = {'content-type': 'application/json',
            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
@@ -27,7 +27,7 @@ headers = {'content-type': 'application/json',
 def parse_sh_market():
     page = parse('http://www.sse.com.cn/market/stockdata/overview/day/').getroot()
     result = etree.tostring(page)
-    # print result
+    print(result)
 
     r = page.get_element_by_id('dateList')
     statistics = r.text_content().split()
@@ -38,6 +38,60 @@ def parse_sh_market():
                     turnover=statistics[12], pe=statistics[14], date=statistics[2])
     # print market
     return market
+
+
+# 中证指数
+def parse_sh_market2():
+    url = 'http://www.csindex.com.cn/zh-CN/downloads/industry-price-earnings-ratio?date=2017-12-29&type=zy1'
+    page = parse(url).getroot()
+    result = etree.tostring(page)
+    print(result)
+    el = page.xpath("//tbody[@class='tc']")
+    print(el)
+    for element in el:
+        table = etree.tostring(element)
+        print(table)
+        dfs = pd.read_html(table, flavor='lxml')
+        print(dfs)
+    r = page.cssselect('tbody.tc')
+    print(r[0].text_content())
+    # res = requests.get(url, data=payload)
+    # print(res.text)
+    dfs = pd.read_html(r[0].text_content(), flavor='lxml')
+    print(dfs)
+    # print res.text
+    # read html <table> to list of DataFrame
+    # dfs = pd.read_html(res.text, flavor='lxml')
+
+
+# 中证指数
+def download_zz_index(date='20171228'):
+    url = 'http://115.29.204.48/syl/bk'+date+'.zip'
+    import requests, zipfile, io
+    r = requests.get(url)
+    z = zipfile.ZipFile(io.BytesIO(r.content))
+    z.extractall()
+    # df = pd.read_csv("bk20171228.csv")
+    # xls_file = pd.ExcelFile('bk20171228.xls', encoding_override="gb2312")
+    # xls_file = pd.read_excel('bk20171228.xls', encoding="gb2312")
+    # print(df)
+    import xlrd
+    book = xlrd.open_workbook("bk"+date+".xls", encoding_override="gbk")
+    print("The number of worksheets is {0}".format(book.nsheets))
+    print("Worksheet name(s): {0}".format(book.sheet_names()))
+    sh = book.sheet_by_index(0)
+    print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
+    for rx in range(sh.nrows):
+        row = sh.row(rx)
+        # print(row)
+        name = row[0].value
+        pe = row[1].value
+        # print(name, pe)
+        # print(name, pe)
+        # print(pe.replace('.', '', 1).isdigit(), type(pe))
+        if pe.replace('.', '', 1).isdigit():
+            market = Market(name=name, pe=pe)
+            print(market)
 
 
 # average PE for shanghai http://www.sse.com.cn/market/stockdata/overview/monthly/
@@ -108,12 +162,17 @@ def parse_sz_market():
         # print 'total_market:{} volume:{} turnover_rate:{} pe:{}'.format(total_market, volume, turnover_rate, pe)
         market = Market('sz', total_market_cap=float(total_market)/100000000, volume=float(volume)/100000000,
                         turnover=float(turnover_rate), pe=float(pe))
-        # print market
+        print(market)
         # print df.index
         # print df.columns
         # print df.values
         # print df.describe()
         return market
+
+
+# 深圳主板
+def parse_szzb_market():
+    return parse_sz_market_common('szzb', 'http://www.szse.cn/main/mainboard/scsj/jbzb/')
 
 
 # 创业板 market overall
@@ -174,7 +233,7 @@ def parse_zxb_market():
 # parse sz market util
 def parse_sz_market_common(name, url):
     page = parse(url).getroot()
-    result = etree.tostring(page)
+    # result = etree.tostring(page)
     # print '*'*20
     # print result
     # print '*'*20
@@ -188,14 +247,14 @@ def parse_sz_market_common(name, url):
     # dfs = pd.read_html(etree.tostring(r), flavor='bs4')
     if len(dfs) >= 1:
         df = dfs[0]
-        # print df
+        print(df)
         tradable_shares = df.iloc[4][1]
         total_market = df.iloc[5][1]
         volume_money = df.iloc[7][1]
         volume = df.iloc[8][1]
         pe = df.iloc[10][1]
-        high_pe = df.iloc[10][3]
-        value = df.iloc[13][1]
+        # high_pe = df.iloc[10][3]
+        # value = df.iloc[13][1]
 
         if isinstance(tradable_shares, type(pd.NaT)):
             tradable_shares = 0
@@ -207,8 +266,8 @@ def parse_sz_market_common(name, url):
             volume = 0
         if isinstance(pe, type(pd.NaT)):
             pe = 0
-        if type(value) != float:
-            value = 0.0
+        # if type(value) != float:
+        #     value = 0.0
 
         # 换手率＝成交量÷当日实际流通量
         if tradable_shares == 0:
@@ -218,7 +277,7 @@ def parse_sz_market_common(name, url):
         # print 'name:{} total_market:{} volume:{} turnover:{} pe:{} value:{}'.format(name,
         #                                                                            total_market, volume_money,
         #                                                                            turnover, pe, value)
-        market = Market(name, float(total_market)/100000000, float(volume_money)/100000000, turnover, pe, value)
+        market = Market(name, float(total_market)/100000000, float(volume_money)/100000000, turnover, pe)
         # print market
         return market
 
@@ -711,6 +770,7 @@ def high_market_value_ratio():
 
 
 # sina real time API
+@DeprecationWarning
 def sina(code='600276'):
     if code.startswith('60') or code.startswith('51'):
         code = 'sh'+code
@@ -721,7 +781,7 @@ def sina(code='600276'):
     url = "http://hq.sinajs.cn/list="+code
     # print 'url:{}'.format(url)
     r = requests.get(url)
-    # print r.text
+    print(r.content)
     test = r.content.split(',')
     # print test
     if code.startswith('hk'):
@@ -765,22 +825,25 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
     # print r
     # print r.json()
     data = r.json().get(code)
-    # print data
+    print(data)
     time = data.get('time')
     print(time)
-    import arrow
-    #Wed Dec 27 14:59:59 +0800 2017
-    time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
-    print(time)
-    stock = Stock(code=code,
-                  #name=data.get('name').encode("GB2312"),
-                  current=data.get('current'), percentage=data.get('percentage'),
-                  open_price=data.get('open'), high=data.get('high'), low=data.get('low'), close=data.get('close'),
-                  low52week=data.get('low52week'), high52week=data.get('high52week'),
-                  pe_lyr=data.get('pe_lyr'), pb=data.get('pb'),
-                  date=time.datetime)
-    print(stock)
-    return stock
+    if time:
+        # Wed Dec 27 14:59:59 +0800 2017
+        time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
+        print(time)
+        stock = Stock(code=code,
+                      #name=data.get('name').encode("GB2312"),
+                      current=data.get('current'), percentage=data.get('percentage'),
+                      open_price=data.get('open'), high=data.get('high'), low=data.get('low'), close=data.get('close'),
+                      low52week=data.get('low52week'), high52week=data.get('high52week'),
+                      # pe_lyr=data.get('pe_lyr'),
+                      pb=data.get('pb'),
+                      date=time.datetime)
+        print(stock)
+        return stock
+    else:
+        return None
 
 
 # parse history data from xueqiu 1412158358740
@@ -1002,11 +1065,20 @@ def polling():
         s = xueqiu(code)
         try:
             stock = Stock.objects.get(code=code)
-            if stock:
+            if s and stock:
                 stock.current = s.current
                 stock.volume = s.volume
                 stock.percentage = s.percentage
-                #TODO
+                stock.open_price = s.open_price
+                stock.high = s.high
+                stock.low = s.low
+                stock.close = s.close
+                stock.high52week = s.high52week
+                stock.low52week = s.low52week
+                # stock.pe_lyr = s.pe_lyr
+                # stock.pb = s.pb
+                stock.nh = s.nh
+                stock.nl = s.nl
                 stock.save()
                 result.append(stock)
             else:
