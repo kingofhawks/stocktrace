@@ -25,8 +25,8 @@ class ParseTestCase(TestCase):
     def test_sh_pe(self):
         avg_sh_pe()
 
-    def test_sh(self):
-        download_zz_index('20171225')
+    def test_cs_index(self):
+        download_cs_index('20180202')
         # market = parse_sh_market2()
         # if market:
         #     market.save()

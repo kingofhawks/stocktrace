@@ -16,6 +16,10 @@ from stocktrace.stock import Stock, StockHistory
 import tushare as ts
 from PyQt5 import Qt
 import sys
+import xlrd
+import zipfile
+import io
+from datetime import datetime
 
 # check xueqiu HTTP request cookie "xq_a_token"
 xq_a_token = '858067b79675b5998f822ff62f7c0b83ac009405'
@@ -41,6 +45,7 @@ def parse_sh_market():
 
 
 # 中证指数
+@DeprecationWarning
 def parse_sh_market2():
     url = 'http://www.csindex.com.cn/zh-CN/downloads/industry-price-earnings-ratio?date=2017-12-29&type=zy1'
     page = parse(url).getroot()
@@ -64,34 +69,65 @@ def parse_sh_market2():
     # dfs = pd.read_html(res.text, flavor='lxml')
 
 
+# extract zip file to memory file
+def extract_zip(input_zip):
+    return {name: input_zip.read(name) for name in input_zip.namelist()}
+
+
 # 中证指数
-def download_zz_index(date='20171228'):
+def download_cs_index(date='20171228'):
+    # http://115.29.204.48/syl/bk20180202.zip
+    day = arrow.get(date,'YYYYMMDD').date()
+    weekday = day.weekday()
+    # ignore weekend
+    if weekday == 5 or weekday == 6:
+        return
     url = 'http://115.29.204.48/syl/bk'+date+'.zip'
-    import requests, zipfile, io
     r = requests.get(url)
+    # create memory file
     z = zipfile.ZipFile(io.BytesIO(r.content))
-    z.extractall()
+    # not extract to disk file here
+    # z.extractall()
+    memory_unzip_files = extract_zip(z)
+    # print(zip_files)
+    # pandas read_csv not work!
     # df = pd.read_csv("bk20171228.csv")
     # xls_file = pd.ExcelFile('bk20171228.xls', encoding_override="gb2312")
     # xls_file = pd.read_excel('bk20171228.xls', encoding="gb2312")
-    # print(df)
-    import xlrd
-    book = xlrd.open_workbook("bk"+date+".xls", encoding_override="gbk")
-    print("The number of worksheets is {0}".format(book.nsheets))
-    print("Worksheet name(s): {0}".format(book.sheet_names()))
-    sh = book.sheet_by_index(0)
-    print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
-    for rx in range(sh.nrows):
-        row = sh.row(rx)
-        # print(row)
-        name = row[0].value
-        pe = row[1].value
-        # print(name, pe)
-        # print(name, pe)
-        # print(pe.replace('.', '', 1).isdigit(), type(pe))
-        if pe.replace('.', '', 1).isdigit():
-            market = Market(name=name, pe=pe)
-            print(market)
+    for name in memory_unzip_files.keys():
+        book = xlrd.open_workbook(file_contents=memory_unzip_files.get(name), encoding_override="gbk")
+        print("The number of worksheets is {0}".format(book.nsheets))
+        print("Worksheet name(s): {0}".format(book.sheet_names()))
+        for sheet in range(book.nsheets):
+            sh = book.sheet_by_index(sheet)
+            print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
+            for rx in range(sh.nrows):
+                row = sh.row(rx)
+                # print(row)
+                name = row[0].value
+                pe = row[1].value
+                # print(name, pe)
+                # print(name, pe)
+                # print(pe.replace('.', '', 1).isdigit(), type(pe))
+                if pe.replace('.', '', 1).isdigit():
+                    market = Market(name=name, pe=pe)
+                    print(market)
+    # book = xlrd.open_workbook("bk"+date+".xls", encoding_override="gbk")
+    # print("The number of worksheets is {0}".format(book.nsheets))
+    # print("Worksheet name(s): {0}".format(book.sheet_names()))
+    # sh = book.sheet_by_index(0)
+    # print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
+    # for rx in range(sh.nrows):
+    #     row = sh.row(rx)
+    #     # print(row)
+    #     name = row[0].value
+    #     pe = row[1].value
+    #     # print(name, pe)
+    #     # print(name, pe)
+    #     # print(pe.replace('.', '', 1).isdigit(), type(pe))
+    #     if pe.replace('.', '', 1).isdigit():
+    #         market = Market(name=name, pe=pe)
+    #         print(market)
 
 
 # average PE for shanghai http://www.sse.com.cn/market/stockdata/overview/monthly/
