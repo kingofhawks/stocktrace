@@ -1,4 +1,7 @@
 # Django settings for stocktrace project.
+import os
+from pymongo import MongoClient
+import mongoengine
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -8,7 +11,7 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DATABASES = {
     'default': {
@@ -198,9 +201,6 @@ CACHES = {
     }
 }
 
-from pymongo import MongoClient
-import mongoengine
-
 DB_HOST = 'localhost'
 client = MongoClient(DB_HOST, 27017)
 DB = client.stocktrace
@@ -220,22 +220,20 @@ HIGHER = 1
 LOWER = 2
 
 
-#rabbitmq settings
+# rabbitmq settings
 STOCK_ALARMS_TOPIC ='stock_alarms'
 RABBIT_SERVER = '172.25.21.16'
 
-#monitoring settings
+# monitoring settings
 POLLING_INTERVAL = 180
 STATUS_UP = 'UP'
 STATUS_WARNING = 'WARNING'
 STATUS_CRITICAL = 'CRITICAL'
 
-#paging
+# paging
 PAGING_ITEM = 20
 PAGING_TOTAL = 10000
 
-#redis
+# redis
 REDIS_SERVER = '192.168.192.128'
 INDUSTRY_SET = 'industry'
-
-#APP_ROOT = 'G:\Dropbox\Workspace\stocktrace'

@@ -5,7 +5,7 @@ Created on 2011-3-7
 '''
 import logging
 from stocktrace.util import slf4p
-from market.models import Market
+from market.models import Index
 from lxml import etree
 from lxml.html import parse
 

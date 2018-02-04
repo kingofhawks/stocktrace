@@ -1,6 +1,5 @@
 from django.test import TestCase
 from market.parse import *
-# from stocktrace.parse.yahooparser import *
 from stocktrace.dao.stockdao import *
 from market.analysis import *
 from market.cix import *
@@ -10,9 +9,6 @@ from market.cix import *
 
 class ParseTestCase(TestCase):
     code = '600609'
-
-    # def test_sina(self):
-    #     sina(self.code)
 
     def test_xueqiu(self):
         stock = xueqiu(self.code)
@@ -26,10 +22,10 @@ class ParseTestCase(TestCase):
         avg_sh_pe()
 
     def test_cs_index(self):
-        download_cs_index('20180202')
-        # market = parse_sh_market2()
-        # if market:
-        #     market.save()
+        download_cs_index('20170102')
+
+    def test_cs_index_all(self):
+        download_cs_index_all('20170101')
 
     def test_sz(self):
         market = parse_sz_market()
@@ -123,10 +119,8 @@ class ParseTestCase(TestCase):
         cix_data = cix()
         cix_data.save()
 
-
     def test_alert(self):
         alert_high_diff()
-
 
     # def test_stock_list(self):
     #     stock_list()

@@ -13,7 +13,6 @@ from lxml.html import parse
 from stocktrace.dao.stockdao import *
 import io
 from stocktrace.util import slf4p, settings
-import redis
 import requests
 
 logger = slf4p.getLogger(__name__)

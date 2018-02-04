@@ -2,7 +2,7 @@
 from lxml import etree
 from lxml.html import parse
 from pandas.util.testing import DataFrame
-from market.models import Market, AhIndex
+from market.models import Index, AhIndex
 import pandas as pd
 import numpy as np
 import xlrd
@@ -20,7 +20,9 @@ import xlrd
 import zipfile
 import io
 from datetime import datetime
+from django.conf import settings
 
+db = settings.DB
 # check xueqiu HTTP request cookie "xq_a_token"
 xq_a_token = '858067b79675b5998f822ff62f7c0b83ac009405'
 headers = {'content-type': 'application/json',
@@ -38,8 +40,8 @@ def parse_sh_market():
     # for word in statistics:
     #     print word
 
-    market = Market(name='sh', total_market_cap=statistics[1], volume=float(statistics[8])/10000,
-                    turnover=statistics[12], pe=statistics[14], date=statistics[2])
+    market = Index(name='sh', total_market_cap=statistics[1], volume=float(statistics[8]) / 10000,
+                   turnover=statistics[12], pe=statistics[14], date=statistics[2])
     # print market
     return market
 
@@ -84,6 +86,8 @@ def download_cs_index(date='20171228'):
         return
     url = 'http://115.29.204.48/syl/bk'+date+'.zip'
     r = requests.get(url)
+    if r.status_code == 404:
+        return
     # create memory file
     z = zipfile.ZipFile(io.BytesIO(r.content))
     # not extract to disk file here
@@ -105,13 +109,23 @@ def download_cs_index(date='20171228'):
                 row = sh.row(rx)
                 # print(row)
                 name = row[0].value
-                pe = row[1].value
-                # print(name, pe)
-                # print(name, pe)
+                value = row[1].value
+                print(name, value)
                 # print(pe.replace('.', '', 1).isdigit(), type(pe))
-                if pe.replace('.', '', 1).isdigit():
-                    market = Market(name=name, pe=pe)
-                    print(market)
+                if value.replace('.', '', 1).isdigit():
+                    if sheet == 0:
+                        # 静态市盈率
+                        Index.objects(name=name, date=day).update_one(name=name, date=day, pe=value, upsert=True)
+                    elif sheet == 1:
+                        # 滚动市盈率
+                        print(Index.objects(name=name, date=day))
+                        Index.objects(name=name, date=day).update_one(name=name, pe_ttm=value, upsert=True)
+                    elif sheet == 2:
+                        # 板块市净率
+                        Index.objects(name=name, date=day).update_one(name=name, pb=value, upsert=True)
+                    elif sheet == 3:
+                        # 板块股息率
+                        Index.objects(name=name, date=day).update_one(name=name, dividend_yield_ratio=value, upsert=True)
     # book = xlrd.open_workbook("bk"+date+".xls", encoding_override="gbk")
     # print("The number of worksheets is {0}".format(book.nsheets))
     # print("Worksheet name(s): {0}".format(book.sheet_names()))
@@ -128,6 +142,21 @@ def download_cs_index(date='20171228'):
     #     if pe.replace('.', '', 1).isdigit():
     #         market = Market(name=name, pe=pe)
     #         print(market)
+
+
+def download_cs_index_all(begin_date='20171228', end_date=None):
+    date_format = 'YYYYMMDD'
+    if end_date is None:
+        end_date = arrow.now().format(date_format)
+    begin_arrow = arrow.get(begin_date, date_format)
+    begin = begin_arrow.date()
+    end = arrow.get(end_date, date_format).date()
+    delta = end-begin
+    print(delta.days)
+    for i in range(delta.days):
+        day = begin_arrow.shift(days=i).format(date_format)
+        print(day)
+        download_cs_index(day)
 
 
 # average PE for shanghai http://www.sse.com.cn/market/stockdata/overview/monthly/
@@ -196,8 +225,8 @@ def parse_sz_market():
         if type(pe) == type(pd.NaT):
             pe = 0
         # print 'total_market:{} volume:{} turnover_rate:{} pe:{}'.format(total_market, volume, turnover_rate, pe)
-        market = Market('sz', total_market_cap=float(total_market)/100000000, volume=float(volume)/100000000,
-                        turnover=float(turnover_rate), pe=float(pe))
+        market = Index('sz', total_market_cap=float(total_market) / 100000000, volume=float(volume) / 100000000,
+                       turnover=float(turnover_rate), pe=float(pe))
         print(market)
         # print df.index
         # print df.columns
@@ -256,7 +285,7 @@ def parse_cyb2(url='http://www.szse.cn/szseWeb/FrontController.szse?randnum=0.53
         # print 'name:{} total_market:{} volume:{} turnover:{} pe:{} value:{}'.format(name,
         #                                                                            total_market, volume_money,
         #                                                                            turnover, pe, value)
-        market = Market('CYB', float(total_market)/100000000, float(volume_money)/100000000, turnover, pe, value)
+        market = Index('CYB', float(total_market) / 100000000, float(volume_money) / 100000000, turnover, pe, value)
         # print market
         return market
 
@@ -313,7 +342,7 @@ def parse_sz_market_common(name, url):
         # print 'name:{} total_market:{} volume:{} turnover:{} pe:{} value:{}'.format(name,
         #                                                                            total_market, volume_money,
         #                                                                            turnover, pe, value)
-        market = Market(name, float(total_market)/100000000, float(volume_money)/100000000, turnover, pe)
+        market = Index(name, float(total_market) / 100000000, float(volume_money) / 100000000, turnover, pe)
         # print market
         return market
 

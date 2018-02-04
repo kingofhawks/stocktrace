@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from api.serializers import *
-from market.models import Market, Sw, Cix, AhIndex
+from market.models import Index, Sw, Cix, AhIndex
 from market.parse import *
 import pymongo
 
