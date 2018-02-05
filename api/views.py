@@ -18,25 +18,22 @@ DB_HOST = 'localhost'
 db = getattr(pymongo.MongoClient(host=DB_HOST), DB_NAME)
 
 
-class MarketView(APIView):
+class IndexView(APIView):
 
     def get(self, request, *args, **kw):
         # Process any get params that you may need
         # If you don't need to process get params,
         # you can skip this part
         print('*'*15)
-        # market = Market(1000, 100, 1.2, 20)
-        # serializer = MarketSerializer(market)
-        market = market_list()
-        # serializer = MarketOverallSerializer(market)
-        serializer = MarketsSerializer({'markets': market})
+        name = request.GET.get('name')
+        items = Index.objects(name=name).order_by('date')
+        serializer = IndexListSerializer({'items': items})
         # print serializer.is_valid()
         # print serializer.errors
         content = JSONRenderer().render(serializer.data)
         print('**********content:{}'.format(content))
         json_output = json.loads(content)
         print('****json:{}'.format(json_output))
-        # response = Response(json_output.get('markets'), status=status.HTTP_200_OK)
         response = Response(json_output, status=status.HTTP_200_OK)
 
         return response

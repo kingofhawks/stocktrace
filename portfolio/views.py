@@ -3,7 +3,7 @@ import os
 from django.shortcuts import render, render_to_response
 from portfolio.dao import *
 from stocktrace.stock import Stock
-from portfolio.portfolio import polling, snapshot, market_value
+from portfolio.portfolio import  snapshot, market_value
 from django.http import HttpResponse
 import json
 from django.shortcuts import redirect
