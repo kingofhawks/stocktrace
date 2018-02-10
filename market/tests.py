@@ -27,6 +27,9 @@ class ParseTestCase(TestCase):
     def test_cs_index_all(self):
         download_cs_index_all('20170101')
 
+    def test_hscei(self):
+        hs_cei()
+
     def test_sz(self):
         market = parse_sz_market()
         if market:
@@ -42,7 +45,6 @@ class ParseTestCase(TestCase):
         if market:
             market.save()
 
-
     def test_cyb(self):
         market = parse_cyb_market()
         if market:
@@ -50,7 +52,6 @@ class ParseTestCase(TestCase):
 
     def test_cyb2(self):
         parse_cyb2()
-
 
     def test_gdp(self):
         parse_securitization_rate()
