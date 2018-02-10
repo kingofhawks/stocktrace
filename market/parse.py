@@ -172,9 +172,12 @@ def hs_cei():
             print(row)
             date = row[0].value
             pe = row[1].value
-            if date and pe:
+            print(type(pe))
+            if date and pe and type(pe) == float:
                 py_date = xlrd.xldate.xldate_as_datetime(date, book.datemode)
-                print(py_date)
+                # print(py_date)
+                date = str(py_date)
+                Index.objects(name='HSCEI', date=date).update_one(name='HSCEI', date=date, pe=pe, upsert=True)
 
 
 # average PE for shanghai http://www.sse.com.cn/market/stockdata/overview/monthly/
