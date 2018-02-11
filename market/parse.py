@@ -168,6 +168,8 @@ def hs_cei():
         sh = book.sheet_by_index(sheet)
         for rx in range(sh.nrows):
             row = sh.row(rx)
+            # df = DataFrame(row)
+            # print(df)
             # print(row)
             date = row[0].value
             pe = row[1].value
@@ -178,6 +180,7 @@ def hs_cei():
                 date = str(py_date)
                 print(pd.to_datetime(date))
                 Index.objects(name=name, date=date).update_one(name=name, date=date, pe=pe, upsert=True)
+
 
 
 # average PE for shanghai http://www.sse.com.cn/market/stockdata/overview/monthly/
