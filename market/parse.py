@@ -160,24 +160,23 @@ def download_cs_index_all(begin_date='20171228', end_date=None):
 def hs_cei():
     url = 'http://www.hsi.com.hk/HSI-Net/static/revamp/contents/en/dl_centre/reports_stat/monthly/pe/hscei.xls'
     r = requests.get(url)
-    print(r.content)
     file_contents = io.BytesIO(r.content)
     book = xlrd.open_workbook(file_contents=file_contents.read())
-    print(book)
+    # print(book)
+    name = 'HSCEI'
     for sheet in range(book.nsheets):
         sh = book.sheet_by_index(sheet)
-        print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
         for rx in range(sh.nrows):
             row = sh.row(rx)
-            print(row)
+            # print(row)
             date = row[0].value
             pe = row[1].value
-            print(type(pe))
+            # print(type(pe))
             if date and pe and type(pe) == float:
                 py_date = xlrd.xldate.xldate_as_datetime(date, book.datemode)
                 # print(py_date)
                 date = str(py_date)
-                Index.objects(name='HSCEI', date=date).update_one(name='HSCEI', date=date, pe=pe, upsert=True)
+                Index.objects(name=name, date=date).update_one(name=name, date=date, pe=pe, upsert=True)
 
 
 # average PE for shanghai http://www.sse.com.cn/market/stockdata/overview/monthly/
