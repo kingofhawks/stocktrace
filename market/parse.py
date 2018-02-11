@@ -176,6 +176,7 @@ def hs_cei():
                 py_date = xlrd.xldate.xldate_as_datetime(date, book.datemode)
                 # print(py_date)
                 date = str(py_date)
+                print(pd.to_datetime(date))
                 Index.objects(name=name, date=date).update_one(name=name, date=date, pe=pe, upsert=True)
 
 

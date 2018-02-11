@@ -27,6 +27,7 @@ class IndexView(APIView):
         print('*'*15)
         name = request.GET.get('name')
         items = Index.objects(name=name).order_by('date')
+        df = pd.DataFrame(list(items))
         serializer = IndexListSerializer({'items': items})
         # print serializer.is_valid()
         # print serializer.errors
@@ -34,6 +35,13 @@ class IndexView(APIView):
         print('**********content:{}'.format(content))
         json_output = json.loads(content)
         print('****json:{}'.format(json_output))
+        pb_list = []
+        pe_list = []
+        for item in json_output.get('items'):
+            date = int(item.get('BargainDate'))
+            pb_list.append([date, item.get('PB')])
+            pe_list.append([date, item.get('PE')])
+        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['PB'].mean(), 'PE_avg': df['PE'].mean()}
         response = Response(json_output, status=status.HTTP_200_OK)
 
         return response

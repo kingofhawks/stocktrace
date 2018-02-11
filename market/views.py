@@ -7,6 +7,10 @@ def sw(request):
     return render(request, 'sw.html')
 
 
+def cs_index(request):
+    return render(request, 'cs_index.html')
+
+
 def history(request):
     code = request.GET.get('code') or 'SH600029'
     return render(request, 'stock_history.html', {'code': code})

@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Market
+        <small>CS Index</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <section class="col-xs-12">
+    <form>
+    <div>
+        <label for="code">Select index</label>
+        <select id="code" name="code">
+            <option value="801010">农林牧渔</option>
+            <option value="801020">采掘</option>
+            <option value="801030">化工</option>
+            <option value="801040">钢铁</option>
+            <option value="801050">有色金属</option>
+            <option value="801080">电子</option>
+            <option value="801110">家用电器</option>
+            <option value="801120">食品饮料</option>
+            <option value="801130">纺织服装</option>
+            <option value="801140">轻工制造</option>
+            <option value="801150" selected>医药生物</option>
+            <option value="801160">公用事业</option>
+            <option value="801170">交通运输</option>
+            <option value="801180">房地产</option>
+            <option value="801200">商业贸易</option>
+            <option value="801210">休闲服务</option>
+            <option value="801230">综合</option>
+            <option value="801710">建筑材料</option>
+            <option value="801720">建筑装饰</option>
+            <option value="801730">电气设备</option>
+            <option value="801740">国防军工</option>
+            <option value="801750">计算机</option>
+            <option value="801760">传媒</option>
+            <option value="801770">通信</option>
+            <option value="801780">银行</option>
+            <option value="801790">非银金融</option>
+            <option value="801880">汽车</option>
+            <option value="801890">机械设备</option>
+        </select>
+    </div>
+</form>
+<div id="container" style="width:100%; height:400px;"></div>
+            </section>
+            </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="../static/highcharts/highcharts.js"></script>
+<script>
+function render(code){
+    console.log("render chart with code***"+code);
+    $.getJSON('http://localhost:8000/api/cs?name='+code, function (data) {
+        console.log(data);
+        {#averagePB = data['PB_avg'];#}
+        averagePE = data['PE_avg'];
+        {#console.log(averagePB);#}
+        console.log(averagePE);
+        $('#container').highcharts({
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: 'CS index over time'
+            },
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                        'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: [
+                {
+                    title: {
+                        text: 'PB'
+                    },
+                    plotLines: [{
+                    color: '#000',
+                    dashStyle: 'Solid', //Dash,Dot,Solid,默认Solid
+                    width: 1.5,
+                    value: averagePB,
+                    zIndex: 5,
+                    label: {
+                        text: 'average PB:'+averagePB,
+                        align: 'center',
+                        style: {
+                            color: 'blue'
+                        }
+                    }
+                }]
+                },
+                {
+                    title: {
+                        text: 'PE'
+                    },
+                    plotLines: [{
+                    color: 'black',
+                    dashStyle: 'Dash', //Dash,Dot,Solid,默认Solid
+                    width: 1.5,
+                    value: averagePE,
+                    zIndex: 5,
+                    label: {
+                        text: 'average PE:'+averagePE,
+                        align: 'center',
+                        style: {
+                            color: 'black'
+                        }
+                    }
+                }],
+                    opposite: true //right-side y-axis
+                }],
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 80,
+                verticalAlign: 'top',
+                y: 55,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                },
+                series:{
+                    turboThreshold:5000//set it to a larger threshold, it is by default to render 1000 points
+                }
+            },
+            series: [{
+                type: 'area',
+                name: 'PB',
+                data: data['PB']
+            },{
+                type: 'area',
+                name: 'PE',
+                yAxis: 1,
+                data: data['PE']
+            }]
+        });
+    });
+    }
+
+$(function () {
+    render('HSCEI');
+
+    $( "#code" ).change(function() {
+    var code = $(this).val();
+    render(code);
+});
+});
+</script>
+{% endblock %}
+
