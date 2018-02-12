@@ -27,8 +27,14 @@ class ParseTestCase(TestCase):
     def test_cs_index_all(self):
         download_cs_index_all('20170101')
 
+    def test_csi(self):
+        cs_index('20180212')
+
     def test_hscei(self):
         hs_cei()
+
+    def test_hscei_daily(self):
+        hs_cei_daily()
 
     def test_sz(self):
         market = parse_sz_market()

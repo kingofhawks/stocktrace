@@ -156,12 +156,76 @@ def download_cs_index_all(begin_date='20171228', end_date=None):
         download_cs_index(day)
 
 
-# H股指数
-def hs_cei():
-    url = 'http://www.hsi.com.hk/HSI-Net/static/revamp/contents/en/dl_centre/reports_stat/monthly/pe/hscei.xls'
+# 中证指数行业PE
+def cs_index(date='20180212'):
+    # http://115.29.204.48/syl/csi20180212.zip
+    day = arrow.get(date, 'YYYYMMDD').date()
+    weekday = day.weekday()
+    # ignore weekend
+    if weekday == 5 or weekday == 6:
+        return
+    url = 'http://115.29.204.48/syl/bk'+date+'.zip'
+    r = requests.get(url)
+    if r.status_code == 404:
+        return
+    # create memory file
+    z = zipfile.ZipFile(io.BytesIO(r.content))
+    # not extract to disk file here
+    # z.extractall()
+    memory_unzip_files = extract_zip(z)
+    # print(zip_files)
+    # pandas read_csv not work!
+    # df = pd.read_csv("bk20171228.csv")
+    # xls_file = pd.ExcelFile('bk20171228.xls', encoding_override="gb2312")
+    # xls_file = pd.read_excel('bk20171228.xls', encoding="gb2312")
+    for name in memory_unzip_files.keys():
+        df = pd.read_excel(io=memory_unzip_files.get(name), engine='xlrd')
+        print(df)
+        book = xlrd.open_workbook(file_contents=memory_unzip_files.get(name), encoding_override="gbk")
+        print("The number of worksheets is {0}".format(book.nsheets))
+        print("Worksheet name(s): {0}".format(book.sheet_names()))
+        for sheet in range(book.nsheets):
+            sh = book.sheet_by_index(sheet)
+            print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
+            for rx in range(sh.nrows):
+                row = sh.row(rx)
+                # print(row)
+                name = row[0].value
+                value = row[1].value
+                print(name, value)
+                # print(pe.replace('.', '', 1).isdigit(), type(pe))
+                if value.replace('.', '', 1).isdigit():
+                    if sheet == 0:
+                        # 静态市盈率
+                        Index.objects(name=name, date=day).update_one(name=name, date=day, pe=value, upsert=True)
+                    elif sheet == 1:
+                        # 滚动市盈率
+                        print(Index.objects(name=name, date=day))
+                        Index.objects(name=name, date=day).update_one(name=name, pe_ttm=value, upsert=True)
+                    elif sheet == 2:
+                        # 板块市净率
+                        Index.objects(name=name, date=day).update_one(name=name, pb=value, upsert=True)
+                    elif sheet == 3:
+                        # 板块股息率
+                        Index.objects(name=name, date=day).update_one(name=name, dividend_yield_ratio=value, upsert=True)
+
+
+def get_excel_book(url):
     r = requests.get(url)
     file_contents = io.BytesIO(r.content)
+    print(file_contents)
     book = xlrd.open_workbook(file_contents=file_contents.read())
+    # book = pd.read_csv(file_contents, encoding="gb18030")
+    return book
+
+
+# H股指数monthly
+def hs_cei():
+    url = 'http://www.hsi.com.hk/HSI-Net/static/revamp/contents/en/dl_centre/reports_stat/monthly/pe/hscei.xls'
+    # r = requests.get(url)
+    # file_contents = io.BytesIO(r.content)
+    # book = xlrd.open_workbook(file_contents=file_contents.read())
+    book = get_excel_book(url)
     # print(book)
     name = 'HSCEI'
     for sheet in range(book.nsheets):
@@ -181,6 +245,12 @@ def hs_cei():
                 print(pd.to_datetime(date))
                 Index.objects(name=name, date=date).update_one(name=name, date=date, pe=pe, upsert=True)
 
+
+def hs_cei_daily():
+    url = 'http://www.hsi.com.hk/HSI-Net/static/revamp/contents/en/indexes/report/hscei/idx_9Feb18.csv'
+    # TODO
+    df = pd.read_csv(url)
+    print(df)
 
 
 # average PE for shanghai http://www.sse.com.cn/market/stockdata/overview/monthly/
