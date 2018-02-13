@@ -28,7 +28,7 @@ class ParseTestCase(TestCase):
         download_cs_index_all('20170101')
 
     def test_csi(self):
-        cs_index('20180212')
+        cs_index('20180209')
 
     def test_hscei(self):
         hs_cei()

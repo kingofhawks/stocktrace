@@ -24,6 +24,44 @@ class Index(Document):
                 self.pe, self.pe_ttm, self.pb, self.dividend_yield_ratio, self.date)
 
 
+class Industry(Document):
+    name = StringField()
+    code = StringField()
+    # 静态PE
+    pe = FloatField()
+    # 滚动
+    pe_ttm = FloatField()
+    pb = FloatField()
+    # 股息率
+    dividend_yield_ratio = FloatField()
+    date = DateTimeField()
+
+    def __str__(self):
+        return 'index:{} PE:{} PE_TTM:{} PB:{} DYR:{} Date:{}'.format(self.name,
+                self.pe, self.pe_ttm, self.pb, self.dividend_yield_ratio, self.date)
+
+
+class Equity(Document):
+    name = StringField()
+    code = StringField()
+    code1 = StringField()
+    code2 = StringField()
+    code3 = StringField()
+    code4 = StringField()
+    # 静态PE
+    pe = FloatField()
+    # 滚动
+    pe_ttm = FloatField()
+    pb = FloatField()
+    # 股息率
+    dividend_yield_ratio = FloatField()
+    date = DateTimeField()
+
+    def __str__(self):
+        return 'name:{} code:{} PE:{} PE_TTM:{} PB:{} DYR:{} Date:{}'.format(self.name, self.code,
+                self.pe, self.pe_ttm, self.pb, self.dividend_yield_ratio, self.date)
+
+
 class AhIndex(Document):
     value = FloatField()
     date = DateTimeField(default=datetime.datetime.now())
