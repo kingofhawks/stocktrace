@@ -16,6 +16,32 @@ class IndexListSerializer(serializers.Serializer):
     items = IndexSerializer(many=True)  # A nested list of 'edit' items.
 
 
+class IndustrySerializer(serializers.Serializer):
+    name = serializers.CharField(read_only=True)
+    code = serializers.CharField(read_only=True)
+    pe = serializers.FloatField(required=False)
+    pe_ttm = serializers.FloatField(required=False)
+    pb = serializers.FloatField(required=False)
+    date = serializers.CharField(required=False)
+
+
+class IndustryListSerializer(serializers.Serializer):
+    items = IndexSerializer(many=True)  # A nested list of 'edit' items.
+
+
+class EquitySerializer(serializers.Serializer):
+    name = serializers.CharField(read_only=True)
+    code = serializers.CharField(read_only=True)
+    pe = serializers.FloatField(required=False)
+    pe_ttm = serializers.FloatField(required=False)
+    pb = serializers.FloatField(required=False)
+    date = serializers.CharField(required=False)
+
+
+class EquityListSerializer(serializers.Serializer):
+    items = IndexSerializer(many=True)  # A nested list of 'edit' items.
+
+
 @DeprecationWarning
 class MarketOverallSerializer(serializers.Serializer):
     # markets = MarketSerializer(many=True)  # A nested list of 'edit' items.

@@ -21,14 +21,17 @@ class ParseTestCase(TestCase):
     def test_sh_pe(self):
         avg_sh_pe()
 
-    def test_cs_index(self):
-        download_cs_index('20170102')
-
-    def test_cs_index_all(self):
-        download_cs_index_all('20170101')
-
     def test_csi(self):
-        cs_index('20180209')
+        csi('20170102')
+
+    def test_csi_all(self):
+        csi_all('20170101')
+
+    def test_csi_industry(self):
+        csi_industry('20180209')
+
+    def test_csi_industry_all(self):
+        csi_industry_all('20180102')
 
     def test_hscei(self):
         hs_cei()

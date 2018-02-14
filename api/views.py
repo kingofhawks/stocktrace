@@ -42,7 +42,64 @@ class IndexView(APIView):
             pb_list.append([date, item.get('PB')])
             pe_list.append([date, item.get('PE')])
         result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['PB'].mean(), 'PE_avg': df['PE'].mean()}
-        response = Response(json_output, status=status.HTTP_200_OK)
+        response = Response(result, status=status.HTTP_200_OK)
+
+        return response
+
+
+class IndustryView(APIView):
+
+    def get(self, request, *args, **kw):
+        # Process any get params that you may need
+        # If you don't need to process get params,
+        # you can skip this part
+        print('*'*15)
+        code = request.GET.get('code')
+        items = Industry.objects(code=code).order_by('date')
+        df = pd.DataFrame(list(items))
+        print(df)
+        serializer = IndustryListSerializer({'items': items})
+        content = JSONRenderer().render(serializer.data)
+        # print('**********content:{}'.format(content))
+        json_output = json.loads(content)
+        # print('****json:{}'.format(json_output))
+        pb_list = []
+        pe_list = []
+        for item in json_output.get('items'):
+            # date = int(item.get('date'))
+            # date = datetime.strptime(item.get('date'), '%Y-%m-%d %H:%M:%S').date()
+            date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
+            pb_list.append([date, item.get('pb')])
+            pe_list.append([date, item.get('pe')])
+        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
+        response = Response(result, status=status.HTTP_200_OK)
+
+        return response
+
+
+class EquityView(APIView):
+
+    def get(self, request, *args, **kw):
+        # Process any get params that you may need
+        # If you don't need to process get params,
+        # you can skip this part
+        print('*'*15)
+        name = request.GET.get('name')
+        items = Equity.objects(name=name).order_by('date')
+        df = pd.DataFrame(list(items))
+        serializer = EquityListSerializer({'items': items})
+        content = JSONRenderer().render(serializer.data)
+        print('**********content:{}'.format(content))
+        json_output = json.loads(content)
+        print('****json:{}'.format(json_output))
+        pb_list = []
+        pe_list = []
+        for item in json_output.get('items'):
+            date = int(item.get('date'))
+            pb_list.append([date, item.get('PB')])
+            pe_list.append([date, item.get('PE')])
+        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['PB'].mean(), 'PE_avg': df['PE'].mean()}
+        response = Response(result, status=status.HTTP_200_OK)
 
         return response
 

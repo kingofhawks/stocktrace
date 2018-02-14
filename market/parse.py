@@ -74,7 +74,7 @@ def extract_zip(input_zip):
 
 
 # 中证指数
-def download_cs_index(date='20171228'):
+def csi(date='20171228'):
     # http://115.29.204.48/syl/bk20180202.zip
     day = arrow.get(date,'YYYYMMDD').date()
     weekday = day.weekday()
@@ -141,7 +141,7 @@ def download_cs_index(date='20171228'):
     #         print(market)
 
 
-def download_cs_index_all(begin_date='20171228', end_date=None):
+def csi_all(begin_date='20171228', end_date=None):
     date_format = 'YYYYMMDD'
     if end_date is None:
         end_date = arrow.now().format(date_format)
@@ -152,12 +152,11 @@ def download_cs_index_all(begin_date='20171228', end_date=None):
     print(delta.days)
     for i in range(delta.days):
         day = begin_arrow.shift(days=i).format(date_format)
-        print(day)
-        download_cs_index(day)
+        csi(day)
 
 
-# 中证指数行业PE
-def cs_index(date='20180212'):
+# 中证指数行业/个股PE
+def csi_industry(date='20180212'):
     # http://115.29.204.48/syl/csi20180212.zip
     day = arrow.get(date, 'YYYYMMDD').date()
     weekday = day.weekday()
@@ -232,6 +231,19 @@ def cs_index(date='20180212'):
                                                                        code4=code4,
                                                                        pe=pe, pe_ttm=pe_ttm, pb=pb,
                                                                        dividend_yield_ratio=dyr, upsert=True)
+
+
+def csi_industry_all(begin_date='20171228', end_date=None):
+    date_format = 'YYYYMMDD'
+    if end_date is None:
+        end_date = arrow.now().format(date_format)
+    begin_arrow = arrow.get(begin_date, date_format)
+    begin = begin_arrow.date()
+    end = arrow.get(end_date, date_format).date()
+    delta = end-begin
+    for i in range(delta.days):
+        day = begin_arrow.shift(days=i).format(date_format)
+        csi_industry(day)
 
 
 def get_excel_book(url):
