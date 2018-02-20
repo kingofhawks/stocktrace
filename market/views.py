@@ -1,6 +1,9 @@
+import pymongo
 from django.shortcuts import render
 from market.cix import cix as cix2
-
+DB_NAME = 'stocktrace'
+DB_HOST = 'localhost'
+db = getattr(pymongo.MongoClient(host=DB_HOST), DB_NAME)
 
 # Create your views here.
 def sw(request):
@@ -12,7 +15,14 @@ def cs_index(request):
 
 
 def industry(request):
-    return render(request, 'industry.html')
+    code = request.GET.get('code') or '00'
+    industry_col = db.industry.find()
+    print(industry_col)
+    industry_list = list(industry_col)
+    print(industry_list)
+    # for industry in industry_list:
+
+    return render(request, 'industry.html', {'code': code, 'industry_list': industry_list})
 
 
 def history(request):

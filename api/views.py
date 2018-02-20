@@ -56,7 +56,8 @@ class IndustryView(APIView):
         print('*'*15)
         code = request.GET.get('code')
         items = Industry.objects(code=code).order_by('date')
-        df = pd.DataFrame(list(items))
+        industry_col = db.industry.find({'code': code})
+        df = pd.DataFrame(list(industry_col))
         print(df)
         serializer = IndustryListSerializer({'items': items})
         content = JSONRenderer().render(serializer.data)
@@ -147,7 +148,7 @@ class SwView(APIView):
         df = pd.DataFrame(list(sw_col))
         # print len(df)
         # df = DataFrame(list(sw_data))
-        # print df
+        print(df)
         # df = df.sort_index(by='BargainDate', ascending=False)
         # print 'PE min:{}'.format(df['PE'].min())
         # print 'PE mean:{}'.format(df['PE'].mean())
