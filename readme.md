@@ -1,37 +1,19 @@
 pip install -r requirements.txt  
-Revision History
+mongodb 3.6  
+mongodb backup:  
+mongodump  --db stocktrace  
+mongodb restore:  
+mongorestore --collection industry --db stocktrace dump/stocktrace/industry.bson  
 
-2016/1/15--v0.4
-1. use tushare to parse finance data
-
-2013/02/05--v0.3
-
-1.screen by Yahoo and support category
-
-2012/09/18--v0.2
-
-1.add django view /zytj/candle
-
-2012/09/11--v0.1
-
-1.Parse history data from Yahoo CSV API
-
-2.Support NHNL screener
-
-http://localhost:8000/zytj/alist
-
+http://localhost:8000
 
 stocktrace will parse finance data from famous finance web sites and generate some useful report
 
-* Parse stock data, both real time and history data from xueqiu/shenwan/Sina/Yahoo(csv or YDN)/ifeng/Google/reuters etc
-
-* Market Analysis based on PB/PE/GDP/turnover/AH etc
-
+* Parse stock data, both real time and history data from xueqiu/shenwan/Sina/Yahoo(csv or YDN)/ifeng etc
+* Market Analysis based on PB/PE/GDP/turnover/AH from csindex/SW index/AH index etc  
 * Screen stocks based on 52 week's high or low percentage
-
+* NHNL index  
 * Generate OHLC chart
-
-
 
 How to run tests
 

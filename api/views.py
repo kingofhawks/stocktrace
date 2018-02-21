@@ -27,7 +27,8 @@ class IndexView(APIView):
         print('*'*15)
         name = request.GET.get('name')
         items = Index.objects(name=name).order_by('date')
-        df = pd.DataFrame(list(items))
+        index_col = db.index.find({'name': name})
+        df = pd.DataFrame(list(index_col))
         serializer = IndexListSerializer({'items': items})
         # print serializer.is_valid()
         # print serializer.errors
@@ -38,10 +39,10 @@ class IndexView(APIView):
         pb_list = []
         pe_list = []
         for item in json_output.get('items'):
-            date = int(item.get('BargainDate'))
-            pb_list.append([date, item.get('PB')])
-            pe_list.append([date, item.get('PE')])
-        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['PB'].mean(), 'PE_avg': df['PE'].mean()}
+            date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
+            pb_list.append([date, item.get('pb')])
+            pe_list.append([date, item.get('pe')])
+        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
         response = Response(result, status=status.HTTP_200_OK)
 
         return response
@@ -87,6 +88,8 @@ class EquityView(APIView):
         print('*'*15)
         name = request.GET.get('name')
         items = Equity.objects(name=name).order_by('date')
+        equity_col = db.equity.find({'name': name})
+        df = pd.DataFrame(list(equity_col))
         df = pd.DataFrame(list(items))
         serializer = EquityListSerializer({'items': items})
         content = JSONRenderer().render(serializer.data)
@@ -96,10 +99,10 @@ class EquityView(APIView):
         pb_list = []
         pe_list = []
         for item in json_output.get('items'):
-            date = int(item.get('date'))
-            pb_list.append([date, item.get('PB')])
-            pe_list.append([date, item.get('PE')])
-        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['PB'].mean(), 'PE_avg': df['PE'].mean()}
+            date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
+            pb_list.append([date, item.get('pb')])
+            pe_list.append([date, item.get('pe')])
+        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
         response = Response(result, status=status.HTTP_200_OK)
 
         return response

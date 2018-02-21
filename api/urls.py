@@ -4,7 +4,7 @@ from api.views import *
 
 urlpatterns = [
     # Examples:
-    url(r'^index', IndexView.as_view()),
+    url(r'^csi', IndexView.as_view()),
     url(r'^industry', IndustryView.as_view()),
     url(r'^equity', EquityView.as_view()),
     url(r'^ah', AhView.as_view()),

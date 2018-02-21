@@ -5,13 +5,15 @@ DB_NAME = 'stocktrace'
 DB_HOST = 'localhost'
 db = getattr(pymongo.MongoClient(host=DB_HOST), DB_NAME)
 
+
 # Create your views here.
 def sw(request):
     return render(request, 'sw.html')
 
 
 def cs_index(request):
-    return render(request, 'cs_index.html')
+    name = request.GET.get('name') or '上海A股'
+    return render(request, 'cs_index.html', {'name': name})
 
 
 def industry(request):
