@@ -20,6 +20,10 @@
     <div>
         <label for="code">Select index</label>
         <select id="code" name="code">
+            <option value="-">-</option>
+            {% for index in indexes%}
+                <option value="{{index.name}}">{{index.name}}</option>
+            {%endfor%}
         </select>
     </div>
 </form>
@@ -67,7 +71,7 @@ function render(code){
                     value: averagePB,
                     zIndex: 5,
                     label: {
-                        text: 'average PB:'+averagePB,
+                        text: 'PB:'+averagePB,
                         align: 'center',
                         style: {
                             color: 'blue'
@@ -86,7 +90,7 @@ function render(code){
                     value: averagePE,
                     zIndex: 5,
                     label: {
-                        text: 'average PE:'+averagePE,
+                        text: 'PE:'+averagePE,
                         align: 'center',
                         style: {
                             color: 'black'
@@ -151,9 +155,9 @@ $(function () {
     render('上海A股');
 
     $( "#code" ).change(function() {
-    var code = $(this).val();
-    render(code);
-});
+        var code = $(this).val();
+        render(code);
+    });
 });
 </script>
 {% endblock %}

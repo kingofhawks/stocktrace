@@ -41,8 +41,13 @@ class IndexView(APIView):
         for item in json_output.get('items'):
             # date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
             timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
-            pb_list.append([timestamp, item.get('pb')])
+            if item.get('pb'):
+                pb_list.append([timestamp, item.get('pb')])
             pe_list.append([timestamp, item.get('pe')])
+
+        # HSCEI index has no pb data
+        if name == 'HSCEI':
+            df['pb'] = 0
         result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
         response = Response(result, status=status.HTTP_200_OK)
 

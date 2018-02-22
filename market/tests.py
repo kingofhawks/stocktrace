@@ -25,13 +25,13 @@ class ParseTestCase(TestCase):
         csi('20170102')
 
     def test_csi_all(self):
-        csi_all('20170101')
+        csi_all('20110503', '20170101')
 
     def test_csi_industry(self):
         csi_industry('20180209')
 
     def test_csi_industry_all(self):
-        csi_industry_all('20180102')
+        csi_industry_all('20110503', '20171231')
 
     def test_hscei(self):
         hs_cei()

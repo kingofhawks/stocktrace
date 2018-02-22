@@ -13,7 +13,12 @@ def sw(request):
 
 def cs_index(request):
     name = request.GET.get('name') or '上海A股'
-    return render(request, 'cs_index.html', {'name': name})
+    index_group = db.index.aggregate([{"$group": {"_id": "$name"}}], cursor={})
+    index_list = list(index_group)
+    for index in index_list:
+        index['name'] = index.get('_id')
+    print(index_list)
+    return render(request, 'cs_index.html', {'name': name, 'indexes': index_list})
 
 
 def industry(request):
@@ -25,6 +30,12 @@ def industry(request):
     # for industry in industry_list:
 
     return render(request, 'industry.html', {'code': code, 'industry_list': industry_list})
+
+
+def equity(request):
+    code = request.GET.get('code') or '00'
+
+    return render(request, 'equity.html', {'code': code})
 
 
 def history(request):

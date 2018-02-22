@@ -21,7 +21,7 @@
         <label for="code">Select industry code</label>
         <select id="code" name="code">
             {% for industry in industry_list%}
-                <option value="{{industry.code}}">{{industry.code}}</option>
+                <option value="{{industry.code}}">{{industry.name}}</option>
             {%endfor%}
         </select>
     </div>
@@ -48,7 +48,7 @@ function render(code){
                 zoomType: 'x'
             },
             title: {
-                text: 'Industry over time'
+                text: 'Industry over time '+code
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
