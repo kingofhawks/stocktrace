@@ -39,9 +39,10 @@ class IndexView(APIView):
         pb_list = []
         pe_list = []
         for item in json_output.get('items'):
-            date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
-            pb_list.append([date, item.get('pb')])
-            pe_list.append([date, item.get('pe')])
+            # date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
+            timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
+            pb_list.append([timestamp, item.get('pb')])
+            pe_list.append([timestamp, item.get('pe')])
         result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
         response = Response(result, status=status.HTTP_200_OK)
 
@@ -70,9 +71,10 @@ class IndustryView(APIView):
         for item in json_output.get('items'):
             # date = int(item.get('date'))
             # date = datetime.strptime(item.get('date'), '%Y-%m-%d %H:%M:%S').date()
-            date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
-            pb_list.append([date, item.get('pb')])
-            pe_list.append([date, item.get('pe')])
+            # timestamp is million seconds
+            timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp*1000
+            pb_list.append([timestamp, item.get('pb')])
+            pe_list.append([timestamp, item.get('pe')])
         result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
         response = Response(result, status=status.HTTP_200_OK)
 
@@ -85,12 +87,10 @@ class EquityView(APIView):
         # Process any get params that you may need
         # If you don't need to process get params,
         # you can skip this part
-        print('*'*15)
-        name = request.GET.get('name')
-        items = Equity.objects(name=name).order_by('date')
-        equity_col = db.equity.find({'name': name})
+        code = request.GET.get('code')
+        items = Equity.objects(code=code).order_by('date')
+        equity_col = db.equity.find({'code': code})
         df = pd.DataFrame(list(equity_col))
-        df = pd.DataFrame(list(items))
         serializer = EquityListSerializer({'items': items})
         content = JSONRenderer().render(serializer.data)
         print('**********content:{}'.format(content))
@@ -99,9 +99,10 @@ class EquityView(APIView):
         pb_list = []
         pe_list = []
         for item in json_output.get('items'):
-            date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
-            pb_list.append([date, item.get('pb')])
-            pe_list.append([date, item.get('pe')])
+            # date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
+            timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
+            pb_list.append([timestamp, item.get('pb')])
+            pe_list.append([timestamp, item.get('pe')])
         result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
         response = Response(result, status=status.HTTP_200_OK)
 

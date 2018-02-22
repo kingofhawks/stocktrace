@@ -702,10 +702,12 @@ def parse_sw_history2(begin_date='2014-03-12', end_date=None, code='801150'):
 
     # convert string to float
     df[['PE', 'PB']] = df[['PE', 'PB']].astype(float)
-
-    df_sort_pe = df.sort(columns='PE', ascending=True)
+    print(df)
+    # df_sort_pe = df.sort(columns='PE', ascending=True)
+    df_sort_pe = df.sort_values(by='PE', ascending=True)
     # print df_sort_pe
-    df_sort_pb = df.sort(columns='PB', ascending=True)
+    # df_sort_pb = df.sort(columns='PB', ascending=True)
+    df_sort_pb = df.sort_values(by='PB', ascending=True)
     # print df_sort_pb
     # print 'PE mean:{}'.format(df['PE'].mean())
     # print 'PB mean:{}'.format(df['PB'].mean())
