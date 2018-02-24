@@ -15,54 +15,53 @@ import io
 from django.conf import settings
 
 db = settings.DB
+date_format = 'YYYY-MM-DD'
 
 
 # 中证指数
-def csi(date='2011-05-04'):
+def csi_by_type(date='2011-05-04', data_type='zy1'):
     # http://115.29.204.48/syl/bk20180202.zip
-    day = arrow.get(date, 'YYYY-MM-DD').date()
+    day = arrow.get(date, date_format).date()
     weekday = day.weekday()
     # ignore weekend
     if weekday == 5 or weekday == 6:
         return
-    url = 'http://www.csindex.com.cn/zh-CN/downloads/industry-price-earnings-ratio?date={}&type=zy1'.format(date)
+    url = 'http://www.csindex.com.cn/zh-CN/downloads/industry-price-earnings-ratio?date={}&type={}'.format(date, data_type)
 
     page = parse(url).getroot()
-    result = etree.tostring(page)
-    print(result)
-
-    # for name in memory_unzip_files.keys():
-    #     book = xlrd.open_workbook(file_contents=memory_unzip_files.get(name), encoding_override="gbk")
-    #     print("The number of worksheets is {0}".format(book.nsheets))
-    #     print("Worksheet name(s): {0}".format(book.sheet_names()))
-    #     for sheet in range(book.nsheets):
-    #         sh = book.sheet_by_index(sheet)
-    #         print("{0} {1} {2}".format(sh.name, sh.nrows, sh.ncols))
-    #         for rx in range(sh.nrows):
-    #             row = sh.row(rx)
-    #             # print(row)
-    #             name = row[0].value
-    #             value = row[1].value
-    #             print(name, value)
-    #             # print(pe.replace('.', '', 1).isdigit(), type(pe))
-    #             if value.replace('.', '', 1).isdigit():
-    #                 if sheet == 0:
-    #                     # 静态市盈率
-    #                     Index.objects(name=name, date=day).update_one(name=name, date=day, pe=value, upsert=True)
-    #                 elif sheet == 1:
-    #                     # 滚动市盈率
-    #                     print(Index.objects(name=name, date=day))
-    #                     Index.objects(name=name, date=day).update_one(name=name, pe_ttm=value, upsert=True)
-    #                 elif sheet == 2:
-    #                     # 板块市净率
-    #                     Index.objects(name=name, date=day).update_one(name=name, pb=value, upsert=True)
-    #                 elif sheet == 3:
-    #                     # 板块股息率
-    #                     Index.objects(name=name, date=day).update_one(name=name, dividend_yield_ratio=value, upsert=True)
+    # result = etree.tostring(page)
+    # print(result)
+    r = page.xpath('//table[@class="table  table-bg p_table table-bordered table-border mb-20"]');
+    tree = etree.ElementTree(r[0])
+    # print(etree.tostring(tree))
+    html_table = etree.tostring(tree)
+    dfs = pd.read_html(html_table, flavor='lxml')
+    df = dfs[0]
+    print(df)
+    # v1 = df.iloc[1][1]
+    # print(v1)
+    for index, row in df.iterrows():
+        name = row.iloc[0]
+        value = row.iloc[1]
+        print(index, name, value)
+        if data_type == 'zy1':
+            Index.objects(name=name, date=day).update_one(name=name, pe=value, upsert=True)
+        elif data_type == 'zy2':
+            Index.objects(name=name, date=day).update_one(name=name, pe_ttm=value, upsert=True)
+        elif data_type =='zy3':
+            Index.objects(name=name, date=day).update_one(name=name, pb=value, upsert=True)
+        elif data_type =='zy4':
+            Index.objects(name=name, date=day).update_one(name=name, dividend_yield_ratio=value, upsert=True)
 
 
-def csi_all(begin_date='20171228', end_date=None):
-    date_format = 'YYYYMMDD'
+def csi(date='2011-05-04'):
+    csi_by_type(date, 'zy1')
+    csi_by_type(date, 'zy2')
+    csi_by_type(date, 'zy3')
+    csi_by_type(date, 'zy4')
+
+
+def csi_all(begin_date='2017-12-28', end_date=None):
     if end_date is None:
         end_date = arrow.now().format(date_format)
     begin_arrow = arrow.get(begin_date, date_format)

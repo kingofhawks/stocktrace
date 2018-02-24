@@ -3,6 +3,8 @@ from market.parse import *
 from stocktrace.dao.stockdao import *
 from market.analysis import *
 from market.cix import *
+from market.csi import csi as csi2
+from market.csi import csi_all as csi_all2
 
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -32,6 +34,12 @@ class ParseTestCase(TestCase):
 
     def test_csi_industry_all(self):
         csi_industry_all('20170215', '20171231')
+
+    def test_csi2(self):
+        csi2('2018-02-23')
+
+    def test_csi2_all(self):
+        csi_all2('2018-02-20')
 
     def test_hscei(self):
         hs_cei()
