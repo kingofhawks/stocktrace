@@ -39,8 +39,11 @@ class ParseTestCase(TestCase):
     def test_csi_by_type(self):
         csi_by_type('2018-02-23', 'zy1')
 
+    def test_csi_by_type2(self):
+        csi_by_type('2018-02-23', 'zz4')
+
     def test_csi2(self):
-        csi2('2018-02-23')
+        csi2('2011-05-04')
 
     def test_csi2_all(self):
         csi_all2('2018-02-20')

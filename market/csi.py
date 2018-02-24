@@ -18,7 +18,7 @@ db = settings.DB
 date_format = 'YYYY-MM-DD'
 
 
-# 中证指数
+# 中证指数(主要板块/行业)
 def csi_by_type(date='2011-05-04', data_type='zy1'):
     # http://115.29.204.48/syl/bk20180202.zip
     day = arrow.get(date, date_format).date()
@@ -27,44 +27,57 @@ def csi_by_type(date='2011-05-04', data_type='zy1'):
     if weekday == 5 or weekday == 6:
         return
     url = 'http://www.csindex.com.cn/zh-CN/downloads/industry-price-earnings-ratio?date={}&type={}'.format(date, data_type)
-
+    print('url***', url);
     page = parse(url).getroot()
     # result = etree.tostring(page)
     # print(result)
-    r = page.xpath('//table[@class="table-bg p_table table-bordered table-border mb-20"]');
-    print(len(r))
+    xpath = '//table[@class="table  table-bg p_table table-bordered table-border mb-20"]'
+    if data_type == 'zz1' or data_type == 'zz2' or data_type == 'zz3' or data_type == 'zz4':
+        xpath = '//table[@class="table table-bg p_table table-bordered table-border mb-20"]'
+    r = page.xpath(xpath);
+    # print(len(r))
     tree = etree.ElementTree(r[0])
     # print(etree.tostring(tree))
     html_table = etree.tostring(tree)
     dfs = pd.read_html(html_table, flavor='lxml')
     df = dfs[0]
     print(df)
-    # v1 = df.iloc[1][1]
-    # print(v1)
+    # v1 = df.iloc[3][0]
+    # print(v1, df.iloc[3][1], df.iloc[3][2])
+    # print(v1, df.iloc[4][1], df.iloc[4][2])
     for index, row in df.iterrows():
-        name = row.iloc[0]
-        value = row.iloc[1]
-        print(index, name, value)
-        if data_type == 'zy1':
-            Index.objects(name=name, date=day).update_one(name=name, pe=value, upsert=True)
-        elif data_type == 'zy2':
-            Index.objects(name=name, date=day).update_one(name=name, pe_ttm=value, upsert=True)
-        elif data_type =='zy3':
-            Index.objects(name=name, date=day).update_one(name=name, pb=value, upsert=True)
-        elif data_type =='zy4':
-            Index.objects(name=name, date=day).update_one(name=name, dividend_yield_ratio=value, upsert=True)
-        elif data_type =='zz1':
-            # 行业静态市盈率
-            Industry.objects(code=name, date=day).update_one(code=name, date=day, name=name, pe=value, upsert=True)
-        elif data_type =='zz2':
-            # 行业滚动市盈率
-            Industry.objects(code=name, date=day).update_one(code=name, pe_ttm=value, upsert=True)
-        elif data_type =='zz2':
-            # 行业市净率
-            Industry.objects(code=name, date=day).update_one(code=name, pb=value, upsert=True)
-        elif data_type =='zz2':
-            # 行业股息率
-            Industry.objects(code=name, date=day).update_one(code=name, dividend_yield_ratio=value, upsert=True)
+        v0 = row.iloc[0]
+        v1 = row.iloc[1]
+        v2 = row.iloc[2]
+        # print(index, name, value)
+        print('index {} v0:{} v1:{} v2:{}***'.format(index, v0, v1, v2))
+        try:
+            if data_type == 'zy1':
+                # 静态市盈率
+                Index.objects(name=v0, date=day).update_one(name=v0, pe=v1, upsert=True)
+            elif data_type == 'zy2':
+                # 滚动市盈率
+                Index.objects(name=v0, date=day).update_one(name=v0, pe_ttm=v1, upsert=True)
+            elif data_type == 'zy3':
+                # 市净率
+                Index.objects(name=v0, date=day).update_one(name=v0, pb=v1, upsert=True)
+            elif data_type == 'zy4':
+                # 股息率
+                Index.objects(name=v0, date=day).update_one(name=v0, dividend_yield_ratio=v1, upsert=True)
+            elif data_type == 'zz1':
+                # 行业静态市盈率
+                Industry.objects(code=v0, date=day).update_one(code=v0, date=day, name=v1, pe=v2, upsert=True)
+            elif data_type == 'zz2':
+                # 行业滚动市盈率
+                Industry.objects(code=v0, date=day).update_one(code=v0, pe_ttm=v2, upsert=True)
+            elif data_type == 'zz3':
+                # 行业市净率
+                Industry.objects(code=v0, date=day).update_one(code=v0, pb=v2, upsert=True)
+            elif data_type == 'zz4':
+                # 行业股息率
+                Industry.objects(code=v0, date=day).update_one(code=v0, dividend_yield_ratio=v2, upsert=True)
+        except:
+            continue
 
 
 def csi(date='2011-05-04'):
@@ -72,6 +85,10 @@ def csi(date='2011-05-04'):
     csi_by_type(date, 'zy2')
     csi_by_type(date, 'zy3')
     csi_by_type(date, 'zy4')
+    csi_by_type(date, 'zz1')
+    csi_by_type(date, 'zz2')
+    csi_by_type(date, 'zz3')
+    csi_by_type(date, 'zz4')
 
 
 def csi_all(begin_date='2017-12-28', end_date=None):
@@ -87,7 +104,7 @@ def csi_all(begin_date='2017-12-28', end_date=None):
         csi(day)
 
 
-# 中证指数行业/个股PE
+# 中证指数(个股)
 def csi_industry(date='20180212'):
     # http://115.29.204.48/syl/csi20180212.zip
     day = arrow.get(date, 'YYYYMMDD').date()
