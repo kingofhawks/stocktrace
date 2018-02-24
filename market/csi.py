@@ -31,7 +31,8 @@ def csi_by_type(date='2011-05-04', data_type='zy1'):
     page = parse(url).getroot()
     # result = etree.tostring(page)
     # print(result)
-    r = page.xpath('//table[@class="table  table-bg p_table table-bordered table-border mb-20"]');
+    r = page.xpath('//table[@class="table-bg p_table table-bordered table-border mb-20"]');
+    print(len(r))
     tree = etree.ElementTree(r[0])
     # print(etree.tostring(tree))
     html_table = etree.tostring(tree)
@@ -52,6 +53,18 @@ def csi_by_type(date='2011-05-04', data_type='zy1'):
             Index.objects(name=name, date=day).update_one(name=name, pb=value, upsert=True)
         elif data_type =='zy4':
             Index.objects(name=name, date=day).update_one(name=name, dividend_yield_ratio=value, upsert=True)
+        elif data_type =='zz1':
+            # 行业静态市盈率
+            Industry.objects(code=name, date=day).update_one(code=name, date=day, name=name, pe=value, upsert=True)
+        elif data_type =='zz2':
+            # 行业滚动市盈率
+            Industry.objects(code=name, date=day).update_one(code=name, pe_ttm=value, upsert=True)
+        elif data_type =='zz2':
+            # 行业市净率
+            Industry.objects(code=name, date=day).update_one(code=name, pb=value, upsert=True)
+        elif data_type =='zz2':
+            # 行业股息率
+            Industry.objects(code=name, date=day).update_one(code=name, dividend_yield_ratio=value, upsert=True)
 
 
 def csi(date='2011-05-04'):
@@ -158,7 +171,6 @@ def csi_industry(date='20180212'):
 
 
 def csi_industry_all(begin_date='20171228', end_date=None):
-    date_format = 'YYYYMMDD'
     if end_date is None:
         end_date = arrow.now().format(date_format)
     begin_arrow = arrow.get(begin_date, date_format)
