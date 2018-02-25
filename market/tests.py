@@ -5,7 +5,7 @@ from market.analysis import *
 from market.cix import *
 from market.csi import csi as csi2
 from market.csi import csi_all as csi_all2
-from market.csi import csi_by_type
+from market.csi import csi_by_type, read_equity_by_date, read_equity
 
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -47,6 +47,12 @@ class ParseTestCase(TestCase):
 
     def test_csi2_all(self):
         csi_all2('2018-02-20')
+
+    def test_csi_equity(self):
+        read_equity_by_date()
+
+    def test_read_equity(self):
+        read_equity('600276', '2018-02-20', '2018-02-25')
 
     def test_hscei(self):
         hs_cei()
