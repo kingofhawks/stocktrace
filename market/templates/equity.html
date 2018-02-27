@@ -132,11 +132,11 @@ function render(code){
                 }
             },
             series: [{
-                type: 'area',
+                type: 'line',
                 name: 'PB',
                 data: data['PB']
             },{
-                type: 'area',
+                type: 'line',
                 name: 'PE',
                 yAxis: 1,
                 data: data['PE']
@@ -148,8 +148,8 @@ function render(code){
 $(function () {
     render('600276');
 
-    $( "#code" ).change(function() {
-        var code = $(this).val();
+    $('#code').on('input', function() {
+         var code = $(this).val();
         render(code);
     });
 });

@@ -3,8 +3,7 @@ from market.parse import *
 from stocktrace.dao.stockdao import *
 from market.analysis import *
 from market.cix import *
-from market.csi import csi as csi2
-from market.csi import csi_all as csi_all2
+from market.csi import read_index, read_industry, read_index_all, read_industry_all
 from market.csi import csi_by_type, read_equity_by_date, read_equity
 
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
@@ -42,13 +41,16 @@ class ParseTestCase(TestCase):
     def test_csi_by_type2(self):
         csi_by_type('2018-02-23', 'zz4')
 
-    def test_csi2(self):
-        csi2('2011-05-04')
+    def test_read_index(self):
+        read_index('2016-01-04')
 
-    def test_csi2_all(self):
-        csi_all2('2018-02-20')
+    def test_read_index_all(self):
+        read_index_all('2011-05-04', '2014-12-31')
 
-    def test_csi_equity(self):
+    def test_read_industry_all(self):
+        read_industry_all('2016-01-02', '2016-12-31')
+
+    def test_read_equity_by_date(self):
         read_equity_by_date()
 
     def test_read_equity(self):

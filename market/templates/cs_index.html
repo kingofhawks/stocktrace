@@ -50,7 +50,7 @@ function render(code){
                 zoomType: 'x'
             },
             title: {
-                text: 'CS index over time {{ name }}'
+                text: 'CS index over time '+code
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -138,11 +138,11 @@ function render(code){
                 }
             },
             series: [{
-                type: 'area',
+                type: 'line',
                 name: 'PB',
                 data: data['PB']
             },{
-                type: 'area',
+                type: 'line',
                 name: 'PE',
                 yAxis: 1,
                 data: data['PE']

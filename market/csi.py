@@ -81,18 +81,35 @@ def csi_by_type(date='2011-05-04', data_type='zy1'):
             continue
 
 
-def csi(date='2011-05-04'):
+# read index data
+def read_index(date='2011-05-04'):
     csi_by_type(date, 'zy1')
     csi_by_type(date, 'zy2')
     csi_by_type(date, 'zy3')
     csi_by_type(date, 'zy4')
+
+
+# read industry data
+def read_industry(date='2011-05-04'):
     csi_by_type(date, 'zz1')
     csi_by_type(date, 'zz2')
     csi_by_type(date, 'zz3')
     csi_by_type(date, 'zz4')
 
 
-def csi_all(begin_date='2017-12-28', end_date=None):
+def read_index_all(begin_date='2017-12-28', end_date=None):
+    if end_date is None:
+        end_date = arrow.now().format(date_format)
+    begin_arrow = arrow.get(begin_date, date_format)
+    begin = begin_arrow.date()
+    end = arrow.get(end_date, date_format).date()
+    delta = end-begin
+    for i in range(delta.days):
+        day = begin_arrow.shift(days=i).format(date_format)
+        read_index(day)
+
+
+def read_industry_all(begin_date='2017-12-28', end_date=None):
     if end_date is None:
         end_date = arrow.now().format(date_format)
     begin_arrow = arrow.get(begin_date, date_format)
@@ -102,18 +119,18 @@ def csi_all(begin_date='2017-12-28', end_date=None):
     print(delta.days)
     for i in range(delta.days):
         day = begin_arrow.shift(days=i).format(date_format)
-        csi(day)
+        read_industry(day)
 
 
 # 中证指数(个股)
 def read_equity_by_date(date='2018-02-23', code='600420'):
-    # http://115.29.204.48/syl/csi20180212.zip
     day = arrow.get(date, date_format).date()
     weekday = day.weekday()
     # ignore weekend
     if weekday == 5 or weekday == 6:
         return
     url = '{}industry-price-earnings-ratio-detail?date={}&class=2&search=1&csrc_code={}'.format(csi_domain, date, code)
+    print(url)
     page = parse(url).getroot()
     # result = etree.tostring(page)
     # print(result)
