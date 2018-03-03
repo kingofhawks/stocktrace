@@ -55,8 +55,8 @@ function render(){
                         value: data['PE_avg'],
                         zIndex: 5,
                         label: {
-                            text: 'average PE:'+data['PE_avg'],
-                            align: 'center'
+                            text: 'PE:'+data['PE_avg'],
+                            align: 'right'
                         }
                     }]
                 },
@@ -112,7 +112,7 @@ function render(){
                 }
             },
             series: [{
-                type: 'area',
+                type: 'line',
                 name: 'PE',
                 data: data['pe_list']
             }]

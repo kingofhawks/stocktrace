@@ -4,13 +4,14 @@ from stocktrace.dao.stockdao import *
 from market.analysis import *
 from market.cix import *
 from market.csi import read_index, read_industry, read_index_all, read_industry_all
-from market.csi import csi_by_type, read_equity_by_date, read_equity
-
+from market.csi import csi_by_type, read_equity_by_date, read_equity, read_equity_all, read_equity_all2
+from market.xueqiu import read_portfolio
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
 
 class ParseTestCase(TestCase):
     code = '600609'
+    begin = '2011-05-04'
 
     def test_xueqiu(self):
         stock = xueqiu(self.code)
@@ -51,10 +52,16 @@ class ParseTestCase(TestCase):
         read_industry_all('2016-01-02', '2016-12-31')
 
     def test_read_equity_by_date(self):
-        read_equity_by_date()
+        read_equity_by_date('2012-10-09', '600436' )
 
     def test_read_equity(self):
-        read_equity('600276', '2018-02-20', '2018-02-25')
+        read_equity('600276', self.begin, '2016-12-31')
+
+    def test_read_equity_all(self):
+        read_equity_all(self.begin, '2016-12-31')
+
+    def test_read_equity_all2(self):
+        read_equity_all2(self.begin, '2016-12-31')
 
     def test_hscei(self):
         hs_cei()
@@ -155,8 +162,8 @@ class ParseTestCase(TestCase):
     def test_alert(self):
         alert_high_diff()
 
-    # def test_stock_list(self):
-    #     stock_list()
-    #
-    # def test_polling(self):
-    #     polling()
+    def test_read_portfolio(self):
+        read_portfolio()
+
+    def test_sh(self):
+        sh()

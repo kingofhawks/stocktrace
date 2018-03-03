@@ -13,6 +13,7 @@ import xlrd
 import zipfile
 import io
 from django.conf import settings
+from market.xueqiu import read_portfolio
 
 db = settings.DB
 date_format = 'YYYY-MM-DD'
@@ -135,51 +136,52 @@ def read_equity_by_date(date='2018-02-23', code='600420'):
     # result = etree.tostring(page)
     # print(result)
     xpath = '//table[@class="table table-bg p_table table-border "]'
-    r = page.xpath(xpath)
-    # print(len(r))
-    tree = etree.ElementTree(r[0])
-    # print(etree.tostring(tree))
-    html_table = etree.tostring(tree)
-    dfs = pd.read_html(html_table, flavor='lxml')
-    df = dfs[0]
-    print(df)
-    for index, row in df.iterrows():
-        # 个股数据
-        code = str(row[1])
-        name = row[2]
-        code1 = str(row[3])
-        code2 = str(row[5])
-        code3 = str(row[7])
-        code4 = str(row[9])
-        row11 = row[11]
-        row12 = row[12]
-        row13 = row[13]
-        row14 = row[14]
-        try:
-            pe = float(row11)
-        except:
-            pe = 0
+    if page is not None:
+        r = page.xpath(xpath)
+        # print(len(r))
+        tree = etree.ElementTree(r[0])
+        # print(etree.tostring(tree))
+        html_table = etree.tostring(tree)
+        dfs = pd.read_html(html_table, flavor='lxml')
+        df = dfs[0]
+        print(df)
+        for index, row in df.iterrows():
+            # 个股数据
+            code = str(row[1])
+            name = row[2]
+            code1 = str(row[3])
+            code2 = str(row[5])
+            code3 = str(row[7])
+            code4 = str(row[9])
+            row11 = row[11]
+            row12 = row[12]
+            row13 = row[13]
+            row14 = row[14]
+            try:
+                pe = float(row11)
+            except:
+                pe = 0
 
-        try:
-            pe_ttm = float(row12)
-        except:
-            pe_ttm = 0
+            try:
+                pe_ttm = float(row12)
+            except:
+                pe_ttm = 0
 
-        try:
-            pb = float(row13)
-        except:
-            pb = 0
+            try:
+                pb = float(row13)
+            except:
+                pb = 0
 
-        try:
-            dyr = float(row14)
-        except:
-            dyr = 0
-        print(pe, pe_ttm, pb, dyr)
-        Equity.objects(name=name, date=day).update_one(code=code, date=day, name=name,
-                                                       code1=code1, code2=code2, code3=code3,
-                                                       code4=code4,
-                                                       pe=pe, pe_ttm=pe_ttm, pb=pb,
-                                                       dividend_yield_ratio=dyr, upsert=True)
+            try:
+                dyr = float(row14)
+            except:
+                dyr = 0
+            print(pe, pe_ttm, pb, dyr)
+            Equity.objects(name=name, date=day).update_one(code=code, date=day, name=name,
+                                                           code1=code1, code2=code2, code3=code3,
+                                                           code4=code4,
+                                                           pe=pe, pe_ttm=pe_ttm, pb=pb,
+                                                           dividend_yield_ratio=dyr, upsert=True)
 
 
 def read_equity(code='600276', begin_date='2017-12-28', end_date=None):
@@ -192,3 +194,20 @@ def read_equity(code='600276', begin_date='2017-12-28', end_date=None):
     for i in range(delta.days):
         day = begin_arrow.shift(days=i).format(date_format)
         read_equity_by_date(day, code)
+
+
+def read_equity_all(begin_date='2017-12-28', end_date=None):
+    equity_group = db.equity.aggregate([{"$group": {"_id": "$code"}}], cursor={})
+    equity_list = list(equity_group)
+    print(equity_list)
+    for equity in equity_list:
+        read_equity(equity.get('_id'), begin_date, end_date)
+
+
+def read_equity_all2(begin_date='2017-12-28', end_date=None):
+    equities = read_portfolio()
+    for equity in equities:
+        try:
+            read_equity(equity, begin_date, end_date)
+        except:
+            continue

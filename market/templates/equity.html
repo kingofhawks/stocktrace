@@ -149,8 +149,10 @@ $(function () {
     render('600276');
 
     $('#code').on('input', function() {
-         var code = $(this).val();
-        render(code);
+        var code = $(this).val();
+        if (code.length == 6) {
+            render(code);
+        }
     });
 });
 </script>
