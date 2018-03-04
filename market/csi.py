@@ -147,7 +147,7 @@ def read_equity_by_date(date='2018-02-23', code='600420'):
         print(df)
         for index, row in df.iterrows():
             # 个股数据
-            code = str(row[1])
+            # code = str(row[1])
             name = row[2]
             code1 = str(row[3])
             code2 = str(row[5])
@@ -176,8 +176,8 @@ def read_equity_by_date(date='2018-02-23', code='600420'):
                 dyr = float(row14)
             except:
                 dyr = 0
-            print(pe, pe_ttm, pb, dyr)
-            Equity.objects(name=name, date=day).update_one(code=code, date=day, name=name,
+            print(Equity.objects(code=code, date=day))
+            Equity.objects(code=code, date=day).update_one(code=code, date=day, name=name,
                                                            code1=code1, code2=code2, code3=code3,
                                                            code4=code4,
                                                            pe=pe, pe_ttm=pe_ttm, pb=pb,
@@ -191,12 +191,14 @@ def read_equity(code='600276', begin_date='2017-12-28', end_date=None):
     begin = begin_arrow.date()
     end = arrow.get(end_date, date_format).date()
     delta = end-begin
+    print(delta)
     for i in range(delta.days):
         day = begin_arrow.shift(days=i).format(date_format)
         read_equity_by_date(day, code)
 
 
 def read_equity_all(begin_date='2017-12-28', end_date=None):
+    # get all equities by group aggregate
     equity_group = db.equity.aggregate([{"$group": {"_id": "$code"}}], cursor={})
     equity_list = list(equity_group)
     print(equity_list)
@@ -204,8 +206,16 @@ def read_equity_all(begin_date='2017-12-28', end_date=None):
         read_equity(equity.get('_id'), begin_date, end_date)
 
 
-def read_equity_all2(begin_date='2017-12-28', end_date=None):
+def read_equity_by_portfolio(begin_date='2017-12-28', end_date=None):
     equities = read_portfolio()
+    for equity in equities:
+        try:
+            read_equity(equity, begin_date, end_date)
+        except:
+            continue
+
+
+def read_equities(equities, begin_date='2017-12-28', end_date=None):
     for equity in equities:
         try:
             read_equity(equity, begin_date, end_date)

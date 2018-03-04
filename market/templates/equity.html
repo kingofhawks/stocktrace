@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="../static/highcharts/highcharts.js"></script>
+
 <script>
 function render(code){
     console.log("render chart with code***"+code);
@@ -59,14 +59,14 @@ function render(code){
                         text: 'PB'
                     },
                     plotLines: [{
-                    color: '#000',
+                    color: 'blue',
                     dashStyle: 'Solid', //Dash,Dot,Solid,默认Solid
                     width: 1.5,
                     value: averagePB,
                     zIndex: 5,
                     label: {
                         text: 'PB:'+averagePB,
-                        align: 'center',
+                        align: 'left',
                         style: {
                             color: 'blue'
                         }
@@ -85,7 +85,7 @@ function render(code){
                     zIndex: 5,
                     label: {
                         text: 'PE:'+averagePE,
-                        align: 'center',
+                        align: 'right',
                         style: {
                             color: 'black'
                         }

@@ -3,8 +3,8 @@ from market.parse import *
 from stocktrace.dao.stockdao import *
 from market.analysis import *
 from market.cix import *
-from market.csi import read_index, read_industry, read_index_all, read_industry_all
-from market.csi import csi_by_type, read_equity_by_date, read_equity, read_equity_all, read_equity_all2
+from market.csi import read_index, read_industry, read_index_all, read_industry_all, csi_by_type
+from market.csi import read_equity_by_date, read_equity, read_equity_all, read_equity_by_portfolio, read_equities
 from market.xueqiu import read_portfolio
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -52,16 +52,24 @@ class ParseTestCase(TestCase):
         read_industry_all('2016-01-02', '2016-12-31')
 
     def test_read_equity_by_date(self):
-        read_equity_by_date('2012-10-09', '600436' )
+        read_equity_by_date('2012-10-09', '600436')
 
     def test_read_equity(self):
-        read_equity('600276', self.begin, '2016-12-31')
+        read_equity('002262', '2011-05-04', '2016-12-31')
 
     def test_read_equity_all(self):
         read_equity_all(self.begin, '2016-12-31')
 
     def test_read_equity_all2(self):
-        read_equity_all2(self.begin, '2016-12-31')
+        read_equity_by_portfolio('2018-01-02')
+
+    def test_read_equities(self):
+        equities = ['002450', '002739', '601801', '002475', '300133', '002230', '002558', '000063', '000997',
+                    '002279', '300271', '002065', '002456', '600398', '002024', '002572', '002508', '600233',
+                    '600519', '002304', '000568', '000768', '000625', '600893', '600685', '600482', '002594',
+                    '600038', '002460', '000738', '002466', '600995', '600583', '601985', '601857', '601808',
+                    '002353', ]
+        read_equities(equities, self.begin, '2016-12-31')
 
     def test_hscei(self):
         hs_cei()
