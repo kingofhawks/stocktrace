@@ -49,7 +49,7 @@ class ParseTestCase(TestCase):
         read_index_all('2011-05-04', '2014-12-31')
 
     def test_read_industry_all(self):
-        read_industry_all('2016-01-02', '2016-12-31')
+        read_industry_all('2011-06-01', '2018-03-05')
 
     def test_read_equity_by_date(self):
         read_equity_by_date('2012-10-09', '600436')

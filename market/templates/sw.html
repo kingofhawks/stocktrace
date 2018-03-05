@@ -73,7 +73,7 @@ function render(code){
                 zoomType: 'x'
             },
             title: {
-                text: 'SW index over time'
+                text: 'SW index over time:'+code
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -94,8 +94,8 @@ function render(code){
                     value: averagePB,
                     zIndex: 5,
                     label: {
-                        text: 'average PB:'+averagePB,
-                        align: 'center',
+                        text: 'PB:'+averagePB,
+                        align: 'left',
                         style: {
                             color: 'blue'
                         }
@@ -113,8 +113,8 @@ function render(code){
                     value: averagePE,
                     zIndex: 5,
                     label: {
-                        text: 'average PE:'+averagePE,
-                        align: 'center',
+                        text: 'PE:'+averagePE,
+                        align: 'right',
                         style: {
                             color: 'black'
                         }
@@ -161,11 +161,11 @@ function render(code){
                 }
             },
             series: [{
-                type: 'area',
+                type: 'line',
                 name: 'PB',
                 data: data['PB']
             },{
-                type: 'area',
+                type: 'line',
                 name: 'PE',
                 yAxis: 1,
                 data: data['PE']
