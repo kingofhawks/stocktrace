@@ -11,3 +11,4 @@ djangorestframework
 mongoengine
 tushare
 schedule
+django-cors-headers
