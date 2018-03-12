@@ -3128,6 +3128,10 @@ he@1.1.x:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/he/download/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+highcharts@^6.0.7:
+  version "6.0.7"
+  resolved "http://registry.npm.taobao.org/highcharts/download/highcharts-6.0.7.tgz#fd5c4f24fdc61a04ae155a5b70830a96c8f70919"
+
 history@^4.7.2:
   version "4.7.2"
   resolved "http://registry.npm.taobao.org/history/download/history-4.7.2.tgz#22b5c7f31633c5b8021c7f4a8a954ac139ee8d5b"

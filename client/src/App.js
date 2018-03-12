@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Chart from './Chart'
 import BasicExample from './Router'
 
 
@@ -18,7 +17,6 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save it to reload.
         </p>
         <BasicExample/>
-          <Chart code={code}/>
       </div>
     );
   }
