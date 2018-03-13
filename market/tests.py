@@ -49,7 +49,7 @@ class ParseTestCase(TestCase):
         read_index_all('2011-05-04', '2014-12-31')
 
     def test_read_industry_all(self):
-        read_industry_all('2011-06-01', '2018-03-05')
+        read_industry_all('2016-01-21', '2018-03-07')
 
     def test_read_equity_by_date(self):
         read_equity_by_date('2012-10-09', '600436')
@@ -61,7 +61,7 @@ class ParseTestCase(TestCase):
         read_equity_all(self.begin, '2016-12-31')
 
     def test_read_equity_all2(self):
-        read_equity_by_portfolio('2018-01-02')
+        read_equity_by_portfolio('2018-03-02')
 
     def test_read_equities(self):
         equities = ['002450', '002739', '601801', '002475', '300133', '002230', '002558', '000063', '000997',

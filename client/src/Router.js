@@ -35,6 +35,10 @@ const Industry = () => (
 const Equity = () => (
   <div>
     <h2>Equity</h2>
+      <div>
+          <label htmlFor="code">Input equity code</label>
+          <input id="code" name="code" placeholder="Input equity code"/>
+      </div>
       <FinanceChart url = {equityUrl}/>
   </div>
 )

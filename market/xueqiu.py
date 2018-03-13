@@ -20,7 +20,7 @@ from django.conf import settings
 
 db = settings.DB
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = '9f8d839e53727aedd82932548bcc65ea2e13255d'
+xq_a_token = '72294805c1f582d1db9b3ed434432aebb5b20155'
 headers = {'content-type': 'application/json',
            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
