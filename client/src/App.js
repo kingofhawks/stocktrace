@@ -6,7 +6,6 @@ import BasicExample from './Router'
 
 class App extends Component {
   render() {
-      var code = '000101';
     return (
       <div className="App">
         <header className="App-header">

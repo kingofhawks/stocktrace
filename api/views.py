@@ -24,8 +24,7 @@ class IndexView(APIView):
         # Process any get params that you may need
         # If you don't need to process get params,
         # you can skip this part
-        print('*'*15)
-        name = request.GET.get('name')
+        name = request.GET.get('code')
         items = Index.objects(name=name).order_by('date')
         index_col = db.index.find({'name': name})
         df = pd.DataFrame(list(index_col))
@@ -39,7 +38,6 @@ class IndexView(APIView):
         pb_list = []
         pe_list = []
         for item in json_output.get('items'):
-            # date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
             timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
             if item.get('pb'):
                 pb_list.append([timestamp, item.get('pb')])
@@ -284,7 +282,7 @@ def sh(request):
         # print 'item:{}'.format(item)
         date = int(item.get('Date'))
         pe_list.append([date, item.get('PE')])
-    result = {'pe_list': pe_list, 'PE_avg': pe_avg}
+    result = {'PE': pe_list, 'PE_avg': pe_avg}
     response = Response(result, status=status.HTTP_200_OK)
     return response
 

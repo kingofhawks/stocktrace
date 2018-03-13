@@ -13,23 +13,28 @@ export default class FinanceChart extends Component {
           console.log("componentDidMount***");
           //remember the outer "this"
       var that = this;
-      fetch(this.props.url)
-      // fetch('http://localhost:8000/api/csi?name='+this.props.name)
-          .then(function(response){
+      //only works for CH and FF
+      let url = new URL(this.props.url);
+        let params = new URLSearchParams(url.search.slice(1));
+      console.log(params);
+      //Iterate the search parameters.
+    for (let p of params) {
+      console.log(p);
+    }
+    let code = params.get('code');
+
+      fetch(this.props.url).then(function(response){
           return response.json();
       }).then(function (data) {
-        //  var data = json;
-        // console.log(json);
+          console.log(data);
         var averagePB = data['PB_avg'];
         var averagePE = data['PE_avg'];
-        console.log(averagePB);
-        console.log(averagePE);
         var options2 = {
             chart: {
                 zoomType: 'x'
             },
             title: {
-                text: 'Industry over time '+that.props.code
+                text: 'Finance chart over time '+code
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
