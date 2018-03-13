@@ -1,14 +1,13 @@
 import React from 'react'
-import Chart from './Chart'
-import IndexChart from './IndexChart'
+import FinanceChart from './FinanceChart'
 import {
   BrowserRouter as Router,
   Route,
   Link
 } from 'react-router-dom'
 
-const code ='00'
-const name = '上海A股'
+const industryUrl = 'http://localhost:8000/api/industry?code=00'
+const indexUrl = 'http://localhost:8000/api/csi?name=上海A股'
 
 const Home = () => (
   <div>
@@ -19,14 +18,14 @@ const Home = () => (
 const Index = () => (
   <div>
     <h2>Index</h2>
-      <IndexChart name={name}/>
+      <FinanceChart url = {industryUrl}/>
   </div>
 )
 
 const Industry = () => (
   <div>
     <h2>Industry</h2>
-      <Chart code={code}/>
+      <FinanceChart url = {indexUrl}/>
   </div>
 )
 

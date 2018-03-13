@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Highcharts from 'highcharts';
 
-class Chart extends Component {
+export default class FinanceChart extends Component {
       constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +13,8 @@ class Chart extends Component {
           console.log("componentDidMount***");
           //remember the outer "this"
       var that = this;
-      fetch('http://localhost:8000/api/industry?code='+this.props.code)
+      fetch(this.props.url)
+      // fetch('http://localhost:8000/api/csi?name='+this.props.name)
           .then(function(response){
           return response.json();
       }).then(function (data) {
@@ -146,5 +147,3 @@ class Chart extends Component {
     return <div ref={el => (this.chartEl = el)} />;
   }
 }
-
-export default Chart;
