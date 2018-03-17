@@ -6,11 +6,11 @@ import {
   Link
 } from 'react-router-dom'
 
-const industryUrl = 'http://localhost:8000/api/industry?code=00'
-const indexUrl = 'http://localhost:8000/api/csi?code=上海A股'
-const equityUrl = 'http://localhost:8000/api/equity?code=601111'
-const swUrl = 'http://localhost:8000/api/sw?code=801150'
-const shUrl = 'http://localhost:8000/api/sh'
+const industryChartType = 'industry'
+const indexChartType = 'index'
+const equityChartType = 'equity'
+const swChartType = 'sw'
+const shChartType = 'sh'
 
 const Home = () => (
   <div>
@@ -21,35 +21,35 @@ const Home = () => (
 const Index = () => (
   <div>
     <h2>Index</h2>
-      <FinanceChart url = {industryUrl}/>
+      <FinanceChart chartType = {indexChartType} code={'上海A股'}/>
   </div>
 )
 
 const Industry = () => (
   <div>
     <h2>Industry</h2>
-      <FinanceChart url = {indexUrl}/>
+      <FinanceChart chartType = {industryChartType} code={'00'}/>
   </div>
 )
 
 const Equity = () => (
   <div>
     <h2>Equity</h2>
-      <FinanceChart url = {equityUrl}/>
+      <FinanceChart chartType = {equityChartType} code={'600420'}/>
   </div>
 )
 
 const Sw = () => (
   <div>
     <h2>Sw</h2>
-      <FinanceChart url = {swUrl}/>
+      <FinanceChart chartType = {swChartType} code={'801150'}/>
   </div>
 )
 
 const SH = () => (
   <div>
     <h2>SH</h2>
-      <FinanceChart url = {shUrl}/>
+      <FinanceChart chartType = {shChartType} />
   </div>
 )
 

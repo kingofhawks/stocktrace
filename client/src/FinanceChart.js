@@ -7,35 +7,35 @@ export default class FinanceChart extends Component {
         this.state = {
             chartType: 'equity',
             options: null,
-            code: '600420',
+            code: this.props.code,
         };
         // This binding is necessary to make `this` work in the callback
         this.handleChange  = this.handleChange .bind(this);
-        console.log("init***");
+        console.log("***constructor***");
       }
         handleChange (e) {
-            console.log("***handle change***"+e.target.value);
+            console.log("***handleChange***"+e.target.value);
             this.setState({
               code: e.target.value
             })
       }
     getUrl(){
         var url = '';
-      //only works for CH and FF
-        let chartType = this.state.chartType;
+        let chartType = this.props.chartType;
       if(chartType === 'equity'){
           url = 'http://localhost:8000/api/equity?code='+this.state.code;
       } else if (chartType === 'industry'){
-          url = 'http://localhost:8000/api/industry?code=00'
+          url = 'http://localhost:8000/api/industry?code='+this.state.code
       }else if (chartType === 'index'){
-          url = 'http://localhost:8000/api/csi?code=上海A股'
+          url = 'http://localhost:8000/api/csi?code='+this.state.code
       }else if (chartType === 'sw'){
-          url = 'http://localhost:8000/api/sw?code=801150'
+          url = 'http://localhost:8000/api/sw?code='+this.state.code
       }else if (chartType === 'sh'){
           url = 'http://localhost:8000/api/sh'
       }
       return url;
     }
+    
   componentDidMount() {
           console.log("componentDidMount***");
           //remember the outer "this"
@@ -162,6 +162,7 @@ export default class FinanceChart extends Component {
         }
         that.setState({options: options2});
         console.log(that.state.options);
+        //create highcharts chart
         that.chart = new Highcharts[that.props.type || 'Chart'](
           that.chartEl,
           that.state.options
@@ -182,6 +183,7 @@ export default class FinanceChart extends Component {
           //get highcharts instance
           let chart = this.chart;
           if(this.chart && this.state.code.length === 6) {
+              chart.setTitle({ text: 'Finance chart over time ' + this.state.code });
               // console.log(this.chart.series);
               var url = this.getUrl();
               console.log(url);
@@ -198,12 +200,14 @@ export default class FinanceChart extends Component {
 
   render() {
     console.log("render***"+this.state.code);
+    // Use the `ref` callback to store a reference to the text input DOM
+      //     // element in an instance field (for example, this.chartEl).
     return (
         <div>
           <div>
               <label htmlFor="code">Input equity code</label>
               <input id="code" name="code" placeholder="Input equity code" value={this.state.code}
-                onChange={this.handleChange}/>
+                onChange={this.handleChange} ref={input => (this.codeInput = input)}/>
           </div>
             <div ref={el => (this.chartEl = el)} />
         </div>
