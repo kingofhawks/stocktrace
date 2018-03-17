@@ -5,25 +5,53 @@ export default class FinanceChart extends Component {
       constructor(props) {
         super(props);
         this.state = {
-          options: null,
+            chartType: 'equity',
+            options: null,
+            code: '600420',
         };
+        // This binding is necessary to make `this` work in the callback
+        this.handleChange  = this.handleChange .bind(this);
         console.log("init***");
       }
+        handleChange (e) {
+            console.log("***handle change***"+e.target.value);
+            this.setState({
+              code: e.target.value
+            })
+      }
+    getUrl(){
+        var url = '';
+      //only works for CH and FF
+        let chartType = this.state.chartType;
+      if(chartType === 'equity'){
+          url = 'http://localhost:8000/api/equity?code='+this.state.code;
+      } else if (chartType === 'industry'){
+          url = 'http://localhost:8000/api/industry?code=00'
+      }else if (chartType === 'index'){
+          url = 'http://localhost:8000/api/csi?code=上海A股'
+      }else if (chartType === 'sw'){
+          url = 'http://localhost:8000/api/sw?code=801150'
+      }else if (chartType === 'sh'){
+          url = 'http://localhost:8000/api/sh'
+      }
+      return url;
+    }
   componentDidMount() {
           console.log("componentDidMount***");
           //remember the outer "this"
       var that = this;
+      var url = this.getUrl();
       //only works for CH and FF
-      let url = new URL(this.props.url);
-        let params = new URLSearchParams(url.search.slice(1));
-      console.log(params);
-      //Iterate the search parameters.
-    for (let p of params) {
-      console.log(p);
-    }
-    let code = params.get('code');
+      // let url = new URL(this.props.url);
+      // let params = new URLSearchParams(url.search.slice(1));
+      // console.log(params);
+      // //Iterate the search parameters.
+      //   for (let p of params) {
+      //     console.log(p);
+      //   }
+      //   let code = params.get('code');
 
-      fetch(this.props.url).then(function(response){
+      fetch(url).then(function(response){
           return response.json();
       }).then(function (data) {
           console.log(data);
@@ -34,7 +62,7 @@ export default class FinanceChart extends Component {
                 zoomType: 'x'
             },
             title: {
-                text: 'Finance chart over time '+code
+                text: 'Finance chart over time '+that.state.code
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -137,7 +165,7 @@ export default class FinanceChart extends Component {
         that.chart = new Highcharts[that.props.type || 'Chart'](
           that.chartEl,
           that.state.options
-    );
+        );
       })
       .catch(function (error) {
         console.log(error);
@@ -148,7 +176,38 @@ export default class FinanceChart extends Component {
     this.chart.destroy();
   }
 
+  componentDidUpdate(){
+          console.log("componentDidUpdate with code:"+this.state.code);
+          // console.log(this.chart);
+          //get highcharts instance
+          let chart = this.chart;
+          if(this.chart && this.state.code.length === 6) {
+              // console.log(this.chart.series);
+              var url = this.getUrl();
+              console.log(url);
+              fetch(url).then(function (response) {
+                  return response.json();
+              }).then(function (data) {
+                  console.log(data);
+                  chart.series[0].setData(data['PB']);
+                  chart.series[1].setData(data['PE']);
+              }).catch(function (error) {
+              });
+          }
+  }
+
   render() {
-    return <div ref={el => (this.chartEl = el)} />;
+    console.log("render***"+this.state.code);
+    return (
+        <div>
+          <div>
+              <label htmlFor="code">Input equity code</label>
+              <input id="code" name="code" placeholder="Input equity code" value={this.state.code}
+                onChange={this.handleChange}/>
+          </div>
+            <div ref={el => (this.chartEl = el)} />
+        </div>
+    );
+
   }
 }
