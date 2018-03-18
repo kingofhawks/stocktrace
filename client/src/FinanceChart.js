@@ -35,7 +35,7 @@ export default class FinanceChart extends Component {
       }
       return url;
     }
-    
+
   componentDidMount() {
           console.log("componentDidMount***");
           //remember the outer "this"
@@ -84,7 +84,7 @@ export default class FinanceChart extends Component {
                     zIndex: 5,
                     label: {
                         text: 'PB:'+averagePB,
-                        align: 'center',
+                        align: 'left',
                         style: {
                             color: 'blue'
                         }
@@ -103,7 +103,7 @@ export default class FinanceChart extends Component {
                     zIndex: 5,
                     label: {
                         text: 'PE:'+averagePE,
-                        align: 'center',
+                        align: 'right',
                         style: {
                             color: 'black'
                         }
