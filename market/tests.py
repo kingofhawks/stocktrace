@@ -46,10 +46,10 @@ class ParseTestCase(TestCase):
         read_index('2016-01-04')
 
     def test_read_index_all(self):
-        read_index_all('2011-05-04', '2014-12-31')
+        read_index_all('2018-02-24')
 
     def test_read_industry_all(self):
-        read_industry_all('2016-01-21', '2018-03-07')
+        read_industry_all('2018-01-23')
 
     def test_read_equity_by_date(self):
         read_equity_by_date('2012-10-09', '600436')
@@ -57,11 +57,12 @@ class ParseTestCase(TestCase):
     def test_read_equity(self):
         read_equity('002262', '2011-05-04', '2016-12-31')
 
+    @DeprecationWarning
     def test_read_equity_all(self):
         read_equity_all(self.begin, '2016-12-31')
 
     def test_read_equity_all2(self):
-        read_equity_by_portfolio('2018-03-02')
+        read_equity_by_portfolio('2018-03-13')
 
     def test_read_equities(self):
         equities = ['002450', '002739', '601801', '002475', '300133', '002230', '002558', '000063', '000997',

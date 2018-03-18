@@ -77,6 +77,7 @@ export default class FinanceChart extends Component {
                         text: 'PB'
                     },
                     plotLines: [{
+                        id:'plotLinePB',
                     color: '#000',
                     dashStyle: 'Solid', //Dash,Dot,Solid,默认Solid
                     width: 1.5,
@@ -96,6 +97,7 @@ export default class FinanceChart extends Component {
                         text: 'PE'
                     },
                     plotLines: [{
+                        id: 'plotLinePE',
                     color: 'black',
                     dashStyle: 'Dash', //Dash,Dot,Solid,默认Solid
                     width: 1.5,
@@ -193,6 +195,47 @@ export default class FinanceChart extends Component {
                   console.log(data);
                   chart.series[0].setData(data['PB']);
                   chart.series[1].setData(data['PE']);
+
+                  //dynamic update plotLines
+                  chart.yAxis[0].removePlotLine('plotLinePB');
+                  var averagePB = data['PB_avg'];
+                  var averagePE = data['PE_avg'];
+                  var plotLinePB = {
+                        id:'plotLinePB',
+                    color: '#000',
+                    dashStyle: 'Solid', //Dash,Dot,Solid,默认Solid
+                    width: 1.5,
+                    value: averagePB,
+                    zIndex: 5,
+                    label: {
+                        text: 'PB:'+averagePB,
+                        align: 'left',
+                        style: {
+                            color: 'blue'
+                        }
+                    }
+                };
+                  chart.yAxis[0].addPlotLine(plotLinePB);
+
+                  chart.yAxis[1].removePlotLine('plotLinePE');
+                var plotLinePE = {
+                    id: 'plotLinePE',
+                    color: 'black',
+                    dashStyle: 'Dash', //Dash,Dot,Solid,默认Solid
+                    width: 1.5,
+                    value: averagePE,
+                    zIndex: 5,
+                    label: {
+                        text: 'PE:'+averagePE,
+                        align: 'right',
+                        style: {
+                            color: 'black'
+                        }
+                    }
+                };
+                  chart.yAxis[1].addPlotLine(plotLinePE);
+                  console.log(chart.yAxis[0].getExtremes().dataMax);
+                  console.log(chart.yAxis[0].getExtremes().dataMin);
               }).catch(function (error) {
               });
           }
