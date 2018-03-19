@@ -106,7 +106,11 @@ class EquityView(APIView):
             timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
             pb_list.append([timestamp, item.get('pb')])
             pe_list.append([timestamp, item.get('pe')])
-        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
+        # https://stackoverflow.com/questions/455612/limiting-floats-to-two-decimal-points
+        pb_avg = df['pb'].mean()
+        pe_avg = df['pe'].mean()
+        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': float("{0:.2f}".format(pb_avg)), 'PE_avg': float("{0:.2f}".format(pe_avg))}
+
         response = Response(result, status=status.HTTP_200_OK)
 
         return response
