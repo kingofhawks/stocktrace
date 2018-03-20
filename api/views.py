@@ -18,6 +18,26 @@ DB_HOST = 'localhost'
 db = getattr(pymongo.MongoClient(host=DB_HOST), DB_NAME)
 
 
+def get_result(serializer, df):
+    content = JSONRenderer().render(serializer.data)
+    print('**********content:{}'.format(content))
+    json_output = json.loads(content)
+    print('****json:{}'.format(json_output))
+    pb_list = []
+    pe_list = []
+    for item in json_output.get('items'):
+        # date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
+        timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
+        pb_list.append([timestamp, item.get('pb')])
+        pe_list.append([timestamp, item.get('pe')])
+    # https://stackoverflow.com/questions/455612/limiting-floats-to-two-decimal-points
+    pb_avg = df['pb'].mean()
+    pe_avg = df['pe'].mean()
+    result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': float("{0:.2f}".format(pb_avg)),
+              'PE_avg': float("{0:.2f}".format(pe_avg))}
+    return result
+
+
 class IndexView(APIView):
 
     def get(self, request, *args, **kw):
@@ -31,22 +51,24 @@ class IndexView(APIView):
         serializer = IndexListSerializer({'items': items})
         # print serializer.is_valid()
         # print serializer.errors
-        content = JSONRenderer().render(serializer.data)
-        print('**********content:{}'.format(content))
-        json_output = json.loads(content)
-        print('****json:{}'.format(json_output))
-        pb_list = []
-        pe_list = []
-        for item in json_output.get('items'):
-            timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
-            if item.get('pb'):
-                pb_list.append([timestamp, item.get('pb')])
-            pe_list.append([timestamp, item.get('pe')])
+        # content = JSONRenderer().render(serializer.data)
+        # print('**********content:{}'.format(content))
+        # json_output = json.loads(content)
+        # print('****json:{}'.format(json_output))
+        # pb_list = []
+        # pe_list = []
+        # for item in json_output.get('items'):
+        #     timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
+        #     if item.get('pb'):
+        #         pb_list.append([timestamp, item.get('pb')])
+        #     pe_list.append([timestamp, item.get('pe')])
 
         # HSCEI index has no pb data
         if name == 'HSCEI':
             df['pb'] = 0
-        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
+        # result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
+
+        result = get_result(serializer, df)
         response = Response(result, status=status.HTTP_200_OK)
 
         return response
@@ -65,20 +87,8 @@ class IndustryView(APIView):
         df = pd.DataFrame(list(industry_col))
         print(df)
         serializer = IndustryListSerializer({'items': items})
-        content = JSONRenderer().render(serializer.data)
-        # print('**********content:{}'.format(content))
-        json_output = json.loads(content)
-        # print('****json:{}'.format(json_output))
-        pb_list = []
-        pe_list = []
-        for item in json_output.get('items'):
-            # date = int(item.get('date'))
-            # date = datetime.strptime(item.get('date'), '%Y-%m-%d %H:%M:%S').date()
-            # timestamp is million seconds
-            timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp*1000
-            pb_list.append([timestamp, item.get('pb')])
-            pe_list.append([timestamp, item.get('pe')])
-        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
+
+        result = get_result(serializer, df)
         response = Response(result, status=status.HTTP_200_OK)
 
         return response
@@ -95,21 +105,7 @@ class EquityView(APIView):
         equity_col = db.equity.find({'code': code})
         df = pd.DataFrame(list(equity_col))
         serializer = EquityListSerializer({'items': items})
-        content = JSONRenderer().render(serializer.data)
-        print('**********content:{}'.format(content))
-        json_output = json.loads(content)
-        print('****json:{}'.format(json_output))
-        pb_list = []
-        pe_list = []
-        for item in json_output.get('items'):
-            # date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
-            timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
-            pb_list.append([timestamp, item.get('pb')])
-            pe_list.append([timestamp, item.get('pe')])
-        # https://stackoverflow.com/questions/455612/limiting-floats-to-two-decimal-points
-        pb_avg = df['pb'].mean()
-        pe_avg = df['pe'].mean()
-        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': float("{0:.2f}".format(pb_avg)), 'PE_avg': float("{0:.2f}".format(pe_avg))}
+        result = get_result(serializer, df)
 
         response = Response(result, status=status.HTTP_200_OK)
 
@@ -182,6 +178,7 @@ class SwView(APIView):
             pb_list.append([date, item.get('PB')])
             pe_list.append([date, item.get('PE')])
         result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['PB'].mean(), 'PE_avg': df['PE'].mean()}
+
         response = Response(result, status=status.HTTP_200_OK)
 
         return response
