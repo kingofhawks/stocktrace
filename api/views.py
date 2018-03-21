@@ -25,18 +25,26 @@ def get_result(serializer, df):
     print('****json:{}'.format(json_output))
     pb_list = []
     pe_list = []
+    pe_ttm_list = []
     for item in json_output.get('items'):
         if item.get('date'):
             timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
         else:
+            # SW index
             timestamp = int(item.get('BargainDate'))
         pb_list.append([timestamp, item.get('pb') or item.get('PB')])
         pe_list.append([timestamp, item.get('pe') or item.get('PE')])
+        pe_ttm_list.append([timestamp, item.get('pe_ttm')])
     # https://stackoverflow.com/questions/455612/limiting-floats-to-two-decimal-points
     pb_avg = df['pb'].mean()
     pe_avg = df['pe'].mean()
-    result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': float("{0:.2f}".format(pb_avg)),
-              'PE_avg': float("{0:.2f}".format(pe_avg))}
+    if 'pe_ttm' in df:
+        pe_ttm_avg = df['pe_ttm'].mean()
+    else:
+        pe_ttm_avg = 0
+    result = {'PB': pb_list, 'PE': pe_list, 'PE_TTM': pe_ttm_list,  'PB_avg': float("{0:.2f}".format(pb_avg)),
+              'PE_avg': float("{0:.2f}".format(pe_avg)),
+              'PE_ttm_avg': float("{0:.2f}".format(pe_ttm_avg))}
     return result
 
 
@@ -263,7 +271,7 @@ def sh(request):
         # print 'item:{}'.format(item)
         date = int(item.get('Date'))
         pe_list.append([date, item.get('PE')])
-    result = {'PE': pe_list, 'PE_avg': pe_avg}
+    result = {'PE': pe_list, 'PE_avg': float("{0:.2f}".format(pe_avg))}
     response = Response(result, status=status.HTTP_200_OK)
     return response
 

@@ -58,11 +58,11 @@ class ParseTestCase(TestCase):
         read_equity('002262', '2011-05-04', '2016-12-31')
 
     @DeprecationWarning
-    def test_read_equity_all(self):
+    def test_read_equity_all2(self):
         read_equity_all(self.begin, '2016-12-31')
 
-    def test_read_equity_all2(self):
-        read_equity_by_portfolio('2018-03-13')
+    def test_read_equity_all(self):
+        read_equity_by_portfolio('2018-03-19')
 
     def test_read_equities(self):
         equities = ['002450', '002739', '601801', '002475', '300133', '002230', '002558', '000063', '000997',
@@ -124,22 +124,6 @@ class ParseTestCase(TestCase):
             history_list = xueqiu_history(code)
             for history in history_list:
                 history.save()
-
-    # def test_history_yahoo(self):
-    #     download_history_data(self.code)
-
-    # def test_history_sh(self):
-    #     download_history_data('000001.SS')
-    #
-    # def test_sw_low(self):
-    #     df = parse_sw_history('2014-03-12', '2014-03-13')
-    #     df_to_collection(df, 'sw')
-    #
-    # def test_sw_now(self):
-    #     import arrow
-    #     now = arrow.now()
-    #     begin_date = str(now.date())
-    #     parse_sw_history(begin_date)
 
     def test_sw_history(self):
         codes = ['801020', '801030', '801040', '801050', '801080',

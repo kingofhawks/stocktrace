@@ -160,6 +160,11 @@ export default class FinanceChart extends Component {
                 name: 'PE',
                 yAxis: 1,
                 data: data['PE']
+            },{
+                type: 'line',
+                name: 'PE_TTM',
+                yAxis: 1,
+                data: data['PE_TTM']
             }]
         }
         that.setState({options: options2});
