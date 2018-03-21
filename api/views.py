@@ -26,10 +26,12 @@ def get_result(serializer, df):
     pb_list = []
     pe_list = []
     for item in json_output.get('items'):
-        # date = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp
-        timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
-        pb_list.append([timestamp, item.get('pb')])
-        pe_list.append([timestamp, item.get('pe')])
+        if item.get('date'):
+            timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
+        else:
+            timestamp = int(item.get('BargainDate'))
+        pb_list.append([timestamp, item.get('pb') or item.get('PB')])
+        pe_list.append([timestamp, item.get('pe') or item.get('PE')])
     # https://stackoverflow.com/questions/455612/limiting-floats-to-two-decimal-points
     pb_avg = df['pb'].mean()
     pe_avg = df['pe'].mean()
@@ -49,24 +51,10 @@ class IndexView(APIView):
         index_col = db.index.find({'name': name})
         df = pd.DataFrame(list(index_col))
         serializer = IndexListSerializer({'items': items})
-        # print serializer.is_valid()
-        # print serializer.errors
-        # content = JSONRenderer().render(serializer.data)
-        # print('**********content:{}'.format(content))
-        # json_output = json.loads(content)
-        # print('****json:{}'.format(json_output))
-        # pb_list = []
-        # pe_list = []
-        # for item in json_output.get('items'):
-        #     timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
-        #     if item.get('pb'):
-        #         pb_list.append([timestamp, item.get('pb')])
-        #     pe_list.append([timestamp, item.get('pe')])
 
         # HSCEI index has no pb data
         if name == 'HSCEI':
             df['pb'] = 0
-        # result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['pb'].mean(), 'PE_avg': df['pe'].mean()}
 
         result = get_result(serializer, df)
         response = Response(result, status=status.HTTP_200_OK)
@@ -153,6 +141,8 @@ class SwView(APIView):
         sw_col = db.sw.find({'SwIndexCode': code})
         # print sw_col
         df = pd.DataFrame(list(sw_col))
+        df['pb'] = df['PB']
+        df['pe'] = df['PE']
         # print len(df)
         # df = DataFrame(list(sw_data))
         print(df)
@@ -167,18 +157,8 @@ class SwView(APIView):
         # print 'PB max:{}'.format(df['PB'].max())
         # print sw_data
         serializer = SwIndexSerializer({'items': sw_data})
-        content = JSONRenderer().render(serializer.data)
-        # print '**********content:{}'.format(content)
-        json_output = json.loads(content)
-        # print '****json:{}'.format(json_output)
-        pb_list = []
-        pe_list = []
-        for item in json_output.get('items'):
-            date = int(item.get('BargainDate'))
-            pb_list.append([date, item.get('PB')])
-            pe_list.append([date, item.get('PE')])
-        result = {'PB': pb_list, 'PE': pe_list, 'PB_avg': df['PB'].mean(), 'PE_avg': df['PE'].mean()}
 
+        result = get_result(serializer, df)
         response = Response(result, status=status.HTTP_200_OK)
 
         return response
