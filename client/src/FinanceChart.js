@@ -200,6 +200,7 @@ export default class FinanceChart extends Component {
                   console.log(data);
                   chart.series[0].setData(data['PB']);
                   chart.series[1].setData(data['PE']);
+                  chart.series[2].setData(data['PE_TTM']);
 
                   //dynamic update plotLines
                   chart.yAxis[0].removePlotLine('plotLinePB');
