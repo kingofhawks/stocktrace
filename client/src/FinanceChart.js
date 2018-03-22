@@ -112,6 +112,26 @@ export default class FinanceChart extends Component {
                     }
                 }],
                     opposite: true //right-side y-axis
+                },{
+                    title: {
+                        text: 'DYR'
+                    },
+                    plotLines: [{
+                        id: 'plotLineDYR',
+                    color: 'black',
+                    dashStyle: 'Dash', //Dash,Dot,Solid,默认Solid
+                    width: 1.5,
+                    value: averagePE,
+                    zIndex: 5,
+                    label: {
+                        text: 'PE:'+averagePE,
+                        align: 'right',
+                        style: {
+                            color: 'black'
+                        }
+                    }
+                }],
+                    opposite: true //right-side y-axis
                 }],
             legend: {
                 layout: 'vertical',
@@ -165,6 +185,11 @@ export default class FinanceChart extends Component {
                 name: 'PE_TTM',
                 yAxis: 1,
                 data: data['PE_TTM']
+            },{
+                type: 'line',
+                name: 'DYR',
+                yAxis: 2,
+                data: data['DYR']
             }]
         }
         that.setState({options: options2});

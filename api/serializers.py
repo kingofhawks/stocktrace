@@ -35,11 +35,12 @@ class EquitySerializer(serializers.Serializer):
     pe = serializers.FloatField(required=False)
     pe_ttm = serializers.FloatField(required=False)
     pb = serializers.FloatField(required=False)
+    dividend_yield_ratio = serializers.FloatField(required=False)
     date = serializers.CharField(required=False)
 
 
 class EquityListSerializer(serializers.Serializer):
-    items = IndexSerializer(many=True)  # A nested list of 'edit' items.
+    items = EquitySerializer(many=True)  # A nested list of 'edit' items.
 
 
 @DeprecationWarning
