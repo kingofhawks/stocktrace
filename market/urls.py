@@ -1,7 +1,7 @@
 from django.conf.urls import url
 import market.views as views
 
-
+app_name = 'market'
 urlpatterns = [
     url(r'^sw', views.sw, name='sw'),
     url(r'^csi', views.cs_index, name='csi'),

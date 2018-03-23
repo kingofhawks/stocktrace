@@ -21,7 +21,7 @@ from django.conf import settings
 
 db = settings.DB
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = '858067b79675b5998f822ff62f7c0b83ac009405'
+xq_a_token = '72294805c1f582d1db9b3ed434432aebb5b20155'
 headers = {'content-type': 'application/json',
            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
@@ -314,7 +314,7 @@ def avg_sh_pe(begin_date='1999-12-31'):
                15.94, 16.57, 18.97, 22.55, 21.92, 20.92, 18.04, 15.81, 15.1, 16.69, 17.04, 17.61,
                13.73, 13.5, 15.08, 14.75, 14.32, 14.43, 14.77, 15.42, 15.09, 15.73, 16.56, 15.91,
                16.32, 16.83, 16.85, 16.68, 16.49, 16.98, 17.47, 17.99, 18.01, 18.36, 18.1, 18.15,
-               19.24, 18.28, 
+               19.24, 18.28,
                ]
 
     dates = pd.date_range('20000131', periods=len(pe_list), freq='M')

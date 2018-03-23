@@ -7,7 +7,7 @@ from portfolio.portfolio import  snapshot, market_value
 from django.http import HttpResponse
 import json
 from django.shortcuts import redirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 # to resolve datetime type JSON serialization issue
 from bson import json_util
 

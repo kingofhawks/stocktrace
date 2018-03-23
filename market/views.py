@@ -38,7 +38,7 @@ def equity(request):
 
 
 def history(request):
-    code = request.GET.get('code') or 'SH600029'
+    code = request.GET.get('code') or 'SH600420'
     return render(request, 'stock_history.html', {'code': code})
 
 

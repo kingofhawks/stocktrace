@@ -38,8 +38,14 @@ def get_result(serializer, df):
         pe_ttm_list.append([timestamp, item.get('pe_ttm')])
         dyr_list.append([timestamp, item.get('dividend_yield_ratio')])
     # https://stackoverflow.com/questions/455612/limiting-floats-to-two-decimal-points
-    pb_avg = df['pb'].mean()
-    pe_avg = df['pe'].mean()
+    if 'pb' in df:
+        pb_avg = df['pb'].mean()
+    else:
+        pb_avg = 0
+    if 'pe' in df:
+        pe_avg = df['pe'].mean()
+    else:
+        pe_avg = 0
     if 'pe_ttm' in df:
         pe_ttm_avg = df['pe_ttm'].mean()
     else:
@@ -49,6 +55,12 @@ def get_result(serializer, df):
               'PE_avg': float("{0:.2f}".format(pe_avg)),
               'PE_ttm_avg': float("{0:.2f}".format(pe_ttm_avg))}
     return result
+
+
+def get_response_cors(response):
+    # TODO
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
 
 
 class IndexView(APIView):
@@ -70,7 +82,7 @@ class IndexView(APIView):
         result = get_result(serializer, df)
         response = Response(result, status=status.HTTP_200_OK)
 
-        return response
+        return get_response_cors(response)
 
 
 class IndustryView(APIView):
@@ -90,7 +102,7 @@ class IndustryView(APIView):
         result = get_result(serializer, df)
         response = Response(result, status=status.HTTP_200_OK)
 
-        return response
+        return get_response_cors(response)
 
 
 class EquityView(APIView):
@@ -107,8 +119,7 @@ class EquityView(APIView):
         result = get_result(serializer, df)
 
         response = Response(result, status=status.HTTP_200_OK)
-
-        return response
+        return get_response_cors(response)
 
 
 class AhView(APIView):
@@ -131,8 +142,7 @@ class AhView(APIView):
         json_output = json.loads(content)
         # print '****json:{}'.format(json_output)
         response = Response(json_output, status=status.HTTP_200_OK)
-
-        return response
+        return get_response_cors(response)
 
 
 class SwView(APIView):
@@ -171,8 +181,7 @@ class SwView(APIView):
 
         result = get_result(serializer, df)
         response = Response(result, status=status.HTTP_200_OK)
-
-        return response
+        return get_response_cors(response)
 
 
 class StockView(APIView):
@@ -231,8 +240,7 @@ class StockView(APIView):
         if 'turnover_avg' in df.index:
             result.update({'turnover_avg': df['turn_rate'].mean()})
         response = Response(result, status=status.HTTP_200_OK)
-
-        return response
+        return get_response_cors(response)
 
 
 @api_view(['GET'])
@@ -276,7 +284,7 @@ def sh(request):
         pe_list.append([date, item.get('PE')])
     result = {'PE': pe_list, 'PE_avg': float("{0:.2f}".format(pe_avg))}
     response = Response(result, status=status.HTTP_200_OK)
-    return response
+    return get_response_cors(response)
 
 
 class CixView(APIView):

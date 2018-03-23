@@ -1,6 +1,6 @@
 from django.conf.urls import url
 import portfolio.views as views
-
+app_name = 'portfolio'
 
 urlpatterns = [
     url(r'^$', views.stock_list, name='home'),
@@ -11,6 +11,6 @@ urlpatterns = [
     url(r'^update', views.update),
     url(r'^stock/(?P<pk>\d{6})/delete/$', views.delete, name='delete'),
     url(r'^(?P<pk>\w+)/delete/$', views.delete_portfolio, name='delete_portfolio'),
-    url(r'^tag/(?P<pk>\w+)/$', views.tag),
+    url(r'^tag/(?P<pk>\w+)/$', views.tag, name='tag'),
     url(r'^snapshot', views.snapshot_view, name='snapshot'),
 ]

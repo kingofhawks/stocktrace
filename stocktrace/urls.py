@@ -4,6 +4,7 @@ from base import views as base_views
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from django.urls import path
 admin.autodiscover()
 
 urlpatterns = [
@@ -12,10 +13,11 @@ urlpatterns = [
     url(r'^$', base_views.index, name='index'),
     url(r'^zytj/', include('zytj.urls')),
     url(r'^portfolio/', include('portfolio.urls', namespace='portfolio')),
-    url(r'^api/', include('api.urls', namespace='api')),
-    url(r'^market/', include('market.urls', namespace='market')),
+    path(r'api/', include('api.urls', namespace='api')),
+    path(r'market/', include('market.urls', namespace='market')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls))
+    # url(r'^admin/', include(admin.site.urls), namespace='admin')
+    path('admin/', admin.site.urls),
 ]
 

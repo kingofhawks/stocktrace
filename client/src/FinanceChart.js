@@ -206,7 +206,9 @@ export default class FinanceChart extends Component {
   }
 
   componentWillUnmount() {
-    this.chart.destroy();
+          if (this.chart){
+            this.chart.destroy();
+          }
   }
 
   componentDidUpdate(){
