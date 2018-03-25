@@ -38,7 +38,7 @@
 <script>
 function render(code){
     console.log("render chart with code***"+code);
-    $.getJSON('http://localhost:8000/api/csi?name='+code, function (data) {
+    $.getJSON('http://localhost:8000/api/csi?code='+code, function (data) {
         console.log(data);
         averagePB = data['PB_avg'];
         averagePE = data['PE_avg'];

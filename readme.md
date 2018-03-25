@@ -1,19 +1,30 @@
-pip install -r requirements.txt  
-mongodb 3.6  
+stocktrace will parse finance data from famous finance web sites and generate some useful report.
+tech stack:
+backend: python3+django+pandas
+frontend: react+highcharts
+
+Features:
+* Parse stock data, both real time and history data from xueqiu/shenwan/Sina/Yahoo(csv or YDN)/ifeng etc
+* Market Analysis based on PB/PE/PE_TTM/DYR/GDP/turnover/AH from csindex/SW index/AH index etc
+* Screen stocks based on 52 week's high or low percentage
+* NHNL index
+* Generate OHLC chart
+
+Tutorial:
+1. pip install -r requirements.txt
+2. install mongodb 3.6
 mongodb backup:  
 mongodump  --db stocktrace  
 mongodb restore:  
 mongorestore --collection industry --db stocktrace dump/stocktrace/industry.bson  
-
+3. python manage.py runserver
 http://localhost:8000
+4. client side
+cd client
+yarn
+yarn start
+http://localhost:3000
 
-stocktrace will parse finance data from famous finance web sites and generate some useful report
-
-* Parse stock data, both real time and history data from xueqiu/shenwan/Sina/Yahoo(csv or YDN)/ifeng etc
-* Market Analysis based on PB/PE/GDP/turnover/AH from csindex/SW index/AH index etc  
-* Screen stocks based on 52 week's high or low percentage
-* NHNL index  
-* Generate OHLC chart
 
 How to run tests
 

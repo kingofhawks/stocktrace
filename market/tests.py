@@ -6,6 +6,7 @@ from market.cix import *
 from market.csi import read_index, read_industry, read_index_all, read_industry_all, csi_by_type
 from market.csi import read_equity_by_date, read_equity, read_equity_all, read_equity_by_portfolio, read_equities
 from market.xueqiu import read_portfolio
+from market.sw import read_sw_all
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
 
@@ -62,7 +63,7 @@ class ParseTestCase(TestCase):
         read_equity_all(self.begin, '2016-12-31')
 
     def test_read_equity_all(self):
-        read_equity_by_portfolio('2018-03-19')
+        read_equity_by_portfolio('2018-03-22')
 
     def test_read_equities(self):
         equities = ['002450', '002739', '601801', '002475', '300133', '002230', '002558', '000063', '000997',
@@ -71,6 +72,13 @@ class ParseTestCase(TestCase):
                     '600038', '002460', '000738', '002466', '600995', '600583', '601985', '601857', '601808',
                     '002353', ]
         read_equities(equities, self.begin, '2016-12-31')
+
+    def test_read_all(self):
+        begin = '2018-03-19'
+        read_index_all(begin)
+        read_industry_all(begin)
+        # read_equity_all(begin)
+        read_sw_all(begin)
 
     def test_hscei(self):
         hs_cei()
@@ -125,20 +133,15 @@ class ParseTestCase(TestCase):
             for history in history_list:
                 history.save()
 
-    def test_sw_history(self):
-        codes = ['801020', '801030', '801040', '801050', '801080',
-                '801110', '801120', '801130', '801140', '801150', '801160', '801170', '801180',
-                '801200', '801210', '801230',
-                '801710', '801720', '801730', '801740', '801750', '801760', '801770', '801780', '801790',
-                '801880', '801890']
-        for code in codes:
-            df = parse_sw_history2(begin_date='2005-01-01', code=code)
-            df_to_collection(df, 'sw')
+    def test_read_sw_all(self):
+        read_sw_all('2013-03-01', '2014-02-20', ['801780'])
+        # read_sw_all('2005-01-04', '2005-02-20')
 
-    def test_sw_history2(self):
+    def test_read_sw(self):
         df = parse_sw_history2(begin_date='2015-01-01', code='801150')
         df_to_collection(df, 'sw')
 
+    @DeprecationWarning
     def test_sw_history3(self):
         df = parse_sw_history2(begin_date='2016-01-01', code='801150')
         print(df)

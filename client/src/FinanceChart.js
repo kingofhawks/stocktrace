@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import Highcharts from 'highcharts';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 export default class FinanceChart extends Component {
       constructor(props) {
@@ -8,17 +10,32 @@ export default class FinanceChart extends Component {
             chartType: 'equity',
             options: null,
             code: this.props.code,
+            selectedOption: '',
+            selectOptions: []
         };
+
+
+      this.handleChangeSelect = (selectedOption) => {
+        this.setState({ selectedOption });
+        console.log(`${selectedOption.value}`);
+        this.setState({
+          code: `${selectedOption.value}`
+        })
+      }
+
         // This binding is necessary to make `this` work in the callback
-        this.handleChange  = this.handleChange .bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeSelect = this.handleChangeSelect.bind(this);
         console.log("***constructor***");
       }
+
         handleChange (e) {
             console.log("***handleChange***"+e.target.value);
             this.setState({
               code: e.target.value
             })
       }
+
     getUrl(){
         var url = '';
         let chartType = this.props.chartType;
@@ -30,6 +47,23 @@ export default class FinanceChart extends Component {
           url = 'http://localhost:8000/api/csi?code='+this.state.code
       }else if (chartType === 'sw'){
           url = 'http://localhost:8000/api/sw?code='+this.state.code
+      }else if (chartType === 'sh'){
+          url = 'http://localhost:8000/api/sh'
+      }
+      return url;
+    }
+
+    getUrl2(){
+        var url = '';
+        let chartType = this.props.chartType;
+      if(chartType === 'equity'){
+          url = 'http://localhost:8000/api/equities';
+      } else if (chartType === 'industry'){
+          url = 'http://localhost:8000/api/industries'
+      }else if (chartType === 'index'){
+          url = 'http://localhost:8000/api/indexes'
+      }else if (chartType === 'sw'){
+          url = 'http://localhost:8000/api/sw'
       }else if (chartType === 'sh'){
           url = 'http://localhost:8000/api/sh'
       }
@@ -50,6 +84,34 @@ export default class FinanceChart extends Component {
       //     console.log(p);
       //   }
       //   let code = params.get('code');
+      fetch(this.getUrl2()).then(function(response){
+          return response.json();
+      }).then(function(data){
+          console.log(data);
+          let options = [];
+          for (let item of data){
+              // console.log(stock);
+              let chartType = that.props.chartType;
+              if(chartType === 'equity'){
+                  const dict = { value: item._id, label: item._id };
+                  options.push(dict);
+              } else if (chartType === 'industry'){
+                  const dict = { value: item.code, label: item.name };
+                  options.push(dict);
+              }else if (chartType === 'index'){
+                  const dict = { value: item._id, label: item._id };
+                  options.push(dict);
+              }else if (chartType === 'sw'){
+                  const dict = { value: item._id, label: item._id };
+                  options.push(dict);
+              }
+
+          }
+          console.log(options);
+          that.setState({selectOptions: options})
+      }).catch(function (error) {
+        console.log(error);
+      });
 
       fetch(url).then(function(response){
           return response.json();
@@ -78,7 +140,7 @@ export default class FinanceChart extends Component {
                     },
                     plotLines: [{
                         id:'plotLinePB',
-                    color: '#000',
+                    color: 'blue',
                     dashStyle: 'Solid', //Dash,Dot,Solid,默认Solid
                     width: 1.5,
                     value: averagePB,
@@ -184,12 +246,14 @@ export default class FinanceChart extends Component {
                 type: 'line',
                 name: 'PE_TTM',
                 yAxis: 1,
-                data: data['PE_TTM']
+                data: data['PE_TTM'],
+                visible: false
             },{
                 type: 'line',
                 name: 'DYR',
                 yAxis: 2,
-                data: data['DYR']
+                data: data['DYR'],
+                visible: false
             }]
         }
         that.setState({options: options2});
@@ -216,7 +280,7 @@ export default class FinanceChart extends Component {
           // console.log(this.chart);
           //get highcharts instance
           let chart = this.chart;
-          if(this.chart && this.state.code.length === 6) {
+          if(chart && this.state.code) {
               chart.setTitle({ text: 'Finance chart over time ' + this.state.code });
               // console.log(this.chart.series);
               var url = this.getUrl();
@@ -235,7 +299,7 @@ export default class FinanceChart extends Component {
                   var averagePE = data['PE_avg'];
                   var plotLinePB = {
                         id:'plotLinePB',
-                    color: '#000',
+                    color: 'blue',
                     dashStyle: 'Solid', //Dash,Dot,Solid,默认Solid
                     width: 1.5,
                     value: averagePB,
@@ -278,12 +342,20 @@ export default class FinanceChart extends Component {
     console.log("render***"+this.state.code);
     // Use the `ref` callback to store a reference to the text input DOM
       //     // element in an instance field (for example, this.chartEl).
+      const { selectedOption } = this.state;
+    const value = selectedOption && selectedOption.value;
     return (
         <div>
           <div>
-              <label htmlFor="code">Input equity code</label>
-              <input id="code" name="code" placeholder="Input equity code" value={this.state.code}
-                onChange={this.handleChange} ref={input => (this.codeInput = input)}/>
+              {/*<label htmlFor="code">Input equity code</label>*/}
+              {/*<input id="code" name="code" placeholder="Input equity code" value={this.state.code}*/}
+                {/*onChange={this.handleChange} ref={input => (this.codeInput = input)}/>*/}
+              <Select
+                name="form-field-name"
+                value={value}
+                onChange={this.handleChangeSelect}
+                options={this.state.selectOptions}
+              />
           </div>
             <div ref={el => (this.chartEl = el)} />
         </div>

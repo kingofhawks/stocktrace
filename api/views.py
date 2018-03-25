@@ -244,6 +244,31 @@ class StockView(APIView):
 
 
 @api_view(['GET'])
+def equity_list(request):
+    equity_group = db.equity.aggregate([{"$group": {"_id": "$code"}}], cursor={})
+    response = Response(list(equity_group), status=status.HTTP_200_OK)
+
+    return get_response_cors(response)
+
+
+@api_view(['GET'])
+def index_list(request):
+    index_group = db.index.aggregate([{"$group": {"_id": "$name"}}], cursor={})
+    indexes = list(index_group)
+    response = Response(indexes, status=status.HTTP_200_OK)
+
+    return get_response_cors(response)
+
+
+@api_view(['GET'])
+def industry_list(request):
+    industry_col = db.industry.aggregate([{"$group": {"_id": {"code": "$code", "name": "$name"}}}], cursor={})
+    result = list(map(lambda x: x.get('_id'), list(industry_col)))
+    response = Response(result, status=status.HTTP_200_OK)
+    return get_response_cors(response)
+
+
+@api_view(['GET'])
 def diff(request):
     result = {}
     code = request.GET.get('code')
