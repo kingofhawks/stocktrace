@@ -105,7 +105,6 @@ export default class FinanceChart extends Component {
                   const dict = { value: item._id, label: item._id };
                   options.push(dict);
               }
-
           }
           console.log(options);
           that.setState({selectOptions: options})

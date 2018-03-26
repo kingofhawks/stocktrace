@@ -246,7 +246,12 @@ class StockView(APIView):
 @api_view(['GET'])
 def equity_list(request):
     equity_group = db.equity.aggregate([{"$group": {"_id": "$code"}}], cursor={})
-    response = Response(list(equity_group), status=status.HTTP_200_OK)
+    equities = list(equity_group)
+    print(len(equities))
+    # filter wrong data
+    filtered_equites = list(filter(lambda x: len(x.get('_id')) == 6, equities))
+    print(len(filtered_equites))
+    response = Response(filtered_equites, status=status.HTTP_200_OK)
 
     return get_response_cors(response)
 
