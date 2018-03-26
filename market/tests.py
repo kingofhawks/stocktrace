@@ -50,7 +50,7 @@ class ParseTestCase(TestCase):
         read_index_all('2018-02-24')
 
     def test_read_industry_all(self):
-        read_industry_all('2018-01-23')
+        read_industry_all('2016-01-23', '2018-01-23')
 
     def test_read_equity_by_date(self):
         read_equity_by_date('2012-10-09', '600436')
@@ -134,7 +134,7 @@ class ParseTestCase(TestCase):
                 history.save()
 
     def test_read_sw_all(self):
-        read_sw_all('2013-03-01', '2014-02-20', ['801780'])
+        read_sw_all('2014-02-21', '2014-02-21', ['801790'])
         # read_sw_all('2005-01-04', '2005-02-20')
 
     def test_read_sw(self):

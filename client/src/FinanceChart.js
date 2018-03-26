@@ -63,7 +63,7 @@ export default class FinanceChart extends Component {
       }else if (chartType === 'index'){
           url = 'http://localhost:8000/api/indexes'
       }else if (chartType === 'sw'){
-          url = 'http://localhost:8000/api/sw'
+          url = 'http://localhost:8000/api/swlist'
       }else if (chartType === 'sh'){
           url = 'http://localhost:8000/api/sh'
       }
@@ -102,7 +102,7 @@ export default class FinanceChart extends Component {
                   const dict = { value: item._id, label: item._id };
                   options.push(dict);
               }else if (chartType === 'sw'){
-                  const dict = { value: item._id, label: item._id };
+                  const dict = { value: item.value, label: item.name };
                   options.push(dict);
               }
           }

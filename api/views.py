@@ -249,9 +249,9 @@ def equity_list(request):
     equities = list(equity_group)
     print(len(equities))
     # filter wrong data
-    filtered_equites = list(filter(lambda x: len(x.get('_id')) == 6, equities))
-    print(len(filtered_equites))
-    response = Response(filtered_equites, status=status.HTTP_200_OK)
+    filtered_equities = list(filter(lambda x: len(x.get('_id')) == 6, equities))
+    print(len(filtered_equities))
+    response = Response(filtered_equities, status=status.HTTP_200_OK)
 
     return get_response_cors(response)
 
@@ -269,6 +269,45 @@ def index_list(request):
 def industry_list(request):
     industry_col = db.industry.aggregate([{"$group": {"_id": {"code": "$code", "name": "$name"}}}], cursor={})
     result = list(map(lambda x: x.get('_id'), list(industry_col)))
+    response = Response(result, status=status.HTTP_200_OK)
+    return get_response_cors(response)
+
+
+@api_view(['GET'])
+def sw_list(request):
+    result = list()
+    result.append({'value': '801010', 'name': '农林牧渔'})
+    result.append({'value': '801020', 'name': '采掘'})
+    result.append({'value': '801030', 'name': '化工'})
+    result.append({'value': '801040', 'name': '钢铁'})
+    result.append({'value': '801050', 'name': '有色金属'})
+    result.append({'value': '801080', 'name': '电子'})
+
+    result.append({'value': '801110', 'name': '家用电器'})
+    result.append({'value': '801120', 'name': '食品饮料'})
+    result.append({'value': '801130', 'name': '纺织服装'})
+    result.append({'value': '801140', 'name': '轻工制造'})
+    result.append({'value': '801150', 'name': '医药生物'})
+    result.append({'value': '801160', 'name': '公用事业'})
+    result.append({'value': '801170', 'name': '交通运输'})
+    result.append({'value': '801180', 'name': '房地产'})
+
+    result.append({'value': '801200', 'name': '商业贸易'})
+    result.append({'value': '801210', 'name': '休闲服务'})
+    result.append({'value': '801230', 'name': '综合'})
+
+    result.append({'value': '801710', 'name': '建筑材料'})
+    result.append({'value': '801720', 'name': '建筑装饰'})
+    result.append({'value': '801730', 'name': '电气设备'})
+    result.append({'value': '801740', 'name': '国防军工'})
+    result.append({'value': '801750', 'name': '计算机'})
+    result.append({'value': '801760', 'name': '传媒'})
+    result.append({'value': '801770', 'name': '通信'})
+    result.append({'value': '801780', 'name': '银行'})
+    result.append({'value': '801790', 'name': '非银金融'})
+    result.append({'value': '801880', 'name': '汽车'})
+    result.append({'value': '801890', 'name': '机械设备'})
+
     response = Response(result, status=status.HTTP_200_OK)
     return get_response_cors(response)
 

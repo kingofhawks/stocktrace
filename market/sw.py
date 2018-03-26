@@ -10,6 +10,8 @@ from datetime import timedelta, datetime
 import arrow
 from django.conf import settings
 
+from market.models import Sw
+
 db = settings.DB
 
 
@@ -255,4 +257,20 @@ def read_sw_all(begin_date, end_date, codes):
         df = parse_sw_history2(begin_date, end_date, code=code)
         if df is not None and not df.empty:
             records = json.loads(df.T.to_json()).values()
-            db.sw.insert(records)
+            print(records)
+            # db.sw.insert(records)
+            for record in records:
+                date = record.get('BargainDate')
+                code = record.get('SwIndexCode')
+                Sw.objects(BargainDate=date, SwIndexCode=code).update_one(BargainDate=int(date), SwIndexCode=code,
+                                                                          BargainAmount=int(record.get('BargainAmount')),
+                                                                          BargainSumRate=float(record.get('BargainSumRate')),
+                                                                          CloseIndex=float(record.get('CloseIndex')),
+                                                                          DP=float(record.get('DP')),
+                                                                          Markup=float(record.get('Markup')),
+                                                                          MeanPrice=float(record.get('MeanPrice')),
+                                                                          PB=float(record.get('PB')),
+                                                                          PE=float(record.get('PE')),
+                                                                          SwIndexName=record.get('SwIndexName'),
+                                                                          TurnoverRate=float(record.get('TurnoverRate') or 0),
+                                                                          upsert=True)

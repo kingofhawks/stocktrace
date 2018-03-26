@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^indexes', index_list),
     url(r'^industries', industry_list),
     url(r'^ah', AhView.as_view()),
+    url(r'^swlist', sw_list),
     url(r'^sw', SwView.as_view()),
     url(r'^stock', StockView.as_view()),
     url(r'^diff', diff),
