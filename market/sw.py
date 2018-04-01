@@ -243,7 +243,7 @@ def parse_sw_history2(begin_date='2014-03-12', end_date=None, code='801150'):
     return df
 
 
-def read_sw_all(begin_date, end_date, codes):
+def read_sw_all(begin_date, end_date=None, codes=None):
     if end_date is None:
         now = arrow.now()
         end_date = str(now.date())
