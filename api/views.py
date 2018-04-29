@@ -269,6 +269,8 @@ def index_list(request):
 def industry_list(request):
     industry_col = db.industry.aggregate([{"$group": {"_id": {"code": "$code", "name": "$name"}}}], cursor={})
     result = list(map(lambda x: x.get('_id'), list(industry_col)))
+    # filter those name is empty
+    result = list(filter(lambda x: x.get('name') is not None, result))
     response = Response(result, status=status.HTTP_200_OK)
     return get_response_cors(response)
 

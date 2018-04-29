@@ -127,7 +127,7 @@ def parse_sw_with_day(day=None):
     return df
 
 
-# parse history PE/PB from 申万一级行业
+# parse history PE/PB from 申万网站指数发布->一级行业(历史)
 @DeprecationWarning
 def parse_sw_history(begin_date='2014-03-12', end_date=None, codes=None):
     if end_date is None:
@@ -182,6 +182,7 @@ def parse_sw_history(begin_date='2014-03-12', end_date=None, codes=None):
     return df
 
 
+# 申万网站指数分析->一级行业日报表
 def parse_sw_history2(begin_date='2014-03-12', end_date=None, code='801150'):
     if end_date is None:
         now = arrow.now()

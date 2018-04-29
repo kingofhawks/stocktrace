@@ -202,10 +202,12 @@ def read_equity_all(begin_date='2017-12-28', end_date=None):
     equity_group = db.equity.aggregate([{"$group": {"_id": "$code"}}], cursor={})
     equity_list = list(equity_group)
     print(equity_list)
+    print(len(equity_list))
     for equity in equity_list:
         read_equity(equity.get('_id'), begin_date, end_date)
 
 
+# read equity history of xueqiu portfolio
 def read_equity_by_portfolio(begin_date='2017-12-28', end_date=None):
     equities = read_portfolio()
     for equity in equities:

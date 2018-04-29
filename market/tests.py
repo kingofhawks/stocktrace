@@ -56,14 +56,14 @@ class ParseTestCase(TestCase):
         read_equity_by_date('2012-10-09', '600436')
 
     def test_read_equity(self):
-        read_equity('002262', '2011-05-04', '2016-12-31')
+        read_equity('000625', '2015-09-01', '2017-01-02')
 
     @DeprecationWarning
     def test_read_equity_all2(self):
         read_equity_all(self.begin, '2016-12-31')
 
     def test_read_equity_all(self):
-        read_equity_by_portfolio('2018-03-22')
+        read_equity_by_portfolio('2018-04-16')
 
     def test_read_equities(self):
         equities = ['002450', '002739', '601801', '002475', '300133', '002230', '002558', '000063', '000997',
@@ -74,10 +74,11 @@ class ParseTestCase(TestCase):
         read_equities(equities, self.begin, '2016-12-31')
 
     def test_read_all(self):
-        begin = '2018-03-30'
+        begin = '2018-04-26'
         read_index_all(begin)
         read_industry_all(begin)
-        read_equity_all(begin)
+        # read_equity_all(begin)
+        read_equity_by_portfolio(begin)
         read_sw_all(begin)
 
     def test_hscei(self):
@@ -134,12 +135,10 @@ class ParseTestCase(TestCase):
                 history.save()
 
     def test_read_sw_all(self):
-        read_sw_all('2014-02-21', '2014-02-21', ['801790'])
-        # read_sw_all('2005-01-04', '2005-02-20')
+        read_sw_all('2005-01-04', '2005-02-20')
 
     def test_read_sw(self):
-        df = parse_sw_history2(begin_date='2015-01-01', code='801150')
-        df_to_collection(df, 'sw')
+        read_sw_all('2013-01-02', '2014-02-21', codes=['801780'])
 
     @DeprecationWarning
     def test_sw_history3(self):
