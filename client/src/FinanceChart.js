@@ -235,12 +235,14 @@ export default class FinanceChart extends Component {
             series: [{
                 type: 'line',
                 name: 'PB',
-                data: data['PB']
+                data: data['PB'],
+                color: 'blue',
             },{
                 type: 'line',
                 name: 'PE',
                 yAxis: 1,
-                data: data['PE']
+                data: data['PE'],
+                color: 'black',
             },{
                 type: 'line',
                 name: 'PE_TTM',
