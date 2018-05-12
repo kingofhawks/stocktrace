@@ -5,7 +5,7 @@ from market.analysis import *
 from market.cix import *
 from market.csi import read_index, read_industry, read_index_all, read_industry_all, csi_by_type
 from market.csi import read_equity_by_date, read_equity, read_equity_all, read_equity_by_portfolio, read_equities
-from market.xueqiu import read_portfolio
+from market.xueqiu import read_portfolio, read_history
 from market.sw import read_sw_all
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -74,12 +74,13 @@ class ParseTestCase(TestCase):
         read_equities(equities, self.begin, '2016-12-31')
 
     def test_read_all(self):
-        begin = '2018-04-26'
+        begin = '2018-05-07'
         read_index_all(begin)
         read_industry_all(begin)
+        read_sw_all(begin)
         # read_equity_all(begin)
         read_equity_by_portfolio(begin)
-        read_sw_all(begin)
+        hs_cei()
 
     def test_hscei(self):
         hs_cei()
@@ -123,10 +124,10 @@ class ParseTestCase(TestCase):
         high_price_ratio()
 
     def test_history(self):
-        for code in ['600029','601111','600276','600196','002294','601933','601607','002422','002179','600030','601009']:
-            history_list = xueqiu_history(code)
-            for history in history_list:
-                history.save()
+        codes = ['600420', '600177', '000028', '300246', '601009', ]
+        for code in ['600420']:
+            history_list = read_history(code, '2018-02-03', '2018-05-04')
+            print(history_list)
 
     def test_index_history(self):
         for code in ['SH000001', 'SZ399001', 'SZ399005', 'SZ399006']:

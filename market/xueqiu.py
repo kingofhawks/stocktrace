@@ -19,8 +19,9 @@ import io
 from django.conf import settings
 
 db = settings.DB
+api_home = 'http://xueqiu.com'
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = '6d51298d05b21d9d5682d44067014d47c3e74c36'
+xq_a_token = 'f11c55a10baf6b9692d1eeee153286d38e2ffe60'
 headers = {'content-type': 'application/json',
            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
@@ -49,7 +50,7 @@ def parse_xue_qiu_comment_last_day(stock='SH600029', access_token=xq_a_token):
         utc = arrow.get(timestamp)
         local = utc.to('local')
         # print local
-        if today_begin < utc and utc < today_end:
+        if today_begin < utc < today_end:
             # print '***comment when trading***{}'.format(local)
             count += 1
         else:
@@ -93,7 +94,7 @@ def parse_xue_qiu_comment(stock='SH600027', access_token=xq_a_token):
         utc = arrow.get(timestamp)
         local = utc.to('local')
         # print local
-        if (morning_begin < utc and utc < morning_end) or (afternoon_begin < utc and utc < afternoon_end):
+        if (morning_begin < utc < morning_end) or (afternoon_begin < utc < afternoon_end):
             # print '***comment when trading***{}'.format(local)
             count += 1
         else:
@@ -274,15 +275,17 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
         return None
 
 
-# parse history data from xueqiu 1412158358740
-def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_date=None):
+# parse history data
+def read_history(code='600036', begin_date=None, end_date=None):
     if begin_date is None:
         begin = arrow.get('2014-01-01')
-        begin_date = begin.timestamp*1000
+    else:
+        begin = arrow.get(begin_date)
         # print begin_date
     if end_date is None:
         end = arrow.now()
-        end_date = end.timestamp*1000
+    else:
+        end = arrow.get(end_date)
     if len(code) == 8:
         pass
     elif code.startswith('60') or code.startswith('51'):
@@ -292,9 +295,11 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
     elif len(code) == 6:
         code = 'SZ'+code
 
-    url = 'http://xueqiu.com/stock/forchartk/stocklist.json?symbol={}&period=1day&type=normal&begin={}&end={}&_=1443694358741'
-    url = url.format(code, begin_date, end_date)
-    payload = {'access_token': access_token}
+    # url = '{}/stock/forchartk/stocklist.json?symbol={}&period=1day&type=normal&begin={}&end={}&_=1443694358741'
+    url = '{}/stock/forchartk/stocklist.json?symbol={}&period=1day&type=before&begin={}&end={}'
+    url = url.format(api_home, code, begin.timestamp*1000, end.timestamp*1000)
+    print(url)
+    payload = {'access_token': xq_a_token}
 
     r = requests.get(url, params=payload, headers=headers)
     # print r.json()
@@ -303,9 +308,10 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
     # print len(data_list)
     result = []
     for data in data_list:
-        # print data
+        # print(data)
         time = data.get('time')
         time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
+        date = time.date
         # print time
         timestamp = time.timestamp*1000
         history = StockHistory(code=code, percent=data.get('percent'),
@@ -315,6 +321,19 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
                                volume=data.get('volume'),
                                # 注：指数无法取得换手率
                                turn_rate=data.get('turnrate'))
+        nh = False
+        nl = False
+        # if high == high52week:
+        #     nh = True
+        # if low == low52week:
+        #     nl = True
+        # Equity.objects(code=code, date=date).update_one(percent=data.get('percent'),
+        #                        ma5=data.get('ma5'), ma10=data.get('ma10'), ma30=data.get('ma30'),
+        #                        open_price=data.get('open'), high=data.get('high'), low=data.get('low'),
+        #                        close=data.get('close'), time=time.datetime, timestamp=timestamp,
+        #                        volume=data.get('volume'),
+        #                        # 注：指数无法取得换手率
+        #                        turn_rate=data.get('turnrate'), upsert=True)
         # print history
         result.append(history)
     df = DataFrame(data_list)
@@ -336,9 +355,10 @@ def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_
 
 
 def ah_history():
-    xueqiu_history('HKHSAHP')
+    read_history('HKHSAHP')
 
 
+@DeprecationWarning
 def stock_list():
     import tushare as ts
     df = ts.get_stock_basics()

@@ -12,9 +12,10 @@ urlpatterns = [
     # url(r'^$', zyt_views.index, name='index'),
     url(r'^$', base_views.index, name='index'),
     url(r'^zytj/', include('zytj.urls')),
-    url(r'^portfolio/', include('portfolio.urls', namespace='portfolio')),
+    # url(r'^portfolio/', include('portfolio.urls', namespace='portfolio')),
     path(r'api/', include('api.urls', namespace='api')),
     path(r'market/', include('market.urls', namespace='market')),
+    path(r'portfolio/', include('portfolio.urls', namespace='portfolio')),
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls), namespace='admin')

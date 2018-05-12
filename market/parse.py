@@ -260,8 +260,10 @@ def get_excel_book(url):
 
 
 # H股指数monthly
+# TODO
 def hs_cei():
-    url = 'http://www.hsi.com.hk/HSI-Net/static/revamp/contents/en/dl_centre/reports_stat/monthly/pe/hscei.xls'
+    # url = 'http://www.hsi.com.hk/HSI-Net/static/revamp/contents/en/dl_centre/reports_stat/monthly/pe/hscei.xls'
+    url = 'https://www.hsi.com.hk/static/uploads/contents/en/dl_centre/monthly/pe/hscei.xls'
     # r = requests.get(url)
     # file_contents = io.BytesIO(r.content)
     # book = xlrd.open_workbook(file_contents=file_contents.read())
@@ -314,7 +316,7 @@ def avg_sh_pe(begin_date='1999-12-31'):
                15.94, 16.57, 18.97, 22.55, 21.92, 20.92, 18.04, 15.81, 15.1, 16.69, 17.04, 17.61,
                13.73, 13.5, 15.08, 14.75, 14.32, 14.43, 14.77, 15.42, 15.09, 15.73, 16.56, 15.91,
                16.32, 16.83, 16.85, 16.68, 16.49, 16.98, 17.47, 17.99, 18.01, 18.36, 18.1, 18.15,
-               19.24, 18.28, 17.77,
+               19.24, 18.28, 17.77, 17.31,
                ]
 
     dates = pd.date_range('20000131', periods=len(pe_list), freq='M')
