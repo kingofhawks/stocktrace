@@ -1,8 +1,7 @@
 from portfolio.dao import find_all_stocks, update_stock_price, insert_stock, add_tag, find_stock_by_code
-from market.parse import sina, xueqiu
+from market.parse import sina, xueqiu, polling
 from stocktrace.stock import Stock
 import traceback
-
 
 
 # get real-time market value

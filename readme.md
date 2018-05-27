@@ -16,7 +16,9 @@ Tutorial:
 mongodb backup:  
 mongodump  --db stocktrace  
 mongodb restore:  
-mongorestore --collection industry --db stocktrace dump/stocktrace/industry.bson  
+mongorestore --collection industry --db stocktrace dump/stocktrace/industry.bson
+run as windows service:
+mongod --dbpath=g:\data --logpath=g:\data\mongodb.log --install
 3. python manage.py runserver
 http://localhost:8000
 4. client side
@@ -36,6 +38,7 @@ How to run tests
 
 > python manage.py test test.yahoo_test.TestSequenceFunctions.test_print_stock
 
+3. pycharm just right click test method and click "Run"  
 
 xueqiu.com API token:
 
