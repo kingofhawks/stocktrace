@@ -1263,15 +1263,21 @@ def stock_list():
 
 
 def polling():
-    stocks = find_all_stocks()
+    # stocks = find_all_stocks()
+    stocks = [{'code': '600420', 'amount': 20000}, {'code': '601009', 'amount': 6000},
+              {'code': '600177', 'amount': 21000}, {'code': '000028', 'amount': 2500},]
     result = []
-    for stock in stocks:
-        code = stock['code']
+    for item in stocks:
+        code = item['code']
+        amount = item['amount']
         s = xueqiu(code)
         try:
             stock = Stock.objects.get(code=code)
+            # print('s:{}'.format(s))
+            # print('stock:{}'.format(stock))
             if s and stock:
                 stock.current = s.current
+                stock.amount = amount
                 stock.volume = s.volume
                 stock.percentage = s.percentage
                 stock.open_price = s.open_price
@@ -1289,7 +1295,8 @@ def polling():
             else:
                 s.save()
         except Exception as e:
-            # print traceback.format_exc()
+            import traceback
+            print(traceback.format_exc())
             continue
     return result
 

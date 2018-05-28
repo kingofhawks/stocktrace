@@ -38,6 +38,7 @@ def import_portfolio(file,portfolio):
 
 def snapshot(save=True):
     stocks = polling()
+    print(stocks)
     from portfolio.models import Portfolio
     portfolio = Portfolio(stocks)
     if save:

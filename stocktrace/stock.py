@@ -17,6 +17,8 @@ class Stock(Document):
     # NH-NL index
     nh = BooleanField(default=False)
     nl = BooleanField(default=False)
+    hasGap = BooleanField(default=False)
+    isInSh = BooleanField(default=False)
     pb = FloatField()
     # EPS TTM
     mgsy = FloatField()
