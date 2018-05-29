@@ -62,8 +62,8 @@ def snapshot(save=True):
     # # if save:
     # #     portfolio.save()
     # portfolio = Portfolio.objects.get(name=name)
-    print(portfolio)
-    return portfolio
+    result = Portfolio(stocks)
+    return result
 
 
 if __name__ == '__main__':

@@ -3,7 +3,7 @@ import os
 from django.shortcuts import render, render_to_response
 from portfolio.dao import *
 from stocktrace.stock import Stock
-from portfolio.portfolio import  snapshot, market_value
+from portfolio.portfolio import snapshot, market_value
 from django.http import HttpResponse
 import json
 from django.shortcuts import redirect
@@ -14,13 +14,13 @@ from bson import json_util
 
 def stock_list(request):
     portfolio = snapshot(True)
-    results = portfolio.get('stocks')
+    results = sorted(portfolio.stocks, key=lambda s: s.ratio, reverse=True)
     print('result:{}'.format(results))
 
-    context = {'results': results, 'market_value': portfolio.get('market_value'), 'total': portfolio.get('total'),
-               'net_asset': portfolio.get('net_asset'),
-               'position_ratio': portfolio.get('position_ratio'), 'financing': portfolio.get('financing'),
-               'lever': portfolio.get('lever'), 'profit_ratio': portfolio.get('profit_ratio')}
+    context = {'results': results, 'market_value': portfolio.market_value, 'total': portfolio.total,
+               'net_asset': portfolio.net_asset,
+               'position_ratio': portfolio.position_ratio, 'financing': portfolio.financing,
+               'lever': portfolio.lever, 'profit_ratio': portfolio.profit_ratio}
     return render(request, 'portfolio/index.html', context)
 
 

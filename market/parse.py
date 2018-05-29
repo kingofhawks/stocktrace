@@ -1017,7 +1017,7 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
         code = 'SH'+code
     elif len(code) == 5:
         code = 'HK'+code
-    elif code == '999999' or code == '999998':
+    elif code == '999999' or code == '999998' or code == '131810':
         return Stock(code=code, current=1)
     elif len(code) == 6:
         code = 'SZ'+code
@@ -1264,18 +1264,18 @@ def stock_list():
 
 def polling(refresh):
     # stocks = find_all_stocks()
-    stocks = [{'code': '600420', 'amount': 20000}, {'code': '601009', 'amount': 6000},
+    stocks = [{'code': '600420', 'amount': 21200}, {'code': '601009', 'amount': 6000},
               {'code': '600177', 'amount': 21000}, {'code': '000028', 'amount': 2500},
-              {'code': '300246', 'amount': 2000}, {'code': '510900', 'amount': 20000},
+              {'code': '300246', 'amount': 4000}, {'code': '510900', 'amount': 20000},
               {'code': '601688', 'amount': 1700}, {'code': '002468', 'amount': 900},
               {'code': '601818', 'amount': 20000}, {'code': '601997', 'amount': 7000},
-              {'code': '600383', 'amount': 1800}, {'code': '002589', 'amount': 5800},
-              {'code': '600995', 'amount': 5700}, {'code': '601933', 'amount': 500},
-              {'code': '131810', 'amount': 21000}, ]
+              {'code': '600383', 'amount': 1800}, {'code': '002589', 'amount': 5300},
+              {'code': '600995', 'amount': 5700}, {'code': '131810', 'amount': 26000}, ]
     result = []
     for item in stocks:
         code = item['code']
         amount = item['amount']
+        # TODO 交易时间才需要刷新
         if refresh:
             s = xueqiu(code)
             Stock.objects(code=code).update_one(code=code, amount=amount, current=s.current,
@@ -1284,33 +1284,8 @@ def polling(refresh):
                                                 low=s.low, high52week=s.high52week, low52week=s.low52week,
                                                 nh=s.nh, nl=s.nl, upsert=True)
         stock = Stock.objects.get(code=code)
+        stock.amount = amount
         result.append(stock)
-        # try:
-        #     stock = Stock.objects.get(code=code)
-        #     # print('stock:{}'.format(stock))
-        #     if s and stock:
-        #         stock.current = s.current
-        #         stock.amount = amount
-        #         stock.volume = s.volume
-        #         stock.percentage = s.percentage
-        #         stock.open_price = s.open_price
-        #         stock.high = s.high
-        #         stock.low = s.low
-        #         stock.close = s.close
-        #         stock.high52week = s.high52week
-        #         stock.low52week = s.low52week
-        #         # stock.pe_lyr = s.pe_lyr
-        #         # stock.pb = s.pb
-        #         stock.nh = s.nh
-        #         stock.nl = s.nl
-        #         stock.save()
-        #         result.append(stock)
-        #     else:
-        #         s.save()
-        # except Exception as e:
-        #     import traceback
-        #     print(traceback.format_exc())
-        #     continue
     return result
 
 

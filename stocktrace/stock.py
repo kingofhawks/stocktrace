@@ -47,6 +47,7 @@ class Stock(Document):
     tags = ListField(StringField())
     up_threshold = FloatField()
     down_threshold = FloatField()
+    ratio = FloatField()
 
     def __init__(self, *args, **kwargs):
             Document.__init__(self, *args, **kwargs)
@@ -79,10 +80,10 @@ class Stock(Document):
     def __str__(self):
         return 'code:{} name:{} current:{} percentage:{} open:{} high:{} low:{} close:{} ' \
                'low52week:{} nl:{}  high52week:{} nh:{} PercentChangeFromYearLow:{} PercentChangeFromYearHigh:{} ' \
-               'pe:{} pb:{} date:{}'.format(
+               'pe:{} pb:{} ratio:{} date:{}'.format(
             self.code, self.name, self.current, self.percentage, self.open_price, self.high, self.low, self.close,
             self.low52week, self.nl, self.high52week, self.nh,  self.PercentChangeFromYearLow, self.PercentChangeFromYearHigh,
-            self.pe_lyr, self.pb, self.date
+            self.pe_lyr, self.pb, self.ratio, self.date
         )
 
     def shortStr(self):
