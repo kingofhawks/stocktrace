@@ -1036,7 +1036,7 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
     if time:
         # Wed Dec 27 14:59:59 +0800 2017
         time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
-        print(time)
+        # print(time)
         stock = Stock(code=code,
                       #name=data.get('name').encode("GB2312"),
                       current=data.get('current'), percentage=data.get('percentage'),
@@ -1262,7 +1262,7 @@ def stock_list():
         s.save()
 
 
-def polling():
+def polling(refresh):
     # stocks = find_all_stocks()
     stocks = [{'code': '600420', 'amount': 20000}, {'code': '601009', 'amount': 6000},
               {'code': '600177', 'amount': 21000}, {'code': '000028', 'amount': 2500},
@@ -1276,34 +1276,41 @@ def polling():
     for item in stocks:
         code = item['code']
         amount = item['amount']
-        s = xueqiu(code)
-        try:
-            stock = Stock.objects.get(code=code)
-            # print('s:{}'.format(s))
-            # print('stock:{}'.format(stock))
-            if s and stock:
-                stock.current = s.current
-                stock.amount = amount
-                stock.volume = s.volume
-                stock.percentage = s.percentage
-                stock.open_price = s.open_price
-                stock.high = s.high
-                stock.low = s.low
-                stock.close = s.close
-                stock.high52week = s.high52week
-                stock.low52week = s.low52week
-                # stock.pe_lyr = s.pe_lyr
-                # stock.pb = s.pb
-                stock.nh = s.nh
-                stock.nl = s.nl
-                stock.save()
-                result.append(stock)
-            else:
-                s.save()
-        except Exception as e:
-            import traceback
-            print(traceback.format_exc())
-            continue
+        if refresh:
+            s = xueqiu(code)
+            Stock.objects(code=code).update_one(code=code, amount=amount, current=s.current,
+                                                volume=s.volume, percentage=s.percentage, close=s.close,
+                                                open_price=s.open_price, high=s.high,
+                                                low=s.low, high52week=s.high52week, low52week=s.low52week,
+                                                nh=s.nh, nl=s.nl, upsert=True)
+        stock = Stock.objects.get(code=code)
+        result.append(stock)
+        # try:
+        #     stock = Stock.objects.get(code=code)
+        #     # print('stock:{}'.format(stock))
+        #     if s and stock:
+        #         stock.current = s.current
+        #         stock.amount = amount
+        #         stock.volume = s.volume
+        #         stock.percentage = s.percentage
+        #         stock.open_price = s.open_price
+        #         stock.high = s.high
+        #         stock.low = s.low
+        #         stock.close = s.close
+        #         stock.high52week = s.high52week
+        #         stock.low52week = s.low52week
+        #         # stock.pe_lyr = s.pe_lyr
+        #         # stock.pb = s.pb
+        #         stock.nh = s.nh
+        #         stock.nl = s.nl
+        #         stock.save()
+        #         result.append(stock)
+        #     else:
+        #         s.save()
+        # except Exception as e:
+        #     import traceback
+        #     print(traceback.format_exc())
+        #     continue
     return result
 
 

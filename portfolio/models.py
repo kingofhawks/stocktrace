@@ -3,11 +3,12 @@ from django.db import models
 from django.utils import timezone
 from datetime import datetime, date
 from django.conf import settings
+from mongoengine import Document
 
 db = settings.DB
 
 
-class Portfolio(object):
+class Portfolio(Document):
     #static variable here
     position_ratio_limit = 90
 

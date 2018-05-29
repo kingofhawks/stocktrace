@@ -37,12 +37,32 @@ def import_portfolio(file,portfolio):
 
 
 def snapshot(save=True):
-    stocks = polling()
+    stocks = polling(False)
     print(stocks)
     from portfolio.models import Portfolio
-    portfolio = Portfolio(stocks)
-    if save:
+    from datetime import date
+    from django.conf import settings
+    db = settings.DB
+    name = str(date.today())
+    portfolios = db.portfolio
+    portfolio = portfolios.find_one({"name": name})
+    if portfolio:
+        stock_list = []
+        for stock in stocks:
+            stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
+        portfolios.update({"name": name}, {"$set": {"stocks": stock_list}}, upsert=True)
+        portfolio['stocks'] = stocks
+    else:
+        portfolio = Portfolio(stocks)
         portfolio.save()
+
+    # Portfolio.objects(name=name).update_one(stocks=stocks, upsert=True)
+    # portfolios.update({"name": name}, {"$set": {"stocks": stocks}}, upsert=True)
+    # # portfolio = Portfolio(stocks)
+    # # if save:
+    # #     portfolio.save()
+    # portfolio = Portfolio.objects.get(name=name)
+    print(portfolio)
     return portfolio
 
 

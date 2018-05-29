@@ -14,13 +14,13 @@ from bson import json_util
 
 def stock_list(request):
     portfolio = snapshot(True)
-    results = portfolio.stocks
+    results = portfolio.get('stocks')
     print('result:{}'.format(results))
 
-    context = {'results': results, 'market_value': portfolio.market_value, 'total': portfolio.total,
-               'net_asset': portfolio.net_asset,
-               'position_ratio': portfolio.position_ratio, 'financing': portfolio.financing,
-               'lever': portfolio.lever, 'profit_ratio': portfolio.profit_ratio}
+    context = {'results': results, 'market_value': portfolio.get('market_value'), 'total': portfolio.get('total'),
+               'net_asset': portfolio.get('net_asset'),
+               'position_ratio': portfolio.get('position_ratio'), 'financing': portfolio.get('financing'),
+               'lever': portfolio.get('lever'), 'profit_ratio': portfolio.get('profit_ratio')}
     return render(request, 'portfolio/index.html', context)
 
 
