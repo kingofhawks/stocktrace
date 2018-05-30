@@ -19,9 +19,9 @@ class Portfolio(Document):
             self.name = str(date.today())
         self.stocks = stocks
         # 三个账户本金
-        self.cost = 500000+210000+226000
+        self.cost = 493000+218579+277461
         # 融资
-        self.financing = 150000
+        self.financing = 200000
         # 市值
         self.market_value = 0
         # 总资产
@@ -59,9 +59,11 @@ class Portfolio(Document):
                 try:
                     if stock['code'] == '131810':
                         stock['ratio'] = float(stock['amount'])/self.total
+                        stock['market'] = float(stock['amount'])
                     else:
                         value = float(stock['amount']) * float(stock['current'])
                         stock['ratio'] = value / self.total
+                        stock['market'] = value
                 except KeyError as e:
                     pass
         self.profit_ratio = (self.net_asset-self.cost)/self.cost

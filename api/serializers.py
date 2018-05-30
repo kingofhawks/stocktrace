@@ -73,6 +73,11 @@ class SwIndexSerializer(serializers.Serializer):
 
 class StockSerializer(serializers.Serializer):
     code = serializers.CharField(required=False)
+    current = serializers.FloatField(read_only=True)
+    amount = serializers.IntegerField(read_only=True)
+    percentage = serializers.FloatField(read_only=True)
+    market = serializers.FloatField(read_only=True)
+    ratio = serializers.FloatField(read_only=True)
     close = serializers.FloatField(read_only=True)
     volume = serializers.FloatField(read_only=True)
     timestamp = serializers.IntegerField(read_only=True)
@@ -81,6 +86,10 @@ class StockSerializer(serializers.Serializer):
 
 class StockListSerializer(serializers.Serializer):
     items = StockSerializer(many=True)  # A nested list of 'edit' items.
+
+
+class PortfolioListSerializer(serializers.Serializer):
+    list = StockSerializer(many=True)  # A nested list of 'edit' items.
 
 
 class CixSerializer(serializers.Serializer):

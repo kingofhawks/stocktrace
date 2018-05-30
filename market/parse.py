@@ -1263,14 +1263,13 @@ def stock_list():
 
 
 def polling(refresh):
-    # stocks = find_all_stocks()
-    stocks = [{'code': '600420', 'amount': 21200}, {'code': '601009', 'amount': 6000},
-              {'code': '600177', 'amount': 21000}, {'code': '000028', 'amount': 2500},
-              {'code': '300246', 'amount': 4000}, {'code': '510900', 'amount': 20000},
+    stocks = [{'code': '600420', 'amount': 24300}, {'code': '601009', 'amount': 9000},
+              {'code': '600177', 'amount': 23000}, {'code': '000028', 'amount': 2500},
+              {'code': '300246', 'amount': 4500}, {'code': '510900', 'amount': 20000},
               {'code': '601688', 'amount': 1700}, {'code': '002468', 'amount': 900},
-              {'code': '601818', 'amount': 20000}, {'code': '601997', 'amount': 7000},
+              {'code': '601818', 'amount': 20000}, {'code': '601997', 'amount': 8000},
               {'code': '600383', 'amount': 1800}, {'code': '002589', 'amount': 5300},
-              {'code': '600995', 'amount': 5700}, {'code': '131810', 'amount': 26000}, ]
+              {'code': '600995', 'amount': 5700}, {'code': '131810', 'amount': 15000}, ]
     result = []
     for item in stocks:
         code = item['code']

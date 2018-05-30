@@ -13,6 +13,8 @@ from market.models import Index, Sw, Cix, AhIndex
 from market.parse import *
 import pymongo
 
+from portfolio.portfolio import snapshot
+
 DB_NAME = 'stocktrace'
 DB_HOST = 'localhost'
 db = getattr(pymongo.MongoClient(host=DB_HOST), DB_NAME)
@@ -272,6 +274,24 @@ def industry_list(request):
     # filter those name is empty
     result = list(filter(lambda x: x.get('name') is not None, result))
     response = Response(result, status=status.HTTP_200_OK)
+    return get_response_cors(response)
+
+
+@api_view(['GET'])
+def portfolio(request):
+    results = sorted(snapshot(True).stocks, key=lambda s: s.ratio, reverse=True)
+    print(results)
+    serializer = PortfolioListSerializer({'list': results})
+    content = JSONRenderer().render(serializer.data)
+    print('**********content:{}'.format(content))
+    json_output = json.loads(content)
+    response = Response(json_output, status=status.HTTP_200_OK)
+    return get_response_cors(response)
+
+
+@api_view(['GET'])
+def fake(request):
+    response = Response([], status=status.HTTP_200_OK)
     return get_response_cors(response)
 
 

@@ -37,7 +37,7 @@ def import_portfolio(file,portfolio):
 
 
 def snapshot(save=True):
-    stocks = polling(False)
+    stocks = polling(True)
     print(stocks)
     from portfolio.models import Portfolio
     from datetime import date
@@ -55,13 +55,6 @@ def snapshot(save=True):
     else:
         portfolio = Portfolio(stocks)
         portfolio.save()
-
-    # Portfolio.objects(name=name).update_one(stocks=stocks, upsert=True)
-    # portfolios.update({"name": name}, {"$set": {"stocks": stocks}}, upsert=True)
-    # # portfolio = Portfolio(stocks)
-    # # if save:
-    # #     portfolio.save()
-    # portfolio = Portfolio.objects.get(name=name)
     result = Portfolio(stocks)
     return result
 
