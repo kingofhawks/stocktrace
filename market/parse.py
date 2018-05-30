@@ -1262,7 +1262,7 @@ def stock_list():
         s.save()
 
 
-def polling(refresh):
+def polling():
     stocks = [{'code': '600420', 'amount': 24300}, {'code': '601009', 'amount': 9000},
               {'code': '600177', 'amount': 23000}, {'code': '000028', 'amount': 2500},
               {'code': '300246', 'amount': 4500}, {'code': '510900', 'amount': 20000},
@@ -1271,10 +1271,19 @@ def polling(refresh):
               {'code': '600383', 'amount': 1800}, {'code': '002589', 'amount': 5300},
               {'code': '600995', 'amount': 5700}, {'code': '131810', 'amount': 15000}, ]
     result = []
+
+    # 交易时间才需要刷新
+    now = arrow.now()
+    today = now.date()
+    trade_begin = arrow.get(str(today)+'T09:30+08:00')
+    trade_end = arrow.get(str(today)+'T15:01+08:00')
+    refresh = False
+    if trade_begin < now < trade_end:
+        refresh = True
     for item in stocks:
         code = item['code']
         amount = item['amount']
-        # TODO 交易时间才需要刷新
+
         if refresh:
             s = xueqiu(code)
             Stock.objects(code=code).update_one(code=code, amount=amount, current=s.current,

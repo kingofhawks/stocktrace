@@ -37,7 +37,7 @@ def import_portfolio(file,portfolio):
 
 
 def snapshot(save=True):
-    stocks = polling(True)
+    stocks = polling()
     print(stocks)
     from portfolio.models import Portfolio
     from datetime import date
