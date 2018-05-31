@@ -91,3 +91,29 @@ class Cix(Document):
     low_pb = FloatField()
     ah = FloatField()
     high_price = FloatField()
+
+
+class Market(Document):
+    date = DateTimeField()
+    # 个股数量
+    stock_count = IntField()
+    # 新高
+    nh = IntField()
+    nh_ratio = FloatField()
+    # 新低
+    nl = IntField()
+    nl_ratio = FloatField()
+    nhnl = IntField()
+    # 涨停
+    zt = FloatField()
+    zt_ratio = FloatField()
+    # 跌停
+    dt = FloatField()
+    dt_ratio = FloatField()
+    # 破净数
+    broken_net = IntField()
+    # 破净率
+    broken_net_ratio = FloatField()
+    broken_net_stocks = ListField(StringField())
+
+

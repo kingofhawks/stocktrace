@@ -76,6 +76,7 @@ class StockSerializer(serializers.Serializer):
     current = serializers.FloatField(read_only=True)
     amount = serializers.IntegerField(read_only=True)
     percentage = serializers.FloatField(read_only=True)
+    change = serializers.FloatField(read_only=True)
     market = serializers.FloatField(read_only=True)
     ratio = serializers.FloatField(read_only=True)
     close = serializers.FloatField(read_only=True)
@@ -90,6 +91,17 @@ class StockListSerializer(serializers.Serializer):
 
 class PortfolioListSerializer(serializers.Serializer):
     list = StockSerializer(many=True)  # A nested list of 'edit' items.
+    market_value = serializers.FloatField(read_only=True)
+    total = serializers.FloatField(read_only=True)
+    net_asset = serializers.FloatField(read_only=True)
+    cost = serializers.FloatField(read_only=True)
+    position_ratio = serializers.FloatField(read_only=True)
+    financing = serializers.FloatField(read_only=True)
+    lever = serializers.FloatField(read_only=True)
+    profit = serializers.FloatField(read_only=True)
+    profit_ratio = serializers.FloatField(read_only=True)
+    profit_today = serializers.FloatField(read_only=True)
+    profit_ratio_today = serializers.FloatField(read_only=True)
 
 
 class CixSerializer(serializers.Serializer):

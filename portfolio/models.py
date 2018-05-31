@@ -18,7 +18,7 @@ class Portfolio(Document):
         else:
             self.name = str(date.today())
         self.stocks = stocks
-        # 三个账户本金
+        # 三个账户当年本金
         self.cost = 493000+218579+277461
         # 融资
         self.financing = 200000
@@ -30,17 +30,23 @@ class Portfolio(Document):
         self.cash = 0
         # 净资产
         self.net_asset = 0
+        # 盈利
+        self.profit = 0
         # 盈利率
         self.profit_ratio = 0
+        # 当日盈利
+        self.profit_today = 0
+        # 当日盈利%
+        self.profit_ratio_today = 0
+
         for stock in self.stocks:
             try:
                 if stock['code'] == '131810':
                     self.cash += float(stock['amount'])
-                elif stock['code'] == '999998':
-                    self.financing = float(stock['amount'])
                 else:
                     value = float(stock['amount'])*float(stock['current'])
                     self.market_value += value
+                    self.profit_today += float(stock['amount'])*float(stock['change'])
             except KeyError as e:
                 pass
         self.total += self.market_value+self.cash
@@ -66,7 +72,9 @@ class Portfolio(Document):
                         stock['market'] = value
                 except KeyError as e:
                     pass
+        self.profit = self.net_asset - self.cost
         self.profit_ratio = (self.net_asset-self.cost)/self.cost
+        self.profit_ratio_today = self.profit_today/self.net_asset
         self.date = datetime.now()
 
     def save(self):

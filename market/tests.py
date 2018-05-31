@@ -5,19 +5,17 @@ from market.analysis import *
 from market.cix import *
 from market.csi import read_index, read_industry, read_index_all, read_industry_all, csi_by_type
 from market.csi import read_equity_by_date, read_equity, read_equity_all, read_equity_by_portfolio, read_equities
-from market.xueqiu import read_portfolio, read_history
+from market.xueqiu import read_portfolio, read_history, read_market, low_pb_ratio, high_pb_ratio
 from market.sw import read_sw_all
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
 
 class ParseTestCase(TestCase):
-    code = '600609'
+    code = '600420'
     begin = '2011-05-04'
 
     def test_xueqiu(self):
-        stock = xueqiu(self.code)
-        if stock:
-            stock.save()
+        xueqiu(self.code)
 
     def test_ah(self):
         ah_history()
@@ -56,7 +54,7 @@ class ParseTestCase(TestCase):
         read_equity_by_date('2012-10-09', '600436')
 
     def test_read_equity(self):
-        read_equity('000625', '2015-09-01', '2017-01-02')
+        read_equity('002016', '2004-09-01', '2017-01-02')
 
     @DeprecationWarning
     def test_read_equity_all2(self):
@@ -131,7 +129,7 @@ class ParseTestCase(TestCase):
 
     def test_index_history(self):
         for code in ['SH000001', 'SZ399001', 'SZ399005', 'SZ399006']:
-            history_list = xueqiu_history(code)
+            history_list = read_history(code)
             for history in history_list:
                 history.save()
 
@@ -163,3 +161,6 @@ class ParseTestCase(TestCase):
 
     def test_sh(self):
         sh()
+
+    def test_market(self):
+        read_market(21, 59, '2019-05-31')

@@ -7,6 +7,7 @@ class Stock(Document):
     name = StringField()
     current = FloatField()
     percentage = FloatField()
+    change = FloatField()
     volume = FloatField()
     open_price = FloatField()
     high = FloatField()

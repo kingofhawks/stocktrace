@@ -3,14 +3,14 @@ from lxml import etree
 from lxml.html import parse
 from pandas.util.testing import DataFrame
 from market.models import Index, AhIndex, Industry, Equity
+from market.xueqiu import xueqiu, read_history
 import pandas as pd
 import numpy as np
 import requests
 import json
 from datetime import timedelta, datetime
 import arrow
-from portfolio.dao import find_all_stocks
-from stocktrace.stock import Stock, StockHistory
+from stocktrace.stock import Stock
 import tushare as ts
 from PyQt5 import Qt
 import sys
@@ -889,49 +889,6 @@ def screen_by_market_value(low, high=60000, access_token=xq_a_token):
     return count
 
 
-# get stock count by PB
-def screen_by_pb(low=0.1, high=1, access_token=xq_a_token):
-    url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pb&order=desc&current=ALL&pct=ALL&page=1&pb={}_{}&_=1440168645679'
-    payload = {'access_token': access_token}
-    url2 = url.format(low, high)
-    # print '*************url********************{}'.format(url2)
-    r = requests.get(url2, params=payload, headers=headers)
-    # print r.text
-    # print r.content
-    result = r.json()
-    # print result
-    count = result.get('count')
-    # print count
-    # return count
-    stock_list = result.get('list')
-    stocks = []
-    if stock_list:
-        for stock in stock_list:
-            stocks.append(stock.get('symbol'))
-    result_dict = {'count': count, 'stocks': stocks}
-    # print result_dict
-    return result_dict
-
-
-def low_pb_ratio():
-    data = screen_by_pb()
-    # print data
-    count = data['count']
-    total = screen_by_price(high=10000)['count']
-    ratio = float(count)/total
-    # print 'low_pb_ratio:{} size:{}'.format(ratio, count)
-    return ratio, data['stocks']
-
-
-def high_pb_ratio():
-    data = screen_by_pb(low=10, high=10000)
-    count = data['count']
-    total = screen_by_price(high=10000)['count']
-    ratio = float(count)/total
-    # print 'high_pb_ratio:{} size:{}'.format(ratio, count)
-    return ratio, data['stocks']
-
-
 # get stock count by static PE
 def screen_by_static_pe(low=1, high=10, access_token=xq_a_token):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pelyr&order=desc&current=ALL&pct=ALL&page=1&pelyr={}_{}&_=1440168752260'
@@ -1011,107 +968,6 @@ def sina(code='600276'):
     return stock
 
 
-# parse real time data from xueqiu
-def xueqiu(code='SH600036', access_token=xq_a_token):
-    if code.startswith('60') or code.startswith('51'):
-        code = 'SH'+code
-    elif len(code) == 5:
-        code = 'HK'+code
-    elif code == '999999' or code == '999998' or code == '131810':
-        return Stock(code=code, current=1)
-    elif len(code) == 6:
-        code = 'SZ'+code
-
-    url = 'http://xueqiu.com/v4/stock/quote.json?code={}&_=1443253485389'
-    url = url.format(code)
-    payload = {'access_token': access_token}
-
-    r = requests.get(url, params=payload, headers=headers)
-    # print r
-    # print r.json()
-    data = r.json().get(code)
-    print(data)
-    time = data.get('time')
-    print(time)
-    if time:
-        # Wed Dec 27 14:59:59 +0800 2017
-        time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
-        # print(time)
-        stock = Stock(code=code,
-                      #name=data.get('name').encode("GB2312"),
-                      current=data.get('current'), percentage=data.get('percentage'),
-                      open_price=data.get('open'), high=data.get('high'), low=data.get('low'), close=data.get('close'),
-                      low52week=data.get('low52week'), high52week=data.get('high52week'),
-                      # pe_lyr=data.get('pe_lyr'),
-                      pb=data.get('pb'),
-                      date=time.datetime)
-        print(stock)
-        return stock
-    else:
-        return None
-
-
-# parse history data from xueqiu 1412158358740
-def xueqiu_history(code='600036', access_token=xq_a_token, begin_date=None, end_date=None):
-    if begin_date is None:
-        begin = arrow.get('2014-01-01')
-        begin_date = begin.timestamp*1000
-        # print begin_date
-    if end_date is None:
-        end = arrow.now()
-        end_date = end.timestamp*1000
-    if len(code) == 8:
-        pass
-    elif code.startswith('60') or code.startswith('51'):
-        code = 'SH'+code
-    elif len(code) == 5:
-        code = 'HK'+code
-    elif len(code) == 6:
-        code = 'SZ'+code
-
-    url = 'http://xueqiu.com/stock/forchartk/stocklist.json?symbol={}&period=1day&type=normal&begin={}&end={}&_=1443694358741'
-    url = url.format(code, begin_date, end_date)
-    payload = {'access_token': access_token}
-
-    r = requests.get(url, params=payload, headers=headers)
-    # print r.json()
-    data_list = r.json().get('chartlist')
-    # print data_list
-    # print len(data_list)
-    result = []
-    for data in data_list:
-        # print data
-        time = data.get('time')
-        time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
-        # print time
-        timestamp = time.timestamp*1000
-        history = StockHistory(code=code, percent=data.get('percent'),
-                               ma5=data.get('ma5'), ma10=data.get('ma10'), ma30=data.get('ma30'),
-                               open_price=data.get('open'), high=data.get('high'), low=data.get('low'),
-                               close=data.get('close'), time=time.datetime, timestamp=timestamp,
-                               volume=data.get('volume'),
-                               # 注：指数无法取得换手率
-                               turn_rate=data.get('turnrate'))
-        # print history
-        result.append(history)
-    df = DataFrame(data_list)
-    # print df
-    max_turnover = df['turnrate'].max()
-    min_turnover = df['turnrate'].min()
-    # print df['turnrate'].mean()
-    # max_turnover_index = df.loc[df['turnrate'] == max_turnover].index
-    # print max_turnover_index
-    columns = ['time', 'turnrate', 'volume', 'close']
-    # print df.loc[df['turnrate'] == max_turnover][columns]
-    # print df.loc[df['turnrate'] == min_turnover][columns]
-    max_volume = df['volume'].max()
-    min_volume = df['volume'].min()
-    mean_volume = df['volume'].mean()
-    # print df.loc[df['volume'] == max_volume][columns]
-    # print df.loc[df['volume'] == min_volume][columns]
-    return result
-
-
 # HK and USD to RMB exchange rate from boc.cn
 def rmb_exchange_rate():
     page = parse('http://www.boc.cn/sourcedb/whpj/').getroot()
@@ -1173,7 +1029,7 @@ def ah_ratio(hk_rmb_change_rate, ah_pair=('000002', '02202'), ):
 
 
 def ah_history():
-    xueqiu_history('HKHSAHP')
+    read_history('HKHSAHP')
 
 
 # 8 AH premium index: average of sample stock's AH ratio
@@ -1276,7 +1132,7 @@ def polling():
     now = arrow.now()
     today = now.date()
     trade_begin = arrow.get(str(today)+'T09:30+08:00')
-    trade_end = arrow.get(str(today)+'T15:01+08:00')
+    trade_end = arrow.get(str(today)+'T16:01+08:00')
     refresh = False
     if trade_begin < now < trade_end:
         refresh = True
@@ -1286,10 +1142,10 @@ def polling():
 
         if refresh:
             s = xueqiu(code)
-            Stock.objects(code=code).update_one(code=code, amount=amount, current=s.current,
-                                                volume=s.volume, percentage=s.percentage, close=s.close,
-                                                open_price=s.open_price, high=s.high,
-                                                low=s.low, high52week=s.high52week, low52week=s.low52week,
+            Stock.objects(code=code).update_one(code=code, amount=amount, current=s.current, volume=s.volume,
+                                                percentage=s.percentage, change=s.change,
+                                                open_price=s.open_price, high=s.high, low=s.low, close=s.close,
+                                                high52week=s.high52week, low52week=s.low52week,
                                                 nh=s.nh, nl=s.nl, upsert=True)
         stock = Stock.objects.get(code=code)
         stock.amount = amount

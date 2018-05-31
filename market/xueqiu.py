@@ -2,7 +2,7 @@
 from lxml import etree
 from lxml.html import parse
 from pandas.util.testing import DataFrame
-from market.models import Index, AhIndex, Industry, Equity
+from market.models import Index, AhIndex, Industry, Equity, Market
 import pandas as pd
 import numpy as np
 import requests
@@ -160,16 +160,16 @@ def screen_by_market_value(low, high=60000, access_token=xq_a_token):
 
 
 # get stock count by PB
-def screen_by_pb(low=0.1, high=1, access_token=xq_a_token):
+def screen_by_pb(low=0, high=0.999, access_token=xq_a_token):
     url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pb&order=desc&current=ALL&pct=ALL&page=1&pb={}_{}&_=1440168645679'
     payload = {'access_token': access_token}
     url2 = url.format(low, high)
-    # print '*************url********************{}'.format(url2)
+    print('*************url********************{}'.format(url2))
     r = requests.get(url2, params=payload, headers=headers)
     # print r.text
     # print r.content
     result = r.json()
-    # print result
+    # print(result)
     count = result.get('count')
     # print count
     # return count
@@ -177,9 +177,13 @@ def screen_by_pb(low=0.1, high=1, access_token=xq_a_token):
     stocks = []
     if stock_list:
         for stock in stock_list:
+            name = stock.get('name')
+            # 过滤掉退市股
+            if name.endswith('退'):
+                continue
             stocks.append(stock.get('symbol'))
     result_dict = {'count': count, 'stocks': stocks}
-    # print result_dict
+    print(result_dict)
     return result_dict
 
 
@@ -190,7 +194,7 @@ def low_pb_ratio():
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
     # print 'low_pb_ratio:{} size:{}'.format(ratio, count)
-    return ratio, data['stocks']
+    return ratio, data['stocks'], total
 
 
 def high_pb_ratio():
@@ -262,11 +266,11 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
         time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
         print(time)
         stock = Stock(code=code,
-                      #name=data.get('name').encode("GB2312"),
+                      # name=data.get('name').encode("GB2312"),
                       current=data.get('current'), percentage=data.get('percentage'),
                       open_price=data.get('open'), high=data.get('high'), low=data.get('low'), close=data.get('close'),
                       low52week=data.get('low52week'), high52week=data.get('high52week'),
-                      # pe_lyr=data.get('pe_lyr'),
+                      change=data.get('change'),
                       pb=data.get('pb'),
                       date=time.datetime)
         print(stock)
@@ -396,3 +400,21 @@ def read_portfolio():
     print(stock_set)
     return stock_set
 
+
+def read_market(nh, nl, date):
+    date_format = 'YYYY-MM-DD'
+    day = arrow.get(date, date_format).date()
+    low_pb = low_pb_ratio()
+    print(low_pb)
+    print('*'*20)
+    broken_net_ratio = low_pb[0]
+    broken_net = len(low_pb[1])
+    stock_count = low_pb[2]
+    nh_ratio = float(nh)/stock_count
+    nl_ratio = float(nl)/stock_count
+
+    Market.objects(date=day).update_one(nh=nh, nl=nl, nhnl=nh-nl, nh_ratio=nh_ratio, nl_ratio=nl_ratio,
+                                        stock_count=stock_count,
+                                        broken_net=broken_net, broken_net_ratio=broken_net_ratio,
+                                        broken_net_stocks=low_pb[1],
+                                        upsert=True)

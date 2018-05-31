@@ -279,9 +279,14 @@ def industry_list(request):
 
 @api_view(['GET'])
 def portfolio(request):
-    results = sorted(snapshot(True).stocks, key=lambda s: s.ratio, reverse=True)
+    p = snapshot(True)
+    results = sorted(p.stocks, key=lambda s: s.ratio, reverse=True)
     print(results)
-    serializer = PortfolioListSerializer({'list': results})
+    serializer = PortfolioListSerializer({'list': results, 'market_value': p.market_value, 'cost':p.cost,
+                                          'total': p.total, 'net_asset': p.net_asset, 'lever': p.lever,
+                                          'position_ratio': p.position_ratio, 'financing': p.financing,
+                                          'profit': p.profit, 'profit_ratio': p.profit_ratio,
+                                          'profit_today': p.profit_today, 'profit_ratio_today': p.profit_ratio_today})
     content = JSONRenderer().render(serializer.data)
     print('**********content:{}'.format(content))
     json_output = json.loads(content)
