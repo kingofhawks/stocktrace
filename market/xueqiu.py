@@ -180,10 +180,11 @@ def screen_by_pb(low=0, high=0.999, access_token=xq_a_token):
             name = stock.get('name')
             # 过滤掉退市股
             if name.endswith('退'):
+                count -= 1
                 continue
             stocks.append(stock.get('symbol'))
     result_dict = {'count': count, 'stocks': stocks}
-    print(result_dict)
+    # print(result_dict)
     return result_dict
 
 
@@ -194,7 +195,7 @@ def low_pb_ratio():
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
     # print 'low_pb_ratio:{} size:{}'.format(ratio, count)
-    return ratio, data['stocks'], total
+    return ratio, count, data['stocks'], total
 
 
 def high_pb_ratio():
@@ -406,15 +407,14 @@ def read_market(nh, nl, date):
     day = arrow.get(date, date_format).date()
     low_pb = low_pb_ratio()
     print(low_pb)
-    print('*'*20)
     broken_net_ratio = low_pb[0]
-    broken_net = len(low_pb[1])
-    stock_count = low_pb[2]
+    broken_net = low_pb[1]
+    stock_count = low_pb[3]
     nh_ratio = float(nh)/stock_count
     nl_ratio = float(nl)/stock_count
 
     Market.objects(date=day).update_one(nh=nh, nl=nl, nhnl=nh-nl, nh_ratio=nh_ratio, nl_ratio=nl_ratio,
                                         stock_count=stock_count,
                                         broken_net=broken_net, broken_net_ratio=broken_net_ratio,
-                                        broken_net_stocks=low_pb[1],
+                                        broken_net_stocks=low_pb[2],
                                         upsert=True)
