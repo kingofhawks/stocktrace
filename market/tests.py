@@ -163,4 +163,4 @@ class ParseTestCase(TestCase):
         sh()
 
     def test_market(self):
-        read_market(21, 59, '2019-05-31')
+        read_market(21, 59, '2019-06-01')
