@@ -9,11 +9,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from api.serializers import *
-from market.models import Index, Sw, Cix, AhIndex
+from market.models import Index, Sw, Cix, AhIndex, Market
 from market.parse import *
 import pymongo
 
 from portfolio.portfolio import snapshot
+from stocktrace.stock import StockHistory
 
 DB_NAME = 'stocktrace'
 DB_HOST = 'localhost'
@@ -202,7 +203,7 @@ class StockView(APIView):
         # print sw_col
         history_list = list(sw_col)
         if len(history_list) == 0:
-            history_list = xueqiu_history(code)
+            history_list = read_history(code)
             for history in history_list:
                 history.save()
             sw_col = db.stock_history.find({'code': code})
@@ -381,6 +382,54 @@ def sh(request):
     result = {'PE': pe_list, 'PE_avg': float("{0:.2f}".format(pe_avg))}
     response = Response(result, status=status.HTTP_200_OK)
     return get_response_cors(response)
+
+
+def get_market_result(serializer):
+    content = JSONRenderer().render(serializer.data)
+    print('**********content:{}'.format(content))
+    json_output = json.loads(content)
+    print('****json:{}'.format(json_output))
+    nh_list = []
+    nl_list = []
+    nhnl_list = []
+    nh_ratio_list = []
+    nl_ratio_list = []
+    for item in json_output.get('items'):
+        if item.get('date'):
+            timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
+        nh_list.append([timestamp, item.get('nh')])
+        nl_list.append([timestamp, item.get('nl')])
+        nhnl_list.append([timestamp, item.get('nh')-item.get('nl')])
+        nh_ratio_list.append([timestamp, item.get('nh_ratio')])
+        nl_ratio_list.append([timestamp, item.get('nl_ratio')])
+    result = {'nh': nh_list, 'nl': nl_list, 'nhnl': nhnl_list,
+              'nh_ratio': nh_ratio_list, 'nl_ratio': nl_ratio_list,
+              }
+    return result
+
+
+class MarketView(APIView):
+
+    def get(self, request, *args, **kw):
+        # Process any get params that you may need
+        # If you don't need to process get params,
+        # you can skip this part
+        data = Market.objects().order_by('date')
+        print(data)
+        # df = DataFrame(list(data))
+        # print df
+        # max_ah = df['value'].max()
+        # min_ah = df['value'].min()
+        # avg_ah = df['value'].mean()
+        # print('PE max:{} min:{} average:{} median:{}'.format(max_ah, min_ah, avg_ah))
+        serializer = MarketListSerializer({'items': data})
+        # content = JSONRenderer().render(serializer.data)
+        # print '**********content:{}'.format(content)
+        # json_output = json.loads(content)
+        # print '****json:{}'.format(json_output)
+        result = get_market_result(serializer)
+        response = Response(result, status=status.HTTP_200_OK)
+        return get_response_cors(response)
 
 
 class CixView(APIView):

@@ -6,11 +6,11 @@ app_name = 'url'
 urlpatterns = [
     # Examples:
     url(r'^csi', IndexView.as_view()),
+    url(r'^industries', industry_list),
     url(r'^industry', IndustryView.as_view()),
     url(r'^equity', EquityView.as_view()),
     url(r'^equities', equity_list),
     url(r'^indexes', index_list),
-    url(r'^industries', industry_list),
     url(r'^ah', AhView.as_view()),
     url(r'^swlist', sw_list),
     url(r'^sw', SwView.as_view()),
@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^diff', diff),
     url(r'^sh', sh),
     url(r'^cix', CixView.as_view()),
+    url(r'^market', MarketView.as_view()),
     url(r'^rule', portfolio),
     url(r'^fake_chart_data', fake),
 ]

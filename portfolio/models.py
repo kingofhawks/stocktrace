@@ -18,10 +18,12 @@ class Portfolio(Document):
         else:
             self.name = str(date.today())
         self.stocks = stocks
+        # 三个账户真实本金
+        self.cost_history = 493000+210000+226000
         # 三个账户当年本金
         self.cost = 493000+218579+277461
-        # 融资
-        self.financing = 200000
+        # 券商融资+江苏银行
+        self.financing = 156765+50000
         # 市值
         self.market_value = 0
         # 总资产
@@ -81,10 +83,12 @@ class Portfolio(Document):
         stock_list = []
         for stock in self.stocks:
             stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
-        db.portfolio.insert({'name':self.name, 'date': self.date, 'stocks': stock_list,
+        db.portfolio.insert({'name': self.name, 'date': self.date, 'stocks': stock_list,
                              'market_value': self.market_value,
-                             'total': self.total, 'net_asset': self.net_asset,'financing': self.financing,
-                             'position_ratio': self.position_ratio, 'profit_ratio': self.profit_ratio})
+                             'total': self.total, 'net_asset': self.net_asset, 'financing': self.financing,
+                             'position_ratio': self.position_ratio, 'lever': self.lever,
+                             'profit': self.profit, 'profit_ratio': self.profit_ratio,
+                             'profit_today': self.profit_today, 'profit_ratio_today': self.profit_ratio_today})
 
     def __unicode__(self):
         return self.name
