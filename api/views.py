@@ -394,14 +394,22 @@ def get_market_result(serializer):
     nhnl_list = []
     nh_ratio_list = []
     nl_ratio_list = []
+    broken_net_list = []
+    broken_net_ratio_list = []
     for item in json_output.get('items'):
         if item.get('date'):
             timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
         nh_list.append([timestamp, item.get('nh')])
         nl_list.append([timestamp, item.get('nl')])
         nhnl_list.append([timestamp, item.get('nh')-item.get('nl')])
-        nh_ratio_list.append([timestamp, item.get('nh_ratio')])
-        nl_ratio_list.append([timestamp, item.get('nl_ratio')])
+        nh_ratio = item.get('nh_ratio')*100
+        nh_ratio_list.append([timestamp, float("{0:.2f}".format(nh_ratio))])
+        nl_ratio = item.get('nl_ratio')*100
+        nl_ratio_list.append([timestamp, float("{0:.2f}".format(nl_ratio))])
+        broken_net = item.get('broken_net')*100
+        broken_net_list.append([timestamp, float("{0:.2f}".format(broken_net))])
+        broken_net_ratio = item.get('broken_net_ratio') * 100
+        broken_net_ratio_list.append([timestamp, float("{0:.2f}".format(broken_net_ratio))])
     result = {'nh': nh_list, 'nl': nl_list, 'nhnl': nhnl_list,
               'nh_ratio': nh_ratio_list, 'nl_ratio': nl_ratio_list,
               }
