@@ -23,7 +23,7 @@ class Portfolio(Document):
         # 三个账户当年本金
         self.cost = 493000+218579+277461
         # 券商融资+江苏银行
-        self.financing = 156765+50000
+        self.financing = 156765+30000
         # 市值
         self.market_value = 0
         # 总资产
@@ -60,23 +60,26 @@ class Portfolio(Document):
         self.lever = 0
        
         if self.total != 0:
-            self.position_ratio = self.market_value/self.total
-            self.lever = self.total/self.net_asset
+            self.position_ratio = float("{0:.2f}".format(self.market_value*100/self.total))
+            self.lever = float("{0:.2f}".format(self.total*100/self.net_asset))
             # 个股占比
             for stock in self.stocks:
                 try:
                     if stock['code'] == '131810':
-                        stock['ratio'] = float(stock['amount'])/self.total
+                        value = float(stock['amount'])*100/self.total
+                        stock['ratio'] = float("{0:.2f}".format(value))
                         stock['market'] = float(stock['amount'])
                     else:
-                        value = float(stock['amount']) * float(stock['current'])
-                        stock['ratio'] = value / self.total
+                        value = float(stock['amount']) * float(stock['current'])*100
+                        stock['ratio'] = float("{0:.2f}".format(value / self.total))
                         stock['market'] = value
                 except KeyError as e:
                     pass
         self.profit = self.net_asset - self.cost
-        self.profit_ratio = (self.net_asset-self.cost)/self.cost
-        self.profit_ratio_today = self.profit_today/self.net_asset
+        # 以成本入账
+        self.profit_ratio = float("{0:.2f}".format(self.profit*100/self.cost))
+        # 以净资产入账
+        self.profit_ratio_today = float("{0:.2f}".format(self.profit_today*100/self.net_asset))
         self.date = datetime.now()
 
     def save(self):
