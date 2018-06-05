@@ -70,8 +70,8 @@ class Portfolio(Document):
                         stock['ratio'] = float("{0:.2f}".format(value))
                         stock['market'] = float(stock['amount'])
                     else:
-                        value = float(stock['amount']) * float(stock['current'])*100
-                        stock['ratio'] = float("{0:.2f}".format(value / self.total))
+                        value = float(stock['amount']) * float(stock['current'])
+                        stock['ratio'] = float("{0:.2f}".format(value*100 / self.total))
                         stock['market'] = value
                 except KeyError as e:
                     pass
