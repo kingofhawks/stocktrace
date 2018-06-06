@@ -72,7 +72,7 @@ class ParseTestCase(TestCase):
         read_equities(equities, self.begin, '2016-12-31')
 
     def test_read_all(self):
-        begin = '2018-05-21'
+        begin = '2018-05-30'
         read_index_all(begin)
         read_industry_all(begin)
         read_sw_all(begin)
@@ -163,4 +163,4 @@ class ParseTestCase(TestCase):
         sh()
 
     def test_market(self):
-        read_market(21, 59, '2019-06-01')
+        read_market(20, 28, str(date.today()))

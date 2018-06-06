@@ -18,10 +18,12 @@ class Portfolio(Document):
         else:
             self.name = str(date.today())
         self.stocks = stocks
+        # 三个账户真实本金
+        self.cost_history = 493000+210000+226000
         # 三个账户当年本金
         self.cost = 493000+218579+277461
-        # 融资
-        self.financing = 200000
+        # 券商融资+江苏银行
+        self.financing = 156765+30000
         # 市值
         self.market_value = 0
         # 总资产
@@ -58,33 +60,38 @@ class Portfolio(Document):
         self.lever = 0
        
         if self.total != 0:
-            self.position_ratio = self.market_value/self.total
-            self.lever = self.total/self.net_asset
+            self.position_ratio = float("{0:.2f}".format(self.market_value*100/self.total))
+            self.lever = float("{0:.2f}".format(self.total*100/self.net_asset))
             # 个股占比
             for stock in self.stocks:
                 try:
                     if stock['code'] == '131810':
-                        stock['ratio'] = float(stock['amount'])/self.total
+                        value = float(stock['amount'])*100/self.total
+                        stock['ratio'] = float("{0:.2f}".format(value))
                         stock['market'] = float(stock['amount'])
                     else:
                         value = float(stock['amount']) * float(stock['current'])
-                        stock['ratio'] = value / self.total
+                        stock['ratio'] = float("{0:.2f}".format(value*100 / self.total))
                         stock['market'] = value
                 except KeyError as e:
                     pass
         self.profit = self.net_asset - self.cost
-        self.profit_ratio = (self.net_asset-self.cost)/self.cost
-        self.profit_ratio_today = self.profit_today/self.net_asset
+        # 以成本入账
+        self.profit_ratio = float("{0:.2f}".format(self.profit*100/self.cost))
+        # 以净资产入账
+        self.profit_ratio_today = float("{0:.2f}".format(self.profit_today*100/self.net_asset))
         self.date = datetime.now()
 
     def save(self):
         stock_list = []
         for stock in self.stocks:
             stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
-        db.portfolio.insert({'name':self.name, 'date': self.date, 'stocks': stock_list,
+        db.portfolio.insert({'name': self.name, 'date': self.date, 'stocks': stock_list,
                              'market_value': self.market_value,
-                             'total': self.total, 'net_asset': self.net_asset,'financing': self.financing,
-                             'position_ratio': self.position_ratio, 'profit_ratio': self.profit_ratio})
+                             'total': self.total, 'net_asset': self.net_asset, 'financing': self.financing,
+                             'position_ratio': self.position_ratio, 'lever': self.lever,
+                             'profit': self.profit, 'profit_ratio': self.profit_ratio,
+                             'profit_today': self.profit_today, 'profit_ratio_today': self.profit_ratio_today})
 
     def __unicode__(self):
         return self.name

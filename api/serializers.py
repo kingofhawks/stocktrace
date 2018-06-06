@@ -52,6 +52,22 @@ class MarketOverallSerializer(serializers.Serializer):
     zxb = IndexSerializer()
 
 
+class MarketSerializer(serializers.Serializer):
+    date = serializers.CharField(required=False)
+    stock_count = serializers.IntegerField(read_only=True)
+    nh = serializers.IntegerField(read_only=True)
+    nh_ratio = serializers.FloatField(read_only=True)
+    nl = serializers.IntegerField(read_only=True)
+    nl_ratio = serializers.FloatField(read_only=True)
+    nhnl = serializers.IntegerField(read_only=True)
+    broken_net = serializers.IntegerField(read_only=True)
+    broken_net_ratio = serializers.FloatField(read_only=True)
+
+
+class MarketListSerializer(serializers.Serializer):
+    items = MarketSerializer(many=True)  # A nested list of 'edit' items.
+
+
 class AhSerializer(serializers.Serializer):
     value = serializers.FloatField(read_only=True)
     date = serializers.CharField(required=False)
