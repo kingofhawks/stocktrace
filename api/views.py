@@ -283,7 +283,9 @@ def portfolio(request):
     p = snapshot(True)
     results = sorted(p.stocks, key=lambda s: s.ratio, reverse=True)
     print(results)
-    serializer = PortfolioListSerializer({'list': results, 'market_value': p.market_value, 'cost':p.cost,
+    serializer = PortfolioListSerializer({'list': results, 'market_value': p.market_value,
+                                          'cost_zs': p.cost_zs, 'cost_ht1': p.cost_ht1, 'cost_ht2': p.cost_ht2,
+                                          'cost': p.cost,
                                           'total': p.total, 'net_asset': p.net_asset, 'lever': p.lever,
                                           'position_ratio': p.position_ratio, 'financing': p.financing,
                                           'profit': p.profit, 'profit_ratio': p.profit_ratio,

@@ -1119,14 +1119,15 @@ def stock_list():
 
 
 def polling():
-    stocks = [{'code': '600420', 'amount': 10000+7000+4800}, {'code': '601009', 'amount': 6000},
+    stocks = [{'code': '600420', 'amount': 10000+7000+4000}, {'code': '601009', 'amount': 7000},
               {'code': '600177', 'amount': 21000}, {'code': '000028', 'amount': 2500},
-              {'code': '300246', 'amount': 3000}, {'code': '510900', 'amount': 20000},
+              {'code': '300246', 'amount': 3100}, {'code': '510900', 'amount': 20000},
               {'code': '601688', 'amount': 1700}, {'code': '002468', 'amount': 900},
-              {'code': '601818', 'amount': 20000}, {'code': '601997', 'amount': 8000},
+              {'code': '601818', 'amount': 20000}, {'code': '601997', 'amount': 7000},
               {'code': '600383', 'amount': 1800}, {'code': '002589', 'amount': 5300},
-              {'code': '600995', 'amount': 5700}, {'code': '131810', 'amount': 13000+36000+32485},
-              {'code': '600533', 'amount': 1000}, {'code': '600960', 'amount': 1000}, ]
+              {'code': '600995', 'amount': 5700}, {'code': '131810', 'amount': 21000+18000+2000},
+              {'code': '600533', 'amount': 1000}, {'code': '600960', 'amount': 1800},
+              {'code': '601933', 'amount': 500}, {'code': '300750', 'amount': 500}, ]
     result = []
 
     # 交易时间才需要刷新

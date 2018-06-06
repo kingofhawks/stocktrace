@@ -20,8 +20,14 @@ class Portfolio(Document):
         self.stocks = stocks
         # 三个账户真实本金
         self.cost_history = 493000+210000+226000
+        # ZS账户当年本金
+        self.cost_zs = 463000
+        # HT1账户当年本金
+        self.cost_ht1 = 277461
+        # HT2账户当年本金
+        self.cost_ht2 = 218579
         # 三个账户当年本金
-        self.cost = 493000+218579+277461
+        self.cost = self.cost_zs+self.cost_ht1+self.cost_ht2
         # 券商融资+江苏银行
         self.financing = 156765+30000
         # 市值
