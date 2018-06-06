@@ -78,7 +78,7 @@ class Portfolio(Document):
                     else:
                         value = float(stock['amount']) * float(stock['current'])
                         stock['ratio'] = float("{0:.2f}".format(value*100 / self.total))
-                        stock['market'] = value
+                        stock['market'] = float("{0:.2f}".format(value))
                 except KeyError as e:
                     pass
         self.profit = self.net_asset - self.cost
@@ -94,6 +94,8 @@ class Portfolio(Document):
             stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
         db.portfolio.insert({'name': self.name, 'date': self.date, 'stocks': stock_list,
                              'market_value': self.market_value,
+                             'cost_zs': self.cost_zs, 'cost_ht1': self.cost_ht1, 'cost_ht2': self.cost_ht2,
+                             'cost': self.cost,
                              'total': self.total, 'net_asset': self.net_asset, 'financing': self.financing,
                              'position_ratio': self.position_ratio, 'lever': self.lever,
                              'profit': self.profit, 'profit_ratio': self.profit_ratio,

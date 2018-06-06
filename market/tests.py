@@ -11,11 +11,12 @@ from market.sw import read_sw_all
 
 
 class ParseTestCase(TestCase):
-    code = '600420'
+    code = '300750'
     begin = '2011-05-04'
 
     def test_xueqiu(self):
-        xueqiu(self.code)
+        s = xueqiu(self.code)
+        print(s)
 
     def test_ah(self):
         ah_history()
@@ -163,4 +164,4 @@ class ParseTestCase(TestCase):
         sh()
 
     def test_market(self):
-        read_market(20, 28, str(date.today()))
+        read_market(18, 28, str(date.today()))

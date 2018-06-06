@@ -1144,6 +1144,7 @@ def polling():
 
         if refresh:
             s = xueqiu(code)
+            print('code:{} s:{}'.format(code, s))
             Stock.objects(code=code).update_one(code=code, amount=amount, current=s.current, volume=s.volume,
                                                 percentage=s.percentage, change=s.change,
                                                 open_price=s.open_price, high=s.high, low=s.low, close=s.close,

@@ -251,7 +251,7 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
     elif len(code) == 6:
         code = 'SZ'+code
 
-    url = 'http://xueqiu.com/v4/stock/quote.json?code={}&_=1443253485389'
+    url = api_home+'/v4/stock/quote.json?code={}&_=1443253485389'
     url = url.format(code)
     payload = {'access_token': access_token}
 
@@ -262,18 +262,22 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
     print(data)
     time = data.get('time')
     print(time)
-    if time:
+    if data:
         # Wed Dec 27 14:59:59 +0800 2017
-        time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
-        print(time)
         stock = Stock(code=code,
                       # name=data.get('name').encode("GB2312"),
                       current=data.get('current'), percentage=data.get('percentage'),
                       open_price=data.get('open'), high=data.get('high'), low=data.get('low'), close=data.get('close'),
                       low52week=data.get('low52week'), high52week=data.get('high52week'),
                       change=data.get('change'),
-                      pb=data.get('pb'),
-                      date=time.datetime)
+                      pb=data.get('pb'))
+        if time:
+            time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
+            print(time)
+            stock.date = time.datetime
+        # TODO 新股发行价
+        if code == 'SZ300750':
+            stock.current = 25.14
         print(stock)
         return stock
     else:
