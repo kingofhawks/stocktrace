@@ -9,6 +9,8 @@ import requests
 import json
 from datetime import timedelta, datetime
 import arrow
+
+from market.utils import rmb_exchange_rate
 from stocktrace.stock import Stock, StockHistory
 import tushare as ts
 from PyQt5 import Qt
@@ -311,7 +313,7 @@ def read_history(code='600036', begin_date=None, end_date=None):
     payload = {'access_token': xq_a_token}
 
     r = requests.get(url, params=payload, headers=headers)
-    # print r.json()
+    print(r.json())
     data_list = r.json().get('chartlist')
     # print data_list
     # print len(data_list)
@@ -422,3 +424,25 @@ def read_market(nh, nl, date):
                                         broken_net=broken_net, broken_net_ratio=broken_net_ratio,
                                         broken_net_stocks=low_pb[2],
                                         upsert=True)
+
+
+# 指数市值
+def read_index_market(code):
+    url = 'https://stock.xueqiu.com/v5/stock/quote.json?symbol='+code
+    payload = {'access_token': xq_a_token}
+    r = requests.get(url, params=payload, headers=headers)
+    # print(r.json())
+    data = r.json()
+    # print(data)
+    quote = data.get('data').get('quote')
+    print(quote)
+    return quote
+
+
+# 7 stock ratio with high market value
+def high_market_value_ratio():
+    count = screen_by_market_value(rmb_exchange_rate()[1])
+    total = screen_by_market_value(1)
+    ratio = float(count)/total
+    # print 'count:{} total:{} ratio:{}'.format(count, total, ratio)
+    return ratio

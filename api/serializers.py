@@ -81,6 +81,7 @@ class SwSerializer(serializers.Serializer):
     BargainDate = serializers.IntegerField(required=False)
     PB = serializers.FloatField(read_only=True)
     PE = serializers.FloatField(read_only=True)
+    TurnoverRate = serializers.CharField(read_only=True)
 
 
 class SwIndexSerializer(serializers.Serializer):

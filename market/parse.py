@@ -3,7 +3,9 @@ from lxml import etree
 from lxml.html import parse
 from pandas.util.testing import DataFrame
 from market.models import Index, AhIndex, Industry, Equity
-from market.xueqiu import xueqiu, read_history
+from market.sina import sina
+from market.utils import rmb_exchange_rate
+from market.xueqiu import xueqiu, read_history, read_index_market, screen_by_price
 import pandas as pd
 import numpy as np
 import requests
@@ -329,7 +331,7 @@ def avg_sh_pe(begin_date='1999-12-31'):
     # Create DF from dict of list
     df = pd.DataFrame(s)
     if begin_date:
-        df = df[df.Date > begin_date]
+        df = df[df.Date >= begin_date]
     # print 'SH PE min:{} max:{} average:{}'.format(df['PE'].min(), df['PE'].max(), df['PE'].mean())
     # return df['PE'].min(), df['PE'].max(), df['PE'].mean()
     return df
@@ -736,14 +738,22 @@ def parse_securitization_rate():
     return securitization_rate
 
 
-# SZ399001+SH000001/last year GDP
+# SZ399001+SH000001+SZ399006+SZ399005/last year GDP
 def gdp_rate():
-    # 2015 GDP http://data.eastmoney.com/cjsj/gdp.html
-    last_year_gdp = 676707.80
-    sh = parse_sh_market()
-    sz = parse_sz_market()
-    total_market = float(sh.total_market_cap)+float(sz.total_market_cap)
-    # print total_market
+    # last year GDP http://data.eastmoney.com/cjsj/gdp.html
+    last_year_gdp = 827121.70*1e8
+    sh = read_index_market('SH000001')
+    print(sh)
+    sz = read_index_market('SZ399001')
+    print(sz)
+    sz = read_index_market('SZ399001')
+    print(sz)
+    zxb = read_index_market('SZ399005')
+    print(zxb)
+    cyb = read_index_market('SZ399006')
+    print(cyb)
+    total_market = float(sh.get('market_capital'))+float(sz.get('market_capital'))+float(zxb.get('market_capital'))+float(cyb.get('market_capital'))
+    print(total_market)
     securitization_rate = total_market/last_year_gdp
     # print 'securitization_rate:{0:.2f}'.format(securitization_rate)
     return securitization_rate
@@ -845,173 +855,11 @@ def login_xue_qiu():
     return access_token
 
 
-# get stock count by price
-def screen_by_price(low=0.1, high=3, access_token=xq_a_token):
-    url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=symbol&order=desc&current={}_{}&pct=ALL&page=1&_=1438835212122'
-    payload = {'access_token': access_token}
-    url2 = url.format(low, high)
-    # print '*************url********************{}'.format(url2)
-    r = requests.get(url2, params=payload, headers=headers)
-    # print r.text
-    # print r.content
-    result = r.json()
-    # print result
-    count = result.get('count')
-    stock_list = result.get('list')
-    stocks = []
-    if stock_list:
-        for stock in stock_list:
-            stocks.append(stock.get('symbol'))
-    result_dict = {'count': count, 'stocks': stocks}
-    # print result_dict
-    return result_dict
-
-
 # get stock price position
 def position(code):
     current = sina(code)
     count = screen_by_price(current, high=60000)
     # print count
-
-
-# get stock count by market value
-def screen_by_market_value(low, high=60000, access_token=xq_a_token):
-    url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=symbol&order=desc&current=ALL&pct=ALL&page=1&mc={}_{}&_=1438834686129'
-    payload = {'access_token': access_token}
-    url2 = url.format(low, high)
-    # print '*************url********************{}'.format(url2)
-    r = requests.get(url2, params=payload, headers=headers)
-    # print r.text
-    # print r.content
-    result = r.json()
-    count = result.get('count')
-    # print count
-    return count
-
-
-# get stock count by static PE
-def screen_by_static_pe(low=1, high=10, access_token=xq_a_token):
-    url = 'http://xueqiu.com/stock/screener/screen.json?category=SH&orderby=pelyr&order=desc&current=ALL&pct=ALL&page=1&pelyr={}_{}&_=1440168752260'
-    payload = {'access_token': access_token}
-    url2 = url.format(low, high)
-    # print '*************url********************{}'.format(url2)
-    r = requests.get(url2, params=payload, headers=headers)
-    # print r.text
-    # print r.content
-    result = r.json()
-    count = result.get('count')
-    # print count
-    return count
-
-
-# 5 stock ratio with low price
-def low_price_ratio():
-    count = screen_by_price()
-    total = screen_by_price(high=10000)
-    ratio = float(count)/total
-    # print ratio
-    return ratio
-
-
-# 6 stock ratio with high price
-def high_price_ratio():
-    count = screen_by_price(low=100, high=10000)['count']
-    total = screen_by_price(high=10000)['count']
-    ratio = float(count)/total
-    # print 'count:{} total:{} ratio:{}'.format(count, total, ratio)
-    return ratio
-
-
-# 7 stock ratio with high market value
-def high_market_value_ratio():
-    count = screen_by_market_value(rmb_exchange_rate()[1])
-    total = screen_by_market_value(1)
-    ratio = float(count)/total
-    # print 'count:{} total:{} ratio:{}'.format(count, total, ratio)
-    return ratio
-
-
-# sina real time API
-@DeprecationWarning
-def sina(code='600276'):
-    if code.startswith('60') or code.startswith('51'):
-        code = 'sh'+code
-    elif len(code) == 5:
-        code = 'hk'+code
-    else:
-        code = 'sz'+code
-    url = "http://hq.sinajs.cn/list="+code
-    # print 'url:{}'.format(url)
-    r = requests.get(url)
-    print(r.content)
-    test = r.content.split(',')
-    # print test
-    if code.startswith('hk'):
-        current = float(test[6])
-    else:
-        current = float(test[3])
-
-    yesterday = float(test[2])
-    high = float(test[4])
-    low = float(test[5])
-    volume = float(test[8])
-    if yesterday != 0:
-        percent = (current-yesterday)/yesterday*100
-    else:
-        percent = 0
-    name = test[0].split('"')[1]
-    enc = "gbk"
-    u_content = name.decode(enc)  # decodes from enc to unicode
-    utf8_name = u_content.encode("utf8")
-    stock = Stock(code, 0, current, percent, low, high, volume)
-    # print stock
-    return stock
-
-
-# HK and USD to RMB exchange rate from boc.cn
-def rmb_exchange_rate():
-    page = parse('http://www.boc.cn/sourcedb/whpj/').getroot()
-    # result = etree.tostring(page)
-    # print result
-    tables = page.xpath("//table")
-
-    # import lxml.html as H
-    # doc = H.document_fromstring(result)
-    # tables=doc.xpath("//table")
-
-    # print len(tables)
-
-    # use the first row as DF columns
-    dfs = pd.read_html(etree.tostring(tables[1]), header=0, flavor='lxml')
-    # print len(dfs)
-    df = dfs[0]
-    # print df
-    # print df.index
-    # print df.columns
-    name = '货币名称'
-    usd = '美元'
-    hk = '港币'
-    zh = '中行折算价'
-    # usd_to_rmb = df.loc[df[name] == usd][zh]
-    # print 'usd_to_rmb:{}'.format(usd_to_rmb)
-    # hk_to_rmb = df.loc[df[name] == hk][zh]
-    # print 'hk_to_rmb:{}'.format(hk_to_rmb)
-    # print type(hk_to_rmb)
-    usd_df = df.loc[df[name] == usd]
-    usd_to_rmb = usd_df.iloc[0][5]
-
-    hk_df = df.loc[df[name] == hk]
-    hk_to_rmb = hk_df.iloc[0][5]
-
-    result = hk_to_rmb, usd_to_rmb
-    # print result
-
-    # select with iloccheck column 0 name
-    # hk_to_rmb = df.iloc[8][5]
-    # usd_to_rmb = df.iloc[22][5]
-    # print 'hk_to_rmb:{}'.format(hk_to_rmb)
-    # print 'usd_to_rmb:{}'.format(usd_to_rmb)
-    return result
 
 
 # AH ratio
@@ -1119,14 +967,14 @@ def stock_list():
 
 
 def polling():
-    stocks = [{'code': '600420', 'amount': 10000+7000+4000}, {'code': '601009', 'amount': 7000},
-              {'code': '600177', 'amount': 21000}, {'code': '000028', 'amount': 2500},
-              {'code': '300246', 'amount': 3100}, {'code': '510900', 'amount': 20000},
+    stocks = [{'code': '600420', 'amount': 10000+7000+5700}, {'code': '601009', 'amount': 7000},
+              {'code': '600177', 'amount': 22000}, {'code': '000028', 'amount': 2500},
+              {'code': '300246', 'amount': 3900}, {'code': '510900', 'amount': 20000},
               {'code': '601688', 'amount': 1700}, {'code': '002468', 'amount': 900},
               {'code': '601818', 'amount': 20000}, {'code': '601997', 'amount': 7000},
               {'code': '600383', 'amount': 1800}, {'code': '002589', 'amount': 5300},
-              {'code': '600995', 'amount': 5700}, {'code': '131810', 'amount': 21000+18000+2000},
-              {'code': '600533', 'amount': 1000}, {'code': '600960', 'amount': 1800},
+              {'code': '600995', 'amount': 5700}, {'code': '131810', 'amount': 500+6000+2000},
+              {'code': '600533', 'amount': 1000}, {'code': '600960', 'amount': 1000},
               {'code': '601933', 'amount': 500}, {'code': '300750', 'amount': 500}, ]
     result = []
 
@@ -1134,7 +982,7 @@ def polling():
     now = arrow.now()
     today = now.date()
     trade_begin = arrow.get(str(today)+'T09:30+08:00')
-    trade_end = arrow.get(str(today)+'T21:01+08:00')
+    trade_end = arrow.get(str(today)+'T22:01+08:00')
     refresh = False
     if trade_begin < now < trade_end:
         refresh = True

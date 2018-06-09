@@ -30,6 +30,7 @@ def get_result(serializer, df):
     pe_list = []
     pe_ttm_list = []
     dyr_list = []
+    turnover_list = []
     for item in json_output.get('items'):
         if item.get('date'):
             timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
@@ -40,6 +41,11 @@ def get_result(serializer, df):
         pe_list.append([timestamp, item.get('pe') or item.get('PE')])
         pe_ttm_list.append([timestamp, item.get('pe_ttm')])
         dyr_list.append([timestamp, item.get('dividend_yield_ratio')])
+        turnover = item.get('TurnoverRate')
+        if turnover:
+            turnover_list.append([timestamp, float(turnover)])
+        else:
+            turnover_list.append([timestamp, 0])
     # https://stackoverflow.com/questions/455612/limiting-floats-to-two-decimal-points
     if 'pb' in df:
         pb_avg = df['pb'].mean()
@@ -53,10 +59,16 @@ def get_result(serializer, df):
         pe_ttm_avg = df['pe_ttm'].mean()
     else:
         pe_ttm_avg = 0
-    result = {'PB': pb_list, 'PE': pe_list, 'PE_TTM': pe_ttm_list, 'DYR': dyr_list,
+    # if 'TurnoverRate' in df:
+    #     turnover_avg = df['TurnoverRate'].mean()
+    # else:
+    #     turnover_avg = 0
+
+    result = {'PB': pb_list, 'PE': pe_list, 'PE_TTM': pe_ttm_list, 'DYR': dyr_list, 'turnover': turnover_list,
               'PB_avg': float("{0:.2f}".format(pb_avg)),
-              'PE_avg': float("{0:.2f}".format(pe_avg)),
-              'PE_ttm_avg': float("{0:.2f}".format(pe_ttm_avg))}
+              'PE_avg': float("{0:.2f}".format(pe_avg)), 'PE_ttm_avg': float("{0:.2f}".format(pe_ttm_avg)),
+              # 'turnover_avg': float("{0:.2f}".format(turnover_avg)),
+              }
     return result
 
 

@@ -5,7 +5,8 @@ from market.analysis import *
 from market.cix import *
 from market.csi import read_index, read_industry, read_index_all, read_industry_all, csi_by_type
 from market.csi import read_equity_by_date, read_equity, read_equity_all, read_equity_by_portfolio, read_equities
-from market.xueqiu import read_portfolio, read_history, read_market, low_pb_ratio, high_pb_ratio
+from market.xueqiu import read_portfolio, read_history, read_market, low_pb_ratio, high_pb_ratio, read_index_market, \
+    high_price_ratio
 from market.sw import read_sw_all
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -73,7 +74,7 @@ class ParseTestCase(TestCase):
         read_equities(equities, self.begin, '2016-12-31')
 
     def test_read_all(self):
-        begin = '2018-05-30'
+        begin = '2018-06-04'
         read_index_all(begin)
         read_industry_all(begin)
         read_sw_all(begin)
@@ -111,7 +112,8 @@ class ParseTestCase(TestCase):
         parse_cyb2()
 
     def test_gdp(self):
-        parse_securitization_rate()
+        gdp = gdp_rate()
+        print(gdp)
 
     def test_low_pb(self):
         print(low_pb_ratio())
@@ -131,8 +133,9 @@ class ParseTestCase(TestCase):
     def test_index_history(self):
         for code in ['SH000001', 'SZ399001', 'SZ399005', 'SZ399006']:
             history_list = read_history(code)
-            for history in history_list:
-                history.save()
+            print(history_list)
+            # for history in history_list:
+            #     history.save()
 
     def test_read_sw_all(self):
         read_sw_all('2005-01-04', '2005-02-20')
@@ -150,9 +153,11 @@ class ParseTestCase(TestCase):
     def test_sw(self):
         sw()
 
+
     def test_cix(self):
         cix_data = cix()
-        cix_data.save()
+        print(cix_data.value)
+
 
     def test_alert(self):
         alert_high_diff()
@@ -164,4 +169,7 @@ class ParseTestCase(TestCase):
         sh()
 
     def test_market(self):
-        read_market(18, 28, str(date.today()))
+        read_market(4, 332, str(date.today()))
+
+    def test_index_market(self):
+        read_index_market('SH000001')

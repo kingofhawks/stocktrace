@@ -29,7 +29,7 @@ class Portfolio(Document):
         # 三个账户当年本金
         self.cost = self.cost_zs+self.cost_ht1+self.cost_ht2
         # 券商融资+江苏银行
-        self.financing = 156765+30000
+        self.financing = 157492+30000
         # 市值
         self.market_value = 0
         # 总资产
