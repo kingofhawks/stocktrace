@@ -410,6 +410,11 @@ def get_market_result(serializer):
     nl_ratio_list = []
     broken_net_list = []
     broken_net_ratio_list = []
+    zt_list = []
+    zt__ratio_list = []
+    dt_list = []
+    dt__ratio_list = []
+    zdr_list = []
     for item in json_output.get('items'):
         if item.get('date'):
             timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
@@ -420,12 +425,29 @@ def get_market_result(serializer):
         nh_ratio_list.append([timestamp, float("{0:.2f}".format(nh_ratio))])
         nl_ratio = item.get('nl_ratio')*100
         nl_ratio_list.append([timestamp, float("{0:.2f}".format(nl_ratio))])
-        broken_net = item.get('broken_net')*100
+        broken_net = item.get('broken_net')
         broken_net_list.append([timestamp, float("{0:.2f}".format(broken_net))])
         broken_net_ratio = item.get('broken_net_ratio') * 100
         broken_net_ratio_list.append([timestamp, float("{0:.2f}".format(broken_net_ratio))])
+        zt = item.get('zt')
+        if zt:
+            zt_list.append([timestamp, float("{0:.2f}".format(zt))])
+        zt_ratio = item.get('zt_ratio')
+        if zt_ratio:
+            zt__ratio_list.append([timestamp, float("{0:.2f}".format(zt_ratio*100))])
+        dt = item.get('dt')
+        if dt:
+            dt_list.append([timestamp, float("{0:.2f}".format(dt))])
+        dt_ratio = item.get('dt_ratio')
+        if dt_ratio:
+            dt__ratio_list.append([timestamp, float("{0:.2f}".format(dt_ratio*100))])
+        zdr = item.get('zdr')
+        if zdr:
+            zdr_list.append([timestamp, float("{0:.2f}".format(zdr*100))])
     result = {'nh': nh_list, 'nl': nl_list, 'nhnl': nhnl_list,
               'nh_ratio': nh_ratio_list, 'nl_ratio': nl_ratio_list,
+              'zt': zt_list, 'dt': dt_list, 'zt_ratio': zt__ratio_list, 'dt_ratio': dt__ratio_list,
+              'zdr': zdr_list,
               }
     return result
 

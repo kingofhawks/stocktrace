@@ -58,6 +58,3 @@ def cix(day='2016-08-06'):
     date = arrow.get(day)
     time_stamp = date.timestamp*1000
     return Cix(value, time_stamp, latest_pe, low_pb, ah_current)
-
-if __name__ == '__main__':
-    cix(None)

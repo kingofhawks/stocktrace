@@ -62,6 +62,11 @@ class MarketSerializer(serializers.Serializer):
     nhnl = serializers.IntegerField(read_only=True)
     broken_net = serializers.IntegerField(read_only=True)
     broken_net_ratio = serializers.FloatField(read_only=True)
+    zt = serializers.FloatField(read_only=True)
+    zt_ratio = serializers.FloatField(read_only=True)
+    dt = serializers.FloatField(read_only=True)
+    dt_ratio = serializers.FloatField(read_only=True)
+    zdr = serializers.FloatField(read_only=True)
 
 
 class MarketListSerializer(serializers.Serializer):

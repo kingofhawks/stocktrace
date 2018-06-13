@@ -110,6 +110,8 @@ class Market(Document):
     # 跌停
     dt = FloatField()
     dt_ratio = FloatField()
+    # 涨跌停比例
+    zdr = FloatField()
     # 破净数
     broken_net = IntField()
     # 破净率

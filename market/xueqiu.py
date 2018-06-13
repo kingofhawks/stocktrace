@@ -224,6 +224,19 @@ def screen_by_static_pe(low=1, high=10, access_token=xq_a_token):
     return count
 
 
+def screen_by_pencentage(low=-10.11, high=-9.9, access_token=xq_a_token):
+    url = 'https://xueqiu.com/stock/screener/screen.json?category=SH&exchange=&areacode=&indcode=&orderby=symbol&order=desc&current=ALL&pct={}_{}&page=1&_=1528891053799'
+    payload = {'access_token': access_token}
+    url2 = url.format(low, high)
+    # print '*************url********************{}'.format(url2)
+    r = requests.get(url2, params=payload, headers=headers)
+    # print r.text
+    # print r.content
+    result = r.json()
+    count = result.get('count')
+    # print count
+    return count
+
 # 5 stock ratio with low price
 def low_price_ratio():
     count = screen_by_price()
@@ -419,10 +432,19 @@ def read_market(nh, nl, date):
     nh_ratio = float(nh)/stock_count
     nl_ratio = float(nl)/stock_count
 
+    # 跌停板
+    dt = screen_by_pencentage(-10.11, -9.9)
+    dt_ratio = dt/stock_count
+    # 涨停板
+    zt = screen_by_pencentage(9.9, 10.11)
+    zt_ratio = zt/stock_count
+    zdr = zt/dt
+    print('dtb:{} ztb:{} zdr'.format(dt, zt, zdr))
     Market.objects(date=day).update_one(nh=nh, nl=nl, nhnl=nh-nl, nh_ratio=nh_ratio, nl_ratio=nl_ratio,
                                         stock_count=stock_count,
                                         broken_net=broken_net, broken_net_ratio=broken_net_ratio,
                                         broken_net_stocks=low_pb[2],
+                                        dt=dt, dt_ratio=dt_ratio, zt=zt, zt_ratio=zt_ratio, zdr=zdr,
                                         upsert=True)
 
 
