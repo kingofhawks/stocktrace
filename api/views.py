@@ -446,6 +446,7 @@ def get_market_result(serializer):
             zdr_list.append([timestamp, float("{0:.2f}".format(zdr*100))])
     result = {'nh': nh_list, 'nl': nl_list, 'nhnl': nhnl_list,
               'nh_ratio': nh_ratio_list, 'nl_ratio': nl_ratio_list,
+              'broken_net': broken_net_list, 'broken_net_ratio': broken_net_ratio_list,
               'zt': zt_list, 'dt': dt_list, 'zt_ratio': zt__ratio_list, 'dt_ratio': dt__ratio_list,
               'zdr': zdr_list,
               }

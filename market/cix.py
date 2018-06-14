@@ -1,6 +1,7 @@
 # crazy index
 from numpy import interp
 from market.parse import *
+from market.utils import get_date
 from market.xueqiu import low_pb_ratio, high_price_ratio
 from .models import Cix
 
@@ -24,11 +25,11 @@ def cix(day='2016-08-06'):
 
     # 2 破净率
     pb_ratio = low_pb_ratio()
-    low_pb = pb_ratio[0]
+    broken_net_ratio = pb_ratio[0]
     # print low_pb
     min_low_pb = 0
     max_low_pb = 0.1
-    pb = interp(-low_pb, [-max_low_pb, min_low_pb], weight_range)
+    pb = interp(-broken_net_ratio, [-max_low_pb, min_low_pb], weight_range)
     # print pb
     value += pb
 
@@ -55,6 +56,7 @@ def cix(day='2016-08-06'):
     turnover = interp(turnover_rate, [1, 3], weight_range)
     value += turnover
 
-    date = arrow.get(day)
-    time_stamp = date.timestamp*1000
-    return Cix(value, time_stamp, latest_pe, low_pb, ah_current)
+    Cix.objects(date=get_date(day)).update_one(pe=latest_pe, broken_net_ratio=broken_net_ratio, ah=ah_current,
+                                               gdp=rate, high_price_ratio=high_price, turnover=turnover_rate,
+                                               value=value,
+                                               upsert=True)

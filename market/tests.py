@@ -155,8 +155,7 @@ class ParseTestCase(TestCase):
 
 
     def test_cix(self):
-        cix_data = cix()
-        print(cix_data.value)
+        cix(str(date.today()))
 
 
     def test_alert(self):
@@ -169,7 +168,7 @@ class ParseTestCase(TestCase):
         sh()
 
     def test_market(self):
-        read_market(4, 332, str(date.today()))
+        read_market(2, 275, str(date.today()))
 
     def test_index_market(self):
         read_index_market('SH000001')

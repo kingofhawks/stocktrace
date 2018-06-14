@@ -85,12 +85,14 @@ class Sw(Document):
 
 
 class Cix(Document):
+    date = DateTimeField()
     value = FloatField()
-    timestamp = IntField()
     pe = FloatField()
-    low_pb = FloatField()
+    broken_net_ratio = FloatField()
+    gdp = FloatField()
     ah = FloatField()
-    high_price = FloatField()
+    high_price_ratio = FloatField()
+    turnover = FloatField()
 
 
 class Market(Document):
