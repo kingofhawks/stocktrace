@@ -168,7 +168,7 @@ class ParseTestCase(TestCase):
         sh()
 
     def test_market(self):
-        read_market(2, 275, str(date.today()))
+        read_market(0, 680, str(date.today()))
 
     def test_index_market(self):
         read_index_market('SH000001')

@@ -290,9 +290,6 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
             time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
             print(time)
             stock.date = time.datetime
-        # TODO 新股发行价
-        if code == 'SZ300750':
-            stock.current = 25.14
         print(stock)
         return stock
     else:
