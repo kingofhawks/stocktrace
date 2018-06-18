@@ -1,3 +1,4 @@
+from market.utils import get_date
 from portfolio.dao import find_all_stocks, update_stock_price, insert_stock, add_tag, find_stock_by_code
 from market.parse import sina, xueqiu, polling
 from stocktrace.stock import Stock
@@ -36,9 +37,13 @@ def import_portfolio(file,portfolio):
         # insert_stock(stock)
 
 
-def snapshot(save=True):
+def snapshot():
     stocks = polling()
     print(stocks)
+    stock_list = []
+    for stock in stocks:
+        stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
+
     from portfolio.models import Portfolio
     from datetime import date
     from django.conf import settings
@@ -46,17 +51,38 @@ def snapshot(save=True):
     name = str(date.today())
     portfolios = db.portfolio
     portfolio = portfolios.find_one({"name": name})
-    if portfolio:
-        stock_list = []
-        for stock in stocks:
-            stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
-        portfolios.update({"name": name}, {"$set": {"stocks": stock_list}}, upsert=True)
-        portfolio['stocks'] = stocks
+    # if portfolio:
+    #     stock_list = []
+    #     for stock in stocks:
+    #         stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
+    #     portfolios.update({"name": name}, {"$set": {"stocks": stock_list}}, upsert=True)
+    #     portfolio['stocks'] = stocks
+    # else:
+    #     portfolio = Portfolio(stocks)
+    #     portfolio.save()
+    # result = Portfolio(stocks)
+    date = get_date(str(date.today()))
+    print('date***{}'.format(date))
+    p = Portfolio(list=stock_list)
+    p.compute()
+    Portfolio.objects(date=date).update_one(list=p.list, market_value=p.market_value, total=p.total,
+                                            net_asset=p.net_asset, cost=p.cost, cost_history=p.cost_history,
+                                            cost_zs=p.cost_zs, cost_ht1=p.cost_ht1, cost_ht2=p.cost_ht2,
+                                            cost_ht1_real=p.cost_ht1_real, cost_ht2_real=p.cost_ht2_real,
+                                            position_ratio=p.position_ratio, financing=p.financing,
+                                            lever=p.lever, cash=p.cash, profit=p.profit,
+                                            profit_ratio=p.profit_ratio, profit_today=p.profit_today,
+                                            profit_ratio_today=p.profit_ratio_today,
+                                            upsert=True)
+    result = Portfolio.objects.get(date=date)
+    if result:
+        print('result found****{}'.format(result.total))
+        # result.compute()
+        print('result list***{}'.format(result.list))
+
+        return result
     else:
-        portfolio = Portfolio(stocks)
-        portfolio.save()
-    result = Portfolio(stocks)
-    return result
+        return None
 
 
 if __name__ == '__main__':

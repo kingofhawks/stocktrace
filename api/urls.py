@@ -17,8 +17,9 @@ urlpatterns = [
     url(r'^stock', StockView.as_view()),
     url(r'^diff', diff),
     url(r'^sh', sh),
-    url(r'^cix', CixView.as_view()),
     url(r'^market', MarketView.as_view()),
+    # url(r'^portfolio', portfolio),
+    url(r'^portfolio_history', PortfolioView.as_view()),
     url(r'^rule', portfolio),
     url(r'^fake_chart_data', fake),
 ]

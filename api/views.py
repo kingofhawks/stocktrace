@@ -9,10 +9,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from api.serializers import *
-from market.models import Index, Sw, Cix, AhIndex, Market
+from market.models import Index, Sw, AhIndex, Market
 from market.parse import *
 import pymongo
 
+from market.sh import avg_sh_pe
+from portfolio.models import Portfolio
 from portfolio.portfolio import snapshot
 from stocktrace.stock import StockHistory
 
@@ -292,21 +294,73 @@ def industry_list(request):
 
 @api_view(['GET'])
 def portfolio(request):
-    p = snapshot(True)
-    results = sorted(p.stocks, key=lambda s: s.ratio, reverse=True)
+    p = snapshot()
+    print('stocks****{}'.format(p.list))
+    results = sorted(p.list, key=lambda s: s.get('ratio'), reverse=True)
     print(results)
-    serializer = PortfolioListSerializer({'list': results, 'market_value': p.market_value,
+    serializer = PortfolioSerializer({'list': results, 'market_value': p.market_value,
                                           'cost_zs': p.cost_zs, 'cost_ht1': p.cost_ht1, 'cost_ht2': p.cost_ht2,
                                           'cost': p.cost,
                                           'total': p.total, 'net_asset': p.net_asset, 'lever': p.lever,
                                           'position_ratio': p.position_ratio, 'financing': p.financing,
                                           'profit': p.profit, 'profit_ratio': p.profit_ratio,
-                                          'profit_today': p.profit_today, 'profit_ratio_today': p.profit_ratio_today})
+                                      'profit_today': p.profit_today, 'profit_ratio_today': p.profit_ratio_today})
     content = JSONRenderer().render(serializer.data)
     print('**********content:{}'.format(content))
     json_output = json.loads(content)
     response = Response(json_output, status=status.HTTP_200_OK)
     return get_response_cors(response)
+
+
+def get_portfolio_result(serializer):
+    content = JSONRenderer().render(serializer.data)
+    print('**********content:{}'.format(content))
+    json_output = json.loads(content)
+    print('****json:{}'.format(json_output))
+    total_list = []
+    market_list = []
+    net_asset_list = []
+    financing_list = []
+    position_ratio_list = []
+    lever_list = []
+    profit_list = []
+    profit_ratio_list = []
+    for item in json_output.get('items'):
+        if item.get('date'):
+            timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
+        total_list.append([timestamp, item.get('total')])
+        market_list.append([timestamp, item.get('market_value')])
+        net_asset_list.append([timestamp, item.get('net_asset')])
+        financing_list.append([timestamp, item.get('financing')])
+        position_ratio_list.append([timestamp, item.get('position_ratio')])
+        lever_list.append([timestamp, item.get('lever')])
+        profit_list.append([timestamp, item.get('profit')])
+        profit_ratio_list.append([timestamp, item.get('profit_ratio')])
+
+    result = {'total': total_list, 'market': market_list, 'net_asset': net_asset_list,
+              'financing': financing_list, 'position_ratio': position_ratio_list,
+              'lever': lever_list, 'profit': profit_list,
+              }
+    return result
+
+
+class PortfolioView(APIView):
+
+    def get(self, request, *args, **kw):
+        # Process any get params that you may need
+        # If you don't need to process get params,
+        # you can skip this part
+        items = Portfolio.objects().order_by('date')
+        # portfolio_col = db.portfolio.find()
+        # df = pd.DataFrame(list(portfolio_col))
+        # print(df)
+        serializer = PortfolioListSerializer({'items': items})
+        print(items)
+        print(serializer)
+        result = get_portfolio_result(serializer)
+        response = Response(result, status=status.HTTP_200_OK)
+
+        return get_response_cors(response)
 
 
 @api_view(['GET'])
@@ -475,30 +529,3 @@ class MarketView(APIView):
         result = get_market_result(serializer)
         response = Response(result, status=status.HTTP_200_OK)
         return get_response_cors(response)
-
-
-class CixView(APIView):
-
-    def get(self, request, *args, **kw):
-        # Process any get params that you may need
-        # If you don't need to process get params,
-        # you can skip this part
-        cix_data = Cix.objects()
-        # print cix_data
-        df = DataFrame(list(cix_data))        
-        # print df
-        # max_ah = df['value'].max()
-        # min_ah = df['value'].min()
-        # avg_ah = df['value'].mean()
-        # print 'PE max:{} min:{} average:{} median:{}'.format(max_ah, min_ah, avg_ah)
-        serializer = CixListSerializer({'items': cix_data})
-        content = JSONRenderer().render(serializer.data)
-        # print '**********content:{}'.format(content)
-        json_output = json.loads(content)
-        # print '****json:{}'.format(json_output)
-        cix_list = []
-        for item in json_output.get('items'):
-            cix_list.append([item.get('timestamp'), item.get('value')])
-        response = Response({'items': cix_list}, status=status.HTTP_200_OK)
-
-        return response

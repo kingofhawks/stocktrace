@@ -84,17 +84,6 @@ class Sw(Document):
     DP = FloatField()
 
 
-class Cix(Document):
-    date = DateTimeField()
-    value = FloatField()
-    pe = FloatField()
-    broken_net_ratio = FloatField()
-    gdp = FloatField()
-    ah = FloatField()
-    high_price_ratio = FloatField()
-    turnover = FloatField()
-
-
 class Market(Document):
     date = DateTimeField()
     # 个股数量
@@ -119,5 +108,18 @@ class Market(Document):
     # 破净率
     broken_net_ratio = FloatField()
     broken_net_stocks = ListField(StringField())
+    # CIX value
+    cix = FloatField()
+    # latest SH PE
+    pe = FloatField()
+    # SH换手率
+    turnover = FloatField()
+    # GDP比率
+    gdp = FloatField()
+    # AH溢价指数
+    ah = FloatField()
+    # 高股价比率
+    high_price_ratio = FloatField()
+
 
 

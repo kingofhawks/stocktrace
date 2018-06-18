@@ -111,7 +111,7 @@ class StockListSerializer(serializers.Serializer):
     items = StockSerializer(many=True)  # A nested list of 'edit' items.
 
 
-class PortfolioListSerializer(serializers.Serializer):
+class PortfolioSerializer(serializers.Serializer):
     list = StockSerializer(many=True)  # A nested list of 'edit' items.
     market_value = serializers.FloatField(read_only=True)
     total = serializers.FloatField(read_only=True)
@@ -129,14 +129,5 @@ class PortfolioListSerializer(serializers.Serializer):
     profit_ratio_today = serializers.FloatField(read_only=True)
 
 
-class CixSerializer(serializers.Serializer):
-    value = serializers.FloatField(read_only=True)
-    timestamp = serializers.IntegerField(required=False)
-    pe = serializers.FloatField(read_only=True)
-    low_pb = serializers.FloatField(read_only=True)
-    ah = serializers.FloatField(read_only=True)
-    high_price = serializers.FloatField(read_only=True)
-
-
-class CixListSerializer(serializers.Serializer):
-    items = CixSerializer(many=True)  # A nested list of 'edit' items.
+class PortfolioListSerializer(serializers.Serializer):
+    items = PortfolioSerializer(many=True)  # A nested list of 'edit' items.

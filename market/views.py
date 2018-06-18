@@ -1,6 +1,5 @@
 import pymongo
 from django.shortcuts import render
-from market.cix import cix as cix2
 DB_NAME = 'stocktrace'
 DB_HOST = 'localhost'
 db = getattr(pymongo.MongoClient(host=DB_HOST), DB_NAME)
@@ -51,7 +50,3 @@ def sh(request):
     return render(request, 'sh.html')
 
 
-def cix(request):
-    cix_index = cix2()
-    # print cix_index
-    return render(request, 'cix.html', {'cix': cix_index})

@@ -9,8 +9,9 @@ import requests
 import json
 from datetime import timedelta, datetime
 import arrow
-
-from market.utils import rmb_exchange_rate
+from numpy import interp
+from market.sh import avg_sh_pe
+from market.utils import rmb_exchange_rate, get_date
 from stocktrace.stock import Stock, StockHistory
 import tushare as ts
 from PyQt5 import Qt
@@ -418,9 +419,28 @@ def read_portfolio():
     return stock_set
 
 
+# SZ399001+SH000001+SZ399006+SZ399005/last year GDP
+def gdp_rate():
+    # last year GDP http://data.eastmoney.com/cjsj/gdp.html
+    last_year_gdp = 827121.70*1e8
+    sh = read_index_market('SH000001')
+    print(sh)
+    sz = read_index_market('SZ399001')
+    print(sz)
+    sz = read_index_market('SZ399001')
+    print(sz)
+    zxb = read_index_market('SZ399005')
+    print(zxb)
+    cyb = read_index_market('SZ399006')
+    print(cyb)
+    total_market = float(sh.get('market_capital'))+float(sz.get('market_capital'))+float(zxb.get('market_capital'))+float(cyb.get('market_capital'))
+    print(total_market)
+    securitization_rate = total_market/last_year_gdp
+    # print 'securitization_rate:{0:.2f}'.format(securitization_rate)
+    return securitization_rate
+
+
 def read_market(nh, nl, date):
-    date_format = 'YYYY-MM-DD'
-    day = arrow.get(date, date_format).date()
     low_pb = low_pb_ratio()
     print(low_pb)
     broken_net_ratio = low_pb[0]
@@ -437,12 +457,60 @@ def read_market(nh, nl, date):
     zt_ratio = zt/stock_count
     zdr = zt/dt
     print('dtb:{} ztb:{} zdr'.format(dt, zt, zdr))
-    Market.objects(date=day).update_one(nh=nh, nl=nl, nhnl=nh-nl, nh_ratio=nh_ratio, nl_ratio=nl_ratio,
-                                        stock_count=stock_count,
-                                        broken_net=broken_net, broken_net_ratio=broken_net_ratio,
-                                        broken_net_stocks=low_pb[2],
-                                        dt=dt, dt_ratio=dt_ratio, zt=zt, zt_ratio=zt_ratio, zdr=zdr,
-                                        upsert=True)
+
+    cix = 0
+    weight_range = [0, 10]
+
+    # 1 SH PE from 2000 year
+    pe_df = avg_sh_pe('2000-1-31')
+    max_pe = pe_df['PE'].max()
+    min_pe = pe_df['PE'].min()
+    # get latest PE DF by tail()
+    latest_pe_df = pe_df.tail(1)
+    latest_pe = latest_pe_df.iloc[0][1]
+    # print 'latest PE:{}'.format(latest_pe)
+    pe = interp(latest_pe, [min_pe, max_pe], weight_range)
+    print('min_pe:{} max_pe:{} latest_pe:{} pe:{}'.format(min_pe, max_pe, latest_pe, pe))
+    cix += pe
+
+    # 2 破净率
+    min_low_pb = 0
+    max_low_pb = 0.1
+    pb = interp(-broken_net_ratio, [-max_low_pb, min_low_pb], weight_range)
+    # print pb
+    cix += pb
+
+    # 3 AH premium index
+    ah_now = xueqiu('HKHSAHP')
+    ah_current = ah_now.current
+    ah = interp(ah_current, [100, 150], weight_range)
+    # print ah
+    cix += ah
+
+    # 4 GDP rate
+    rate = gdp_rate()
+    gdp = interp(rate, [0.4, 1], weight_range)
+    cix += gdp
+
+    # 5 high price [0,3.6%]
+    high_price = high_price_ratio()
+    high = interp(high_price, [0, 0.036], weight_range)
+    cix += high
+
+    # 6 换手率 [1%,3%]
+    sh = read_index_market('SH000001')
+    turnover_rate = sh['turnover_rate']
+    turnover = interp(turnover_rate, [1, 3], weight_range)
+    cix += turnover
+
+    Market.objects(date=get_date(date)).update_one(nh=nh, nl=nl, nhnl=nh-nl, nh_ratio=nh_ratio, nl_ratio=nl_ratio,
+                                                   stock_count=stock_count, high_price_ratio=high_price,
+                                                   pe=latest_pe, turnover=turnover_rate,
+                                                   ah=ah_current, gdp=rate, cix=cix,
+                                                   broken_net=broken_net, broken_net_ratio=broken_net_ratio,
+                                                   broken_net_stocks=low_pb[2],
+                                                   dt=dt, dt_ratio=dt_ratio, zt=zt, zt_ratio=zt_ratio, zdr=zdr,
+                                                   upsert=True)
 
 
 # 指数市值

@@ -1,12 +1,12 @@
 from django.test import TestCase
 from market.parse import *
+from market.sh import avg_sh_pe
 from stocktrace.dao.stockdao import *
 from market.analysis import *
-from market.cix import *
 from market.csi import read_index, read_industry, read_index_all, read_industry_all, csi_by_type
 from market.csi import read_equity_by_date, read_equity, read_equity_all, read_equity_by_portfolio, read_equities
 from market.xueqiu import read_portfolio, read_history, read_market, low_pb_ratio, high_pb_ratio, read_index_market, \
-    high_price_ratio
+    high_price_ratio, gdp_rate
 from market.sw import read_sw_all
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -74,7 +74,7 @@ class ParseTestCase(TestCase):
         read_equities(equities, self.begin, '2016-12-31')
 
     def test_read_all(self):
-        begin = '2018-06-04'
+        begin = '2018-06-11'
         read_index_all(begin)
         read_industry_all(begin)
         read_sw_all(begin)
@@ -152,10 +152,6 @@ class ParseTestCase(TestCase):
 
     def test_sw(self):
         sw()
-
-
-    def test_cix(self):
-        cix(str(date.today()))
 
 
     def test_alert(self):
