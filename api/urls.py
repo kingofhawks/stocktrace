@@ -18,8 +18,9 @@ urlpatterns = [
     url(r'^diff', diff),
     url(r'^sh', sh),
     url(r'^market', MarketView.as_view()),
-    # url(r'^portfolio', portfolio),
+    # should be above portfolio for regex matching order!
     url(r'^portfolio_history', PortfolioView.as_view()),
-    url(r'^rule', portfolio),
+    url(r'^portfolio', portfolio),
+    # url(r'^rule', portfolio),
     url(r'^fake_chart_data', fake),
 ]
