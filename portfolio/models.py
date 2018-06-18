@@ -117,18 +117,18 @@ class Portfolio(Document):
         self.profit_ratio_today = float("{0:.2f}".format(self.profit_today*100/self.net_asset))
         # self.date = datetime.now()
 
-    def save(self):
-        stock_list = []
-        for stock in self.list:
-            stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
-        db.portfolio.insert({'name': self.name, 'date': self.date, 'list': stock_list,
-                             'market_value': self.market_value,
-                             'cost_zs': self.cost_zs, 'cost_ht1': self.cost_ht1, 'cost_ht2': self.cost_ht2,
-                             'cost': self.cost,
-                             'total': self.total, 'net_asset': self.net_asset, 'financing': self.financing,
-                             'position_ratio': self.position_ratio, 'lever': self.lever,
-                             'profit': self.profit, 'profit_ratio': self.profit_ratio,
-                             'profit_today': self.profit_today, 'profit_ratio_today': self.profit_ratio_today})
+    # def save(self):
+    #     stock_list = []
+    #     for stock in self.list:
+    #         stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
+    #     db.portfolio.insert({'name': self.name, 'date': self.date, 'list': stock_list,
+    #                          'market_value': self.market_value,
+    #                          'cost_zs': self.cost_zs, 'cost_ht1': self.cost_ht1, 'cost_ht2': self.cost_ht2,
+    #                          'cost': self.cost,
+    #                          'total': self.total, 'net_asset': self.net_asset, 'financing': self.financing,
+    #                          'position_ratio': self.position_ratio, 'lever': self.lever,
+    #                          'profit': self.profit, 'profit_ratio': self.profit_ratio,
+    #                          'profit_today': self.profit_today, 'profit_ratio_today': self.profit_ratio_today})
 
     def __unicode__(self):
         return self.date

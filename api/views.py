@@ -326,6 +326,8 @@ def get_portfolio_result(serializer):
     profit_list = []
     profit_ratio_list = []
     for item in json_output.get('items'):
+        print('item*****{}'.format(item))
+        print('item date*****{}'.format(item.get('date')))
         if item.get('date'):
             timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
         total_list.append([timestamp, item.get('total')])
@@ -339,7 +341,7 @@ def get_portfolio_result(serializer):
 
     result = {'total': total_list, 'market': market_list, 'net_asset': net_asset_list,
               'financing': financing_list, 'position_ratio': position_ratio_list,
-              'lever': lever_list, 'profit': profit_list,
+              'lever': lever_list, 'profit': profit_list, 'profit_ratio': profit_ratio_list,
               }
     return result
 
@@ -355,8 +357,8 @@ class PortfolioView(APIView):
         # df = pd.DataFrame(list(portfolio_col))
         # print(df)
         serializer = PortfolioListSerializer({'items': items})
-        print(items)
-        print(serializer)
+        # print(items)
+        # print(serializer)
         result = get_portfolio_result(serializer)
         response = Response(result, status=status.HTTP_200_OK)
 

@@ -46,11 +46,11 @@ def snapshot():
 
     from portfolio.models import Portfolio
     from datetime import date
-    from django.conf import settings
-    db = settings.DB
-    name = str(date.today())
-    portfolios = db.portfolio
-    portfolio = portfolios.find_one({"name": name})
+    # from django.conf import settings
+    # db = settings.DB
+    # name = str(date.today())
+    # portfolios = db.portfolio
+    # portfolio = portfolios.find_one({"name": name})
     # if portfolio:
     #     stock_list = []
     #     for stock in stocks:
