@@ -24,12 +24,13 @@ class Portfolio(Document):
     cost_history = FloatField()
     # ZS账户当年(真实)本金
     cost_zs = FloatField(default=463000+4000)
+    # 券商融资+江苏银行
+    financing = FloatField(default=169366 + 50000)
     cost_ht1 = FloatField()
     cost_ht2 = FloatField()
     cost_ht1_real = FloatField()
     cost_ht2_real = FloatField()
     position_ratio = FloatField()
-    financing = FloatField()
     lever = FloatField()
     cash = FloatField()
     profit = FloatField()
@@ -38,24 +39,19 @@ class Portfolio(Document):
     profit_ratio_today = FloatField()
 
     def compute(self):
-        # if name:
-        #     self.name = name
-        # else:
-        #     self.name = str(date.today())
         # HT1账户当年本金
-        self.cost_ht1 = 277461+16000
+        self.cost_ht1 = 277461+17000
+        # HT1账户真实本金
+        self.cost_ht1_real = 226000+17000
         # HT2账户当年本金
         self.cost_ht2 = 218579+20000
-        # HT1账户真实本金
-        self.cost_ht1_real = 226000+16000
         # HT2账户真实本金
         self.cost_ht2_real = 210000+20000
         # 三个账户当年本金
         self.cost = self.cost_zs+self.cost_ht1+self.cost_ht2
         # 三个账户真实本金
         self.cost_history = self.cost_zs+self.cost_ht1_real+self.cost_ht2_real
-        # 券商融资+江苏银行
-        self.financing = 169366+30000+20000
+
         # 市值
         self.market_value = 0
         # 总资产

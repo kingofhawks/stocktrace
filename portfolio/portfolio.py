@@ -42,25 +42,12 @@ def snapshot():
     print(stocks)
     stock_list = []
     for stock in stocks:
-        stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
+        stock_list.append({'code': stock['code'], 'amount': stock['amount'],
+                           'current': stock['current'], 'percentage': stock['percentage'],
+                           'change': stock['change']})
 
     from portfolio.models import Portfolio
     from datetime import date
-    # from django.conf import settings
-    # db = settings.DB
-    # name = str(date.today())
-    # portfolios = db.portfolio
-    # portfolio = portfolios.find_one({"name": name})
-    # if portfolio:
-    #     stock_list = []
-    #     for stock in stocks:
-    #         stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
-    #     portfolios.update({"name": name}, {"$set": {"stocks": stock_list}}, upsert=True)
-    #     portfolio['stocks'] = stocks
-    # else:
-    #     portfolio = Portfolio(stocks)
-    #     portfolio.save()
-    # result = Portfolio(stocks)
     date = get_date(str(date.today()))
     print('date***{}'.format(date))
     p = Portfolio(list=stock_list)
@@ -76,10 +63,7 @@ def snapshot():
                                             upsert=True)
     result = Portfolio.objects.get(date=date)
     if result:
-        print('result found****{}'.format(result.total))
-        # result.compute()
         print('result list***{}'.format(result.list))
-
         return result
     else:
         return None
