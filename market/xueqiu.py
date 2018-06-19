@@ -275,9 +275,7 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
     # print r
     # print r.json()
     data = r.json().get(code)
-    print(data)
-    time = data.get('time')
-    print(time)
+    print('data:{} code:{}'.format(data, code))
     if data:
         # Wed Dec 27 14:59:59 +0800 2017
         stock = Stock(code=code,
@@ -287,6 +285,7 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
                       low52week=data.get('low52week'), high52week=data.get('high52week'),
                       change=data.get('change'),
                       pb=data.get('pb'))
+        time = data.get('time')
         if time:
             time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
             print(time)
