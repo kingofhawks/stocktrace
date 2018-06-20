@@ -115,6 +115,7 @@ class PortfolioSerializer(serializers.Serializer):
     date = serializers.CharField(required=False)
     list = StockSerializer(many=True)  # A nested list of 'edit' items.
     market_value = serializers.FloatField(read_only=True)
+    cash = serializers.FloatField(read_only=True)
     total = serializers.FloatField(read_only=True)
     net_asset = serializers.FloatField(read_only=True)
     cost = serializers.FloatField(read_only=True)

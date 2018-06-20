@@ -906,19 +906,19 @@ def stock_list():
 
 
 def polling():
-    stocks = [{'code': '600420', 'amount': 10000+7800+6200}, {'code': '600177', 'amount': 20000+2000},
-              {'code': '000028', 'amount': 2000 + 500}, {'code': '300246', 'amount': 1900+3300+2000},
+    stocks = [{'code': '600420', 'amount': 10000+7400+6200}, {'code': '600177', 'amount': 20000+2000},
+              {'code': '000028', 'amount': 2000 + 500}, {'code': '300246', 'amount': 2000+2000+3300},
               {'code': '601997', 'amount': 1000+3500+3000},
               {'code': '601818', 'amount': 20000}, {'code': '601009', 'amount': 4000+3000},
               {'code': '600995', 'amount': 5700}, {'code': '002589', 'amount': 2300+500},
-              {'code': '601688', 'amount': 2000}, {'code': '002468', 'amount': 900},
+              {'code': '601688', 'amount': 1000+2000}, {'code': '002468', 'amount': 900},
               {'code': '600383', 'amount': 1800},
               {'code': '300750', 'amount': 500},
               {'code': '510900', 'amount': 20000},
-              {'code': '600533', 'amount': 3800},
-              {'code': '601933', 'amount': 1000}, {'code': '510500', 'amount': 1800},
+              {'code': '600533', 'amount': 1000+2800},
+              {'code': '601933', 'amount': 1400}, {'code': '510500', 'amount': 3000},
               {'code': '510050', 'amount': 2000},
-              {'code': '131810', 'amount': 1000},
+              {'code': '131810', 'amount': 4300+7900},
               ]
     result = []
 
@@ -926,7 +926,7 @@ def polling():
     now = arrow.now()
     today = now.date()
     trade_begin = arrow.get(str(today)+'T09:30+08:00')
-    trade_end = arrow.get(str(today)+'T22:01+08:00')
+    trade_end = arrow.get(str(today)+'T21:01+08:00')
     refresh = False
     if trade_begin < now < trade_end:
         refresh = True

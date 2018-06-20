@@ -25,7 +25,7 @@ class Portfolio(Document):
     # ZS账户当年(真实)本金
     cost_zs = FloatField(default=463000+4000)
     # 券商融资+江苏银行
-    financing = FloatField(default=169366 + 50000)
+    financing = FloatField(default=169366 + 70000)
     cost_ht1 = FloatField()
     cost_ht2 = FloatField()
     cost_ht1_real = FloatField()
@@ -40,9 +40,9 @@ class Portfolio(Document):
 
     def compute(self):
         # HT1账户当年本金
-        self.cost_ht1 = 277461+17000
+        self.cost_ht1 = 277461+17000+5000
         # HT1账户真实本金
-        self.cost_ht1_real = 226000+17000
+        self.cost_ht1_real = 226000+17000+5000
         # HT2账户当年本金
         self.cost_ht2 = 218579+20000
         # HT2账户真实本金

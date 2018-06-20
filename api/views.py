@@ -298,12 +298,12 @@ def portfolio(request):
     print('stocks****{}'.format(p.list))
     results = sorted(p.list, key=lambda s: s.get('ratio'), reverse=True)
     print(results)
-    serializer = PortfolioSerializer({'list': results, 'market_value': p.market_value,
-                                          'cost_zs': p.cost_zs, 'cost_ht1': p.cost_ht1, 'cost_ht2': p.cost_ht2,
-                                          'cost': p.cost,
-                                          'total': p.total, 'net_asset': p.net_asset, 'lever': p.lever,
-                                          'position_ratio': p.position_ratio, 'financing': p.financing,
-                                          'profit': p.profit, 'profit_ratio': p.profit_ratio,
+    serializer = PortfolioSerializer({'list': results, 'market_value': p.market_value, 'cash': p.cash,
+                                      'cost_zs': p.cost_zs, 'cost_ht1': p.cost_ht1, 'cost_ht2': p.cost_ht2,
+                                      'cost': p.cost,
+                                      'total': p.total, 'net_asset': p.net_asset, 'lever': p.lever,
+                                      'position_ratio': p.position_ratio, 'financing': p.financing,
+                                      'profit': p.profit, 'profit_ratio': p.profit_ratio,
                                       'profit_today': p.profit_today, 'profit_ratio_today': p.profit_ratio_today})
     content = JSONRenderer().render(serializer.data)
     print('**********content:{}'.format(content))
