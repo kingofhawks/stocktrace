@@ -1,13 +1,24 @@
 #-*- coding: UTF-8 -*-
-from django.db import models
-from django.utils import timezone
-from datetime import datetime, date
 from django.conf import settings
-from mongoengine import Document, ListField, FloatField, DateTimeField, EmbeddedDocumentField
-
-from stocktrace.stock import Stock
+from mongoengine import Document, ListField, FloatField, DateTimeField
 
 db = settings.DB
+
+
+def get_stocks():
+    stocks = [{'code': '600420', 'amount': 10000 + 7800 + 6200}, {'code': '600177', 'amount': 20000 + 2000},
+              {'code': '000028', 'amount': 2000 + 500}, {'code': '300246', 'amount': 2200 + 2000 + 3300},
+              {'code': '601997', 'amount': 1000 + 3500 + 3000},
+              {'code': '601818', 'amount': 20000}, {'code': '601009', 'amount': 4000 + 3000},
+              {'code': '600995', 'amount': 3000 + 2700}, {'code': '002589', 'amount': 500 + 2300},
+              {'code': '601688', 'amount': 1000 + 2000}, {'code': '002468', 'amount': 600 + 900},
+              {'code': '600383', 'amount': 1800},
+              {'code': '510900', 'amount': 20000},
+              {'code': '600533', 'amount': 2000 + 2800},
+              {'code': '601933', 'amount': 1400}, {'code': '510500', 'amount': 3000 + 1000},
+              {'code': '510050', 'amount': 2000},
+              {'code': '131810', 'amount': 12900 + 2800},]
+    return stocks
 
 
 class Portfolio(Document):
@@ -109,20 +120,6 @@ class Portfolio(Document):
         self.profit_ratio = float("{0:.2f}".format(self.profit*100/self.cost))
         # 以净资产入账
         self.profit_ratio_today = float("{0:.2f}".format(self.profit_today*100/self.net_asset))
-        # self.date = datetime.now()
-
-    # def save(self):
-    #     stock_list = []
-    #     for stock in self.list:
-    #         stock_list.append({'code': stock['code'], 'amount': stock['amount'], 'current': stock['current']})
-    #     db.portfolio.insert({'name': self.name, 'date': self.date, 'list': stock_list,
-    #                          'market_value': self.market_value,
-    #                          'cost_zs': self.cost_zs, 'cost_ht1': self.cost_ht1, 'cost_ht2': self.cost_ht2,
-    #                          'cost': self.cost,
-    #                          'total': self.total, 'net_asset': self.net_asset, 'financing': self.financing,
-    #                          'position_ratio': self.position_ratio, 'lever': self.lever,
-    #                          'profit': self.profit, 'profit_ratio': self.profit_ratio,
-    #                          'profit_today': self.profit_today, 'profit_ratio_today': self.profit_ratio_today})
 
     def __unicode__(self):
         return self.date

@@ -12,6 +12,8 @@ import requests
 import json
 from datetime import timedelta, datetime
 import arrow
+
+from portfolio.models import get_stocks
 from stocktrace.stock import Stock
 import tushare as ts
 from PyQt5 import Qt
@@ -906,20 +908,6 @@ def stock_list():
 
 
 def polling():
-    stocks = [{'code': '600420', 'amount': 10000+7400+6200}, {'code': '600177', 'amount': 20000+2000},
-              {'code': '000028', 'amount': 2000 + 500}, {'code': '300246', 'amount': 2000+2000+3300},
-              {'code': '601997', 'amount': 1000+3500+3000},
-              {'code': '601818', 'amount': 20000}, {'code': '601009', 'amount': 4000+3000},
-              {'code': '600995', 'amount': 5700}, {'code': '002589', 'amount': 2300+500},
-              {'code': '601688', 'amount': 1000+2000}, {'code': '002468', 'amount': 900},
-              {'code': '600383', 'amount': 1800},
-              {'code': '300750', 'amount': 500},
-              {'code': '510900', 'amount': 20000},
-              {'code': '600533', 'amount': 1000+2800},
-              {'code': '601933', 'amount': 1400}, {'code': '510500', 'amount': 3000},
-              {'code': '510050', 'amount': 2000},
-              {'code': '131810', 'amount': 4300+7900},
-              ]
     result = []
 
     # 交易时间才需要刷新
@@ -930,6 +918,7 @@ def polling():
     refresh = False
     if trade_begin < now < trade_end:
         refresh = True
+    stocks = get_stocks()
     for item in stocks:
         code = item['code']
         amount = item['amount']

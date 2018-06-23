@@ -238,21 +238,20 @@ def screen_by_pencentage(low=-10.11, high=-9.9, access_token=xq_a_token):
     # print count
     return count
 
+
 # 5 stock ratio with low price
-def low_price_ratio():
-    count = screen_by_price()
-    total = screen_by_price(high=10000)
+def low_price_ratio(price=3):
+    count = screen_by_price(low=0.1, high=price)['count']
+    total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
-    # print ratio
     return ratio
 
 
 # 6 stock ratio with high price
-def high_price_ratio():
-    count = screen_by_price(low=100, high=10000)['count']
+def high_price_ratio(price=100):
+    count = screen_by_price(low=price, high=10000)['count']
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
-    # print 'count:{} total:{} ratio:{}'.format(count, total, ratio)
     return ratio
 
 
@@ -460,30 +459,30 @@ def read_market(nh, nl, date):
     cix = 0
     weight_range = [0, 10]
 
-    # 1 SH PE from 2000 year
+    # 1 latest SH PE
     pe_df = avg_sh_pe('2000-1-31')
     max_pe = pe_df['PE'].max()
     min_pe = pe_df['PE'].min()
     # get latest PE DF by tail()
-    latest_pe_df = pe_df.tail(1)
-    latest_pe = latest_pe_df.iloc[0][1]
+    # latest_pe_df = pe_df.tail(1)
+    # latest_pe = latest_pe_df.iloc[0][1]
     # print 'latest PE:{}'.format(latest_pe)
-    pe = interp(latest_pe, [min_pe, max_pe], weight_range)
-    print('min_pe:{} max_pe:{} latest_pe:{} pe:{}'.format(min_pe, max_pe, latest_pe, pe))
+    latest_sh = Index.objects(name='上海A股').order_by('-date').first()
+    print('items***{}'.format(latest_sh))
+    pe = interp(latest_sh.pe, [min_pe, max_pe], weight_range)
+    # print('min_pe:{} max_pe:{} latest_pe:{} pe:{}'.format(min_pe, max_pe, latest_pe, pe))
     cix += pe
 
     # 2 破净率
     min_low_pb = 0
     max_low_pb = 0.1
     pb = interp(-broken_net_ratio, [-max_low_pb, min_low_pb], weight_range)
-    # print pb
     cix += pb
 
     # 3 AH premium index
     ah_now = xueqiu('HKHSAHP')
     ah_current = ah_now.current
     ah = interp(ah_current, [100, 150], weight_range)
-    # print ah
     cix += ah
 
     # 4 GDP rate
@@ -496,15 +495,20 @@ def read_market(nh, nl, date):
     high = interp(high_price, [0, 0.036], weight_range)
     cix += high
 
-    # 6 换手率 [1%,3%]
+    # 5 low price
+    low_price = low_price_ratio()
+    print('low_price***{}'.format(low_price))
+
+    # 6 SH换手率 [1%,3%]
     sh = read_index_market('SH000001')
     turnover_rate = sh['turnover_rate']
     turnover = interp(turnover_rate, [1, 3], weight_range)
     cix += turnover
 
     Market.objects(date=get_date(date)).update_one(nh=nh, nl=nl, nhnl=nh-nl, nh_ratio=nh_ratio, nl_ratio=nl_ratio,
-                                                   stock_count=stock_count, high_price_ratio=high_price,
-                                                   pe=latest_pe, turnover=turnover_rate,
+                                                   stock_count=stock_count,
+                                                   high_price_ratio=high_price, low_price_ratio=low_price,
+                                                   pe=latest_sh.pe, turnover=turnover_rate,
                                                    ah=ah_current, gdp=rate, cix=cix,
                                                    broken_net=broken_net, broken_net_ratio=broken_net_ratio,
                                                    broken_net_stocks=low_pb[2],

@@ -118,8 +118,10 @@ class Market(Document):
     gdp = FloatField()
     # AH溢价指数
     ah = FloatField()
-    # 高股价比率
+    # 高价股比率(>=100)
     high_price_ratio = FloatField()
+    # 低价股比率(<3)
+    low_price_ratio = FloatField()
 
 
 
