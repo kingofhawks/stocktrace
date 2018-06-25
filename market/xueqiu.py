@@ -63,10 +63,10 @@ def parse_xue_qiu_comment_last_day(stock='SH600029', access_token=xq_a_token):
 
 
 # get comment between trading time
-def parse_xue_qiu_comment(stock='SH600027', access_token=xq_a_token):
+def comment(stock='SH600027'):
     url = 'http://xueqiu.com/statuses/search.json?count=15&comment=0&symbol={}&hl=0&source=all&sort=time&page=1&_=1439801060661'
     url = url.format(stock)
-    payload = {'access_token': access_token}
+    payload = {'access_token': xq_a_token}
 
     r = requests.get(url, params=payload, headers=headers)
     # print r
