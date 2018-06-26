@@ -914,7 +914,7 @@ def polling():
     now = arrow.now()
     today = now.date()
     trade_begin = arrow.get(str(today)+'T09:30+08:00')
-    trade_end = arrow.get(str(today)+'T21:01+08:00')
+    trade_end = arrow.get(str(today)+'T22:01+08:00')
     refresh = False
     if trade_begin < now < trade_end:
         refresh = True
