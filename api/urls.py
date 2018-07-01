@@ -23,4 +23,7 @@ urlpatterns = [
     url(r'^portfolio', portfolio),
     # url(r'^rule', portfolio),
     url(r'^fake_chart_data', fake),
+    url(r'^fake_list', fake),
+    url(r'^currentUser', fake),
+    url(r'^tags', fake),
 ]

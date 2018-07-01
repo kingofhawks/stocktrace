@@ -499,7 +499,7 @@ def get_market_result(serializer):
             dt__ratio_list.append([timestamp, float("{0:.2f}".format(dt_ratio*100))])
         zdr = item.get('zdr')
         if zdr:
-            zdr_list.append([timestamp, float("{0:.2f}".format(zdr*100))])
+            zdr_list.append([timestamp, float("{0:.2f}".format(zdr))])
     result = {'nh': nh_list, 'nl': nl_list, 'nhnl': nhnl_list,
               'nh_ratio': nh_ratio_list, 'nl_ratio': nl_ratio_list,
               'broken_net': broken_net_list, 'broken_net_ratio': broken_net_ratio_list,
