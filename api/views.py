@@ -274,6 +274,25 @@ def equity_list(request):
 
 
 @api_view(['GET'])
+def latest_equity_list(request):
+    latest_equity = Equity.objects().order_by('-date').first()
+    print(latest_equity)
+    date = latest_equity.date
+    # TODO
+    print(date)
+    arrow.get(date)
+    items = Equity.objects({'date': date})
+    equity_col = db.equity.find({'date': str(date)})
+    df = pd.DataFrame(list(equity_col))
+    serializer = EquityListSerializer({'items': items})
+    result = get_result(serializer, df)
+
+    response = Response(result, status=status.HTTP_200_OK)
+
+    return get_response_cors(response)
+
+
+@api_view(['GET'])
 def index_list(request):
     index_group = db.index.aggregate([{"$group": {"_id": "$name"}}], cursor={})
     indexes = list(index_group)
