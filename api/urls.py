@@ -10,7 +10,6 @@ urlpatterns = [
     url(r'^industry', IndustryView.as_view()),
     url(r'^equity', EquityView.as_view()),
     url(r'^equities', equity_list),
-    url(r'^latest_equities', latest_equity_list),
     url(r'^indexes', index_list),
     url(r'^ah', AhView.as_view()),
     url(r'^swlist', sw_list),
@@ -22,6 +21,7 @@ urlpatterns = [
     # should be above portfolio for regex matching order!
     url(r'^portfolio_history', PortfolioView.as_view()),
     url(r'^portfolio', portfolio),
+    # url(r'^magic', magic_formula),
     url(r'^magic', portfolio),
     # url(r'^rule', portfolio),
     url(r'^fake_chart_data', fake),
