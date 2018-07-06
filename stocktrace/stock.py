@@ -5,6 +5,8 @@ from mongoengine import *
 class Stock(Document):
     code = StringField()
     name = StringField()
+    # 自选股
+    focus = BooleanField(default=False)
     current = FloatField()
     percentage = FloatField()
     change = FloatField()
@@ -68,7 +70,7 @@ class Stock(Document):
                     and abs(self.percentage) < 20:
                 self.nh = True
 
-    #python2.7 use __unicode__, for python3 use __str__
+    # python2.7 use __unicode__, for python3 use __str__
     def __unicode__(self):
         return self.code + '**name:' + str(self.name) + '**now:' + str(
             self.current) + '**state:' + self.state + '**percent:' + str('%.2f' % self.percent + '%') + '**high:' + str(

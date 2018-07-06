@@ -33,8 +33,11 @@ class EquitySerializer(serializers.Serializer):
     name = serializers.CharField(read_only=True)
     code = serializers.CharField(read_only=True)
     pe = serializers.FloatField(required=False)
+    pe_order = serializers.IntegerField(required=False)
     pe_ttm = serializers.FloatField(required=False)
     pb = serializers.FloatField(required=False)
+    pb_order = serializers.IntegerField(required=False)
+    magic_order = serializers.IntegerField(required=False)
     dividend_yield_ratio = serializers.FloatField(required=False)
     date = serializers.CharField(required=False)
 

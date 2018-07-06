@@ -14,6 +14,7 @@ import zipfile
 import io
 from django.conf import settings
 from market.xueqiu import read_portfolio
+from stocktrace.stock import Stock
 
 db = settings.DB
 date_format = 'YYYY-MM-DD'
@@ -212,6 +213,8 @@ def read_equity_by_portfolio(begin_date='2017-12-28', end_date=None):
     equities = read_portfolio()
     for equity in equities:
         try:
+            # update to stock collection
+            Stock.objects(code=equity).update_one(code=equity, focus=True, upsert=True)
             read_equity(equity, begin_date, end_date)
         except:
             continue

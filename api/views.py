@@ -262,13 +262,19 @@ class StockView(APIView):
 
 @api_view(['GET'])
 def equity_list(request):
-    equity_group = db.equity.aggregate([{"$group": {"_id": "$code"}}], cursor={})
-    equities = list(equity_group)
-    print(len(equities))
-    # filter wrong data
-    filtered_equities = list(filter(lambda x: len(x.get('_id')) == 6, equities))
-    print(len(filtered_equities))
-    response = Response(filtered_equities, status=status.HTTP_200_OK)
+    # equity_group = db.equity.aggregate([{"$group": {"_id": "$code"}}], cursor={})
+    # equities = list(equity_group)
+    # print(len(equities))
+    # # filter wrong data
+    # filtered_equities = list(filter(lambda x: len(x.get('_id')) == 6, equities))
+    # print(len(filtered_equities))
+    # response = Response(filtered_equities, status=status.HTTP_200_OK)
+
+    stocks = db.stock.find({'focus': True})
+    result = []
+    for stock in stocks:
+        result.append({'_id': stock['code']})
+    response = Response(result, status=status.HTTP_200_OK)
 
     return get_response_cors(response)
 
@@ -276,18 +282,28 @@ def equity_list(request):
 @api_view(['GET'])
 def latest_equity_list(request):
     latest_equity = Equity.objects().order_by('-date').first()
-    print(latest_equity)
+    # print(latest_equity)
     date = latest_equity.date
-    # TODO
-    print(date)
-    arrow.get(date)
-    items = Equity.objects({'date': date})
-    equity_col = db.equity.find({'date': str(date)})
-    df = pd.DataFrame(list(equity_col))
-    serializer = EquityListSerializer({'items': items})
-    result = get_result(serializer, df)
-
-    response = Response(result, status=status.HTTP_200_OK)
+    items = Equity.objects(date=date)
+    # print(items)
+    # sort on PB
+    results = sorted(items, key=lambda s: s.pb, reverse=False)
+    for idx, item in enumerate(results):
+        item.pb_order = idx+1
+    # print(results)
+    # sort on PE
+    results = sorted(results, key=lambda s: s.pe, reverse=False)
+    for idx, item in enumerate(results):
+        item.pe_order = idx+1
+        item.magic_order = item.pb_order+item.pe_order
+    # print(results)
+    # sort on magic order
+    results = sorted(results, key=lambda s: s.magic_order, reverse=False)
+    serializer = EquityListSerializer({'items': results})
+    content = JSONRenderer().render(serializer.data)
+    # print('**********content:{}'.format(content))
+    json_output = json.loads(content)
+    response = Response(json_output, status=status.HTTP_200_OK)
 
     return get_response_cors(response)
 

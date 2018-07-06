@@ -73,14 +73,6 @@ class ParseTestCase(TestCase):
                     '002353', ]
         read_equities(equities, self.begin, '2016-12-31')
 
-    def test_read_all(self):
-        begin = '2018-06-11'
-        read_index_all(begin)
-        read_industry_all(begin)
-        read_sw_all(begin)
-        # read_equity_all(begin)
-        read_equity_by_portfolio(begin)
-        hs_cei()
 
     def test_hscei(self):
         hs_cei()
@@ -163,8 +155,17 @@ class ParseTestCase(TestCase):
     def test_sh(self):
         sh()
 
-    def test_market(self):
-        read_market(0, 680, str(date.today()))
-
     def test_index_market(self):
         read_index_market('SH000001')
+
+    def test_market(self):
+        read_market(0, 209, str(date.today()))
+
+    def test_read_all(self):
+        begin = '2018-07-02'
+        read_index_all(begin)
+        read_industry_all(begin)
+        read_sw_all(begin)
+        # read_equity_all(begin)
+        read_equity_by_portfolio(begin)
+        hs_cei()

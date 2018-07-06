@@ -50,16 +50,22 @@ class Equity(Document):
     code4 = StringField()
     # 静态PE
     pe = FloatField()
+    # PE排序
+    pe_order = IntField()
     # 滚动
     pe_ttm = FloatField()
     pb = FloatField()
+    # PB排序
+    pb_order = IntField()
+    # 神奇公式排序
+    magic_order = IntField()
     # 股息率
     dividend_yield_ratio = FloatField()
     date = DateTimeField()
 
     def __str__(self):
-        return 'name:{} code:{} PE:{} PE_TTM:{} PB:{} DYR:{} Date:{}'.format(self.name, self.code,
-                self.pe, self.pe_ttm, self.pb, self.dividend_yield_ratio, self.date)
+        return 'name:{} code:{} PE:{} PE_TTM:{} PB:{} DYR:{} PB_Order:{} Date:{}'.format(self.name, self.code,
+                self.pe, self.pe_ttm, self.pb, self.dividend_yield_ratio, self.pb_order, self.date)
 
 
 class AhIndex(Document):
