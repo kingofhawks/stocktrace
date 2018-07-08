@@ -21,8 +21,7 @@ urlpatterns = [
     # should be above portfolio for regex matching order!
     url(r'^portfolio_history', PortfolioView.as_view()),
     url(r'^portfolio', portfolio),
-    # url(r'^magic', magic_formula),
-    url(r'^magic', portfolio),
+    url(r'^magic', magic_formula),
     # url(r'^rule', portfolio),
     url(r'^fake_chart_data', fake),
     url(r'^fake_list', fake),
