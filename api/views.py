@@ -14,7 +14,7 @@ from market.parse import *
 import pymongo
 
 from market.sh import avg_sh_pe
-from portfolio.models import Portfolio
+from portfolio.models import Portfolio, Dividend
 from portfolio.portfolio import snapshot
 from stocktrace.stock import StockHistory
 
@@ -565,4 +565,29 @@ class MarketView(APIView):
         # print '****json:{}'.format(json_output)
         result = get_market_result(serializer)
         response = Response(result, status=status.HTTP_200_OK)
+        return get_response_cors(response)
+
+
+class DividendView(APIView):
+
+    def get(self, request, *args, **kw):
+        # Process any get params that you may need
+        # If you don't need to process get params,
+        # you can skip this part
+        data = Dividend.objects().order_by('date')
+        print(data)
+        # df = DataFrame(list(data))
+        # print df
+        # max_ah = df['value'].max()
+        # min_ah = df['value'].min()
+        # avg_ah = df['value'].mean()
+        # print('PE max:{} min:{} average:{} median:{}'.format(max_ah, min_ah, avg_ah))
+        serializer = DividendListSerializer({'items': data})
+        # content = JSONRenderer().render(serializer.data)
+        # print '**********content:{}'.format(content)
+        # json_output = json.loads(content)
+        # print '****json:{}'.format(json_output)
+        content = JSONRenderer().render(serializer.data)
+        json_output = json.loads(content)
+        response = Response(json_output, status=status.HTTP_200_OK)
         return get_response_cors(response)

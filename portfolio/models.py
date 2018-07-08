@@ -130,3 +130,9 @@ class Portfolio(Document):
 
     def __unicode__(self):
         return self.date
+
+
+# 分红
+class Dividend(Document):
+    money = FloatField()
+    date = DateTimeField()

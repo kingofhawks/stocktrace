@@ -140,3 +140,12 @@ class PortfolioSerializer(serializers.Serializer):
 
 class PortfolioListSerializer(serializers.Serializer):
     items = PortfolioSerializer(many=True)  # A nested list of 'edit' items.
+
+
+class DividendSerializer(serializers.Serializer):
+    date = serializers.CharField(required=False)
+    money = serializers.FloatField(read_only=True)
+
+
+class DividendListSerializer(serializers.Serializer):
+    items = DividendSerializer(many=True)

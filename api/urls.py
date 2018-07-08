@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^portfolio_history', PortfolioView.as_view()),
     url(r'^portfolio', portfolio),
     url(r'^magic', magic_formula),
+    url(r'^dividend', DividendView.as_view()),
     # url(r'^rule', portfolio),
     url(r'^fake_chart_data', fake),
     url(r'^fake_list', fake),
