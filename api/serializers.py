@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from portfolio.models import Dividend
+
 
 class IndexSerializer(serializers.Serializer):
     name = serializers.CharField(read_only=True)
@@ -143,9 +145,13 @@ class PortfolioListSerializer(serializers.Serializer):
 
 
 class DividendSerializer(serializers.Serializer):
-    date = serializers.CharField(required=False)
-    money = serializers.FloatField(read_only=True)
+    date = serializers.CharField(required=True)
+    money = serializers.FloatField(required=True)
+
+    def create(self, validated_data):
+        """ Create and return a new `Text` instance, given the validated data. """
+        return Dividend.objects.create(**validated_data)
 
 
 class DividendListSerializer(serializers.Serializer):
-    items = DividendSerializer(many=True)
+    list = DividendSerializer(many=True)

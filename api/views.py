@@ -582,7 +582,7 @@ class DividendView(APIView):
         # min_ah = df['value'].min()
         # avg_ah = df['value'].mean()
         # print('PE max:{} min:{} average:{} median:{}'.format(max_ah, min_ah, avg_ah))
-        serializer = DividendListSerializer({'items': data})
+        serializer = DividendListSerializer({'list': data})
         # content = JSONRenderer().render(serializer.data)
         # print '**********content:{}'.format(content)
         # json_output = json.loads(content)
@@ -591,3 +591,12 @@ class DividendView(APIView):
         json_output = json.loads(content)
         response = Response(json_output, status=status.HTTP_200_OK)
         return get_response_cors(response)
+
+    def post(self, request, *args, **kw):
+        print('post****{}'.format(request.data))
+        serializer = DividendSerializer(data=request.data)
+        if serializer.is_valid():
+            print(serializer.validated_data)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
