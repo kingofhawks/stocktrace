@@ -1,6 +1,6 @@
 #-*- coding: UTF-8 -*-
 from django.conf import settings
-from mongoengine import Document, ListField, FloatField, DateTimeField
+from mongoengine import Document, ListField, FloatField, DateTimeField, StringField
 
 db = settings.DB
 
@@ -136,3 +136,4 @@ class Portfolio(Document):
 class Dividend(Document):
     money = FloatField()
     date = DateTimeField()
+    description = StringField()

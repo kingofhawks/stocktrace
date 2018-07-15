@@ -147,6 +147,7 @@ class PortfolioListSerializer(serializers.Serializer):
 class DividendSerializer(serializers.Serializer):
     date = serializers.CharField(required=True)
     money = serializers.FloatField(required=True)
+    description = serializers.CharField(required=False)
 
     def create(self, validated_data):
         """ Create and return a new `Text` instance, given the validated data. """
