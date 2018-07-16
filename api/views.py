@@ -603,8 +603,17 @@ class DividendView(APIView):
 
 
 @api_view(['GET'])
-def dividend_list(request):
+def dividend_monthly(request):
     dividend_col = db.dividend.aggregate([{"$group": {"_id": {"$month": "$date"}, "total": {"$sum": "$money"}}}], cursor={})
+    data = list(dividend_col)
+    data.sort(key=lambda item: item.get('_id'), reverse=False)
+    response = Response(data, status=status.HTTP_200_OK)
+    return get_response_cors(response)
+
+
+@api_view(['GET'])
+def dividend_yearly(request):
+    dividend_col = db.dividend.aggregate([{"$group": {"_id": {"$year": "$date"}, "total": {"$sum": "$money"}}}], cursor={})
     data = list(dividend_col)
     data.sort(key=lambda item: item.get('_id'), reverse=False)
     response = Response(data, status=status.HTTP_200_OK)
