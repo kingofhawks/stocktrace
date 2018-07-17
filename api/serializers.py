@@ -104,6 +104,7 @@ class SwIndexSerializer(serializers.Serializer):
 
 class StockSerializer(serializers.Serializer):
     code = serializers.CharField(required=False)
+    name = serializers.CharField(required=False)
     current = serializers.FloatField(read_only=True)
     amount = serializers.IntegerField(read_only=True)
     percentage = serializers.FloatField(read_only=True)

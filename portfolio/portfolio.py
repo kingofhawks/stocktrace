@@ -42,7 +42,8 @@ def snapshot():
     print(stocks)
     stock_list = []
     for stock in stocks:
-        stock_list.append({'code': stock['code'], 'amount': stock['amount'],
+        stock_list.append({'code': stock['code'], 'name': stock['name'],
+                           'amount': stock['amount'],
                            'current': stock['current'], 'percentage': stock['percentage'],
                            'change': stock['change']})
 

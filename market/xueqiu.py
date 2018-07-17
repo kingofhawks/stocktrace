@@ -278,7 +278,7 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
     if data:
         # Wed Dec 27 14:59:59 +0800 2017
         stock = Stock(code=code,
-                      # name=data.get('name').encode("GB2312"),
+                     # name=data.get('name').encode("GB2312"),
                       current=data.get('current'), percentage=data.get('percentage'),
                       open_price=data.get('open'), high=data.get('high'), low=data.get('low'), close=data.get('close'),
                       low52week=data.get('low52week'), high52week=data.get('high52week'),
@@ -376,20 +376,6 @@ def read_history(code='600036', begin_date=None, end_date=None):
 
 def ah_history():
     read_history('HKHSAHP')
-
-
-@DeprecationWarning
-def stock_list():
-    import tushare as ts
-    df = ts.get_stock_basics()
-    stocks = df.index.tolist()
-    print((len(stocks)))
-    print(stocks)
-    for stock in stocks:
-        s = Stock()
-        s.code = stock
-        s.save()
-
 
 def read_portfolio():
     url = 'https://xueqiu.com/v4/stock/portfolio/list.json?system=true&_=1520056368754'

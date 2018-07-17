@@ -8,12 +8,17 @@ from market.csi import read_equity_by_date, read_equity, read_equity_all, read_e
 from market.xueqiu import read_portfolio, read_history, read_market, low_pb_ratio, high_pb_ratio, read_index_market, \
     high_price_ratio, gdp_rate
 from market.sw import read_sw_all
+from market.tushare import stock_list
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
 
 class ParseTestCase(TestCase):
-    code = '300750'
+    code = '600420'
     begin = '2011-05-04'
+
+
+    def test_stock_list(self):
+        stock_list()
 
     def test_xueqiu(self):
         s = xueqiu(self.code)
@@ -159,10 +164,10 @@ class ParseTestCase(TestCase):
         read_index_market('SH000001')
 
     def test_market(self):
-        read_market(0, 209, str(date.today()))
+        read_market(10, 23, str(date.today()))
 
     def test_read_all(self):
-        begin = '2018-07-02'
+        begin = '2018-07-09'
         read_index_all(begin)
         read_industry_all(begin)
         read_sw_all(begin)

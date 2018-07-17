@@ -895,18 +895,6 @@ def alert_high_diff():
             systemtray_icon.showMessage('Title', row["name"])
 
 
-def stock_list():
-    import tushare as ts
-    df = ts.get_stock_basics()
-    stocks = df.index.tolist()
-    print((len(stocks)))
-    print(stocks)
-    for stock in stocks:
-        s = Stock()
-        s.code = stock
-        s.save()
-
-
 def polling():
     result = []
 
