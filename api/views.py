@@ -574,7 +574,7 @@ class DividendView(APIView):
         # Process any get params that you may need
         # If you don't need to process get params,
         # you can skip this part
-        data = Dividend.objects().order_by('date')
+        data = Dividend.objects().order_by('-date')
         print(data)
         # df = DataFrame(list(data))
         # print df
