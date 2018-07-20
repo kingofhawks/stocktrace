@@ -76,6 +76,9 @@ class MarketSerializer(serializers.Serializer):
     dt = serializers.FloatField(read_only=True)
     dt_ratio = serializers.FloatField(read_only=True)
     zdr = serializers.FloatField(read_only=True)
+    cix = serializers.FloatField(read_only=True)
+    turnover = serializers.FloatField(read_only=True)
+    cost = serializers.FloatField(read_only=True)
 
 
 class MarketListSerializer(serializers.Serializer):

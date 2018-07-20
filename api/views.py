@@ -360,6 +360,7 @@ def get_portfolio_result(serializer):
     lever_list = []
     profit_list = []
     profit_ratio_list = []
+    cost_list = []
     for item in json_output.get('items'):
         print('item*****{}'.format(item))
         print('item date*****{}'.format(item.get('date')))
@@ -373,10 +374,11 @@ def get_portfolio_result(serializer):
         lever_list.append([timestamp, item.get('lever')])
         profit_list.append([timestamp, item.get('profit')])
         profit_ratio_list.append([timestamp, item.get('profit_ratio')])
-
+        cost_list.append([timestamp, item.get('cost')])
     result = {'total': total_list, 'market': market_list, 'net_asset': net_asset_list,
               'financing': financing_list, 'position_ratio': position_ratio_list,
               'lever': lever_list, 'profit': profit_list, 'profit_ratio': profit_ratio_list,
+              'cost': cost_list,
               }
     return result
 
@@ -506,6 +508,9 @@ def get_market_result(serializer):
     dt_list = []
     dt__ratio_list = []
     zdr_list = []
+    cix_list = []
+    turnover_list = []
+    cost_list = []
     for item in json_output.get('items'):
         if item.get('date'):
             timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
@@ -535,11 +540,20 @@ def get_market_result(serializer):
         zdr = item.get('zdr')
         if zdr:
             zdr_list.append([timestamp, float("{0:.2f}".format(zdr))])
+        cix = item.get('cix')
+        if cix:
+            cix_list.append([timestamp, float("{0:.2f}".format(cix))])
+        turnover = item.get('turnover')
+        if turnover:
+            turnover_list.append([timestamp, float("{0:.2f}".format(turnover))])
+        cost = item.get('cost')
+        if cost:
+            cost_list.append([timestamp, float("{0:.2f}".format(cost))])
     result = {'nh': nh_list, 'nl': nl_list, 'nhnl': nhnl_list,
               'nh_ratio': nh_ratio_list, 'nl_ratio': nl_ratio_list,
               'broken_net': broken_net_list, 'broken_net_ratio': broken_net_ratio_list,
               'zt': zt_list, 'dt': dt_list, 'zt_ratio': zt__ratio_list, 'dt_ratio': dt__ratio_list,
-              'zdr': zdr_list,
+              'zdr': zdr_list, 'cix': cix_list, 'turnover': turnover_list,'cost': cost_list,
               }
     return result
 

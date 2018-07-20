@@ -6,18 +6,6 @@ db = settings.DB
 
 
 def get_stocks():
-    # stocks = [{'code': '600420', 'amount': 10000 + 7800 + 6200}, {'code': '600177', 'amount': 20000 + 2000},
-    #           {'code': '000028', 'amount': 2000 + 500}, {'code': '300246', 'amount': 2200 + 2000 + 3300},
-    #           {'code': '601997', 'amount': 1000 + 3500 + 3000},
-    #           {'code': '601818', 'amount': 20000}, {'code': '601009', 'amount': 4000 + 3000},
-    #           {'code': '600995', 'amount': 3000 + 2700}, {'code': '002589', 'amount': 500 + 2300},
-    #           {'code': '601688', 'amount': 1000 + 2000}, {'code': '002468', 'amount': 600 + 900},
-    #           {'code': '600383', 'amount': 1800},
-    #           {'code': '510900', 'amount': 20000},
-    #           {'code': '600533', 'amount': 2000 + 2800},
-    #           {'code': '601933', 'amount': 1400}, {'code': '510500', 'amount': 3000 + 1000},
-    #           {'code': '510050', 'amount': 2000},
-    #           {'code': '131810', 'amount': 12900 + 2800},]
     stock = db.stock
     stocks = stock.find({"amount": {"$gt": 0}})
     print(stocks)
