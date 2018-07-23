@@ -282,6 +282,8 @@ def equity_list(request):
 # 神奇公式
 @api_view(['GET'])
 def magic_formula(request):
+    sorter = request.GET.get('sorter')
+    print(sorter)
     latest_equity = Equity.objects().order_by('-date').first()
     # print(latest_equity)
     date = latest_equity.date
@@ -298,8 +300,11 @@ def magic_formula(request):
         item.pe_order = idx+1
         item.magic_order = item.pb_order+item.pe_order
     # print(results)
-    # sort on magic order
-    results = sorted(results, key=lambda s: s.magic_order, reverse=False)
+    if sorter and sorter == 'magic_order_ascend':
+        # sort on magic order
+        results = sorted(results, key=lambda s: s.magic_order, reverse=False)
+    else:
+        results = sorted(results, key=lambda s: s.magic_order, reverse=True)
     serializer = EquityListSerializer2({'list': results})
     content = JSONRenderer().render(serializer.data)
     json_output = json.loads(content)
