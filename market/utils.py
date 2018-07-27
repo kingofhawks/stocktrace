@@ -1,8 +1,19 @@
+import io
+
 import pandas as pd
+import requests
+import xlrd
 from lxml import etree
 from lxml.html import parse
 import arrow
 
+def get_excel_book(url):
+    r = requests.get(url)
+    file_contents = io.BytesIO(r.content)
+    print(file_contents)
+    book = xlrd.open_workbook(file_contents=file_contents.read())
+    # book = pd.read_csv(file_contents, encoding="gb18030")
+    return book
 
 # HK and USD to RMB exchange rate from boc.cn
 def rmb_exchange_rate():

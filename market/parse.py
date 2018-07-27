@@ -4,7 +4,7 @@ from lxml.html import parse
 from pandas.util.testing import DataFrame
 from market.models import Index, AhIndex, Industry, Equity
 from market.sina import sina
-from market.utils import rmb_exchange_rate
+from market.utils import rmb_exchange_rate, get_excel_book
 from market.xueqiu import xueqiu, read_history, read_index_market, screen_by_price
 import pandas as pd
 import numpy as np
@@ -252,15 +252,6 @@ def csi_industry_all(begin_date='20171228', end_date=None):
     for i in range(delta.days):
         day = begin_arrow.shift(days=i).format(date_format)
         csi_industry(day)
-
-
-def get_excel_book(url):
-    r = requests.get(url)
-    file_contents = io.BytesIO(r.content)
-    print(file_contents)
-    book = xlrd.open_workbook(file_contents=file_contents.read())
-    # book = pd.read_csv(file_contents, encoding="gb18030")
-    return book
 
 
 # H股指数monthly

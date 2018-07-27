@@ -3,7 +3,7 @@ from market.parse import *
 from market.sh import avg_sh_pe
 from stocktrace.dao.stockdao import *
 from market.analysis import *
-from market.csi import read_index, read_industry, read_index_all, read_industry_all, csi_by_type
+from market.csi import read_index, read_industry, read_index_all, read_industry_all, csi_by_type, read_index2
 from market.csi import read_equity_by_date, read_equity, read_equity_all, read_equity_by_portfolio, read_equities
 from market.xueqiu import read_portfolio, read_history, read_market, low_pb_ratio, high_pb_ratio, read_index_market, \
     high_price_ratio, gdp_rate
@@ -50,6 +50,11 @@ class ParseTestCase(TestCase):
 
     def test_read_index(self):
         read_index('2016-01-04')
+
+    def test_read_index2(self):
+        read_index2('000016')
+        read_index2('000300')
+        read_index2('000905')
 
     def test_read_index_all(self):
         read_index_all('2018-02-24')
@@ -164,13 +169,17 @@ class ParseTestCase(TestCase):
         read_index_market('SH000001')
 
     def test_market(self):
-        read_market(10, 23, str(date.today()))
+        read_market(2, 12, str(date.today()))
 
     def test_read_all(self):
-        begin = '2018-07-09'
+        begin = '2018-07-16'
         read_index_all(begin)
         read_industry_all(begin)
         read_sw_all(begin)
         # read_equity_all(begin)
         read_equity_by_portfolio(begin)
         hs_cei()
+        # 上证50/沪深300/中证500历史PE
+        read_index2('000016')
+        read_index2('000300')
+        read_index2('000905')

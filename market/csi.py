@@ -13,6 +13,8 @@ import xlrd
 import zipfile
 import io
 from django.conf import settings
+
+from market.utils import get_excel_book
 from market.xueqiu import read_portfolio
 from stocktrace.stock import Stock
 
@@ -226,3 +228,41 @@ def read_equities(equities, begin_date='2017-12-28', end_date=None):
             read_equity(equity, begin_date, end_date)
         except:
             continue
+
+
+# 最近一个月的指数市盈率
+def read_index2(code='000905'):
+    url = 'http://www.csindex.com.cn/uploads/file/autofile/perf/{}perf.xls'.format(code)
+    book = get_excel_book(url)
+    # print(book)
+    if code == '000300':
+        name = '沪深300'
+    elif code == '000905':
+        name = '中证500'
+    elif code == '000016':
+        name = '上证50'
+    for sheet in range(book.nsheets):
+        sh = book.sheet_by_index(sheet)
+        for rx in range(sh.nrows):
+            row = sh.row(rx)
+            df = DataFrame(row)
+            # print(df)
+            print(row)
+            print(len(row))
+            if len(row) > 15:
+                date = row[0].value
+                pe1 = row[15].value
+                pe2 = row[16].value
+                dividend_yield_ratio1 = row[17].value
+                dividend_yield_ratio2 = row[18].value
+                turnover = row[13].value
+                # # print(type(pe))
+                if date and pe1 and type(pe1) == float:
+                    py_date = xlrd.xldate.xldate_as_datetime(date, book.datemode)
+                    print(py_date)
+                    date = str(py_date)
+                    print(pd.to_datetime(date))
+                    Index.objects(name=name, date=date).update_one(name=name, date=date, pe=pe1, pe_ttm=pe2,
+                                                                   dividend_yield_ratio=dividend_yield_ratio1,
+                                                                   turnover=turnover,
+                                                                   upsert=True)
