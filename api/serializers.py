@@ -149,6 +149,7 @@ class PortfolioListSerializer(serializers.Serializer):
 
 
 class DividendSerializer(serializers.Serializer):
+    id = serializers.CharField(required=False)
     date = serializers.CharField(required=True)
     money = serializers.FloatField(required=True)
     description = serializers.CharField(required=False)

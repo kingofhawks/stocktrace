@@ -24,7 +24,7 @@ from django.conf import settings
 db = settings.DB
 api_home = 'http://xueqiu.com'
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = '3361bd8b21cb5650bd593b67d8a66f2c6667a20c'
+xq_a_token = 'b0dcb08331f2b8d17a00c23fca69faa696d10b29'
 headers = {'content-type': 'application/json',
            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 

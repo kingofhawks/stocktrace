@@ -1,4 +1,6 @@
 import json
+
+from django.http import Http404
 from django.shortcuts import render
 
 # Create your views here.
@@ -365,6 +367,8 @@ def get_portfolio_result(serializer):
     lever_list = []
     profit_list = []
     profit_ratio_list = []
+    profit_today_list = []
+    profit_ratio_today_list = []
     cost_list = []
     for item in json_output.get('items'):
         print('item*****{}'.format(item))
@@ -379,10 +383,13 @@ def get_portfolio_result(serializer):
         lever_list.append([timestamp, item.get('lever')])
         profit_list.append([timestamp, item.get('profit')])
         profit_ratio_list.append([timestamp, item.get('profit_ratio')])
+        profit_today_list.append([timestamp, item.get('profit_today')])
+        profit_ratio_today_list.append([timestamp, item.get('profit_ratio_today')])
         cost_list.append([timestamp, item.get('cost')])
     result = {'total': total_list, 'market': market_list, 'net_asset': net_asset_list,
               'financing': financing_list, 'position_ratio': position_ratio_list,
               'lever': lever_list, 'profit': profit_list, 'profit_ratio': profit_ratio_list,
+              'profit_today': profit_today_list, 'profit_ratio_today': profit_ratio_today_list,
               'cost': cost_list,
               }
     return result
@@ -589,6 +596,12 @@ class MarketView(APIView):
 
 class DividendView(APIView):
 
+    def get_object(self, pk):
+        try:
+            return Dividend.objects.get(id=pk)
+        except :
+            raise Http404
+
     def get(self, request, *args, **kw):
         # Process any get params that you may need
         # If you don't need to process get params,
@@ -613,12 +626,27 @@ class DividendView(APIView):
 
     def post(self, request, *args, **kw):
         print('post****{}'.format(request.data))
-        serializer = DividendSerializer(data=request.data)
-        if serializer.is_valid():
-            print(serializer.validated_data)
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        method = request.data.get('method')
+        print(request.data)
+        print(method)
+        if method == 'delete':
+            print('**')
+            pk = request.data.get('id')
+            dividend = self.get_object(pk)
+            dividend.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            serializer = DividendSerializer(data=request.data)
+            if serializer.is_valid():
+                print(serializer.validated_data)
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET'])
