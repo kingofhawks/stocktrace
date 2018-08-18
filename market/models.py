@@ -61,6 +61,9 @@ class Equity(Document):
     magic_order = IntField()
     # 股息率
     dividend_yield_ratio = FloatField()
+    # 净资产收益率
+    roe = FloatField()
+    roe_order = IntField()
     date = DateTimeField()
 
     def __str__(self):

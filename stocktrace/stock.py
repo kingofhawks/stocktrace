@@ -118,19 +118,19 @@ class Stock(Document):
                        history_engine='csv', download_statistics=False):
         # logger.info('Start download finance data:{}'.format(stock.code))
 
-        #download statistics from reuters
+        # download statistics from reuters
         if download_statistics:
             from stocktrace.parse.reutersparser import downloadKeyStatDatas
             downloadKeyStatDatas()
 
-        #update latest price from yahoo or sina
-        #Seems YQL API is not stable,tables often to be locked
+        # update latest price from yahoo or sina
+        # Seems YQL API is not stable,tables often to be locked
         if download_latest:
             from stocktrace.parse.sinaparser import update
             update(self.code, realtime_engine)
 
         if download_history:
-        #    #download history data from yahoo CSV or YDN
+            # download history data from yahoo CSV or YDN
             from stocktrace.parse.yahooparser import download_history_data
             download_history_data(self.code, save=True, begin_date='2012-01-01')
 

@@ -291,18 +291,33 @@ def magic_formula(request):
     date = latest_equity.date
     items = Equity.objects(date=date)
     # print(items)
+
+    # filter data
+    items = list(filter(lambda x: x.pb is not None, items))
+    items = list(filter(lambda x: x.pe is not None, items))
+    items = list(filter(lambda x: x.roe is not None, items))
+
     # sort on PB
     results = sorted(items, key=lambda s: s.pb, reverse=False)
     for idx, item in enumerate(results):
         item.pb_order = idx+1
     # print(results)
+
     # sort on PE
     results = sorted(results, key=lambda s: s.pe, reverse=False)
     for idx, item in enumerate(results):
         item.pe_order = idx+1
         item.magic_order = item.pb_order+item.pe_order
     # print(results)
-    if sorter and sorter == 'magic_order_ascend':
+
+    # sort on ROE
+    results = sorted(results, key=lambda s: s.roe, reverse=True)
+    for idx, item in enumerate(results):
+        item.roe_order = idx+1
+        item.magic_order = item.pb_order+item.pe_order+item.roe_order
+    # print(results)
+
+    if sorter is None or sorter == 'magic_order_ascend':
         # sort on magic order
         results = sorted(results, key=lambda s: s.magic_order, reverse=False)
     else:
