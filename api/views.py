@@ -35,6 +35,7 @@ def get_result(serializer, df):
     pe_ttm_list = []
     dyr_list = []
     turnover_list = []
+    close_list = []
     for item in json_output.get('items'):
         if item.get('date'):
             timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
@@ -50,6 +51,9 @@ def get_result(serializer, df):
             turnover_list.append([timestamp, float(turnover)])
         else:
             turnover_list.append([timestamp, 0])
+        close = item.get('close')
+        if close:
+            close_list.append([timestamp, float(close)])
     # https://stackoverflow.com/questions/455612/limiting-floats-to-two-decimal-points
     if 'pb' in df:
         pb_avg = df['pb'].mean()
@@ -71,6 +75,7 @@ def get_result(serializer, df):
     result = {'PB': pb_list, 'PE': pe_list, 'PE_TTM': pe_ttm_list, 'DYR': dyr_list, 'turnover': turnover_list,
               'PB_avg': float("{0:.2f}".format(pb_avg)),
               'PE_avg': float("{0:.2f}".format(pe_avg)), 'PE_ttm_avg': float("{0:.2f}".format(pe_ttm_avg)),
+              'close': close_list,
               # 'turnover_avg': float("{0:.2f}".format(turnover_avg)),
               }
     return result

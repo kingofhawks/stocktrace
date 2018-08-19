@@ -68,7 +68,7 @@ class ParseTestCase(TestCase):
         read_equity_by_date('2012-10-09', '600436')
 
     def test_read_equity(self):
-        read_equity('002016', '2004-09-01', '2017-01-02')
+        read_equity('600420', '2018-08-16', '2018-08-17')
 
     @DeprecationWarning
     def test_read_equity_all2(self):
@@ -129,10 +129,10 @@ class ParseTestCase(TestCase):
         high_price_ratio()
 
     def test_history(self):
-        codes = ['600420', '600177', '000028', '300246', '601009', ]
-        for code in ['600420']:
-            history_list = read_history(code, '2018-02-03', '2018-05-04')
-            print(history_list)
+        # codes = ['600420', '600177', '000028', '300246', '601009', ]
+        codes = ['600420', ]
+        for code in codes:
+            read_history(code, '2011-05-04', '2018-08-17')
 
     def test_index_history(self):
         for code in ['SH000001', 'SZ399001', 'SZ399005', 'SZ399006']:
@@ -156,7 +156,6 @@ class ParseTestCase(TestCase):
 
     def test_sw(self):
         sw()
-
 
     def test_alert(self):
         alert_high_diff()

@@ -306,19 +306,21 @@ def read_history(code='600036', begin_date=None, end_date=None):
         end = arrow.now()
     else:
         end = arrow.get(end_date)
+
+    code2 = code
     if len(code) == 8:
         pass
     elif code.startswith('60') or code.startswith('51'):
-        code = 'SH'+code
+        code2 = 'SH'+code
     elif len(code) == 5:
-        code = 'HK'+code
+        code2 = 'HK'+code
     elif len(code) == 6:
-        code = 'SZ'+code
+        code2 = 'SZ'+code
 
     # url = '{}/stock/forchartk/stocklist.json?symbol={}&period=1day&type=normal&begin={}&end={}&_=1443694358741'
     url = '{}/stock/forchartk/stocklist.json?symbol={}&period=1day&type=before&begin={}&end={}'
-    url = url.format(api_home, code, begin.timestamp*1000, end.timestamp*1000)
-    print(url)
+    url = url.format(api_home, code2, begin.timestamp*1000, end.timestamp*1000)
+    # print(url)
     payload = {'access_token': xq_a_token}
 
     r = requests.get(url, params=payload, headers=headers)
@@ -328,19 +330,24 @@ def read_history(code='600036', begin_date=None, end_date=None):
     # print len(data_list)
     result = []
     for data in data_list:
-        # print(data)
+        print(data)
         time = data.get('time')
         time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
-        date = time.date
-        # print time
-        timestamp = time.timestamp*1000
-        history = StockHistory(code=code, percent=data.get('percent'),
-                               ma5=data.get('ma5'), ma10=data.get('ma10'), ma30=data.get('ma30'),
-                               open_price=data.get('open'), high=data.get('high'), low=data.get('low'),
-                               close=data.get('close'), time=time.datetime, timestamp=timestamp,
-                               volume=data.get('volume'),
-                               # 注：指数无法取得换手率
-                               turn_rate=data.get('turnrate'))
+        date = time.format('YYYY-MM-DD')
+        # print('date:{}'.format(date))
+        # timestamp = time.timestamp*1000
+        # history = StockHistory(code=code, percent=data.get('percent'),
+        #                        ma5=data.get('ma5'), ma10=data.get('ma10'), ma30=data.get('ma30'),
+        #                        open_price=data.get('open'), high=data.get('high'), low=data.get('low'),
+        #                        close=data.get('close'), time=time.datetime, timestamp=timestamp,
+        #                        volume=data.get('volume'),
+        #                        # 注：指数无法取得换手率
+        #                        turn_rate=data.get('turnrate'))
+        # print(Equity.objects(code=code, date=date))
+        Equity.objects(code=code, date=date).update_one(percent=data.get('percent'),
+                                                        open=data.get('open'), high=data.get('high'),
+                                                        low=data.get('low'),
+                                                        close=data.get('close'), volume=data.get('volume'), upsert=True)
         nh = False
         nl = False
         # if high == high52week:
@@ -355,7 +362,7 @@ def read_history(code='600036', begin_date=None, end_date=None):
         #                        # 注：指数无法取得换手率
         #                        turn_rate=data.get('turnrate'), upsert=True)
         # print history
-        result.append(history)
+        # result.append(history)
     df = DataFrame(data_list)
     # print df
     max_turnover = df['turnrate'].max()
@@ -376,6 +383,7 @@ def read_history(code='600036', begin_date=None, end_date=None):
 
 def ah_history():
     read_history('HKHSAHP')
+
 
 def read_portfolio():
     url = 'https://xueqiu.com/v4/stock/portfolio/list.json?system=true&_=1520056368754'

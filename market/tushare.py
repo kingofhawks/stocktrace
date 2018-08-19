@@ -40,3 +40,4 @@ def finance_report(year=2018, quarter=2):
         code = value['code']
         roe = value['roe']
         Equity.objects(code=code, date=date).update_one(code=code, date=date, roe=roe, upsert=True)
+

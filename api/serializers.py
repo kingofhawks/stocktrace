@@ -43,6 +43,13 @@ class EquitySerializer(serializers.Serializer):
     dividend_yield_ratio = serializers.FloatField(required=False)
     roe = serializers.FloatField(required=False)
     roe_order = serializers.IntegerField(required=False)
+    percent = serializers.FloatField(required=False)
+    change = serializers.FloatField(required=False)
+    volume = serializers.FloatField(required=False)
+    open = serializers.FloatField(required=False)
+    high = serializers.FloatField(required=False)
+    low = serializers.FloatField(required=False)
+    close = serializers.FloatField(required=False)
     date = serializers.CharField(required=False)
 
 

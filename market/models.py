@@ -48,6 +48,15 @@ class Equity(Document):
     code2 = StringField()
     code3 = StringField()
     code4 = StringField()
+
+    percent = FloatField()
+    change = FloatField()
+    volume = FloatField()
+    open = FloatField()
+    high = FloatField()
+    low = FloatField()
+    close = FloatField()
+
     # 静态PE
     pe = FloatField()
     # PE排序

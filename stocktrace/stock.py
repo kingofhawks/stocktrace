@@ -52,6 +52,7 @@ class Stock(Document):
     down_threshold = FloatField()
     ratio = FloatField()
     market = FloatField()
+    roe = FloatField()
 
     def __init__(self, *args, **kwargs):
             Document.__init__(self, *args, **kwargs)
