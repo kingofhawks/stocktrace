@@ -49,13 +49,13 @@ class Equity(Document):
     code3 = StringField()
     code4 = StringField()
 
-    percent = FloatField()
-    change = FloatField()
-    volume = FloatField()
-    open = FloatField()
-    high = FloatField()
-    low = FloatField()
-    close = FloatField()
+    percent = FloatField(required=False, default=0)
+    change = FloatField(required=False, default=0)
+    volume = FloatField(required=False, default=0)
+    open = FloatField(required=False, default=0)
+    high = FloatField(required=False, default=0)
+    low = FloatField(required=False, default=0)
+    close = FloatField(required=False, default=0)
 
     # 静态PE
     pe = FloatField()
@@ -71,7 +71,7 @@ class Equity(Document):
     # 股息率
     dividend_yield_ratio = FloatField()
     # 净资产收益率
-    roe = FloatField()
+    roe = FloatField(required=False)
     roe_order = IntField()
     date = DateTimeField()
 

@@ -290,17 +290,20 @@ def equity_list(request):
 @api_view(['GET'])
 def magic_formula(request):
     sorter = request.GET.get('sorter')
-    print(sorter)
+    print('sorter***{}'.format(sorter))
     latest_equity = Equity.objects().order_by('-date').first()
     # print(latest_equity)
     date = latest_equity.date
     items = Equity.objects(date=date)
     # print(items)
 
+    import math
     # filter data
     items = list(filter(lambda x: x.pb is not None, items))
     items = list(filter(lambda x: x.pe is not None, items))
     items = list(filter(lambda x: x.roe is not None, items))
+    # filter roe is nan value
+    items = list(filter(lambda x: not math.isnan(x.roe), items))
 
     # sort on PB
     results = sorted(items, key=lambda s: s.pb, reverse=False)
@@ -327,8 +330,11 @@ def magic_formula(request):
         results = sorted(results, key=lambda s: s.magic_order, reverse=False)
     else:
         results = sorted(results, key=lambda s: s.magic_order, reverse=True)
+    # print('results***{}'.format(results))
     serializer = EquityListSerializer2({'list': results})
-    content = JSONRenderer().render(serializer.data)
+    data = serializer.data
+    print('data***{}'.format(data))
+    content = JSONRenderer().render(data)
     json_output = json.loads(content)
     response = Response(json_output, status=status.HTTP_200_OK)
 
@@ -356,6 +362,8 @@ def industry_list(request):
 
 @api_view(['GET'])
 def portfolio(request):
+    name = request.GET.get('name')
+    print('name***{}'.format(name))
     p = snapshot()
     print('stocks****{}'.format(p.list))
     results = sorted(p.list, key=lambda s: s.get('ratio'), reverse=True)
