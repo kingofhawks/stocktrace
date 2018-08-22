@@ -13,7 +13,7 @@ import json
 from datetime import timedelta, datetime
 import arrow
 
-from portfolio.models import get_stocks
+from portfolio.models import get_stocks, get_stocks_from_latest_portfolio
 from stocktrace.stock import Stock
 import tushare as ts
 from PyQt5 import Qt
@@ -897,7 +897,7 @@ def polling():
     refresh = False
     if trade_begin < now < trade_end:
         refresh = True
-    stocks = get_stocks()
+    stocks = get_stocks_from_latest_portfolio()
     for item in stocks:
         code = item['code']
         amount = item['amount']

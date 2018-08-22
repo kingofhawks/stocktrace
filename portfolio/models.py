@@ -5,10 +5,19 @@ from mongoengine import Document, ListField, FloatField, DateTimeField, StringFi
 db = settings.DB
 
 
+@DeprecationWarning
 def get_stocks():
     stock = db.stock
     stocks = stock.find({"amount": {"$gt": 0}})
     print(stocks)
+    return stocks
+
+
+def get_stocks_from_latest_portfolio():
+    latest_portfolio = Portfolio.objects().order_by('-date').first()
+    date = latest_portfolio.date
+    portfolio = Portfolio.objects(date=date).first()
+    stocks = portfolio.list
     return stocks
 
 
