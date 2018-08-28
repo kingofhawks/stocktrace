@@ -1,6 +1,6 @@
 import tushare as ts
 
-from market.models import Equity
+from market.models import Equity, FinanceReport
 from stocktrace.stock import Stock
 
 
@@ -36,11 +36,20 @@ def finance_report(year=2018, quarter=2):
     print(df)
     data = df.to_dict('index')
     print(data)
+    print(len(data.items()))
     from mongoengine.queryset.visitor import Q
     for index, value in sorted(data.items()):
         code = value['code']
+        name = value['name']
         roe = value['roe']
+        eps = value['eps']
+        report_date = value['report_date']
+        # print('code:{} roe:{}'.format(code, roe))
+        FinanceReport.objects(code=code, year=year, quarter=quarter).update_one(code=code, name=name,
+                                                                                year=year, quarter=quarter,
+                                                                                report_date=report_date,
+                                                                                roe=roe, eps=eps, upsert=True)
         # Equity.objects(code=code).update(code=code, roe=roe, upsert=True)
         # Equity.objects(__raw__={"code":code,"date" : {"$gte":'2018-07-01',"$lte":'2018-08-31'}}).update(code=code, roe=roe, upsert=True)
         # 只更新最近一个季度的数据
-        Equity.objects(Q(code=code) & Q(date__gte='2018-07-01') & Q(date__lte='2018-08-31')).update(roe=roe)
+        # Equity.objects(Q(code=code) & Q(date__gte='2018-07-01') & Q(date__lte='2018-08-31')).update(roe=roe)

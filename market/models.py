@@ -80,6 +80,16 @@ class Equity(Document):
                 self.pe, self.pe_ttm, self.pb, self.dividend_yield_ratio, self.pb_order, self.date)
 
 
+class FinanceReport(Document):
+    name = StringField()
+    code = StringField()
+    year = IntField()
+    quarter = IntField()
+    report_date = StringField()
+    roe = FloatField()
+    eps = FloatField()
+
+
 class AhIndex(Document):
     value = FloatField()
     date = DateTimeField(default=datetime.datetime.now())

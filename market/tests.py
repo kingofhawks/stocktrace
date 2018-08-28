@@ -176,10 +176,10 @@ class ParseTestCase(TestCase):
         read_index_market('SH000001')
 
     def test_market(self):
-        read_market(0, 336, str(date.today()))
+        read_market(2, 13, str(date.today()))
 
     def test_read_all(self):
-        begin = '2018-08-13'
+        begin = '2018-08-27'
         read_index_all(begin)
         read_industry_all(begin)
         read_sw_all(begin)
@@ -190,4 +190,4 @@ class ParseTestCase(TestCase):
         read_index2('000016')
         read_index2('000300')
         read_index2('000905')
-        finance_report()
+        # finance_report(2018, 2)

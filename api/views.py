@@ -4,6 +4,7 @@ from django.http import Http404
 from django.shortcuts import render
 
 # Create your views here.
+from mongoengine import DoesNotExist
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 
@@ -11,7 +12,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from api.serializers import *
-from market.models import Index, Sw, AhIndex, Market
+from market.models import Index, Sw, AhIndex, Market, FinanceReport
 from market.parse import *
 import pymongo
 
@@ -294,16 +295,17 @@ def magic_formula(request):
     latest_equity = Equity.objects().order_by('-date').first()
     # print(latest_equity)
     date = latest_equity.date
+    print('latest date***{}'.format(date))
     items = Equity.objects(date=date)
-    # print(items)
+    print(items)
 
     import math
     # filter data
     items = list(filter(lambda x: x.pb is not None, items))
     items = list(filter(lambda x: x.pe is not None, items))
-    items = list(filter(lambda x: x.roe is not None, items))
+    # items = list(filter(lambda x: x.roe is not None, items))
     # filter roe is nan value
-    items = list(filter(lambda x: not math.isnan(x.roe), items))
+    # items = list(filter(lambda x: not math.isnan(x.roe), items))
 
     # sort on PB
     results = sorted(items, key=lambda s: s.pb, reverse=False)
@@ -316,14 +318,27 @@ def magic_formula(request):
     for idx, item in enumerate(results):
         item.pe_order = idx+1
         item.magic_order = item.pb_order+item.pe_order
-    # print(results)
+    print(results)
 
-    # sort on ROE
+    # TODO sort on ROE
+    for idx, item in enumerate(results):
+        try:
+            fr = FinanceReport.objects.get(code=item.code, year=2018, quarter=2)
+            print(fr)
+            roe = fr.roe
+            item.roe = roe
+        except DoesNotExist as e:
+            pass
+
+    results = list(filter(lambda x: x.roe is not None, results))
+    # filter roe is nan value
+    results = list(filter(lambda x: not math.isnan(x.roe), results))
+
     results = sorted(results, key=lambda s: s.roe, reverse=True)
     for idx, item in enumerate(results):
         item.roe_order = idx+1
         item.magic_order = item.pb_order+item.pe_order+item.roe_order
-    # print(results)
+    print(results)
 
     if sorter is None or sorter == 'magic_order_ascend':
         # sort on magic order
@@ -368,6 +383,7 @@ def portfolio(request):
     print('stocks****{}'.format(p.list))
     results = sorted(p.list, key=lambda s: s.get('ratio'), reverse=True)
     print(results)
+    results = list(filter(lambda x: x.get('amount')>0, results))
     serializer = PortfolioSerializer({'list': results, 'market_value': p.market_value, 'cash': p.cash,
                                       'cost_zs': p.cost_zs, 'cost_ht1': p.cost_ht1, 'cost_ht2': p.cost_ht2,
                                       'cost': p.cost,
