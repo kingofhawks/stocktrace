@@ -73,6 +73,8 @@ class Equity(Document):
     # 净资产收益率
     roe = FloatField(required=False)
     roe_order = IntField()
+    # 排名
+    rank = IntField()
     date = DateTimeField()
 
     def __str__(self):

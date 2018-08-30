@@ -320,7 +320,7 @@ def magic_formula(request):
         item.magic_order = item.pb_order+item.pe_order
     print(results)
 
-    # TODO sort on ROE
+    # sort on ROE
     for idx, item in enumerate(results):
         try:
             fr = FinanceReport.objects.get(code=item.code, year=2018, quarter=2)
@@ -346,6 +346,8 @@ def magic_formula(request):
     else:
         results = sorted(results, key=lambda s: s.magic_order, reverse=True)
     # print('results***{}'.format(results))
+    for idx, item in enumerate(results):
+        item.rank = idx+1
     serializer = EquityListSerializer2({'list': results})
     data = serializer.data
     print('data***{}'.format(data))
@@ -456,6 +458,18 @@ class PortfolioView(APIView):
         response = Response(result, status=status.HTTP_200_OK)
 
         return get_response_cors(response)
+
+    def post(self, request, *args, **kw):
+        print('post****{}'.format(request.data))
+        method = request.data.get('method')
+        code = request.data.get('code')
+        amount = request.data.get('amount')
+        #  mongoengine pull/push operator
+        latest_portfolio = Portfolio.objects().order_by('-date').first()
+        date = latest_portfolio.date
+        Portfolio.objects(date=date).update_one(pull__list={'code': code})
+        Portfolio.objects(date=date).update_one(push__list={'code': code, 'amount': int(amount)})
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET'])
