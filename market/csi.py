@@ -1,4 +1,7 @@
 # -*- coding:utf-8 -*-
+import sys
+import traceback
+
 from lxml import etree
 from lxml.html import parse
 from pandas.util.testing import DataFrame
@@ -32,7 +35,7 @@ def csi_by_type(date='2011-05-04', data_type='zy1'):
     if weekday == 5 or weekday == 6:
         return
     url = '{}industry-price-earnings-ratio?date={}&type={}'.format(csi_domain, date, data_type)
-    print('url***', url);
+    print('url***', url)
     page = parse(url).getroot()
     # result = etree.tostring(page)
     # print(result)
@@ -134,7 +137,7 @@ def read_equity_by_date(date='2018-02-23', code='600420'):
     if weekday == 5 or weekday == 6:
         return
     url = '{}industry-price-earnings-ratio-detail?date={}&class=2&search=1&csrc_code={}'.format(csi_domain, date, code)
-    print(url)
+    # print(url)
     page = parse(url).getroot()
     # result = etree.tostring(page)
     # print(result)
@@ -147,7 +150,7 @@ def read_equity_by_date(date='2018-02-23', code='600420'):
         html_table = etree.tostring(tree)
         dfs = pd.read_html(html_table, flavor='lxml')
         df = dfs[0]
-        print(df)
+        # print(df)
         for index, row in df.iterrows():
             # 个股数据
             # code = str(row[1])
@@ -194,7 +197,7 @@ def read_equity(code='600276', begin_date='2017-12-28', end_date=None):
     begin = begin_arrow.date()
     end = arrow.get(end_date, date_format).date()
     delta = end-begin
-    print(delta)
+    # print(delta)
     for i in range(delta.days):
         day = begin_arrow.shift(days=i).format(date_format)
         read_equity_by_date(day, code)
@@ -219,6 +222,8 @@ def read_equity_by_portfolio(begin_date='2017-12-28', end_date=None):
             Stock.objects(code=equity).update_one(code=equity, focus=True, upsert=True)
             read_equity(equity, begin_date, end_date)
         except:
+            print("****fail to read****"+equity)
+            traceback.print_exc(file=sys.stdout)
             continue
 
 

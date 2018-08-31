@@ -303,9 +303,6 @@ def magic_formula(request):
     # filter data
     items = list(filter(lambda x: x.pb is not None, items))
     items = list(filter(lambda x: x.pe is not None, items))
-    # items = list(filter(lambda x: x.roe is not None, items))
-    # filter roe is nan value
-    # items = list(filter(lambda x: not math.isnan(x.roe), items))
 
     # sort on PB
     results = sorted(items, key=lambda s: s.pb, reverse=False)
@@ -317,19 +314,19 @@ def magic_formula(request):
     results = sorted(results, key=lambda s: s.pe, reverse=False)
     for idx, item in enumerate(results):
         item.pe_order = idx+1
-        item.magic_order = item.pb_order+item.pe_order
-    print(results)
+    # print(results)
 
     # sort on ROE
     for idx, item in enumerate(results):
         try:
             fr = FinanceReport.objects.get(code=item.code, year=2018, quarter=2)
-            print(fr)
+            # print(fr)
             roe = fr.roe
             item.roe = roe
         except DoesNotExist as e:
             pass
 
+    # filter None roe data
     results = list(filter(lambda x: x.roe is not None, results))
     # filter roe is nan value
     results = list(filter(lambda x: not math.isnan(x.roe), results))
@@ -468,7 +465,7 @@ class PortfolioView(APIView):
         latest_portfolio = Portfolio.objects().order_by('-date').first()
         date = latest_portfolio.date
         Portfolio.objects(date=date).update_one(pull__list={'code': code})
-        Portfolio.objects(date=date).update_one(push__list={'code': code, 'amount': int(amount)})
+        Portfolio.objects(date=date).update_one(push__list={'code': code, 'amount': int(amount)}, upsert=True)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 

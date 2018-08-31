@@ -60,12 +60,12 @@ class Equity(Document):
     # 静态PE
     pe = FloatField()
     # PE排序
-    pe_order = IntField()
+    pe_order = IntField(default=0)
     # 滚动
     pe_ttm = FloatField()
     pb = FloatField()
     # PB排序
-    pb_order = IntField()
+    pb_order = IntField(default=0)
     # 神奇公式排序
     magic_order = IntField()
     # 股息率
