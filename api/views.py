@@ -303,6 +303,7 @@ def magic_formula(request):
     # filter data
     items = list(filter(lambda x: x.pb is not None, items))
     items = list(filter(lambda x: x.pe is not None, items))
+    items = list(filter(lambda x: x.pe > 0, items))
 
     # sort on PB
     results = sorted(items, key=lambda s: s.pb, reverse=False)

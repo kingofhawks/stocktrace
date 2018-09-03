@@ -137,7 +137,7 @@ def read_equity_by_date(date='2018-02-23', code='600420'):
     if weekday == 5 or weekday == 6:
         return
     url = '{}industry-price-earnings-ratio-detail?date={}&class=2&search=1&csrc_code={}'.format(csi_domain, date, code)
-    # print(url)
+    print(url)
     page = parse(url).getroot()
     # result = etree.tostring(page)
     # print(result)
@@ -150,7 +150,7 @@ def read_equity_by_date(date='2018-02-23', code='600420'):
         html_table = etree.tostring(tree)
         dfs = pd.read_html(html_table, flavor='lxml')
         df = dfs[0]
-        # print(df)
+        print(df)
         for index, row in df.iterrows():
             # 个股数据
             # code = str(row[1])
@@ -188,6 +188,8 @@ def read_equity_by_date(date='2018-02-23', code='600420'):
                                                            code4=code4,
                                                            pe=pe, pe_ttm=pe_ttm, pb=pb,
                                                            dividend_yield_ratio=dyr, upsert=True)
+    else:
+        print("fail to download:{}".format(code))
 
 
 def read_equity(code='600276', begin_date='2017-12-28', end_date=None):
@@ -197,8 +199,9 @@ def read_equity(code='600276', begin_date='2017-12-28', end_date=None):
     begin = begin_arrow.date()
     end = arrow.get(end_date, date_format).date()
     delta = end-begin
-    # print(delta)
+    print('delta:{} days:{}'.format(delta, delta.days))
     for i in range(delta.days):
+        print(i)
         day = begin_arrow.shift(days=i).format(date_format)
         read_equity_by_date(day, code)
 
