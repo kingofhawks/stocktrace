@@ -33,12 +33,12 @@ class Portfolio(Document):
     net_asset = FloatField()
     cost = FloatField()
     cost_history = FloatField()
-    # ZS账户当年(真实)本金
-    cost_zs = FloatField(default=463000+4000)
+    # ZS账户当年(真实)本金(含期权)
+    cost_zs = FloatField(default=463000+4000+7000)
     # 券商融资+江苏银行
-    financing = FloatField(default=166500 + 80000 + 30000)
+    financing = FloatField(default=166500 + 120000)
     # HT1账户当年资金变动
-    ht1_changes = 17000 + 5000 + 5000
+    ht1_changes = 17000 + 5000 + 5000 + 20000
     # HT2账户当年资金变动
     ht2_changes = 20000
     cost_ht1 = FloatField()
