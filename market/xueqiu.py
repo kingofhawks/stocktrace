@@ -260,7 +260,7 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
     if code.startswith('60') or code.startswith('51'):
         code = 'SH'+code
     elif len(code) == 5:
-        code = 'HK'+code
+        code = code
     elif code == '999999' or code == '999998':
         return Stock(code=code, current=1)
     elif len(code) == 6:
