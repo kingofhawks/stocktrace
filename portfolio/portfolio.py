@@ -45,7 +45,7 @@ def snapshot():
         stock_list.append({'code': stock['code'], 'name': stock['name'],
                            'amount': stock['amount'],
                            'current': stock['current'], 'percentage': stock['percentage'],
-                           'change': stock['change']})
+                           'change': stock['change'] or 0})
 
     from portfolio.models import Portfolio
     from datetime import date

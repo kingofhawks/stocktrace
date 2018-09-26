@@ -268,6 +268,7 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
 
     url = api_home+'/v4/stock/quote.json?code={}&_=1443253485389'
     url = url.format(code)
+    print(url)
     payload = {'access_token': access_token}
 
     r = requests.get(url, params=payload, headers=headers)

@@ -892,15 +892,21 @@ def polling():
     # 交易时间才需要刷新
     now = arrow.now()
     today = now.date()
+    weekday = now.weekday()
+
     trade_begin = arrow.get(str(today)+'T09:25+08:00')
-    trade_end = arrow.get(str(today)+'T22:01+08:00')
+    trade_end = arrow.get(str(today)+'T18:30+08:00')
     refresh = False
     if trade_begin < now < trade_end:
         refresh = True
+    # ignore weekend
+    if weekday == 5 or weekday == 6:
+        refresh = False
     stocks = get_stocks_from_latest_portfolio()
     for item in stocks:
         code = item['code']
         amount = item['amount']
+        current = item.get('current')
 
         if refresh:
             s = xueqiu(code)
@@ -912,6 +918,8 @@ def polling():
                                                 nh=s.nh, nl=s.nl, upsert=True)
         stock = Stock.objects.get(code=code)
         stock.amount = amount
+        if stock.current is None and current:
+            stock.current = current
         result.append(stock)
     return result
 
