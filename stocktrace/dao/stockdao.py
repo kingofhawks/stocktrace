@@ -87,7 +87,7 @@ def find_week52_history(code):
     historyDatas = db.stock_history
     delta = timedelta(-52*7)
     begin = date.today()+delta
-    return historyDatas.find({"code":code,"date" : {"$gte":str(begin)}}).sort([("date",pymongo.DESCENDING)]);
+    return historyDatas.find({"code":code,"date" : {"$gte":str(begin)}}).sort([("date",pymongo.DESCENDING)])
 
 
 def update_week52(code):

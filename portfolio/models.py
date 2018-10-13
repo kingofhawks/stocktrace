@@ -123,7 +123,7 @@ class Portfolio(Document):
                 except KeyError as e:
                     pass
         print('stocks:{}'.format(self.list))
-        self.profit = self.net_asset - self.cost
+        self.profit = float("{0:.2f}".format(self.net_asset - self.cost))
         # 以成本入账
         self.profit_ratio = float("{0:.2f}".format(self.profit*100/self.cost))
         # 以净资产入账

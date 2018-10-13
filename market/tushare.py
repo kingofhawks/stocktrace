@@ -1,7 +1,13 @@
+import pymongo
 import tushare as ts
 
 from market.models import Equity, FinanceReport
 from stocktrace.stock import Stock
+
+
+DB_NAME = 'stocktrace'
+DB_HOST = 'localhost'
+db = getattr(pymongo.MongoClient(host=DB_HOST), DB_NAME)
 
 
 def stock_list():
@@ -14,6 +20,27 @@ def stock_list():
     # print(data)
     # stocks = df.index.tolist()
     # print(stocks)
+
+
+def ipo():
+    ts.set_token('b4c94429dc00fee32d14c52507d9cd44c9621ca91eaa161fcec14041')
+    pro = ts.pro_api()
+
+    # 查询当前所有正常上市交易的股票列表
+    df = pro.stock_basic(exchange_id='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+    print(df)
+    data = df.to_dict('index')
+    print(data.items())
+    for item, value in sorted(data.items()):
+        code = value['symbol']
+        ipo_date = value['list_date']
+        Stock.objects(code=code).update_one(code=code, ipo_date=ipo_date, upsert=True)
+
+
+# 破发率
+def broken_ipo(begin='2018-01-01', end='2018-12-31'):
+    stocks = db.stock.find({"ipo_date": {"$gte": str(begin), "$lte": str(end)}}).sort([("ipo_date", pymongo.DESCENDING)])
+    print(list(stocks))
 
 
 def profit():

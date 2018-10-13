@@ -11,7 +11,7 @@ import requests
 import json
 from datetime import timedelta, datetime
 import arrow
-
+from market.sina import get_real_time
 from portfolio.models import get_stocks, get_stocks_from_latest_portfolio
 from stocktrace.stock import Stock
 import tushare as ts
@@ -788,15 +788,15 @@ def login_xue_qiu():
 
 # get stock price position
 def position(code):
-    current = sina(code)
+    current = get_real_time(code)
     count = screen_by_price(current, high=60000)
     # print count
 
 
 # AH ratio
 def ah_ratio(hk_rmb_change_rate, ah_pair=('000002', '02202'), ):
-    current_a = sina(ah_pair[0]).current
-    current_h = sina(ah_pair[1]).current
+    current_a = get_real_time(ah_pair[0]).current
+    current_h = get_real_time(ah_pair[1]).current
     if current_a * current_h == 0:
         return None
 
@@ -908,7 +908,7 @@ def polling():
         current = item.get('current')
         if amount <= 0:
             continue
-        if True:
+        if refresh:
             s = xueqiu(code)
             print('code:{} s:{}'.format(code, s))
             Stock.objects(code=code).update_one(code=code, amount=amount, current=s.current, volume=s.volume,

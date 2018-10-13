@@ -89,6 +89,7 @@ class MarketSerializer(serializers.Serializer):
     cix = serializers.FloatField(read_only=True)
     turnover = serializers.FloatField(read_only=True)
     cost = serializers.FloatField(read_only=True)
+    broken_ipo_ratio = serializers.FloatField(read_only=True)
 
 
 class MarketListSerializer(serializers.Serializer):
@@ -128,6 +129,7 @@ class StockSerializer(serializers.Serializer):
     volume = serializers.FloatField(read_only=True)
     timestamp = serializers.IntegerField(read_only=True)
     turn_rate = serializers.FloatField(read_only=True)
+    index = serializers.IntegerField(read_only=True)
 
 
 class StockListSerializer(serializers.Serializer):
@@ -152,6 +154,8 @@ class PortfolioSerializer(serializers.Serializer):
     profit_ratio = serializers.FloatField(read_only=True)
     profit_today = serializers.FloatField(read_only=True)
     profit_ratio_today = serializers.FloatField(read_only=True)
+    cr5 = serializers.FloatField(read_only=True)
+    cr10 = serializers.FloatField(read_only=True)
 
 
 class PortfolioListSerializer(serializers.Serializer):

@@ -434,6 +434,7 @@ def gdp_rate():
 
 
 def read_market(nh, nl, date):
+    # 破净率
     low_pb = low_pb_ratio()
     print(low_pb)
     broken_net_ratio = low_pb[0]
@@ -450,6 +451,9 @@ def read_market(nh, nl, date):
     zt_ratio = zt/stock_count
     zdr = zt/dt
     print('dtb:{} ztb:{} zdr'.format(dt, zt, zdr))
+
+
+    # 破发率
 
     cix = 0
     weight_range = [0, 10]

@@ -152,6 +152,8 @@ class Market(Document):
     high_price_ratio = FloatField()
     # 低价股比率(<3)
     low_price_ratio = FloatField()
+    # 破发率
+    broken_ipo_ratio = FloatField()
 
 
 

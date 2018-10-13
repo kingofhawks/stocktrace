@@ -8,7 +8,7 @@ from market.csi import read_equity_by_date, read_equity, read_equity_all, read_e
 from market.xueqiu import read_portfolio, read_history, read_market, low_pb_ratio, high_pb_ratio, read_index_market, \
     high_price_ratio, gdp_rate
 from market.sw import read_sw_all
-from market.tushare import stock_list, profit, finance_report
+from market.tushare import stock_list, profit, finance_report, ipo, broken_ipo
 from market.sina import *
 
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
@@ -21,6 +21,12 @@ class ParseTestCase(TestCase):
 
     def test_stock_list(self):
         stock_list()
+
+    def test_ipo(self):
+        ipo()
+
+    def test_broken_ipo(self):
+        broken_ipo()
 
     def test_xueqiu(self):
         s = xueqiu(self.code)
