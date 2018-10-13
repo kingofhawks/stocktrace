@@ -34,13 +34,13 @@ class Portfolio(Document):
     cost = FloatField()
     cost_history = FloatField()
     # 期权账户本金
-    cost_option = FloatField(default=7000+3000+5000)
+    cost_option = FloatField(default=7000+3000)
     # ZS账户当年(真实)本金(含期权)
-    cost_zs = FloatField(default=463000+4000+10000+15000+cost_option)
-    # 券商融资+江苏银行
-    financing = FloatField(default=167855 + 140000)
+    cost_zs = FloatField(default=463000+4000+10000+15000)
+    # 券商融资+江苏银行+江苏利息(2018年7月以来)
+    financing = FloatField(default=167855 + 140000 + 2000)
     # HT1账户当年资金变动(老婆)
-    ht1_changes = 17000 + 5000 + 5000 + 20000
+    ht1_changes = 17000 + 5000 + 5000 + 20000 + 20000
     # HT2账户当年资金变动(老妈)
     ht2_changes = 20000
     cost_ht1 = FloatField()
@@ -64,10 +64,10 @@ class Portfolio(Document):
         self.cost_ht2 = 218579+self.ht2_changes
         # HT2账户真实本金
         self.cost_ht2_real = 210000+self.ht2_changes
-        # 三个账户当年本金
-        self.cost = self.cost_zs+self.cost_ht1+self.cost_ht2
-        # 三个账户真实本金
-        self.cost_history = self.cost_zs+self.cost_ht1_real+self.cost_ht2_real
+        # 四个账户当年本金
+        self.cost = self.cost_zs+self.cost_ht1+self.cost_ht2+self.cost_option
+        # 四个账户真实本金
+        self.cost_history = self.cost_zs+self.cost_ht1_real+self.cost_ht2_real+self.cost_option
 
         # 市值
         self.market_value = 0

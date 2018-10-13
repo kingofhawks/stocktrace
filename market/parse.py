@@ -3,7 +3,6 @@ from lxml import etree
 from lxml.html import parse
 from pandas.util.testing import DataFrame
 from market.models import Index, AhIndex, Industry, Equity
-from market.sina import sina
 from market.utils import rmb_exchange_rate, get_excel_book
 from market.xueqiu import xueqiu, read_history, read_index_market, screen_by_price
 import pandas as pd
@@ -895,7 +894,7 @@ def polling():
     weekday = now.weekday()
 
     trade_begin = arrow.get(str(today)+'T09:25+08:00')
-    trade_end = arrow.get(str(today)+'T18:30+08:00')
+    trade_end = arrow.get(str(today)+'T19:30+08:00')
     refresh = False
     if trade_begin < now < trade_end:
         refresh = True
@@ -907,8 +906,9 @@ def polling():
         code = item['code']
         amount = item['amount']
         current = item.get('current')
-
-        if refresh:
+        if amount <= 0:
+            continue
+        if True:
             s = xueqiu(code)
             print('code:{} s:{}'.format(code, s))
             Stock.objects(code=code).update_one(code=code, amount=amount, current=s.current, volume=s.volume,
