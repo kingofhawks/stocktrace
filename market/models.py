@@ -148,12 +148,17 @@ class Market(Document):
     gdp = FloatField()
     # AH溢价指数
     ah = FloatField()
+    # 百元股
+    g100 = IntField()
     # 高价股比率(>=100)
     high_price_ratio = FloatField()
     # 低价股比率(<3)
     low_price_ratio = FloatField()
     # 破发率
     broken_ipo_ratio = FloatField()
+    # 仙股
+    xg = IntField()
+    xg_ratio = FloatField()
 
 
 

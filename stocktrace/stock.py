@@ -53,7 +53,12 @@ class Stock(Document):
     ratio = FloatField()
     market = FloatField()
     roe = FloatField()
-    ipo_date = DateTimeField()
+    # IPO上市时间
+    list_date = DateTimeField()
+    # 发行价
+    issue_price = FloatField()
+    # 破发率
+    break_point_rate = FloatField()
 
     def __init__(self, *args, **kwargs):
             Document.__init__(self, *args, **kwargs)

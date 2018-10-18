@@ -34,7 +34,7 @@ class Portfolio(Document):
     cost = FloatField()
     cost_history = FloatField()
     # 期权账户本金
-    cost_option = FloatField(default=7000+3000+5000+5000)
+    cost_option = FloatField(default=7000+3000+5000+5000+9000)
     # ZS账户当年(真实)本金
     cost_zs = FloatField(default=463000+4000+10000+15000)
     # 融资利息江苏银行(2018年7月至10月2000)

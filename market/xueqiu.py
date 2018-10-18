@@ -1,4 +1,7 @@
 # -*- coding:utf-8 -*-
+import re
+
+from dateutil.tz import tzutc
 from lxml import etree
 from lxml.html import parse
 from pandas.util.testing import DataFrame
@@ -135,15 +138,21 @@ def screen_by_price(low=0.1, high=3, access_token=xq_a_token):
     # print r.text
     # print r.content
     result = r.json()
-    # print result
+    print(result)
     count = result.get('count')
     stock_list = result.get('list')
     stocks = []
+    ts_count = 0
     if stock_list:
         for stock in stock_list:
-            stocks.append(stock.get('symbol'))
-    result_dict = {'count': count, 'stocks': stocks}
-    # print result_dict
+            name = stock.get('name')
+            # 不包含退市股
+            if name and '退' not in name:
+                stocks.append(stock.get('symbol'))
+            elif name and '退' in name:
+                ts_count += 1
+    result_dict = {'count': count-ts_count, 'stocks': stocks}
+    print(result_dict)
     return result_dict
 
 
@@ -252,7 +261,7 @@ def high_price_ratio(price=100):
     count = screen_by_price(low=price, high=10000)['count']
     total = screen_by_price(high=10000)['count']
     ratio = float(count)/total
-    return ratio
+    return count, ratio
 
 
 # parse real time data from xueqiu
@@ -286,6 +295,7 @@ def xueqiu(code='SH600036', access_token=xq_a_token):
                       change=data.get('change'),
                       pb=data.get('pb'))
         time = data.get('time')
+        print(time)
         if time:
             time = arrow.get(time, 'ddd MMM DD HH:mm:ss Z YYYY')
             print(time)
@@ -452,9 +462,11 @@ def read_market(nh, nl, date):
     zdr = zt/dt
     print('dtb:{} ztb:{} zdr'.format(dt, zt, zdr))
 
+    # 仙股
+    xg = screen_by_price(0.1, 1)['count']
+    xg_ratio = xg/stock_count
 
-    # 破发率
-
+    # TODO 破发率
     cix = 0
     weight_range = [0, 10]
 
@@ -489,9 +501,11 @@ def read_market(nh, nl, date):
     gdp = interp(rate, [0.4, 1], weight_range)
     cix += gdp
 
-    # 5 high price [0,3.6%]
+    # 5 百元股 [0,3.6%]
     high_price = high_price_ratio()
-    high = interp(high_price, [0, 0.036], weight_range)
+    g100 = high_price[0]
+    g100_ratio = high_price[1]
+    high = interp(g100_ratio, [0, 0.036], weight_range)
     cix += high
 
     # 5 low price
@@ -506,12 +520,14 @@ def read_market(nh, nl, date):
 
     Market.objects(date=get_date(date)).update_one(nh=nh, nl=nl, nhnl=nh-nl, nh_ratio=nh_ratio, nl_ratio=nl_ratio,
                                                    stock_count=stock_count,
-                                                   high_price_ratio=high_price, low_price_ratio=low_price,
+                                                   g100=g100,
+                                                   high_price_ratio=g100_ratio, low_price_ratio=low_price,
                                                    pe=latest_sh.pe, turnover=turnover_rate,
                                                    ah=ah_current, gdp=rate, cix=cix,
                                                    broken_net=broken_net, broken_net_ratio=broken_net_ratio,
                                                    broken_net_stocks=low_pb[2],
                                                    dt=dt, dt_ratio=dt_ratio, zt=zt, zt_ratio=zt_ratio, zdr=zdr,
+                                                   xg=xg, xg_ratio=xg_ratio,
                                                    upsert=True)
 
 
@@ -535,3 +551,42 @@ def high_market_value_ratio():
     ratio = float(count)/total
     # print 'count:{} total:{} ratio:{}'.format(count, total, ratio)
     return ratio
+
+
+# 雪球新股行情
+def ipo(page=1):
+    # all columns
+    all_columns = 'symbol,name,onl_subcode,list_date,actissqty,onl_actissqty,onl_submaxqty,onl_subbegdate,onl_unfrozendate,onl_refunddate,iss_price,onl_frozenamt,onl_lotwinrt,onl_lorwincode,onl_lotwiner_stpub_date,onl_effsubqty,onl_effsubnum,onl_onversubrt,offl_lotwinrt,offl_effsubqty,offl_planum,offl_oversubrt,napsaft,eps_dilutedaft,leaduwer,list_recomer,acttotraiseamt,onl_rdshowweb,onl_rdshowbegdate,onl_distrdate,onl_drawlotsdate,first_open_price,first_close_price,first_percent,first_turnrate,stock_income,onl_lotwin_amount,listed_percent,current,pe_ttm,pb,percent,hasexist'
+    columns = 'name,onl_subcode,list_date,iss_price,current,symbol'
+    url = 'https://xueqiu.com/proipo/query.json?page={}&size=30&order=desc&orderBy=list_date&stockType=&type=quote&_=1539863464075&column={}'.format(page, columns)
+    payload = {'access_token': xq_a_token}
+    r = requests.get(url, params=payload, headers=headers)
+    data = r.json().get('data')
+    date_format = 'ddd MMM DD HH:mm:ss Z YYYY'
+
+    for stock in data:
+        print(stock)
+        # code = stock[1]
+        list_date = stock[2]
+        # CST(China Standard Time timezone解析有问题，转化一下)
+        list_date = list_date.replace('CST', '+0800')
+        print(list_date)
+        date = arrow.get(list_date, date_format)
+        print(date)
+        print(date.datetime)
+        issue_price = stock[3]
+        current = stock[4]
+        symbol = stock[5]
+        code = re.sub('[SHZ]', '', symbol)
+        print(code)
+        break_point_rate = 0
+        if float(current) < float(issue_price):
+            break_point_rate = (current-issue_price)/issue_price
+            print(break_point_rate)
+        Stock.objects(code=code).update_one(code=code, list_date=date.datetime, issue_price=issue_price,
+                                            current=current, break_point_rate=break_point_rate, upsert=True)
+
+
+def ipo_all():
+    for page in range(10):
+        ipo(page+1)
