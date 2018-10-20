@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import re
 
+import pymongo
 from dateutil.tz import tzutc
 from lxml import etree
 from lxml.html import parse
@@ -463,10 +464,12 @@ def read_market(nh, nl, date):
     print('dtb:{} ztb:{} zdr'.format(dt, zt, zdr))
 
     # 仙股
-    xg = screen_by_price(0.1, 1)['count']
-    xg_ratio = xg/stock_count
+    penny_stocks = screen_by_price(0.1, 1)['count']
+    penny_stocks_ratio = penny_stocks/stock_count
 
-    # TODO 破发率
+    #  破发率
+    broken_ipo_count, total_ipo, broken_ipo_rate, broken_list = broken_ipo()
+
     cix = 0
     weight_range = [0, 10]
 
@@ -520,14 +523,16 @@ def read_market(nh, nl, date):
 
     Market.objects(date=get_date(date)).update_one(nh=nh, nl=nl, nhnl=nh-nl, nh_ratio=nh_ratio, nl_ratio=nl_ratio,
                                                    stock_count=stock_count,
-                                                   g100=g100,
-                                                   high_price_ratio=g100_ratio, low_price_ratio=low_price,
+                                                   over_100=g100, over_100_ratio=g100_ratio,
+                                                   penny_stocks=penny_stocks, penny_stocks_ratio=penny_stocks_ratio,
+                                                   low_price_ratio=low_price,
                                                    pe=latest_sh.pe, turnover=turnover_rate,
                                                    ah=ah_current, gdp=rate, cix=cix,
                                                    broken_net=broken_net, broken_net_ratio=broken_net_ratio,
                                                    broken_net_stocks=low_pb[2],
                                                    dt=dt, dt_ratio=dt_ratio, zt=zt, zt_ratio=zt_ratio, zdr=zdr,
-                                                   xg=xg, xg_ratio=xg_ratio,
+                                                   ipo=total_ipo, broken_ipo=broken_ipo_count,
+                                                   broken_ipo_ratio=broken_ipo_rate,broken_ipo_list=broken_list,
                                                    upsert=True)
 
 
@@ -557,7 +562,7 @@ def high_market_value_ratio():
 def ipo(page=1):
     # all columns
     all_columns = 'symbol,name,onl_subcode,list_date,actissqty,onl_actissqty,onl_submaxqty,onl_subbegdate,onl_unfrozendate,onl_refunddate,iss_price,onl_frozenamt,onl_lotwinrt,onl_lorwincode,onl_lotwiner_stpub_date,onl_effsubqty,onl_effsubnum,onl_onversubrt,offl_lotwinrt,offl_effsubqty,offl_planum,offl_oversubrt,napsaft,eps_dilutedaft,leaduwer,list_recomer,acttotraiseamt,onl_rdshowweb,onl_rdshowbegdate,onl_distrdate,onl_drawlotsdate,first_open_price,first_close_price,first_percent,first_turnrate,stock_income,onl_lotwin_amount,listed_percent,current,pe_ttm,pb,percent,hasexist'
-    columns = 'name,onl_subcode,list_date,iss_price,current,symbol'
+    columns = 'name,onl_subcode,list_date,iss_price,current,symbol,onl_subbegdate,actissqty'
     url = 'https://xueqiu.com/proipo/query.json?page={}&size=30&order=desc&orderBy=list_date&stockType=&type=quote&_=1539863464075&column={}'.format(page, columns)
     payload = {'access_token': xq_a_token}
     r = requests.get(url, params=payload, headers=headers)
@@ -566,27 +571,56 @@ def ipo(page=1):
 
     for stock in data:
         print(stock)
+        name = stock[0]
         # code = stock[1]
         list_date = stock[2]
         # CST(China Standard Time timezone解析有问题，转化一下)
         list_date = list_date.replace('CST', '+0800')
         print(list_date)
         date = arrow.get(list_date, date_format)
-        print(date)
         print(date.datetime)
         issue_price = stock[3]
         current = stock[4]
         symbol = stock[5]
+        subscribe_date = stock[6]
+        sub_date = None
+        if subscribe_date and "CST" in subscribe_date:
+            subscribe_date = subscribe_date.replace('CST', '+0800')
+            sub_date = arrow.get(subscribe_date, date_format).datetime
+            print(sub_date)
+        issue_amount = stock[7]
+        financing = 0
+        if issue_price and issue_amount:
+            financing = float(issue_price)*float(issue_amount)
         code = re.sub('[SHZ]', '', symbol)
-        print(code)
         break_point_rate = 0
-        if float(current) < float(issue_price):
+        if issue_price and float(current) < float(issue_price):
             break_point_rate = (current-issue_price)/issue_price
             print(break_point_rate)
-        Stock.objects(code=code).update_one(code=code, list_date=date.datetime, issue_price=issue_price,
-                                            current=current, break_point_rate=break_point_rate, upsert=True)
+        Stock.objects(code=code).update_one(code=code, name=name, list_date=date.datetime, sub_date=sub_date, issue_price=issue_price,
+                                            current=current, break_point_rate=break_point_rate,
+                                            issue_amount=issue_amount, financing=financing, upsert=True)
 
 
-def ipo_all():
-    for page in range(10):
+def ipo_all(begin_page=1, end_page=92):
+    for page in range(begin_page, end_page):
         ipo(page+1)
+
+
+def broken_ipo(begin='2018-01-01', end='2018-12-31'):
+    begin_date = arrow.get(begin + 'T00:00+08:00')
+    end_date = arrow.get(end + 'T00:00+08:00')
+    documents = db.stock.find({"list_date": {"$gte": begin_date.datetime, "$lte": end_date.datetime}}).sort([("list_date", pymongo.DESCENDING)])
+    stocks = list(documents)
+    print(stocks)
+    total_ipo = len(stocks)
+    print(total_ipo)
+    broken_ipo_count = 0
+    broken_list = []
+    for stock in list(stocks):
+        if stock.get('break_point_rate') < 0:
+            print(stock)
+            broken_ipo_count += 1
+            broken_list.append(stock.get('name'))
+    broken_ipo_rate = broken_ipo_count/total_ipo
+    return broken_ipo_count, total_ipo, broken_ipo_rate, broken_list

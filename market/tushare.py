@@ -37,12 +37,6 @@ def ipo():
         Stock.objects(code=code).update_one(code=code, ipo_date=ipo_date, upsert=True)
 
 
-# 破发率
-def broken_ipo(begin='2018-01-01', end='2018-12-31'):
-    stocks = db.stock.find({"ipo_date": {"$gte": str(begin), "$lte": str(end)}}).sort([("ipo_date", pymongo.DESCENDING)])
-    print(list(stocks))
-
-
 def profit():
     df = ts.get_profit_data(2018, 2)
     print(df)

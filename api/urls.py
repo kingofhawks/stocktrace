@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^dividend_yearly', dividend_yearly),
     url(r'^dividend', DividendView.as_view()),
     # url(r'^rule', portfolio),
+    url(r'^ipo_yearly', ipo_yearly),
     url(r'^fake_chart_data', fake),
     url(r'^fake_list', fake),
     url(r'^currentUser', fake),

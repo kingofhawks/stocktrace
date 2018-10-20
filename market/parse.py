@@ -894,7 +894,7 @@ def polling():
     weekday = now.weekday()
 
     trade_begin = arrow.get(str(today)+'T09:25+08:00')
-    trade_end = arrow.get(str(today)+'T19:30+08:00')
+    trade_end = arrow.get(str(today)+'T18:30+08:00')
     refresh = False
     if trade_begin < now < trade_end:
         refresh = True

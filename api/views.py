@@ -591,6 +591,14 @@ def get_market_result(serializer):
     cix_list = []
     turnover_list = []
     cost_list = []
+    ipo_list = []
+    broken_ipo_list = []
+    broken_ipo_ratio_list = []
+    penny_stocks_list = []
+    penny_stocks_ratio_list = []
+    over_100_list = []
+    over_100_ratio_list = []
+    low_price_ratio_list = []
     for item in json_output.get('items'):
         if item.get('date'):
             timestamp = arrow.get(item.get('date'), 'YYYY-MM-DD HH:mm:ss').timestamp * 1000
@@ -629,11 +637,36 @@ def get_market_result(serializer):
         cost = item.get('cost')
         if cost:
             cost_list.append([timestamp, float("{0:.2f}".format(cost))])
+        ipo = item.get('ipo')
+        if ipo:
+            ipo_list.append([timestamp, ipo])
+        broken_ipo_ratio = item.get('broken_ipo_ratio')
+        if broken_ipo_ratio:
+            broken_ipo_ratio_list.append([timestamp, float('{0:.2f}'.format(broken_ipo_ratio))])
+        broken_ipo = item.get('broken_ipo')
+        if broken_ipo:
+            broken_ipo_list.append([timestamp, broken_ipo])
+        penny_stocks = item.get('penny_stocks')
+        if penny_stocks:
+            penny_stocks_list.append([timestamp, penny_stocks])
+        penny_stocks_ratio = item.get('penny_stocks_ratio')
+        if penny_stocks_ratio:
+            penny_stocks_ratio_list.append([timestamp, float("{0:.4f}".format(penny_stocks_ratio))])
+        over_100 = item.get('over_100')
+        if over_100:
+            over_100_list.append([timestamp, over_100])
+        over_100_ratio = item.get('over_100_ratio')
+        if over_100_ratio:
+            over_100_ratio_list.append([timestamp, float("{0:.2f}".format(over_100_ratio))])
+
     result = {'nh': nh_list, 'nl': nl_list, 'nhnl': nhnl_list,
               'nh_ratio': nh_ratio_list, 'nl_ratio': nl_ratio_list,
               'broken_net': broken_net_list, 'broken_net_ratio': broken_net_ratio_list,
               'zt': zt_list, 'dt': dt_list, 'zt_ratio': zt__ratio_list, 'dt_ratio': dt__ratio_list,
               'zdr': zdr_list, 'cix': cix_list, 'turnover': turnover_list,'cost': cost_list,
+              'ipo': ipo_list, 'broken_ipo': broken_ipo_list, 'broken_ipo_ratio': broken_ipo_ratio_list,
+              'penny_stocks': penny_stocks_list, "penny_stocks_ratio": penny_stocks_ratio_list,
+              'over_100': over_100_list, 'over_100_ratio': over_100_ratio_list
               }
     return result
 
@@ -731,5 +764,17 @@ def dividend_yearly(request):
     dividend_col = db.dividend.aggregate([{"$group": {"_id": {"$year": "$date"}, "total": {"$sum": "$money"}}}], cursor={})
     data = list(dividend_col)
     data.sort(key=lambda item: item.get('_id'), reverse=False)
+    response = Response(data, status=status.HTTP_200_OK)
+    return get_response_cors(response)
+
+
+@api_view(['GET'])
+def ipo_yearly(request):
+    stock_col = db.stock.aggregate([{"$group": {"_id": {"$year": "$list_date"},
+                                                "total": {"$sum": 1}, 'financing': {'$sum': '$financing'}}}], cursor={})
+    data = list(stock_col)
+    print(data)
+    data = list(filter(lambda x: x.get('_id') is not None, data))
+    data.sort(key=lambda item: item.get('_id'), reverse=True)
     response = Response(data, status=status.HTTP_200_OK)
     return get_response_cors(response)

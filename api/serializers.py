@@ -89,7 +89,14 @@ class MarketSerializer(serializers.Serializer):
     cix = serializers.FloatField(read_only=True)
     turnover = serializers.FloatField(read_only=True)
     cost = serializers.FloatField(read_only=True)
+    ipo = serializers.IntegerField(read_only=True)
+    broken_ipo = serializers.IntegerField(read_only=True)
     broken_ipo_ratio = serializers.FloatField(read_only=True)
+    over_100 = serializers.IntegerField(read_only=True)
+    over_100_ratio = serializers.FloatField(read_only=True)
+    low_price_ratio = serializers.FloatField(read_only=True)
+    penny_stocks = serializers.IntegerField(read_only=True)
+    penny_stocks_ratio = serializers.FloatField(read_only=True)
 
 
 class MarketListSerializer(serializers.Serializer):

@@ -124,6 +124,7 @@ class Market(Document):
     # 新低
     nl = IntField()
     nl_ratio = FloatField()
+    # 新高新低指标
     nhnl = IntField()
     # 涨停
     zt = FloatField()
@@ -148,17 +149,22 @@ class Market(Document):
     gdp = FloatField()
     # AH溢价指数
     ah = FloatField()
-    # 百元股
-    g100 = IntField()
-    # 高价股比率(>=100)
-    high_price_ratio = FloatField()
-    # 低价股比率(<3)
-    low_price_ratio = FloatField()
+    # 当年IPO数量
+    ipo = IntField()
+    # 破发股
+    broken_ipo = IntField()
     # 破发率
     broken_ipo_ratio = FloatField()
+    # 破发股
+    broken_ipo_list = ListField(StringField())
+    # 百元股
+    over_100 = IntField()
+    # 百元股比率
+    over_100_ratio = FloatField()
+    # 低价股比率(<3)
+    low_price_ratio = FloatField()
     # 仙股
-    xg = IntField()
-    xg_ratio = FloatField()
-
+    penny_stocks = IntField()
+    penny_stocks_ratio = FloatField()
 
 

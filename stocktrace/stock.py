@@ -55,8 +55,16 @@ class Stock(Document):
     roe = FloatField()
     # IPO上市时间
     list_date = DateTimeField()
+    # 申购时间
+    sub_date = DateTimeField()
+    # deprecated
+    ipo_date = DateTimeField()
     # 发行价
     issue_price = FloatField()
+    # 发行数量
+    issue_amount = FloatField()
+    # 融资
+    financing = FloatField()
     # 破发率
     break_point_rate = FloatField()
 
