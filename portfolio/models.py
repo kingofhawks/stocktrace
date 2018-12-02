@@ -34,13 +34,13 @@ class Portfolio(Document):
     cost = FloatField()
     cost_history = FloatField()
     # 期权账户本金
-    cost_option = FloatField(default=7000+3000+5000+5000+9000)
+    cost_option = FloatField(default=7000+3000+5000+5000+10000)
     # ZS账户当年(真实)本金
     cost_zs = FloatField(default=463000+4000+10000+15000)
-    # 融资利息江苏银行(2018年7月至10月2000)
-    js_interest = FloatField(default=2000)
+    # 融资利息江苏银行(2018年7月至12月2日)
+    js_interest = FloatField(default=2600+735)
     # 券商融资+江苏银行
-    financing = FloatField(default=167855 + 140000)
+    financing = FloatField(default=169666 + 140000)
     # HT1账户当年资金变动(老婆)
     ht1_changes = 17000 + 5000 + 5000 + 20000 + 20000
     # HT2账户当年资金变动(老妈)
