@@ -908,7 +908,7 @@ def polling():
         current = item.get('current')
         if amount <= 0:
             continue
-        if refresh:
+        if True:
             s = xueqiu(code)
             print('code:{} s:{}'.format(code, s))
             Stock.objects(code=code).update_one(code=code, amount=amount, current=s.current, volume=s.volume,
