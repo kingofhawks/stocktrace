@@ -197,11 +197,11 @@ class ParseTestCase(TestCase):
 
     def test_read_market(self):
         ipo_all(0, 5)
-        read_market(1, 60, str(date.today()))
+        read_market(17, 1, str(date.today()))
 
     def test_read_all(self):
-        begin = '2018-12-02'
-        end = '2018-12-23'
+        begin = '2019-01-02'
+        end = '2019-01-26'
         read_index_all(begin)
         read_industry_all(begin)
         read_sw_all(begin)

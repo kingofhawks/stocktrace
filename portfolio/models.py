@@ -37,10 +37,10 @@ class Portfolio(Document):
     cost_option = FloatField(default=7000+3000+5000+5000+10000)
     # ZS账户当年(真实)本金
     cost_zs = FloatField(default=463000+4000+10000+15000+8000)
-    # 融资利息江苏银行(2018年7月至12月2日)
-    js_interest = FloatField(default=2600+735)
+    # 融资利息江苏银行(2018年7月至2019年1月1日)
+    js_interest = FloatField(default=2600+735+830)
     # 券商融资+江苏银行
-    financing = FloatField(default=170400 + 160000)
+    financing = FloatField(default=170710 + 160000)
     # HT1账户当年资金变动(老婆)
     ht1_changes = 17000 + 5000 + 5000 + 20000 + 20000
     # HT2账户当年资金变动(老妈)

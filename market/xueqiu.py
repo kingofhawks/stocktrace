@@ -28,7 +28,7 @@ from django.conf import settings
 db = settings.DB
 api_home = 'http://xueqiu.com'
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = '089a76c9fbc841f7a0bd88a235bed01640fd3aa0'
+xq_a_token = '53b75f36e11f361702491a995c751005f124025c'
 headers = {'content-type': 'application/json',
            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
@@ -460,8 +460,12 @@ def read_market(nh, nl, date):
     # 涨停板
     zt = screen_by_pencentage(9.9, 10.11)
     zt_ratio = zt/stock_count
-    zdr = zt/dt
-    print('dtb:{} ztb:{} zdr'.format(dt, zt, zdr))
+    if dt > 0:
+        zdr = zt/dt
+        print('dtb:{} ztb:{} zdr'.format(dt, zt, zdr))
+    else:
+        dt = 0
+        zdr = 0
 
     # 仙股
     penny_stocks = screen_by_price(0.1, 1)['count']
