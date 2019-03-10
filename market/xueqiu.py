@@ -28,7 +28,7 @@ from django.conf import settings
 db = settings.DB
 api_home = 'http://xueqiu.com'
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = '53b75f36e11f361702491a995c751005f124025c'
+xq_a_token = '97465d3b59dcabc762005b4418a3c48007979082'
 headers = {'content-type': 'application/json',
            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
@@ -474,10 +474,11 @@ def read_market(nh, nl, date):
     #  破发率
     broken_ipo_count, total_ipo, broken_ipo_rate, broken_list = broken_ipo()
 
+    # CIX范围从0到100,由10个指标组成
     cix = 0
     weight_range = [0, 10]
 
-    # 1 latest SH PE
+    # 1 SH PE
     pe_df = avg_sh_pe('2000-1-31')
     max_pe = pe_df['PE'].max()
     min_pe = pe_df['PE'].min()
@@ -515,16 +516,30 @@ def read_market(nh, nl, date):
     high = interp(g100_ratio, [0, 0.036], weight_range)
     cix += high
 
-    # 5 low price
-    low_price = low_price_ratio()
-    print('low_price***{}'.format(low_price))
-
-    # 6 SH换手率 [1%,3%]
+    # 5 SH换手率 [1%,3%]
     sh = read_index_market('SH000001')
     turnover_rate = sh['turnover_rate']
     turnover = interp(turnover_rate, [1, 3], weight_range)
     cix += turnover
 
+    # 6 涨跌停差额
+
+
+    # 7 TODO 最近一年IPO、可转债涨幅或破发率
+
+
+    # 8 TODO NHNL
+
+    # 9 融资规模及占比
+
+    # 10 社交媒体挖掘
+
+
+    # TODO low price
+    low_price = low_price_ratio()
+    print('low_price***{}'.format(low_price))
+
+    # TODO cix 映射到0.5-1.5区间,代表持仓比例
     Market.objects(date=get_date(date)).update_one(nh=nh, nl=nl, nhnl=nh-nl, nh_ratio=nh_ratio, nl_ratio=nl_ratio,
                                                    stock_count=stock_count,
                                                    over_100=g100, over_100_ratio=g100_ratio,
