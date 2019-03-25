@@ -460,12 +460,8 @@ def read_market(nh, nl, date):
     # 涨停板
     zt = screen_by_pencentage(9.9, 10.11)
     zt_ratio = zt/stock_count
-    if dt > 0:
-        zdr = zt/dt
-        print('dtb:{} ztb:{} zdr'.format(dt, zt, zdr))
-    else:
-        dt = 0
-        zdr = 0
+    zdr = zt-dt
+    print('dtb:{} ztb:{} zdr'.format(dt, zt, zdr))
 
     # 仙股
     penny_stocks = screen_by_price(0.1, 1)['count']

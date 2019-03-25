@@ -263,11 +263,12 @@ def read_sw_all(begin_date, end_date=None, codes=None):
             for record in records:
                 date = record.get('BargainDate')
                 code = record.get('SwIndexCode')
+                dp = record.get('DP') or 0
                 Sw.objects(BargainDate=date, SwIndexCode=code).update_one(BargainDate=int(date), SwIndexCode=code,
                                                                           BargainAmount=int(record.get('BargainAmount')),
                                                                           BargainSumRate=float(record.get('BargainSumRate')),
                                                                           CloseIndex=float(record.get('CloseIndex')),
-                                                                          DP=float(record.get('DP')),
+                                                                          DP=float(dp),
                                                                           Markup=float(record.get('Markup')),
                                                                           MeanPrice=float(record.get('MeanPrice')),
                                                                           PB=float(record.get('PB')),
