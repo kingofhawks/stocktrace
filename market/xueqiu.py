@@ -28,7 +28,7 @@ from django.conf import settings
 db = settings.DB
 api_home = 'http://xueqiu.com'
 # check xueqiu HTTP request cookie "xq_a_token"
-xq_a_token = '97465d3b59dcabc762005b4418a3c48007979082'
+xq_a_token = '5265a731059b6a9711e03bd7da24b0957a133730'
 headers = {'content-type': 'application/json',
            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36'}
 
@@ -453,6 +453,7 @@ def read_market(nh, nl, date):
     stock_count = low_pb[3]
     nh_ratio = float(nh)/stock_count
     nl_ratio = float(nl)/stock_count
+    nhnl = nh - nl
 
     # 跌停板
     dt = screen_by_pencentage(-10.11, -9.9)
@@ -472,38 +473,56 @@ def read_market(nh, nl, date):
 
     # CIX范围从0到100,由10个指标组成
     cix = 0
+    cix_data = {}
     weight_range = [0, 10]
 
     # 1 SH PE
-    pe_df = avg_sh_pe('2000-1-31')
-    max_pe = pe_df['PE'].max()
-    min_pe = pe_df['PE'].min()
+    # pe_df = avg_sh_pe('2000-1-31')
+    # max_pe = pe_df['PE'].max()
+    # min_pe = pe_df['PE'].min()
+    # # get latest PE DF by tail()
+    # # latest_pe_df = pe_df.tail(1)
+    # # latest_pe = latest_pe_df.iloc[0][1]
+    # # print 'latest PE:{}'.format(latest_pe)
+    # latest_sh = Index.objects(name='上海A股').order_by('-date').first()
+    # print('items***{}'.format(latest_sh))
+    # pe = interp(latest_sh.pe, [min_pe, max_pe], weight_range)
+    # # print('min_pe:{} max_pe:{} latest_pe:{} pe:{}'.format(min_pe, max_pe, latest_pe, pe))
+    # cix += pe
+
+    # 1 替换为沪深A股PE
+    max_pe = 30
+    min_pe = 12
     # get latest PE DF by tail()
     # latest_pe_df = pe_df.tail(1)
     # latest_pe = latest_pe_df.iloc[0][1]
     # print 'latest PE:{}'.format(latest_pe)
-    latest_sh = Index.objects(name='上海A股').order_by('-date').first()
+    latest_sh = Index.objects(name='沪深A股').order_by('-date').first()
     print('items***{}'.format(latest_sh))
-    pe = interp(latest_sh.pe, [min_pe, max_pe], weight_range)
+    pe = interp(latest_sh.pe, [min_pe, max_pe], [0, 50])
     # print('min_pe:{} max_pe:{} latest_pe:{} pe:{}'.format(min_pe, max_pe, latest_pe, pe))
     cix += pe
+    cix_data.update({'pe': pe})
 
     # 2 破净率
-    min_low_pb = 0
-    max_low_pb = 0.1
+    min_low_pb = 0.02
+    max_low_pb = 0.15
     pb = interp(-broken_net_ratio, [-max_low_pb, min_low_pb], weight_range)
     cix += pb
+    cix_data.update({'broken_net': pb})
 
     # 3 AH premium index
     ah_now = xueqiu('HKHSAHP')
     ah_current = ah_now.current
-    ah = interp(ah_current, [100, 150], weight_range)
+    ah = interp(ah_current, [100, 130], weight_range)
     cix += ah
+    cix_data.update({'ah': ah})
 
     # 4 GDP rate
     rate = gdp_rate()
     gdp = interp(rate, [0.4, 1], weight_range)
     cix += gdp
+    cix_data.update({'gdp': gdp})
 
     # 5 百元股 [0,3.6%]
     high_price = high_price_ratio()
@@ -511,38 +530,39 @@ def read_market(nh, nl, date):
     g100_ratio = high_price[1]
     high = interp(g100_ratio, [0, 0.036], weight_range)
     cix += high
+    cix_data.update({'over_100': g100})
 
     # 5 SH换手率 [1%,3%]
     sh = read_index_market('SH000001')
     turnover_rate = sh['turnover_rate']
     turnover = interp(turnover_rate, [1, 3], weight_range)
-    cix += turnover
+    # cix += turnover
 
     # 6 涨跌停差额
 
-
     # 7 TODO 最近一年IPO、可转债涨幅或破发率
 
-
-    # 8 TODO NHNL
+    # 8 NHNL
+    n = interp(nhnl, [-1000, 1000], weight_range)
+    cix += n
+    cix_data.update({'nhnl': n})
 
     # 9 融资规模及占比
 
     # 10 社交媒体挖掘
 
-
     # TODO low price
     low_price = low_price_ratio()
     print('low_price***{}'.format(low_price))
-
+    print(cix_data)
     # TODO cix 映射到0.5-1.5区间,代表持仓比例
-    Market.objects(date=get_date(date)).update_one(nh=nh, nl=nl, nhnl=nh-nl, nh_ratio=nh_ratio, nl_ratio=nl_ratio,
+    Market.objects(date=get_date(date)).update_one(nh=nh, nl=nl, nhnl=nhnl, nh_ratio=nh_ratio, nl_ratio=nl_ratio,
                                                    stock_count=stock_count,
                                                    over_100=g100, over_100_ratio=g100_ratio,
                                                    penny_stocks=penny_stocks, penny_stocks_ratio=penny_stocks_ratio,
                                                    low_price_ratio=low_price,
                                                    pe=latest_sh.pe, turnover=turnover_rate,
-                                                   ah=ah_current, gdp=rate, cix=cix,
+                                                   ah=ah_current, gdp=rate, cix=cix,cix_data=cix_data,
                                                    broken_net=broken_net, broken_net_ratio=broken_net_ratio,
                                                    broken_net_stocks=low_pb[2],
                                                    dt=dt, dt_ratio=dt_ratio, zt=zt, zt_ratio=zt_ratio, zdr=zdr,

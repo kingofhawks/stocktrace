@@ -141,6 +141,7 @@ class Market(Document):
     broken_net_stocks = ListField(StringField())
     # CIX value
     cix = FloatField()
+    cix_data = DictField()
     # latest SH PE
     pe = FloatField()
     # SH换手率
