@@ -265,7 +265,7 @@ def read_index2(code='000905'):
                 dividend_yield_ratio2 = row[18].value
                 turnover = row[13].value
                 # # print(type(pe))
-                if date and pe1 and type(pe1) == float:
+                if date and turnover and pe1 and type(pe1) == float:
                     py_date = xlrd.xldate.xldate_as_datetime(date, book.datemode)
                     print(py_date)
                     date = str(py_date)
