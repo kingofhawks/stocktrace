@@ -6,7 +6,7 @@ from dateutil.tz import tzutc
 from lxml import etree
 from lxml.html import parse
 from pandas.util.testing import DataFrame
-from market.models import Index, AhIndex, Industry, Equity, Market
+from market.models import Index, AhIndex, Industry, Equity, Market, DoesNotExist
 import pandas as pd
 import numpy as np
 import requests
@@ -490,7 +490,7 @@ def read_market(nh, nl, date):
     # # print('min_pe:{} max_pe:{} latest_pe:{} pe:{}'.format(min_pe, max_pe, latest_pe, pe))
     # cix += pe
 
-    # 1 替换为沪深A股PE
+    # 1 替换为沪深A股PE TODO
     max_pe = 30
     min_pe = 12
     # get latest PE DF by tail()
@@ -530,7 +530,16 @@ def read_market(nh, nl, date):
     g100_ratio = high_price[1]
     high = interp(g100_ratio, [0, 0.036], weight_range)
     cix += high
-    cix_data.update({'over_100': g100})
+    cix_data.update({'over_100': high})
+
+    # 8 NHNL
+    n = interp(nhnl, [-1000, 1000], weight_range)
+    cix += n
+    cix_data.update({'nhnl': n})
+
+    # 9 融资规模及占比 TODO tushare
+
+    # 10 社交媒体挖掘 TODO xueqiu
 
     # 5 SH换手率 [1%,3%]
     sh = read_index_market('SH000001')
@@ -542,16 +551,7 @@ def read_market(nh, nl, date):
 
     # 7 TODO 最近一年IPO、可转债涨幅或破发率
 
-    # 8 NHNL
-    n = interp(nhnl, [-1000, 1000], weight_range)
-    cix += n
-    cix_data.update({'nhnl': n})
-
-    # 9 融资规模及占比
-
-    # 10 社交媒体挖掘
-
-    # TODO low price
+    # low price
     low_price = low_price_ratio()
     print('low_price***{}'.format(low_price))
     print(cix_data)
@@ -569,6 +569,58 @@ def read_market(nh, nl, date):
                                                    ipo=total_ipo, broken_ipo=broken_ipo_count,
                                                    broken_ipo_ratio=broken_ipo_rate,broken_ipo_list=broken_list,
                                                    upsert=True)
+
+
+def cix():
+    weight_range = [0, 10]
+    items = Market.objects().order_by('date')
+    for item in items:
+        value = 0
+        cix_data = {}
+        try:
+            index = Index.objects.get(name='沪深A股', date=item.date)
+            print(index)
+            pe = interp(index.pe, [10, 20], [0, 50])
+            # print('min_pe:{} max_pe:{} latest_pe:{} pe:{}'.format(min_pe, max_pe, latest_pe, pe))
+            value += pe
+            cix_data.update({'pe': pe})
+
+            min_low_pb = 0.02
+            max_low_pb = 0.15
+            broken_net_ratio = item.broken_net_ratio
+            pb = interp(-broken_net_ratio, [-max_low_pb, min_low_pb], weight_range)
+            value += pb
+            cix_data.update({'broken_net': pb})
+
+            # 3 AH premium index
+            equity = Equity.objects.get(code='HKHSAHP', date=item.date)
+            ah = interp(equity.close, [100, 130], weight_range)
+            value += ah
+            cix_data.update({'ah': ah})
+
+            # 4 GDP rate
+            print(item.gdp)
+            if item.gdp:
+                gdp = interp(item.gdp, [0.4, 1], weight_range)
+                value += gdp
+                cix_data.update({'gdp': gdp})
+
+            # 5 百元股 [0,3.6%]
+            g100_ratio = item.over_100_ratio
+            if g100_ratio:
+                high = interp(g100_ratio, [0, 0.036], weight_range)
+                value += high
+                cix_data.update({'over_100': high})
+
+            # 8 NHNL
+            n = interp(item.nhnl, [-1000, 1000], weight_range)
+            value += n
+            cix_data.update({'nhnl': n})
+
+            print(cix_data)
+            Market.objects(date=item.date).update_one(cix=value, cix_data=cix_data, upsert=True)
+        except DoesNotExist as e:
+            continue
 
 
 # 指数市值
