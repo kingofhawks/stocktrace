@@ -1,12 +1,15 @@
 from django.test import TestCase
+
+from market.models import Market
 from market.parse import *
 from market.sh import avg_sh_pe
+from market.utils import get_date
 from stocktrace.dao.stockdao import *
 from market.analysis import *
 from market.csi import read_index, read_industry, read_index_all, read_industry_all, csi_by_type, read_index2
 from market.csi import read_equity_by_date, read_equity, read_equity_all, read_equity_by_portfolio, read_equities
 from market.xueqiu import read_portfolio, read_history, read_market, low_pb_ratio, high_pb_ratio, read_index_market, \
-    high_price_ratio, gdp_rate, ipo, ipo_all, broken_ipo, cix
+    high_price_ratio, gdp_rate, ipo, ipo_all, broken_ipo, cix, cix_one, get_footer
 from market.sw import read_sw_all
 from market.tushare import stock_list, profit, finance_report
 from market.sina import *
@@ -50,7 +53,7 @@ class ParseTestCase(TestCase):
         csi_by_type('2018-02-23', 'zz4')
 
     def test_read_index(self):
-        read_index('2016-01-04')
+        read_index('2019-05-07')
 
     def test_read_index2(self):
         read_index2('000016')
@@ -128,9 +131,9 @@ class ParseTestCase(TestCase):
 
     def test_history(self):
         # codes = ['600420', '600177', '000028', '300246', '601009', ]
-        codes = ['600420', 'HKHSAHP']
+        codes = ['HKHSAHP']
         for code in codes:
-            read_history(code, '2013-01-02')
+            read_history(code, '2019-04-21', '2019-04-22')
 
     def test_index_history(self):
         for code in ['SH000001', 'SZ399001', 'SZ399005', 'SZ399006']:
@@ -195,6 +198,13 @@ class ParseTestCase(TestCase):
         broken_ipo_count, total_ipo, broken_ipo_rate, broken_list = broken_ipo()
         print(broken_ipo_count, total_ipo, broken_ipo_rate, broken_list)
 
+    def test_cix_one(self):
+        weight_range = [0, 10]
+        item = Market.objects.get(date=get_date('2019-04-19'))
+        print(item)
+        print(item.date)
+        cix_one(item, weight_range)
+
     def test_cix(self):
         cix()
 
@@ -203,9 +213,12 @@ class ParseTestCase(TestCase):
         read_market(18, 18, str(date.today()))
 
     def test_read_all(self):
-        begin = '2019-05-06'
-        end = '2019-04-25'
-        read_index_all(begin)
+        begin = '2019-05-12'
+        # end = '2019-05-15'
+        now = arrow.now()
+        # print now
+        end = str(now.date())
+        read_index_all(begin, end)
         read_industry_all(begin)
         read_sw_all(begin)
         # read_equity_all(begin, end)
@@ -217,4 +230,24 @@ class ParseTestCase(TestCase):
         read_index2('000905')
         # finance_report(2018, 4)
         ipo_all(0, 5)
-        read_market(18, 18, str(date.today()))
+        read_market(11, 59, str(date.today()))
+
+    def test_excel(self):
+        file_name = 'D:\workspace\stocktrace\market\hs300.xls'
+        # footer_len = get_footer(file_name)
+        skiprows = range(3000,3500)
+        df = pd.read_excel(file_name)
+        print(df)
+        print(len(df))
+        df = df[df['PE(TTM)'] != '--']
+        print(df)
+        print(len(df))
+        max_pe = df['PE(TTM)'].max()
+        min_pe = df['PE(TTM)'].min()
+        mean = df['PE(TTM)'].mean()
+        median = df['PE(TTM)'].median()
+        print(max_pe)
+        print(min_pe)
+        print(mean)
+        print(median)
+

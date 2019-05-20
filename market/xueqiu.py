@@ -571,57 +571,70 @@ def read_market(nh, nl, date):
                                                    upsert=True)
 
 
+def cix_one(item, weight_range):
+    value = 0
+    cix_data = {}
+    try:
+        index = Index.objects.get(name='沪深300', date=item.date)
+        print(index)
+        pe = interp(index.pe, [10, 20], [0, 50])
+        # print('min_pe:{} max_pe:{} latest_pe:{} pe:{}'.format(min_pe, max_pe, latest_pe, pe))
+        value += pe
+        cix_data.update({'pe': pe})
+
+        min_low_pb = 0.02
+        max_low_pb = 0.15
+        broken_net_ratio = item.broken_net_ratio
+        pb = interp(-broken_net_ratio, [-max_low_pb, min_low_pb], weight_range)
+        value += pb
+        cix_data.update({'broken_net': pb})
+
+        # 3 AH premium index
+        equity = Equity.objects.get(code='HKHSAHP', date=item.date)
+        ah = interp(equity.close, [100, 130], weight_range)
+        value += ah
+        cix_data.update({'ah': ah})
+
+        # 4 GDP rate
+        print(item.gdp)
+        if item.gdp:
+            gdp = interp(item.gdp, [0.4, 1], weight_range)
+            value += gdp
+            cix_data.update({'gdp': gdp})
+
+        # 5 百元股 [0,3.6%]
+        g100_ratio = item.over_100_ratio
+        if g100_ratio:
+            high = interp(g100_ratio, [0, 0.036], weight_range)
+            value += high
+            cix_data.update({'over_100': high})
+
+        # 8 NHNL
+        n = interp(item.nhnl, [-1000, 1000], weight_range)
+        value += n
+        cix_data.update({'nhnl': n})
+
+        print(cix_data)
+        Market.objects(date=item.date).update_one(cix=value, cix_data=cix_data, upsert=True)
+    except DoesNotExist as e:
+        import sys, traceback
+        traceback.print_exc(file=sys.stdout)
+
+
 def cix():
     weight_range = [0, 10]
     items = Market.objects().order_by('date')
     for item in items:
-        value = 0
-        cix_data = {}
-        try:
-            index = Index.objects.get(name='沪深A股', date=item.date)
-            print(index)
-            pe = interp(index.pe, [10, 20], [0, 50])
-            # print('min_pe:{} max_pe:{} latest_pe:{} pe:{}'.format(min_pe, max_pe, latest_pe, pe))
-            value += pe
-            cix_data.update({'pe': pe})
+        cix_one(item, weight_range)
 
-            min_low_pb = 0.02
-            max_low_pb = 0.15
-            broken_net_ratio = item.broken_net_ratio
-            pb = interp(-broken_net_ratio, [-max_low_pb, min_low_pb], weight_range)
-            value += pb
-            cix_data.update({'broken_net': pb})
 
-            # 3 AH premium index
-            equity = Equity.objects.get(code='HKHSAHP', date=item.date)
-            ah = interp(equity.close, [100, 130], weight_range)
-            value += ah
-            cix_data.update({'ah': ah})
-
-            # 4 GDP rate
-            print(item.gdp)
-            if item.gdp:
-                gdp = interp(item.gdp, [0.4, 1], weight_range)
-                value += gdp
-                cix_data.update({'gdp': gdp})
-
-            # 5 百元股 [0,3.6%]
-            g100_ratio = item.over_100_ratio
-            if g100_ratio:
-                high = interp(g100_ratio, [0, 0.036], weight_range)
-                value += high
-                cix_data.update({'over_100': high})
-
-            # 8 NHNL
-            n = interp(item.nhnl, [-1000, 1000], weight_range)
-            value += n
-            cix_data.update({'nhnl': n})
-
-            print(cix_data)
-            Market.objects(date=item.date).update_one(cix=value, cix_data=cix_data, upsert=True)
-        except DoesNotExist as e:
-            continue
-
+def get_footer(file_):
+    import itertools as it
+    with open(file_, encoding='utf-8') as f:
+        g = it.dropwhile(lambda x: x != 'Choice\n', f)
+        print(g)
+        footer_len = len([i for i, _ in enumerate(g)])
+    return footer_len
 
 # 指数市值
 def read_index_market(code):
