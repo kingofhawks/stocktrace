@@ -13,6 +13,7 @@ from market.xueqiu import read_portfolio, read_history, read_market, low_pb_rati
 from market.sw import read_sw_all
 from market.tushare import stock_list, profit, finance_report
 from market.sina import *
+from market.choice import *
 
 # > \Workspace\stocktrace>python manage.py test market.tests.ParseTestCase.test_sh_pe
 
@@ -200,7 +201,7 @@ class ParseTestCase(TestCase):
 
     def test_cix_one(self):
         weight_range = [0, 10]
-        item = Market.objects.get(date=get_date('2019-04-19'))
+        item = Market.objects.get(date=get_date('2019-04-24'))
         print(item)
         print(item.date)
         cix_one(item, weight_range)
@@ -213,7 +214,7 @@ class ParseTestCase(TestCase):
         read_market(18, 18, str(date.today()))
 
     def test_read_all(self):
-        begin = '2019-05-12'
+        begin = '2019-05-20'
         # end = '2019-05-15'
         now = arrow.now()
         # print now
@@ -230,24 +231,11 @@ class ParseTestCase(TestCase):
         read_index2('000905')
         # finance_report(2018, 4)
         ipo_all(0, 5)
-        read_market(11, 59, str(date.today()))
+        read_market(7, 57, str(date.today()))
 
-    def test_excel(self):
-        file_name = 'D:\workspace\stocktrace\market\hs300.xls'
-        # footer_len = get_footer(file_name)
-        skiprows = range(3000,3500)
-        df = pd.read_excel(file_name)
-        print(df)
-        print(len(df))
-        df = df[df['PE(TTM)'] != '--']
-        print(df)
-        print(len(df))
-        max_pe = df['PE(TTM)'].max()
-        min_pe = df['PE(TTM)'].min()
-        mean = df['PE(TTM)'].mean()
-        median = df['PE(TTM)'].median()
-        print(max_pe)
-        print(min_pe)
-        print(mean)
-        print(median)
+    def test_choice(self):
+        # index_stats('000016')
+        # index_stats('000300')
+        index_stats('000905')
+
 

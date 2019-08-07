@@ -575,13 +575,17 @@ def cix_one(item, weight_range):
     value = 0
     cix_data = {}
     try:
+        # 1 PE
         index = Index.objects.get(name='沪深300', date=item.date)
         print(index)
-        pe = interp(index.pe, [10, 20], [0, 50])
+        avg_pe = 13.58
+        # pe = interp(index.pe, [8.0159, 50], [0, 50])
+        pe = interp(index.pe, [avg_pe*0.6, avg_pe*2], [0, 50])
         # print('min_pe:{} max_pe:{} latest_pe:{} pe:{}'.format(min_pe, max_pe, latest_pe, pe))
         value += pe
         cix_data.update({'pe': pe})
 
+        # 2 破净率
         min_low_pb = 0.02
         max_low_pb = 0.15
         broken_net_ratio = item.broken_net_ratio
@@ -590,10 +594,14 @@ def cix_one(item, weight_range):
         cix_data.update({'broken_net': pb})
 
         # 3 AH premium index
-        equity = Equity.objects.get(code='HKHSAHP', date=item.date)
-        ah = interp(equity.close, [100, 130], weight_range)
-        value += ah
-        cix_data.update({'ah': ah})
+        try:
+            avg_ah = 120
+            equity = Equity.objects.get(code='HKHSAHP', date=item.date)
+            ah = interp(equity.close, [avg_ah*0.7, avg_ah*1.3], weight_range)
+            value += ah
+            cix_data.update({'ah': ah})
+        except:
+            print('error')
 
         # 4 GDP rate
         print(item.gdp)

@@ -6,6 +6,7 @@ import datetime
 # Create your models here.
 class Index(Document):
     name = StringField()
+    code = StringField()
     # 静态PE
     pe = FloatField()
     # 滚动
