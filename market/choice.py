@@ -2,6 +2,9 @@ import pandas as pd
 from market.models import Index
 import numpy as np
 
+code = {'000015.SH': '红利指数', '000016.SH': '上证50', '000300.SH':'沪深300', '000905.SH': '中证500',
+        '399005.SZ': '中小板', '399006.SZ': '创业板'}
+
 
 def index_stats(file):
     file_name = 'D:\workspace\stocktrace\market\{}.xls'.format(file)
@@ -19,9 +22,12 @@ def index_stats(file):
         # print(df.index)
         # get last 5 Year data
         # print(df)
-        # df = df.last('1825D')
-        # print(df)
+        df = df.last('1825D')
         # df = df.last('5Y')
+        # print(df.tail(1))
+        # get the last row as pandas.Series which is easier to get row value
+        last_pe = df.iloc[-1]['PE(TTM)']
+        # print(last_pe)
         # print(df)
         # a = np.array(df['PE(TTM)'])
         # print(a)
@@ -33,10 +39,12 @@ def index_stats(file):
         median = df['PE(TTM)'].median()
         p30 = df['PE(TTM)'].quantile(0.3)
         p70 = df['PE(TTM)'].quantile(0.7)
-        print('{} PE max:{} min:{} mean:{} median:{} 30%:{} 70%:{}'.format(sheet, max_pe, min_pe, mean, median, p30, p70))
+        # 保留两位小数输出
+        print('{} PE max:{:.2f} min:{:.2f} mean:{:.2f} median:{:.2f} 30%:{:.2f} 70%:{:.2f} current:{:.2f} 红绿灯:{}'
+              .format(code.get(sheet), max_pe, min_pe, mean, median, p30, p70, last_pe, last_pe<p30))
 
 
-
+@DeprecationWarning
 def index_stats_2(code):
     file_name = 'D:\workspace\stocktrace\market\{}.xls'.format(code)
     # footer_len = get_footer(file_name)
