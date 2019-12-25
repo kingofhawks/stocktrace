@@ -15,10 +15,20 @@ sql = '''
 df = pd.read_sql_query(sql, engine)
 
 # 输出employee表的查询结果
-print(df)
+print(len(df))
 
 # duplicate_bool = df.duplicated(subset=['outId', 'productId', 'amount','invoiceMoney','invoiceNum','invoiceDate','mobile'], keep='first')
 # duplicate = df.loc[duplicate_bool == True]
 duplicate = df[df.duplicated(subset=['outId', 'productId', 'amount','invoiceMoney','invoiceNum','invoiceDate','mobile'], keep='first')]
 print(duplicate)
-pd.read_sql_query("delete from t_center_invoiceins_import where id='211094'",con=engine)
+for index, row in duplicate.iterrows():
+    row_id = row['id']
+    try:
+        sql = "delete from t_center_invoiceins_import where id='"+str(row_id)+"'"
+        print(sql)
+        pd.read_sql_query(sql, con=engine)
+    except:
+        continue
+# sql = "delete from t_center_invoiceins_import where id='217055'"
+# print(sql)
+# pd.read_sql_query(sql,con=engine)
