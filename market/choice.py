@@ -3,11 +3,16 @@ from market.models import Index
 import numpy as np
 import math
 
-code = {'000015.SH': '红利指数', '000016.SH': '上证50', '000300.SH':'沪深300', '000905.SH': '中证500',
-        '399005.SZ': '中小板', '399006.SZ': '创业板','399102.SZ': '创业板综',
-        '000918.SH': '300成长', '000919.SH': '300价值', '000922.SH': '中证红利',
-        '000925.SH': '基本面50', '000932.SH': '中证消费', '000934.SH': '中证金融',
-        'DJIA.GI': '道琼斯工业', 'HSI.HI': '恒生指数', 'IXIC.GI': '纳斯达克', 'SPX.GI': '标普500'}
+code = {'000015.SH': '红利指数', '000016.SH': '上证50', '000300.SH': '沪深300',
+        '000905.SH': '中证500', '000903.SH': '中证100', '000906.SH': '中证800',
+        '399005.SZ': '中小板', '399006.SZ': '创业板', '399102.SZ': '创业板综',
+        '000918.SH': '300成长', '000919.SH': '300价值', '000821.SH': '300红利',
+        '000913.SH': '300医药', '399986.SZ': '中证银行', '399995.SZ': '基建工程',
+        '000922.SH': '中证红利',
+        '000925.SH': '基本面50', '000932.SH': '中证消费',
+        '000934.SH': '中证金融', '000018.SH': '180金融',
+        'HSI.HI': '恒生指数',
+        'DJIA.GI': '道琼斯工业',  'IXIC.GI': '纳斯达克', 'SPX.GI': '标普500'}
 
 
 def index_stats(file):
@@ -25,7 +30,7 @@ def index_stats(file):
         # print(df.columns)
         # print(df.index)
         # 取最近5年数据
-        df = df.last('1825D')
+        # df = df.last('1825D')
         # df = df.last('5Y')
         # print(df.tail(1))
         # get the last row as pandas.Series which is easier to get row value
@@ -45,11 +50,12 @@ def index_stats(file):
         # 70分位
         p70 = df['PE(TTM)'].quantile(0.7)
         # a = [max_pe, min_pe, mean, median, p30, p70]
+        # np.percentile 类似于pandas.quantile
         # percent = np.percentile(a, last_pe)
         # 保留两位小数输出
         print('{} PE max:{:.2f} min:{:.2f} mean:{:.2f} median:{:.2f} 30分位%:{:.2f} 70分位%:{:.2f} '
               'current:{:.2f} 红绿灯:{}'
-              .format(code.get(sheet), max_pe, min_pe, mean, median, p30, p70, last_pe, last_pe < p30))
+              .format(code.get(sheet), max_pe, min_pe, mean, median, p30, p70, last_pe, last_pe < p30 ))
 
 
 @DeprecationWarning
@@ -92,9 +98,11 @@ def index_stats_2(code):
 
 if __name__ == '__main__':
     # 10年10倍求年化收益率为25.89%,使用开方运算
-    print(10**(1/10)-1)
+    print(10**(1/10))
     a = [40.7, 20.52, 28.12, 27.66, 25.89, 29.85]
     # 求数组中50分位的数值
     print(np.percentile(a, 50))
-    index_stats('choice20190831')
+    # index_stats('choice20191122_core')
+    # index_stats('choice20191122_zz')
+    index_stats('choice20191122_other')
     # index_stats_2('000300')
